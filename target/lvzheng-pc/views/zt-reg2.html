@@ -1,0 +1,157 @@
+<link href="/css/index.css" type="text/css"  rel="stylesheet"/>
+<link href="/css/zt.css" type="text/css"  rel="stylesheet"/>
+<link href="/css/box.css" type="text/css"  rel="stylesheet"/>
+<script type="text/javascript" src="/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="/js/box.js"></script> 
+<script type="text/javascript" src="/js/return-top.js"></script>
+<script type="text/javascript" src="/js/common/util.js"></script> 
+<script type="text/javascript" src="/js/common/sendPhoneCode.js"></script> 
+<script src="/js/fun.js"></script>
+<script>
+
+$(function(){
+    $(window).scroll(function(){
+    var a=parseInt($(window).scrollTop());
+    if(a<550){
+      $(".zc-nav").removeClass("zc-navxf")
+    }
+    if(a>550)
+      {
+      $(".zc-nav").addClass("zc-navxf")
+      }
+    });
+
+   // 左导航切换显示
+    $(".left-nav dd").hover(function(){
+        $(".nav-right",this).show();
+    });
+    $(".left-nav dd").mouseleave(function(){
+        $(".nav-right",this).hide();
+    });
+})  
+
+
+function getCode(){
+	var phoneNum = $("#phoneNum").val();
+	if(validatemobile(phoneNum)){
+		jQuery.sendPhoneCode(phoneNum,".time",null);
+	}
+}
+//登录办理
+function loginBanli(){
+	var phoneNum = $("#phoneNum").val();
+	var code = $("#code").val();
+	if(jQuery.checkPhoneCode(phoneNum,code)){
+		window.location.href="/usePhoneNumLogin/"+phoneNum;
+	}
+}
+</script>
+</head>
+<body>
+<div id="continer">
+    <!-- 顶部信息条 -->
+
+   <!-- logo区域 -->
+	#parse("views/common/logo_normal.html")
+    <!-- 导航 -->
+    #parse("views/common/navigation.html")
+   
+    <div class="zc-banner">
+        <div class="ban-box">
+            <p class="p-tag1"></p>
+            <p class="text">迈过地址这个坑  注册公司更轻松</p>
+             #if($logen)
+            <a href="http://mycenter.lvzheng.com/mywf/page/reg" class="login-btn ">立即注册公司</a>
+            #else
+            <a href="/login.html" class="login-btn ">立即注册公司</a>
+            #end
+        </div>
+    </div>   
+
+    <div class="zc-nav">
+            #if($logen)
+            <a  class="login-btn" href="http://mycenter.lvzheng.com/mywf/page/reg">立即注册公司</a>
+            #else
+            <a  class="login-btn" href="/login.html">立即注册公司</a>
+            #end
+    </div>
+
+    <div class="zcreg-main">
+        <div class="box1">
+            <div class="con">
+                <p class="tag"><img src="/images/zc/tag1.png"></p>
+                <p class="name">No.1 极速<span></p>
+                <p class="text">自助注册公司，20工作日<br>极速出证，前50名免费刻章</p>
+            </div>
+        </div>
+        <div class="box2">
+            <div class="con">
+                <p class="tag"><img src="/images/zc/tag2.png"></p>
+                <p class="name">No.2 便利<span></p>
+                <p class="text">有了地址，核名、设立<br>注册公司一步到位</p>
+            </div>
+        </div>
+        <div class="box1">
+            <div class="con">
+                <p class="tag3"><img src="/images/zc/tag3.png"></p>
+                <p class="name">No.3 安全<span></p>
+                <p class="text">孵化器地址已在工商局备案<br>完全避开不靠谱中介</p>
+            </div>
+        </div>
+        <div class="box2">
+            <div class="con">
+                <p class="tag4"><img src="/images/zc/tag4.png"></p>
+                <p class="name">No.4 透明<span></p>
+                <p class="text">协议保证，地址价格透明，<br>绝无二次收费</p>
+            </div>
+        </div>
+        
+        <p class="btext"></p>
+    </div>      
+
+    <!-- 请付款 弹出框 -->
+    <div class="cd-popup cd-box1" role="alert"> 
+        <!-- 登录框 -->
+        <div class="cd-popup-container login-box">
+            <div class="loginc">
+                <h4>登录</h4>
+                <div class="item">
+                    <p>
+                        <label>手机号</label>
+                        <input id="phoneNum"  class="w-180" type="text" placeholder="输入手机号">
+                    </p>
+                    <p>
+                        <label>验证码</label>
+                        <input id="code"  class="w-100" type="text" placeholder="输入验证码">
+                        <a onclick="getCode()"  class="get-code">获取验证码</a>
+                        <span class="time"><!-- 剩余<a>52s</a> --></span>
+                    </p>
+                </div>
+                <div class="btn"><a href="loginBanli()">登录</a></div>
+            </div> 
+            <a href="" class="cd-popup-close img-replace">关闭</a>
+        </div>
+
+        <!-- 提示框 -->
+        <!-- <div class="cd-popup-container bl-box">
+            <div class="bl">
+                <div class="item">
+                    <p>您已经正在办理公司注册了<br>是否需要再注册一个新公司？</p>
+                </div>
+                <div class="btn">
+                    <a href="">不，继续办理</a>
+                    <a href="">是，注册新公司</a>
+                </div>
+            </div> 
+            <a href="" class="cd-popup-close img-replace">关闭</a>
+        </div> -->
+
+    </div> 
+    <!-- 弹出框 -->     
+
+
+
+</div>
+</body>
+
+</html>

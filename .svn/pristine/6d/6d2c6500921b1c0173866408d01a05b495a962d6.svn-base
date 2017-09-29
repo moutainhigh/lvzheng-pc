@@ -1,0 +1,68 @@
+/**
+ * 
+ */
+
+package com.jx.hunter.lvzhengpc.utils;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import com.jx.argo.BeatContext;
+import com.jx.blackface.tools.webblack.auth.AuthHelper;
+import com.jx.blackface.tools.webblack.checkname.CheckNameHelper;
+import com.jx.blackface.tools.webblack.checkname.entity.FoundCheckEntity;
+import com.jx.service.messagecenter.util.DateUtils;
+
+
+
+/**
+ * simple introduction
+ *
+ * <p>detailed comment</p>
+ * @author chuxuebao 2016年3月22日
+ * @see
+ * @since 1.0
+ */
+
+public class EnterpriseUtils {
+
+	/**
+	 * 获取登录信息
+	 * @return
+	 * @throws Exception
+	 */
+	public static Map<String, String> getLoginInfo(BeatContext beat) throws Exception{
+		// TODO
+		String ipAddr = "";
+		String userId = "";
+		Map<String, String> loginInfo = new HashMap<String, String>();
+		loginInfo.put("userId", userId);
+		loginInfo.put("IP", ipAddr);
+		return loginInfo;
+	}
+	
+	public static String foundCheck(String industryCharacteristics, String mainBusinessUniteCode, String mainBusinessCode, String fullName, String shopName){
+		String sessionId = null;
+		try {
+			sessionId = AuthHelper.postLogin();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		FoundCheckEntity foundCheckEntity = new FoundCheckEntity();
+		foundCheckEntity.setHangye(industryCharacteristics);
+		foundCheckEntity.setHbdm(mainBusinessUniteCode);
+		foundCheckEntity.setHydm(mainBusinessCode);
+		foundCheckEntity.setQuanming(fullName);
+		foundCheckEntity.setShijian(DateUtils.getFormatDateStr(DateUtils.getCurrentDate(), DateUtils.DATA_FORMAT_YYYY_MM_DD_HH_MM_SS) );
+		foundCheckEntity.setZihao(shopName);
+		foundCheckEntity.setZihaohangye(shopName + industryCharacteristics);
+		foundCheckEntity.setSuperNameId("");
+		String foundCheck = null;
+		try {
+			foundCheck = CheckNameHelper.foundCheck(sessionId, foundCheckEntity);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return foundCheck;
+	}
+}

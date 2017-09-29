@@ -1,0 +1,91 @@
+<!-- 热门服务 -->
+<div class="hot-service">
+    <div class="service-box">
+        <div class="title">
+            <p>创业热门服务</p>
+        </div>
+        <div class="s-flow">  
+            <!-- <ul class="s-name" id="flow-name">                                        
+                <li class="current"><a>工商注册</a></li>
+                <li><a>财税</a></li>  
+                <li><a>知产保护</a></li>  
+                <li><a>人事社保</a></li>
+            </ul> -->
+            <div class="flowcon" id="flow-con">
+                <div class="sublist">
+                    <ul class="con">
+                        <li>
+                            <p class="ico1"></p>
+                            <p class="name">公司注册</p>
+                            <p class="text">20个工作日极速出照高效便捷，<br>放心可靠！</p>
+                            <p class="price"><span>598</span>元</p>
+                            <a href="/commondetail/detail/38229817543169.html" class="btn">立即购买</a>
+                        </li>
+                        
+                         <li>
+                            <p class="ico2"></p>
+                            <p class="name">虚拟地址</p>
+                            <p class="text">放心可靠的地址，<br>放心注册！ </p>
+                            <p class="price"><span>4000</span>元</p>
+                            <a href="http://www.lvzheng.com/addresslist.html" class="btn">立即购买</a>
+                        </li>
+                        
+                        <li>
+                            <p class="ico3"></p>
+                            <p class="name">代理记账</p>
+                            <p class="text">专业会计<br>为您省时省力</p>
+                            <p class="price"><span>900</span>元</p>
+                            <a href="/commondetail/detail/38253214893569.html" class="btn">立即购买</a>
+                        </li>
+                        
+                         <li>
+                            <p class="ico4"></p>
+                            <p class="name">商标注册</p>
+                            <p class="text">专注高效，实时掌控<br>让您享受贴心的专业服务</p>
+                            <p class="price"><span>800</span>元</p>
+                            <a href="/commondetail/detail/38230926529537.html" class="btn">立即购买</a>
+                        </li>
+                         
+                         <li>
+                            <p class="ico5"></p>
+                            <p class="name">社保开户</p>
+                            <p class="text">节省服务、服务专业、安全保密 </p>
+                            <p class="price"><span>580</span>元</p>
+                            <a href="commondetail/detail/38231120087809.html" class="btn">立即购买</a>
+                        </li>
+                        
+                         <li>
+                            <p class="ico6"></p>
+                            <p class="name">文字作品登记</p>
+                            <p class="text">快速提交，全程跟踪，省心省力</p>
+                            <p class="price"><span>700</span>元</p>
+                            <a href="/commondetail/detail/38253259489537.html?cityid=999" class="btn">立即购买</a>
+                        </li>
+                        
+                         
+                        <li>
+                            <p class="ico7"></p>
+                            <p class="name">公司变更</p>
+                            <p class="text">快速办理,全程透明</p>
+                            <p class="price"><span>598</span>元</p>
+                            <a href="commondetail/detail/38230212012545.html" class="btn">立即购买</a>
+                        </li>
+                        
+                         <li>
+                            <p class="ico8"></p>
+                            <p class="name">一次法律咨询</p>
+                            <p class="text">最优惠的价格，<br>最实惠的法律咨询</p>
+                            <p class="price"><span>1</span>元</p>
+                            <a href="commondetail/detail/39186221829377.html" class="btn">立即购买</a>
+                        </li>
+                        
+                    </ul>
+                </div>
+
+
+
+            </div>
+        </div>
+
+    </div>
+</div>

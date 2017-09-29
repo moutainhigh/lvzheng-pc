@@ -1,0 +1,37 @@
+<!-- 友情连接 -->
+<div class="link-main">
+    <div class="link-box">
+        <div class="list">
+            <label>热门服务：</label>
+            <div class="con">
+                <ul>
+                    <li><a href="/reg_bj.html">北京公司注册</a></li>
+                    <li><a href="/change_bj.html">北京公司变更</a></li>
+                    <li><a href="/bookkeeping_bj.html">北京公司记账</a></li>
+                    <li><a href="/addresslist.html">北京注册地址</a></li>
+                </ul>
+            </div>
+        </div>
+        #if(${friendlinks})
+        <div class="list">
+            <label>友情链接：</label>
+            <div class="con">
+                <ul>
+                    #set ($i=0)
+                  	#foreach($friendlink in $!{friendlinks})
+                  	#set($i=$i+1)
+						#if($i>10)
+						<li class="morediv"><a href="http://$!{friendlink.lurl}"  target="_blank" >	$!{friendlink.keyword}     </a></li>
+						#else
+						<li><a href="http://$!{friendlink.lurl}"  target="_blank" >	$!{friendlink.keyword}     </a></li>
+						
+						#end
+					#end
+					
+                </ul>
+            </div>
+        </div>                                         
+		#end
+                                               
+    </div>
+</div>

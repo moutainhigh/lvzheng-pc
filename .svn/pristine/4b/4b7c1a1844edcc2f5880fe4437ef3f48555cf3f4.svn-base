@@ -1,0 +1,311 @@
+@charset "utf-8";
+*{padding:0;margin:0;}
+body{padding:0;margin:0;font-size:12px;font-family:"微软雅黑";color: #333;background:#fff;}
+img{border:none;}
+a{text-decoration:none;cursor:pointer;color:#666;}
+a:hover,a:hover {text-decoration:none;color:#55acee;}
+input{color: #777;}
+ul{padding:0;margin:0;list-style:none;}
+li,p{padding:0;margin:0;}
+.clear{clear:both;}
+::-webkit-input-placeholder { /* WebKit browsers */color: #ccc;}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */color: #ccc;}
+::-moz-placeholder { /* Mozilla Firefox 19+ */color: #ccc;}
+:-ms-input-placeholder { /* Internet Explorer 10+ */color: #ccc;}
+
+.totop{position:fixed;right:25px;bottom:25px;display:block;width:26px;height:62px;background:url(http://static.lvzheng.com/lvzhengpc/images/rocket.png) no-repeat 0 0;-webkit-transition: all 0.2s ease-in-out;}
+.totop:hover{background:url('http://static.lvzheng.com/lvzhengpc/images/rocket.png') no-repeat 0 -62px;}
+/*返回顶部*/
+
+#box {width:180px; height:350px; background:#fff; position:fixed; top:250px; right:-181px; border:1px solid #ddd; border-right: none; z-index: 100000}
+#box .title{width:11px;height:55px; padding: 30px 10px;  position: absolute;left:-32px; font-size: 14px; background:#ff8484;top:120px;color:#fff;line-height:15px;text-align: center;vertical-align: middle;border-radius:5px 0 0 5px;cursor: pointer;}
+#box ul{margin:10px;list-style:none;}
+#box ul .box_tel{padding: 20px 0;text-align: center; line-height: 25px}
+#box ul .box_tel .num{font-size: 22px; color: #e66f70;font-weight: bold;font-family: 微软雅黑;}
+#box ul .box_tel .hot {color: #999999;font-size: 12px}
+#box ul .ewm{padding-top: 10px}
+/*悬浮框*/
+
+
+
+#continer {text-align: left;width: 100%;}
+#top {background: none repeat scroll 0 0 #ffffff;border-bottom: 1px solid #cccccc;height: 60px;left: 0;min-width: 1000px;position: absolute;top: 0;width: 100%;z-index: 10000;}
+.top {height: 60px;margin: 0 auto;position: relative;width: 980px;}
+.logo {margin:5px 70px 0 10px;  float: left;}
+
+
+
+
+
+#main{width:100%;clear:both;}
+.sevice_ul{width:980px;margin:0 auto;}
+.sevice_ul li{float:left;padding:40px 12px;margin:0 43px;width:215px;text-align:center;font-size:14px;line-height:26px;color:#898989;display:inline;}
+.sevice_ul li:hover{ 
+box-shadow: 0 0 4px #e9e9e9;
+border: 1px solid #e9e9e9; 
+-moz-border-radius: 6px; 
+-webkit-border-radius: 6px; 
+border-radius: 6px; 
+padding: 39px 11px; 
+background: #f2f8fb}
+
+.sevice_ul li span{color:#f94444;}
+.sevice_ul li p{padding-top: 15px}
+.sevice_h4{text-align:center;color:#55acee;font-size:24px;font-weight:normal;margin-bottom:20px;}
+/*服务end*/
+
+.fast{height: 530px;background: #f1fbff}
+.fast_top{padding-top: 70px}
+.fast_ul{width:960px;margin:0 auto;padding:35px 0 45px 0;margin-bottom:30px;}
+.fast_ul li{float:left;margin:0 10px;text-align:center;font-size:14px;line-height:26px;color:#898989;display:inline;}
+.fast_ul .icon{width:105px;}
+.fast_ul .arrow{height:100px;width:130px;background:url(http://static.lvzheng.com/lvzhengpc/images/fast-arrow.png) no-repeat;}
+.fast_ul .arrow div{color: #87bde1;padding-top: 25px}
+.fast_ul li span{color:#f94444;}
+.fast_ul li p{padding-top: 15px;color: #8ec1e3}
+/*岂止于快end*/
+
+.unusual{height: 700px;}
+.unusual_top{padding-top: 70px}
+.unusual_ul{width:840px;height:420px;margin:80px auto 30px;background:url(http://static.lvzheng.com/lvzhengpc/images/unusual_bg.png) no-repeat center;}
+.unusual_ul li{float:left;margin:0 25px;text-align:center;font-size:14px;line-height:26px;color:#898989;display:inline;}
+.unusual_ul .unusual_left{width:370px;text-align: right;}
+.unusual_ul .unusual_right{width:370px;text-align: left;}
+.unusual_ul li div{padding: 0 0 80px 0}
+.unusual_ul li div .unusual_title1{font-size: 24px;color: #7ed34f;padding-bottom: 5px}
+.unusual_ul li div .unusual_title2{font-size: 24px;color: #ff6b6b;padding-bottom: 5px}
+.unusual_ul li div .unusual_title3{font-size: 24px;color: #8d97f9;padding-bottom: 5px}
+.unusual_ul li div .unusual_title4{font-size: 24px;color: #ffd669;padding-bottom: 5px}
+.unusual_ul li div .unusual_title5{font-size: 24px;color: #7bbdec;padding-bottom: 5px}
+.unusual_ul li div .unusual_content{font-size:14px;color:#b6b6b6}
+.unusual_ul li .right_top{margin-top: 70px}
+/*与众不同end*/
+
+.profession{height: 730px;background: #f1fbff}
+.profession_top{padding-top: 70px}
+.profession_ul{width:960px;margin:0 auto;padding:30px 0 0 0;margin-bottom:30px;}
+.profession_ul li{float:left;margin:0 10px;text-align:center;font-size:14px;line-height:26px;color:#898989;display:inline;}
+
+#lawyer {height: 290px;width: 980px;margin-right: auto;margin-left: auto;position: relative;margin-top: 80px;}
+#lawyer .pre{background-image: url(http://static.lvzheng.com/lvzhengpc/images/nav.png);background-repeat: no-repeat;background-position: -60px top;display: block;height: 75px;width: 28px;cursor:pointer;position: absolute;left: -20px;top: 100px;}
+#lawyer a.pre:hover{background-position: -90px top;}
+#lawyer .next{background-image: url(http://static.lvzheng.com/lvzhengpc/images/nav.png);background-repeat: no-repeat;background-position: left top;display: block;height: 75px;width: 28px;cursor:pointer;top: 100px;right: -20px;position: absolute;}
+#lawyer a.next:hover{background-position: -30px top; }
+#lawyer #wai_box {height: 290px;width: 980px;overflow: hidden;position: relative;}
+#lawyer #wai_box .lawyer_box .title {
+	font-family: "微软雅黑";font-size: 14px;  line-height: 20px;color: #FFFFFF;padding:15px 10px 15px 20px;background:#113e56;
+	color:#fff;zoom:1 ;filter:alpha(opacity=90); -moz-opacity:0.9; opacity:0.9; display: none;
+	height: 130px;position: absolute;bottom: 0px;z-index: 30;width:190px;text-indent: 1em;left: 0px}
+#lawyer .lawyer_box{width: 3120px;position: absolute;left: 0px;top: 0px;}
+#lawyer .lawyer_box a img{width: 220px;height: 220px} 
+#lawyer .lawyer_box li div{padding:10px 10px;height:50px;background: #ffffff;}
+#lawyer .lawyer_box li div .name{font-size: 18px; line-height: 30px; color: #000000;}
+#lawyer .lawyer_box li div .edu{font-size: 14px;color: #999999;line-height: 16px}
+#lawyer .lawyer_box a.img:hover{-moz-opacity:0.9;-khtml-opacity:0.9;Opacity:0.9;Filter:alpha(opacity=90);outline:none;}
+#lawyer .lawyer_box .img{display: block;}
+#lawyer .lawyer_box ul {float: left;display: block;height: 290px;width: 980px;}
+#lawyer .lawyer_box li {float: left;font-size: 0px;line-height: 0px;position: relative;width: 220px;margin: 0 12px}
+#lawyer .nav {height: 16px;width:80px;margin:55px auto 0;}
+#lawyer .nav a {background:url(http://static.lvzheng.com/lvzhengpc/images/dot.png) -24px 0;display: block;float: left;height: 16px;width: 16px;font-size: 0px;line-height: 0px;margin-right: 2px;cursor:pointer;}
+#lawyer .nav a:hover{background:url(http://static.lvzheng.com/lvzhengpc/images/dot.png) 0 0;}
+#lawyer .nav .now{background:url(http://static.lvzheng.com/lvzhengpc/images/dot.png) 0 0;}
+/*专注专业end*/
+
+
+
+.footer_info{height: 220px;width:100%;background: #112334}
+.footer_info .footer_info_ul{width:1000px;margin:0 auto;padding: 40px 0 0 0}
+.footer_info .footer_info_ul li{float:left;text-align:left; color:#d5d7d8;display:inline;}
+.footer_info .footer_info_ul li p{font-size: 14px; height: 35px; line-height: 35px}
+.footer_info .footer_info_left{width: 730px;padding-right: 30px}
+.footer_info .footer_info_right .contact_us{font-size: 18px}
+.footer_info .footer_info_right .contact_tel{font-size: 24px;color: #ff6969}
+.footer_info .footer_info_right .work_time{font-size: 14px}
+.footer_info .footer_info_right div a{float: left;margin: 5px 10px 0 0;}
+.footer_info .footer_info_right div .wx_ico{height: 43px;width: 43px;background:url(http://static.lvzheng.com/lvzhengpc/images/icon_bg.png) 0 0;}
+.footer_info .footer_info_right div .wx_ico:hover{height: 43px;width: 43px;background:url(http://static.lvzheng.com/lvzhengpc/images/icon_bg.png) 0 -48px;}
+.footer_info .footer_info_right div .wx_ico .weixin-code{ position:  relative; width: 120px; bottom: 145px; right: 45px;display: none;  padding: 6px; background-color: #fff;}
+.footer_info .footer_info_right div .wx_ico:hover .weixin-code{display:block;}
+.footer_info .footer_info_right div .wx_ico .weixin-code .angle{ display: inline-block; height: 0; width: 0; border: 9px solid #fff; border-left-color: transparent; border-right-color: transparent; border-bottom: 0; position: absolute; bottom: -9px; left: 50%; margin-left: -9px; }
+.footer_info .footer_info_right div .wb_ico{height: 43px;width: 43px;background:url(http://static.lvzheng.com/lvzhengpc/images/icon_bg.png) -100px 0;}
+.footer_info .footer_info_right div .wb_ico:hover{height: 43px;width: 43px;background:url(http://static.lvzheng.com/lvzhengpc/images/icon_bg.png) -100px -48px;}
+.footer_info .footer_info_right div .qq_ico{height: 43px;width: 43px;background:url(http://static.lvzheng.com/lvzhengpc/images/icon_bg.png) -50px 0;}
+.footer_info .footer_info_right div .qq_ico:hover{height: 43px;width: 43px;background:url(http://static.lvzheng.com/lvzhengpc/images/icon_bg.png) -49px -48px;}
+.footer_info .footer_info_right div .email_ico{height: 43px;width: 43px;background:url(http://static.lvzheng.com/lvzhengpc/images/icon_bg.png) -150px 0;}
+.footer_info .footer_info_right div .email_ico:hover{height: 43px;width: 43px;background:url(http://static.lvzheng.com/lvzhengpc/images/icon_bg.png) -150px -48px;}
+.footer_top{margin-top: 60px}
+/*底部 end*/
+
+
+
+
+
+
+.business{padding: 20px 0}
+.business ul li{float: left; display:block; width:98px; height:53px; line-height: 53px;cursor: pointer; }
+.business ul li:hover{border:1px solid #fe7575;}
+.business ul li p{vertical-align:  middle; font-size: 12px; color: #666;padding: 5px 7px;line-height: 14px  }
+.box1{margin-right: 10px;text-align: center;}
+.box_one{margin-top: 15px}
+.box2{margin-right: 10px}
+.box_two{margin-top: 8px}
+.box3{margin-right: 10px}
+.b_box{color: #000;border:1px solid #dddddd;}
+.checked{color:#f00;border:1px solid #fe7575;background:url(http://static.lvzheng.com/lvzhengpc/images/product/box_on.png) no-repeat;}
+.change_remark{width: 385px;padding:20px 0 35px 0;border-bottom: 1px solid #e5e5e5}
+.change_remark .time{font-size: 14px;color: #000000;line-height:24px }
+.change_remark .area{font-size: 12px;color: #ff5252}
+.change_btn{margin: 15px 0}
+.change_btn .yuyue{margin-right: 20px; float: left; color: #ffffff;font-size: 18px; width: 150px; height: 40px; text-align: center; line-height: 40px; background: #fe7575}
+.change_btn .zixun{margin-right: 20px; float: left; color: #ffffff;font-size: 18px; width: 150px; height: 40px; text-align: center; line-height: 40px; background: #7ab6db}
+
+.change_btn .yuyue .weixin-code{ position:  relative; width: 200px; height: 235px; top: -8px; right: 30px;display: none;  padding: 6px; }
+.change_btn .yuyue:hover .weixin-code{display:block;}
+/*.change_btn .yuyue .weixin-code .angle{ display: inline-block; height: 0; width: 0; border: 9px solid #e5e5e5; border-left-color: transparent; border-right-color: transparent; border-bottom: 0; position: absolute; bottom: -9px; left: 50%; margin-left: -9px; }*/
+
+/*tab切换*/
+#tabbox{ width: 1000px;margin: 10px auto 50px; overflow:hidden; }
+.tabs_nav{height: 41px;width: 100%;background:url(http://static.lvzheng.com/lvzhengpc/images/product/nav2_bg.png) repeat-x bottom;}
+.tabs{height: 40px;width: 400px;background:#f2f2f2;}
+.tabs li{float:left; line-height:40px;;width:100px;cursor:pointer;text-align: center; font-size: 14px;overflow: hidden;position: relative;}
+.tabs li a {display: block;padding: 0 20px;}
+.tabs li:hover{background: #96caea;color: #ffffff}
+.tab_conbox{border-top: none;}
+.tabs_checked{color: #ffffff;background: #228bcc;}
+.nav2xf {position: fixed;top: 0px;z-index: 9000;width: 1000px;height:42px;margin: 0 auto;color: #ffffff;background:url(http://static.lvzheng.com/lvzhengpc/images/product/nav2bg.png) no-repeat;}
+.btnxf{position: fixed;top: 0px;z-index: 10001;margin: 0 0 0 90px; }
+.listxf{position: fixed; top: 1px;z-index: 10001; }
+
+.tab_con {padding:12px;font-size: 14px; line-height:175%;}
+.tab_con .flow_box{padding: 40px 0 0 0}
+.tab_con h2{font-size: 20px;color: #000000;font-weight: 200;padding-bottom: 10px;}
+.tab_con span{font-size: 12px;color: #999999;padding-left: 10px}
+.tab_con p{font-size: 14px; color: #999999;line-height: 28px}
+
+.tab_con .flow1{width: 840px;height: 180px;background: #f7fafe;padding: 25px 50px;margin-bottom: 30px}
+.tab_con .flow1 h4{color: #228bcc;font-size: 14px;width: 300px; text-align: center; margin: 0 auto;font-weight: 100}
+.tab_con .flow1 .flow1_ul{width: 810px;margin: 30px auto 0px}
+.tab_con .flow1 .flow1_ul div{width: 90px;  float: left;text-align: center;}
+.tab_con .flow1 .flow1_ul .even{background:url(http://static.lvzheng.com/lvzhengpc/images/product/flow_arrow.png) no-repeat;height: 70px;padding-top: 10px;font-size: 12px;color: #56a5d6}
+.tab_con .flow1 .flow1_ul .odd{background:url(http://static.lvzheng.com/lvzhengpc/images/product/circle_bg.png) no-repeat;height: 55px;font-size: 12px;color: #56a5d6;line-height: 18px;}
+.odd_one{padding-top: 25px}
+.odd_two{padding-top: 18px}
+.tab_con .flow1 .flow1_name{width: 900px;margin-left: -30px;font-size: 12px;color: #309cd1;line-height: 16px}
+.tab_con .flow1 .flow1_name div{float: left; width: 180px;height: 40px;text-align: center;}
+.tab_con .flow1 .flow2_name{width: 720px;margin-left: -30px;font-size: 12px;color: #309cd1;line-height: 16px;margin: 0 auto}
+.tab_con .flow1 .flow2_name div{float: left; width: 180px;height: 40px;text-align: center;}
+.tab_con .flow1 .flow3_name{width: 540px;margin-left: -30px;font-size: 12px;color: #309cd1;line-height: 16px;margin: 0 auto}
+.tab_con .flow1 .flow3_name div{float: left; width: 180px;height: 40px;text-align: center;}
+
+.tab_con .flow3{width: 970px;height: 180px;background: #f7fafe;padding: 25px 15px;margin-bottom: 30px}
+.tab_con .flow3 h4{color: #228bcc;font-size: 14px;width: 300px; text-align: center; margin: 0 auto;font-weight: 100}
+.tab_con .flow3 .flow3_ul{width: 960px;margin: 30px auto 0px}
+.tab_con .flow3 .flow3_ul div{width: 87px;  float: left;text-align: center;}
+.tab_con .flow3 .flow3_ul .even{background:url(http://static.lvzheng.com/lvzhengpc/images/product/flow_arrow.png) no-repeat top right;height: 70px;padding-top: 10px;font-size: 12px;color: #56a5d6}
+.tab_con .flow3 .flow3_ul .odd{background:url(http://static.lvzheng.com/lvzhengpc/images/product/circle_bg.png) no-repeat top center;height: 55px;font-size: 12px;color: #56a5d6;line-height: 18px;}
+.tab_con .flow3 .flow3_name{width: 970px;font-size: 12px;color: #309cd1;line-height: 16px}
+.tab_con .flow3 .flow3_name div{float: left; width: 110px; height: 40px;text-align: center;}
+.tab_con .flow3 .flow3_name .range_r{padding-right: 62px; }
+
+.tab_con .flow4{width: 970px;height: 120px;background: #f7fafe;padding: 25px 15px;margin: 20px 0}
+.tab_con .flow4 h4{color: #228bcc;font-size: 14px;width: 300px; text-align: center; margin: 0 auto;font-weight: 100}
+.tab_con .flow4 .flow4_ul{width: 960px;margin: 30px auto 0px}
+.tab_con .flow4 .flow4_ul .odd{width: 75px;  float: left;text-align: center;}
+.tab_con .flow4 .flow4_ul .even{width: 50px;  float: left;text-align: center;}
+.tab_con .flow4 .flow4_ul .even{background:url(http://static.lvzheng.com/lvzhengpc/images/product/flow_arrow.png) no-repeat top right;height: 70px;padding-top: 10px;font-size: 12px;color: #56a5d6}
+.tab_con .flow4 .flow4_ul .odd{background:url(http://static.lvzheng.com/lvzhengpc/images/product/circle_bg.png) no-repeat top center;height: 55px;font-size: 12px;color: #56a5d6;line-height: 18px;}
+
+.care .take_care{ font-size: 16px;color: #000000;padding-bottom: 15px}
+.care .agent{width: 380px;border-bottom: 1px solid #e5e5e5;}
+.care .agent p{width: 75px;border-bottom: 2px solid #309cd1;font-size: 14px;color: #309cd1;text-align: center;line-height: 30px}
+.agent_content{font-size: 14px; color: #999999;line-height: 28px;width: 930px;padding-top: 20px}
+.price_tab {width: 900px;height: 150px}
+.price_tab table{border-right:1px solid #e5e5e5;border-bottom:1px solid #e5e5e5}
+.price_tab table td{border-left:1px solid #e5e5e5;border-top:1px solid #e5e5e5; height: 50px; text-align:center;} 
+.price_tab table .tab1 td{background: #93d0ee}
+.price_tab table .tab2 span{color: #ff5454;padding-left: 0px;font-size: 14px}
+.price_tab table .tab3 span{text-decoration:line-through;padding-left: 0px}
+
+.qu_box{margin: 16px 0} 
+.qu_box ul li{padding:0 0 10px 40px;width: 900px}
+.qu_box ul .question {background:url(http://static.lvzheng.com/lvzhengpc/images/blog/q_ico.png) no-repeat;}
+.qu_box ul .answer{background:url(http://static.lvzheng.com/lvzhengpc/images/blog/a_ico.png) no-repeat;color: #999999}
+
+
+.q_box{padding:0 0 30px 0}
+.q_box div{margin-bottom: 20px}
+.q_ico{float: left;width: 40px;height: 30px;  background:url(http://static.lvzheng.com/lvzhengpc/images/blog/q_ico.png) no-repeat;}
+.q_ico p{padding-bottom: 10px}
+.q_content{padding-left: 10px;width: 925px;}
+.a_ico{float: left;width: 40px;height: 40px;  background:url(http://static.lvzheng.com/lvzhengpc/images/blog/a_ico.png) no-repeat;}
+.a_content{padding-left: 10px;color: #999999;width: 925px;}
+.step_b{margin-bottom: 20px}
+
+
+
+.reg_list{width: 256px;margin-left: 740px;padding-bottom: 15px;border: 1px solid #e2e2e2;border-top: 2px solid #228bcc}
+.reg_list .service_info{font-size: 14px; padding: 10px 20px;background: #f1f8ff}
+.reg_list .info_list li{height: 16px;border-bottom:1px solid #e2e2e2;padding:12px 15px 12px 20px }
+.reg_list .info_list li:hover{background: #e8f3fa}
+.reg_list .info_list li p{float: left;font-size: 14px;}
+.reg_list .info_list li .reg_type{width: 110px}
+.reg_list .info_list li .reg_price{width: 85px;text-align: right}
+.reg_list .info_list li .reg_price span{color: #ff5d5d}
+.reg_list .info_list li #reg_del{ height: 20px;line-height: 20px}
+.reg_list .info_list li #reg_del img{padding:0 0 0 10px }
+.reg_list .reg_total{width: 240px;padding:15px 15px 0 0;text-align: right;font-size: 14px}
+.reg_list .reg_total span{color: #ff5d5d}
+.reg_list .reg_total span.yhq{float:left;padding-left:20px}
+
+/*登陆*/
+.login{width: 1000px;margin: 0 auto}
+.login .login_top .logo {margin:5px 5px 0 10px;  float: left;}
+.login .login_top .register{height: 35px;line-height: 35px; float: left; padding: 0 25px; margin:10px; border-left: 1px solid #e5e5e5;color: #999;font-size: 18px}
+.login .login_top .tel{text-align: right;font-size: 14px;color:#000;  float: right; margin-top: 15px; height: 26px;line-height: 26px;  padding-left: 36px; background:url(http://static.lvzheng.com/lvzhengpc/images/login/telbg.png) no-repeat; }
+.login .login_top .tel p{width: 100px; text-align: left;}
+.login .login_conbox{width: 1000px;}
+.login .login_con{height: 450px; padding: 20px 0; background:url(http://static.lvzheng.com/lvzhengpc/images/users/loginbg.png) no-repeat;}
+.login .login_con_mid{height: 450px; padding: 20px 0; background:url(http://static.lvzheng.com/lvzhengpc/images/users/loginbg_mid.jpg) no-repeat;}
+.login .login_box{width: 350px; padding-bottom: 20px; margin-top:25px;  border: 1px solid #eee;float: right; background: #fff}
+.login .login_box input{font-size: 14px;color: #666}
+.login .login_box .box_top{padding: 30px 45px}
+.login .login_box .box_top p{float: left;}
+.login .login_box .box_top .reg_name{height:25px;line-height: 25px;font-size: 18px;color: #000; padding:0 40px 10px 30px; background:url(http://static.lvzheng.com/lvzhengpc/images/users/reg_name.png) no-repeat -0px -0px;}
+.login .login_box .box_top .reg_login{font-size: 12px;color: #999;padding-top: 5px;}
+.login .login_box .box_top .reg_login a{color: #228bcc; padding-left: 5px}
+.login .login_box .t_box1{ padding: 10px 0px 10px 45px}
+.login .login_box input{height: 35px; border: 1px solid #ddd;padding: 0 10px;float: left;}
+.login .login_box .w_box1{width: 238px;}
+.login .login_box .w_error{border:1px solid #ff9f9f;}
+.login .login_box .w_box2{width: 140px; float: left;}
+.login .login_box .t_box_btn{font-size: 12px; color: #333; float: left; text-align: center; border: 1px solid #ddd;padding: 9px 0; width: 85px; height: 16px;line-height: 16px; background: #f9f9f9; cursor: pointer; margin-left: 10px; display: block;}
+.login .login_box .t_box_btn:hover{color: #228bcc;border: 1px solid #228bcc}
+.login .login_box .t_box1 .reg_btn{font-size: 18px; width: 238px; color: #fff;padding: 10px; text-align: center; background: #66b5e5;cursor: pointer; -moz-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px; }
+.login  .login_bott{width: 100%;border-top: 1px solid #eee}
+.login_bott p{width: 1000px;margin: 0 auto;height: 60px; line-height: 60px;color: #999;text-align: center;}
+
+.login .login_box .box_top .reg_name1{height:25px;line-height: 25px;font-size: 18px;color: #000; padding:0 60px 10px 30px; background:url(http://static.lvzheng.com/lvzhengpc/images/users/reg_name.png) no-repeat -0px -0px;}
+.login .login_box .box_top .reg_login1{font-size: 12px;color: #66b5e5;padding: 3px 0 3px 25px; height: 20px;line-height: 20px; background:url(http://static.lvzheng.com/lvzhengpc/images/users/reg_name.png) no-repeat -0px -33px }
+.login .login_box .box_top .reg_login1:hover{color: #ff7e7e;background:url(http://static.lvzheng.com/lvzhengpc/images/users/reg_name.png) no-repeat -0px -55px;cursor: pointer; }
+.login .login_box .box_top .reg_name2{height:25px;line-height: 25px;font-size: 18px;color: #000; padding:0 45px 10px 30px; background:url(http://static.lvzheng.com/lvzhengpc/images/users/reg_name.png) no-repeat -0px -78px;}
+.login .login_box .box_top .reg_login2{font-size: 12px;color: #66b5e5;padding: 3px 0 3px 25px; height: 20px;line-height: 20px; background:url(http://static.lvzheng.com/lvzhengpc/images/users/reg_name.png) no-repeat -0px -108px }
+.login .login_box .box_top .reg_login2:hover{color: #ff7e7e;background:url(http://static.lvzheng.com/lvzhengpc/images/users/reg_name.png) no-repeat -0px -130px;cursor: pointer; }
+.login .login_box .t_box2{ padding: 0 48px;text-align: left;line-height: 35px; color: #999}
+.login .login_box .t_box2 a{color: #999}
+.login .login_box .t_box2 a:hover{color: #228bcc}
+.login .login_box .t_box1 a{color: #228bcc}
+.login .login_box .t_box2 input{float: left; margin-right: 10px}
+
+
+
+/*404*/
+.error404{width: 1000px;margin: 0 auto;padding: 100px 0}
+.error404 .error404_bg{height: 446px; margin:20px 0; background: url(http://static.lvzheng.com/lvzhengpc/images/404.png) no-repeat center;}
+.hotPage{ width::400px;}
+.center{overflow:hidden;padding:0px 80px;}
+.cost{color: #999999;text-decoration:line-through;}
+.hright .order_list .list_tab3 .list_td13{font-size: 14px;color:#ff4444}
+.hright .order_rate ul li table .rate_tab2 .rate_info .rate_content .p_red_1{color: #646464}
+.hright .order_rate ul li table .rate_tab2 .rate_info .rate_bg1_1{ width: 20px;height: 30px;margin-right: 10px; background:url(http://static.lvzheng.com/lvzhengpc/images/order/icon_list.png) no-repeat center ;}
+
+

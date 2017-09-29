@@ -1,0 +1,18 @@
+<div class="list">
+                    <label>区域：</label>
+                    <ul class="c-area">
+                        <li class="b-box" ><a href="$!{url}$!{localurl}0">不限</a></li>
+                        <li #if($localval == "101") class="checked" #else class="b-box" #end data-value="101">
+                        <a href="$!{url}$!{localurl}101">朝阳区</a></li>
+                        <li #if($localval == "102") class="checked" #else class="b-box" #end data-value="102">
+                        <a href="$!{url}$!{localurl}102">海淀区</a></li>
+                        <li #if($localval == "103") class="checked" #else class="b-box" #end data-value="103">
+                        <a href="$!{url}$!{localurl}103">东城区</a></li>
+                        <li #if($localval == "104") class="checked" #else class="b-box" #end data-value="104">
+                        <a href="$!{url}$!{localurl}104">西城区</a></li>
+                        <li #if($localval == "105") class="checked" #else class="b-box" #end data-value="105">
+                        <a href="$!{url}$!{localurl}105">丰台区</a></li>
+                        <li #if($localval == "106") class="checked" #else class="b-box" #end data-value="106">
+                        <a href="$!{url}$!{localurl}106">石景山区</a></li>
+                    </ul>
+                </div>

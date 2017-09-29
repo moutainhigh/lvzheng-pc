@@ -1,0 +1,74 @@
+package com.jx.hunter.lvzhengpc.controllers;
+
+import java.util.Map;
+
+import com.jx.argo.ActionResult;
+import com.jx.argo.annotations.Path;
+import com.jx.hunter.lvzhengpc.utils.ActionResultUtils;
+import com.jx.hunter.lvzhengpc.utils.BrandUtils;
+
+/**
+ * 
+ * @ClassName: BrandSelection
+ * @Description: TODO(商标筛选)
+ * @author: RENQI
+ * @date 2016年5月17日 下午2:31:41
+ *
+ */
+@Path("brand")
+public class BrandSelectionController extends BaseController {
+
+	/**
+	 * 
+	 * @Title: brandIndex
+	 * @Description: TODO(跳转至商标查询页面)
+	 * @param @return 设定文件
+	 * @return ActionResult 返回类型
+	 * @author: RENQI
+	 * @date 2016年5月17日 下午2:47:11
+	 * @throws
+	 */
+	@Path("index")
+	public ActionResult brandIndex() {
+		return view("/brand/brandSelection");
+	}
+	
+	/**
+	 * 
+	* @Title: getBrandCharactCombo
+	* @Description: TODO(获取行业特点下拉列表数据)
+	* @param @return    设定文件
+	* @return ActionResult    返回类型
+	* @author: RENQI  
+	* @date 2016年5月19日 上午9:24:14
+	* @throws
+	 */
+	@Path("getBrandCharactCombo")
+	public ActionResult getBrandCharactCombo(){
+		String parentId = request().getParameter("parentId");
+		Map<String,Object> map = BrandUtils.getBrandCharactMap();
+		Object obj = map.get(parentId);
+		return ActionResultUtils.renderJson(obj == null ? null : obj.toString());
+	}
+	
+	
+	/**
+	 * 
+	* @Title: getBrandList
+	* @Description: TODO(获取结果)
+	* @param @return    设定文件
+	* @return ActionResult    返回类型
+	* @author: RENQI  
+	* @date 2016年5月19日 上午9:25:28
+	* @throws
+	 */
+	@Path("getBrandList")
+	public ActionResult getBrandList(){
+		String parentId = request().getParameter("parentId");
+		Map<String,Object> map = BrandUtils.getBrandListMap();
+		Object obj = map.get(parentId);
+		return ActionResultUtils.renderJson(obj == null ? null : obj.toString());
+	}
+	
+
+}

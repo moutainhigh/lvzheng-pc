@@ -1,0 +1,20 @@
+    <title>三证合一--国内领先的O2O自营法律服务提供商</title>
+	<link rel="stylesheet" href="/css/merge.css">
+
+ <!-- logo区域 -->
+	 #parse("views/common/logo_normal.html")
+	 <!-- 导航 -->
+  	#parse("views/common/navigation.html")  
+	<div class="section" >
+		<div class="stage-box">
+			<div class="zz-tag"></div>
+			<div class="price-tag"></div>
+			<div class="time-tag"></div>
+			<div class="flow-tag"></div>
+			<div class="tel-tag"></div>
+			<div class="text-tag"></div>
+		</div>
+	</div>
+
+
+

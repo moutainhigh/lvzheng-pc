@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>虚拟地址-小微律政</title>
+<meta name="description" content="注册公司找小微律政,小微律政拥有专业的律师和会计团队,小微律政专注为创业公司及中小微企业提供代办公司注册,商标注册,代理记账,社保公积金开户,公司变更,合同拟定,公司章程等一站式企业服务，小微律政服务流程每一步都无微不至。">
+<meta name="keywords" content="小微律政招聘职位，小微律政公司文化" />
+<link href="/css/index.css" type="text/css"  rel="stylesheet"/>
+<script type="text/javascript" src="/js/jquery-1.7.2.min.js"></script>
+<script src="/js/jquery.tabs.js"></script>
+<script type="text/javascript" src="/js/owl.carousel.min.js"></script>
+<script type="text/javascript" src="/js/return-top.js"></script>
+<script>
+$(function(){
+    // 左导航切换显示
+    $(".left-nav dd").hover(function(){
+        $(".nav-right",this).show();
+    });
+    $(".left-nav dd").mouseleave(function(){
+        $(".nav-right",this).hide();
+    });
+
+    // 选择类型
+    $(".c-type li").each(function(){
+        $(this).click(function(){
+            $(".c-type li").addClass("b-box").removeClass("checked");
+            $(this).addClass("checked").removeClass("b-box");
+        })
+    });
+
+    // 选择价格
+    $(".c-price li").each(function(){
+        $(this).click(function(){
+            $(".c-price li").addClass("b-box").removeClass("checked");
+            $(this).addClass("checked").removeClass("b-box");
+        })
+    });
+    // 选择区域
+    $(".c-area li").each(function(){
+        $(this).click(function(){
+            $(".c-area li").addClass("b-box").removeClass("checked");
+            $(this).addClass("checked").removeClass("b-box");
+        })
+    });
+});
+</script>
+</head>
+
+<body>
+<div id="continer">
+    <!-- 顶部信息条 -->
+    #parse("views/common/header.html")
+
+    <!-- logo区域 -->
+    #parse("views/common/logo_normal.html")
+    <!-- (目录/地址) -->
+	#parse("views/common/navigation.html")
+
+    <div class="sp-listbg">
+        <!-- 商品详情 -->
+        <div class="sp-detail">
+            <div class="crumbs">
+                <a class="crumb-link" href="/">首页</a>
+                <i class="crumb-line">></i>
+                <a class="crumb-link" href="javascript:void(0);">虚拟地址</a>
+            </div>
+
+            <a href="http://mycenter.lvzheng.com/mywf/page/reg" class="ad-banner"><img src="/images/virtual/xn_ad.jpg"></a>
+
+            <div class="xn-screen">
+               
+               <!--  #parse("views/address/bigtitle.html")
+                #parse("views/address/addpricequery.html") -->
+                #parse("views/address/locallist.html")
+            </div>
+
+            <div class="xn-con">
+            #foreach($pro in $productlist)
+                <div class="list-box">
+                
+                    <div class="pic"><a href="javascript:void(0);">
+                    <img src="/imgurl/$!{pro.imgurl}"></a></div>
+                    <div class="text-box">
+                        <div class="name">$!{pro.sellername}</div>
+                        <div class="address">$!{pro.sell_address}</div>
+                        <div class="tag">
+                            <ul>
+                            	#foreach($tt in $pro.titlelist)
+                                <li class="c1">$!{tt.titlename}</li>
+                                #end
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="price-box">
+                        <p class="p1">¥$!{pro.sellerprice}</p>
+                        <p class="p2">¥$!{pro.marketprice}</p>
+                        <a href="/order/index/$!{pro.sellerid}.html" class="btn" val-date="$!{pro.sellerid}">立即购买</a>
+                    </div>
+                </div>
+
+            #end
+               
+                <p class="list-ts">如果您有特殊地址需求，请拨打010-57891402，与我们联系。</p>
+
+               #parse("views/address/pageno.html")
+            </div>
+            
+        </div>        
+    </div>
+
+    <!-- 网站底部 -->
+    <div class="bot-main">
+
+
+	#parse("views/common/friendlink.html")
+      #parse("views/common/bottom.html")
+        
+    </div>
+
+    <!-- 火箭返回顶部 -->
+    <div class="rocket-to-top">
+        <div class="level-2"></div>
+        <div class="level-3"></div>
+    </div>
+    
+</div>
+
+</body>
+
+</html>

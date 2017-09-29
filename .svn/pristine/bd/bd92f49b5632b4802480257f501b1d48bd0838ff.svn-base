@@ -1,0 +1,225 @@
+<link href="/css/global.css" type="text/css"  rel="stylesheet"/>
+<link href="/css/new-trade.css" type="text/css"  rel="stylesheet"/>
+<script type="text/javascript" src="/js/viewport.js"></script> 
+
+   
+
+<div class="cx-newtrade-box">
+<!-- logo区域 -->
+ #parse("views/common/logo_normal.html")
+ <!-- 导航 -->
+#parse("views/common/navigation.html")
+
+      
+
+    <div class="cx-newtrade-main">
+    	<div class="flowbg">
+        <div class="flow">
+                   <div class="flow_left">
+                     <p>商标查询流程</p>
+                     <img src="/images/newtrade/tml_04.png">
+                    </div> 
+                   <div class="flow_right">
+                       <span class="flow_rt_m">
+                           <h3><b>专业知识产权顾问<br>帮您查询并解答您的问题 </b></h3>
+                           <span class="flow_rt_m_spn">
+                               <ul>
+                                  <li>
+                                    <input type="text" id="keyWord" placeholder="请输入关键词如“小微律政” " value=""  class="wth1 input_test">
+                                    
+                                  </li>
+                                  <li>
+                                     <input type="text" id="phoneNum" placeholder="请输入手机号" value="" class="wth1 input_test">
+                                    
+                                  </li>
+                                  <li><a class="a2 js_tc">免费咨询</a></li>
+                               </ul>
+                           </span>
+                               
+                       </span>
+                   </div>
+         </div> 
+         </div>
+         
+         <div class="cx-newtrade-banner">
+   		 </div>
+        <div class="cx-boxbg1 bj mbj">
+            <div class="cxbox1">
+                <p class="boxname">商标证书的作用</p>
+                <div class="newtrade-flow">
+                    <div class="flow-box">
+                        <img src="/images/newtrade/tml_08.png">
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+        <div class="cx-boxbg1">
+            <div class="cxbox1">
+                <p class="boxname">商标注册的流程</p>
+                <div class="newtrade-flow">
+                    <div class="flow-box">
+                        <img src="/images/newtrade/tml_12.jpg">
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+        <div class="cx-boxbg bj">
+            <div class="cxbox1">
+                <p class="boxname">我们提供的商标服务</p>
+                <div class="newtrade-fw">
+                    <ul>
+                        <li><a href="/commondetail/detail/38230926529537.html"><p class="t1">商标注册</p></a></li>
+                        <li><a href="/commondetail/detail/38231039879425.html"><p class="t2">计算机软件著作权登记</p></a></li>
+                        <li><a href="/commondetail/detail/38230940369921.html"><p class="t3">商标转让</p></a></li>
+                        <li><a href="/commondetail/detail/38230933328385.html"><p class="t4">商标变更</p></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="cx-boxbg2">
+            <div class="cxbox1">
+                <p class="boxname">商标注册需要的资料</p>
+                <div class="apply">
+                    <div class="app">
+                        <p class="name1">公司名义申请</p>
+                        <p class="img"><img src="/images/newtrade/apply1.png"></p>
+                    </div>
+                    <div class="app">
+                        <p class="name2">个人名义申请</p>
+                        <p class="img"><img src="/images/newtrade/apply2.png"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+     </div>
+
+        
+</div>
+
+<div class="fxd_popup">
+     <div class="fxd_pp_m">
+        <div class="fxd_pp_qr">
+            <span class="spn2 blk js_ne"></span>
+            <span class="spn_top">
+                <p><em id="msgTitle">您的电话已提交成功！</em><br><i id="msgContent">我们的咨询顾问会在工作日的5分钟之内给您来电！</i></p>
+            </span>
+            <h4>您还可以看看我们别的服务</h4>
+            <ul>
+               <a href="/commondetail/detail/39186221829377.html">
+                   <li>
+                       <p><img src="/images/newtrade/tc1.png"></p>
+                       <b>1元法律咨询</b>
+                   </li>
+               </a>
+                <a href="/commondetail/detail/38231039879425.html">
+                   <li>
+                       <p><img src="/images/newtrade/tc2.png"></p>
+                       <b>计算机软件著作权</b>
+                   </li>
+               </a>
+                <a href="/commondetail/detail/39253461021441.html">
+                   <li>
+                      <p><img src="/images/newtrade/tc3.png"></p>
+                       <b>合同审查或起草</b>
+                   </li>
+               </a>
+
+            </ul>
+           
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+function sendMessage() {
+	var jbPhone =  $("#phoneNum").val(); 
+	var keyWord = $("#keyWord").val();
+	
+	if(keyWord == ''){
+		alert('请输入关键字！');
+		zxBtnEvent();//重新绑定事件
+		return;
+	}
+	
+	if(jbPhone == ''){
+		alert('请输入手机号码！');
+		zxBtnEvent();//重新绑定事件
+		return;
+	}
+	
+	var myreg = /^((1[0-9]{2})+\d{8})$/; 
+	if(!myreg.test(jbPhone)){
+		alert("手机号码格式错误！");
+		zxBtnEvent();//重新绑定事件
+		return;
+	}
+	
+	$.ajax({
+		url:"/brand/ldy/sendDingDingMsg",
+		type:"post",
+		dataType:"json",
+		data:{'keyWord':keyWord,'phoneNum':jbPhone},
+		success:function(data){
+			if(data.ret == 'false'){
+				//更改弹出框显示内容
+				$("#msgTitle").html('您的网络可能出现了问题！');
+				$("#msgContent").html('请您重新提交一次哦~');
+			}else if(data.ret == 'true'){
+				$("#phoneNum").val(''); 
+				$("#keyWord").val('');
+			}
+		  	block();
+		  	$(".cx-newtrade-box").css("display","none");
+			zxBtnEvent();//重新绑定事件
+		},
+		error:function(){
+			alert('未响应，请重试');
+			zxBtnEvent();//重新绑定事件
+		}
+	});
+	 
+	 
+}
+
+function zxBtnEvent(){
+	$(".js_tc").unbind('click').on('click',function(){
+		$(this).unbind('click');
+		 sendMessage();
+	  });
+}
+
+$(function(){
+	//咨询按钮绑定事件
+	zxBtnEvent();
+ 
+  $(".js_ne").click(function(){
+    none();
+    $(".cx-newtrade-box").css("display","block");
+  });
+
+ $('.input_test').bind({
+    focus:function(){
+    if (this.value == this.defaultValue){
+    this.value="";
+    }
+    },
+    blur:function(){
+    if (this.value == ""){
+    this.value = this.defaultValue;
+    }
+    }
+  }); 
+
+});
+
+function block(){
+    $(".fxd_popup").css("display","block");
+    $(".fxd_pp_m").css("display","block");
+ }
+ function none(){
+   $(".fxd_popup").css("display","none");
+   $(".fxd_pp_m").css("display","none");
+ }
+</script>

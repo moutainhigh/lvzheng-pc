@@ -1,0 +1,192 @@
+
+$(function(){
+	//主界面居中
+	$(window).resize(function(){
+		$('.login_conbox').css('padding-top',($(window).height() - 650)/2);
+		$('.login_conbox').css('padding-bottom',($(window).height() - 650)/2);
+	}).resize();
+	
+	
+	//为普通和手机按钮增加事件
+	var phone_click =  document.getElementById("phone_click");
+	phone_click.onclick = function(){
+		$("#pt_login").hide();
+		$("#phone_login").show();
+	}
+	
+	var pt_click =  document.getElementById("pt_click");
+	pt_click.onclick = function(){
+		$("#pt_login").show();
+		$("#phone_login").hide();
+	}
+	
+	
+	$("#pt_button").click(function(){
+		var phone = $("#username").val();
+		if("" == phone || !(/^1[3|4|5|7|8][0-9]\d{8}$/.test(phone))){
+			alert("请输入正确的手机号码！");
+			return false;
+		}
+		var password = $("#password").val();
+		if("" == password){
+			alert("请输入密码！");
+			return false;
+		}
+		$("#userpassd").val($.md5(password));
+		//校验手机 和密码
+		//if(isNull() && phoneValid()){
+		var url ="/loginaction";
+		$.ajax({url:url,type: 'POST',
+			data:$("#pt_form").serialize(),
+			dataType:"json",
+			success:function(redata){
+				logret(redata);
+				
+			}});
+		
+		//pt_form.submit();	
+		//}
+	});
+
+    
+	$("body").keydown(function() {
+	    if (event.keyCode == "13") {//keyCode=13是回车键
+	    	var phone = $("#username").val();
+
+	        $("#pt_button").click();
+	        ptlogin();
+	    }
+	});    
+
+
+	function ptlogin(){
+		if("" == phone || !(/^1[3|4|5|7|8][0-9]\d{8}$/.test(phone))){
+			alert("请输入正确的手机号码！");
+			return false;
+		}
+		var password = $("#password").val();
+		if("" == password){
+			alert("请输入密码！");
+			return false;
+		}
+		$("#userpassd").val($.md5(password));
+		//校验手机 和密码
+		//if(isNull() && phoneValid()){
+		var url ="/loginaction";
+		$.ajax({url:url,type: 'POST',
+			data:$("#pt_form").serialize(),
+			dataType:"json",
+			success:function(redata){
+				logret(redata);
+				
+			}});
+	}
+
+
+
+	var logret = function(redata){
+		var redurl = $("#red_path").val();
+		if(redata.ret === "success"){
+			if(redurl != ""){
+				window.location.href = redurl;
+			}else{
+				window.location.href = "/";
+			}
+			
+		}else if(redata.ret === "ok"){
+			alert(redata.msg);
+			return false;
+		}else{
+			alert("登录失败,"+redata.msg);
+			return false;
+		}
+	}
+	$("#phone_button").click(function(){
+		var phone = $("#phoneNum").val();
+
+		if("" == phone || !(/^1[3|4|5|7|8][0-9]\d{8}$/.test(phone))){
+			alert("请输入正确的手机号码！");
+			return false;
+		}
+		var vcode = $("#validatecode").val();
+		if("" == vcode){
+			alert("请输入图形验证码！");
+			return false;
+		}
+		var pcode = $("#phoneM").val();
+		if("" == pcode){
+			alert("请输入图形验证码！");
+			return false;
+		}
+		var url ="/loginaction";
+		$.ajax({url:url,type: 'POST',
+			data:$("#phone_form").serialize(),
+			dataType:"json",
+			success:function(redata){
+				logret(redata);
+			}});
+		
+		//$("#phone_form").submit();
+	});
+
+
+
+
+$("body").keydown(function() {
+	    if (event.keyCode == "13") {//keyCode=13是回车键
+	    	var phone = $("#phoneNum").val();
+
+		if("" == phone || !(/^1[3|4|5|7|8][0-9]\d{8}$/.test(phone))){
+			alert("请输入正确的手机号码！");
+			return false;
+		}
+		var vcode = $("#validatecode").val();
+		if("" == vcode){
+			alert("请输入图形验证码！");
+			return false;
+		}
+		var pcode = $("#phoneM").val();
+		if("" == pcode){
+			alert("请输入图形验证码！");
+			return false;
+		}
+		var url ="/loginaction";
+		$.ajax({url:url,type: 'POST',
+			data:$("#phone_form").serialize(),
+			dataType:"json",
+			success:function(redata){
+				logret(redata);
+			}});
+
+	        $("#phone_button").click();
+	      
+	    }
+	});    
+
+
+	//为获取验证码添加事件
+	$("#box_btn").click(function(){
+		
+	if($("#phoneNum").val() == ""){
+			alert("请输入手机号码");
+			return false
+		}
+	if($("#validatecode").val() == ""){
+		alert("请输入图形验证码");
+		return false
+	}
+		sendMessage();
+	});
+	
+	
+});
+
+$(document).ready(function(){
+if(window.name != "bencalie"){
+    location.reload();
+    window.name = "bencalie";
+}else{
+    window.name = "";
+}
+
+});

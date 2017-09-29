@@ -1,0 +1,29 @@
+<!-- 动态添加定价条目 -->
+<div class="tab-splist">
+    <ul>
+    	<li style="display: none;" class="mysellid">$!{postSellProductMap.sell_id}</li>
+        <li>$!{postSellProductMap.sell_product_name}</li>
+        <li>$!{postSellProductMap.cityname}</li>
+        <li>$!{postSellProductMap.aeasname}</li>
+        <li>$!{postSellProductMap.sell_amount}</li>
+        <li>
+        
+        #if($postSellProductMap.coupons.size() > 0)
+	        <div class="n-select w-220" style="width:165px;" name="coupon-select">
+				<input class="n-val coupon_input" type="text" value="不使用优惠券"
+					readonly data-discount=""
+					data-id="" />
+				<ul>
+					#foreach($coupon in $!{postSellProductMap.coupons})
+					<li data-value="$!{coupon.realQuota}" data-id="$!{coupon.id}">$!{coupon.getTitleNameString()}</li>
+					#end
+					<li data-value="">不使用优惠券</li>
+				</ul>
+			</div>
+		#end
+        
+        </li>
+        <li>¥<span class="price">$!{postSellProductMap.sell_overprice}</span></li>
+        <li class="del"><a class="del" ></a></li>
+    </ul>
+</div>

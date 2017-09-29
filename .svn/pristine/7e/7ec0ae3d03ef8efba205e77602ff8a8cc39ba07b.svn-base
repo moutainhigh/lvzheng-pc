@@ -1,0 +1,125 @@
+<div class="sublist">
+   <div class="que-box questionBox">
+      
+   </div>
+   <!-- 未查询到数据时 -->
+	<div class="show-none" style="display: none" id="QAlist-none">
+		<p class="ts-text">暂时还没有相关问答哟！</p>
+	</div>	
+</div>
+    
+    
+    
+     <!-- 分页 -->
+    #if($pageEntity.getPageCount() > 0)
+	<div class="page-turn" id="pageNo">
+	#set($pre = $!{pageEntity.getPageIndex()} - 1)
+	#set($next = $!{pageEntity.getPageIndex()} + 1)
+	#if($pageEntity.getPageIndex() == 1)
+		<a href="javascript:void(0);" >[首页]</a>
+		#else
+		<a class="fenye" data-url="$!{pageEntity.getCurrenturl()}/1$!{pageEntity.getUrlSuffix()}$!{pageEntity.getParamValue()}">[首页]</a>
+		<a class="fenye" data-url="$!{pageEntity.getCurrenturl()}/$pre$!{pageEntity.getUrlSuffix()}$!{pageEntity.getParamValue()}">[上一页]</a>
+		#end
+		#if($pageEntity.getPageCount() < 10)
+			#foreach($foo in [1..$!{pageEntity.getPageCount()}])
+				#if($foo == $!{pageEntity.getPageIndex()})
+				<a class="current">$!foo</a>
+				#else
+				<a class="fenye" data-url="$!{pageEntity.getCurrenturl()}/$foo$!{pageEntity.getUrlSuffix()}$!{pageEntity.getParamValue()}">$foo</a>
+				#end
+			#end
+		#else
+			#if($pageEntity.getPageIndex() > 7)
+				<a class="fenye" data-url="$!{pageEntity.getCurrenturl()}/1$!{pageEntity.getUrlSuffix()}$!{pageEntity.getParamValue()}">1</a>
+				<a class="fenye" data-url="$!{pageEntity.getCurrenturl()}/2$!{pageEntity.getUrlSuffix()}$!{pageEntity.getParamValue()}">2</a>
+				<a class="fenye" data-url="$!{pageEntity.getCurrenturl()}/3$!{pageEntity.getUrlSuffix()}$!{pageEntity.getParamValue()}">3</a>
+				<a href="javascript:;" class="nb">…</a>
+				#set($prindex = $pageEntity.getPageIndex() - 2)
+				#if($pageEntity.getPageCount() > $pageEntity.getPageIndex() + 2)
+					#set($endindex = $pageEntity.getPageIndex() +2)
+				#else
+					#set($endindex = $pageEntity.getPageCount())
+				#end
+				#foreach($p in [$prindex..$endindex])
+					#if($p == $!pageEntity.getPageIndex())
+					<a class="current fenye" data-url="$!{pageEntity.getCurrenturl()}/$!p$!{pageEntity.getUrlSuffix()}$!{pageEntity.getParamValue()}">$!p</a>
+					#else
+					<a class="fenye" data-url="$!{pageEntity.getCurrenturl()}/$!p$!{pageEntity.getUrlSuffix()}$!{pageEntity.getParamValue()}">$!p</a>
+					#end
+				#end		
+			#else
+				#foreach($foo in [1..7])
+				#if($foo == $!pageEntity.getPageIndex())
+				<a class="current">$!foo</a>
+				#else
+				<a class="fenye" data-url="$!{pageEntity.getCurrenturl()}/$!foo$!{pageEntity.getUrlSuffix()}$!{pageEntity.getParamValue()}">$foo</a>
+				#end
+				#end
+				<a href="javascript:;" class="nb">…</a>
+				#set($p2index = $pageEntity.getPageCount() - 2)
+				#set($p1index = $pageEntity.getPageCount() - 1)
+				<a class="fenye" data-url="$!{pageEntity.getCurrenturl()}/$!{p2index}$!{pageEntity.getUrlSuffix()}$!{pageEntity.getParamValue()}">$!{p2index}</a>
+				<a class="fenye" data-url="$!{pageEntity.getCurrenturl()}/$!{p1index}$!{pageEntity.getUrlSuffix()}$!{pageEntity.getParamValue()}">$!{p1index}</a>
+				<a class="fenye" data-url="$!{pageEntity.getCurrenturl()}/$pageEntity.getPageCount()$!{pageEntity.getUrlSuffix()}$!{pageEntity.getParamValue()}">$pageEntity.getPageCount()</a>
+				
+			#end
+			
+		#end
+		#if($pageEntity.getPageIndex() == $pageEntity.getPageCount())
+		<a href="javascript:void(0);" >[末页]</a>
+		#else
+		<a class="fenye" data-url="$!{pageEntity.getCurrenturl()}/$next$!{pageEntity.getUrlSuffix()}$!{pageEntity.getParamValue()}" >[下一页]</a>
+		<a class="fenye" data-url="$!{pageEntity.getCurrenturl()}/$pageEntity.getPageCount()$!{pageEntity.getUrlSuffix()}$!{pageEntity.getParamValue()}">[末页]</a>
+		#end
+	</div>
+	#end
+	
+	
+<script type="text/javascript">
+var list = '$!{list}';
+if(list != "" && list != null && list != '[]'){
+	$('#QAlist-none').hide();
+	var listJson = JSON.parse(list);
+	var DomHtml = "";
+	$.each(listJson,function(n,value){
+		
+		DomHtml +=  '<div class="q1">'+
+				        '<p class="que question">'+
+				            '<label></label>'+
+				            '<span>'+value.questioncontent+'</span>'+
+				        '</p>'+
+				        '<p class="ans answer">'+value.answercontent+'</p>'+
+			    	'</div>';
+	});
+	
+	$('.questionBox').append(DomHtml);
+}else{
+	$('#QAlist-none').show();
+}
+	
+	
+$('.fenye').unbind('click').on('click',function(){
+	var dataUrl = $(this).attr('data-url');
+	if(dataUrl == undefined || dataUrl == ""){
+		return;
+	}
+	
+	//异步加载客户问答
+	$.ajax({
+		url:dataUrl,
+		type:"post",
+		dataType:"html",
+		success:function(data){
+			$("#flow-con").children().remove();
+			$("#flow-con").append(data);
+		},
+		error:function(){
+			alert("未响应");
+		}
+	});
+})
+	
+	
+</script>
+

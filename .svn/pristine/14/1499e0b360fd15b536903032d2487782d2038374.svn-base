@@ -1,0 +1,20 @@
+    <title>三证合一即将截止，请速办理</title>
+	<link rel="stylesheet" href="http://static.lvzheng.com/lvzhengpc/css/merge.css">
+
+ <!-- logo区域 -->
+	 #parse("views/common/logo_normal.html")
+	 <!-- 导航 -->
+  	#parse("views/common/navigation.html")  
+	<div class="section" >
+		<div class="stage-box">
+			<div class="zz-tag"></div>
+			<div class="price-tag"></div>
+			<div class="time-tag"></div>
+			<div class="flow-tag"></div>
+			<div class="tel-tag">010-$!{ldy_phone}</div>
+			<div class="text-tag"></div>
+		</div>
+	</div>
+
+
+

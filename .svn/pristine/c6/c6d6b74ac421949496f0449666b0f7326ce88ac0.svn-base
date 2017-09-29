@@ -1,0 +1,46 @@
+/*关于小微--新版2015-11*/
+.bright{margin-bottom: 50px;overflow: hidden;}
+.bright .deve-history{width: 710px; min-height: 600px; padding: 0 50px;overflow: hidden;position: relative;}
+.bright .deve-history .his-left{width: 345px;margin-top: 60px;z-index: 99;position: absolute;left: 61px}
+.bright .deve-history .his-left ul{overflow: hidden;margin-right: -7px;}
+.bright .deve-history .his-left ul li{padding-right: 35px;background: url('../images/about/new/dot_ico.png')  no-repeat right top;}
+.bright .deve-history .his-left ul li .box{margin-bottom: 35px;width: 275px;min-height: 50px;padding: 10px 20px;border: 1px solid #d2e4ef; background: #f7feff;text-align: right; -moz-border-radius: 6px; -webkit-border-radius: 6px; border-radius: 6px; }
+.bright .deve-history .his-right{float: right; width: 345px; margin-right: 10px; background: url('../images/about/new/line_ico.png')  repeat-y left;}
+.bright .deve-history .his-right ul{overflow: hidden;margin-left: -7px;}
+.bright .deve-history .his-right ul li{padding-left: 35px;background: url('../images/about/new/dot_ico.png')  no-repeat left top;}
+.bright .deve-history .his-right ul li .box{ margin-bottom: 35px;width: 275px;min-height: 50px;padding: 10px 20px;border: 1px solid #d2e4ef;background: #f7feff;text-align: left; -moz-border-radius: 6px; -webkit-border-radius: 6px; border-radius: 6px; }
+.arr-right {position:absolute;top:16px;*top:16px;right:-20px;display:block;height:0;width:0;font-size: 0; line-height: 0;border-color:transparent  transparent transparent #d2e4ef;border-style:dashed dashed dashed solid;border-width:10px;}
+.arr-right s{position:absolute;top:-9px;*top:-9px;left:-10px;display:block;height:0;width:0;font-size: 0;line-height: 0;border-color:transparent  transparent transparent #F7FEFF;border-style:dashed dashed dashed solid;border-width:9px;}
+.arr-left{position:absolute;top:16px;*top:16px;left:-21px;display:block;height:0;width:0;font-size: 0; line-height: 0;border-color:transparent #d2e4ef transparent  transparent;border-style:dashed solid dashed  dashed;border-width:10px;}
+.arr-left s{position:absolute;top:-10px;*top:-10px;left:-9px;display:block;height:0;width:0;font-size: 0;line-height: 0;border-color:transparent #F7FEFF transparent  transparent;border-style:dashed solid dashed  dashed;border-width:10px;}
+.pos{position: relative;}
+.bright .deve-history ul li p.title{font-size: 16px;color: #000;line-height: 30px}
+.bright .deve-history ul li p.text{font-size: 14px;color: #999;line-height: 20px}
+
+/*关于我们*/
+.bright .about_content{width:720px;margin:0px auto;}
+.bright .about_banner{width:720px;height: 210px}
+.bright .about_text{padding-bottom: 10px;}
+.bright .about_text p.title{font-size: 18px;color: #4e96c8;margin: 20px 0 10px; background: url('../images/about/new/titbg.png')  no-repeat center right;}
+.bright .about_text p{ font-size: 14px;color: #666; line-height: 25px; padding: 3px 0;}
+.bright .about_text .box{margin-bottom:30px ;overflow: hidden;}
+.bright .about_text .box p.pic{width: 170px;float: left;}
+.bright .about_text .box div.pic_text{float: left;width: 550px}
+.bright .about_text .xw_pic{width: 640px;margin: 10px auto}
+
+.bright .about_text .adv_box{width: 720px;}
+.bright .about_text .adv_box ul{overflow: hidden;}
+.bright .about_text .adv_box ul li{width: 360px; height: 80px; margin-bottom: 20px; float: left;text-align: left;}
+.bright .about_text .adv_box ul li .name{font-size: 16px;color: #000;line-height: 18px;}
+.bright .about_text .adv_box ul li .text{font-size: 14px;color: #999;line-height: 14px}
+.bright .about_text .adv_box ul li .box1{padding: 5px 0 5px 70px; height: 50px; text-align: left; background: url('../images/about/new/b_ico1.png')  no-repeat center left;}
+.bright .about_text .adv_box ul li .box2{padding: 5px 0 5px 70px; height: 50px; text-align: left; background: url('../images/about/new/b_ico2.png')  no-repeat center left;}
+.bright .about_text .adv_box ul li .box3{padding: 5px 0 5px 70px; height: 50px; text-align: left; background: url('../images/about/new/b_ico3.png')  no-repeat center left;}
+.bright .about_text .adv_box ul li .box4{padding: 5px 0 5px 70px; height: 50px; text-align: left; background: url('../images/about/new/b_ico4.png')  no-repeat center left;}
+.bright .about_text .adv_box ul li .box5{padding: 5px 0 5px 70px; height: 50px; text-align: left; background: url('../images/about/new/b_ico5.png')  no-repeat center left;}
+
+.bright .about_text .our_cus{width: 720px}
+.bright .about_text .our_cus ul{overflow: hidden;}
+.bright .about_text .our_cus ul li{width:160px;margin: 0 10px;float: left;}
+.bright .about_text .our_cus ul li p.name{font-size: 18px;color: #999; line-height: 30px;margin: 10px 0; text-align: center;}
+.bright .about_text .our_cus ul li p.cus_ico{width: 160px;height: 60px; margin: 7px 0}

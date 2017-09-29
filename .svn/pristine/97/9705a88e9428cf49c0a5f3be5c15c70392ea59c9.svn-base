@@ -1,0 +1,62 @@
+
+
+<link src="http://static.lvzheng.com/lvzhengpc/css/index.css" type="text/css"  rel="stylesheet"/>
+<script type="text/javascript" src="http://static.lvzheng.com/lvzhengpc/js/jquery-1.7.2.min.js"></script>
+<script src="http://static.lvzheng.com/lvzhengpc/js/jquery.jquery.tabs.js"></script>
+<script type="text/javascript" src="http://static.lvzheng.com/lvzhengpc/js/return-top.js"></script>
+<script>
+$(function(){
+    // 左导航切换显示
+    $(".left-nav dd").hover(function(){
+        $(".nav-right",this).show();
+    });
+    $(".left-nav dd").mouseleave(function(){
+        $(".nav-right",this).hide();
+    });
+});
+</script>
+
+<!-- logo区域 -->
+    #parse("views/common/logo_normal.html")
+
+    <!-- 导航 -->
+     #parse("views/common/navigation.html")
+
+	<div class="xwabout">
+		<div class="bleft">
+			<ul class="about-tit">
+			
+			
+			
+				<li><a href='/about.html'>关于我们</a></li>
+				<li><a href='/history.html'>发展历程</a></li>
+				<li><a href='/join.html'>人才招聘</a></li>
+				<li><a href='/contact.html'>联系我们</a></li>
+                <li class='xz'><a href='/vip.html'>会员服务</a></li>
+			</ul>
+		</div>
+		<div class="bright">
+			<div class="about-content">
+				<div class="vip-box">
+                    <p class="vip-name">会员服务</p>
+                    <div class="vip-list">
+                        <p class="name">1.会员级别</p>
+                        <p class="text">1)会员分为三个等级：普通会员、VIP会员、钻石会员。</p>
+                    </div>
+                    <div class="vip-list">
+                        <p class="name">2.收费标准</p>
+                        <p class="text">1)普通会员：50元/年。 </p>
+                        <p class="text">2)VIP会员：100元/年。 </p>
+                        <p class="text">3)钻石会员：200元/年。 </p>
+                    </div>
+                    <div class="vip-list">
+                        <p class="name">3.会员有效期</p>
+                        <p class="text">1)普通会员、VIP会员、钻石卡会员级别有效期为12个月，从您获得之日起计算。</p>
+                        <p class="text">2)在您原会员级别有效期截止时，我们将根据您最近连续12个月内累计合格购物金额重新确认您的会员身份。</p>
+                    </div>
+                </div>
+			</div>
+		</div>
+	</div>
+
+    

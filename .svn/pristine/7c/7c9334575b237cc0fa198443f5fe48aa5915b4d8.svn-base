@@ -1,0 +1,99 @@
+package com.jx.hunter.lvzhengpc.controllers;
+
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang.StringUtils;
+
+import com.alibaba.fastjson.JSONObject;
+import com.jx.argo.ActionResult;
+import com.jx.argo.annotations.Path;
+import com.jx.hunter.lvzhengpc.common.CommonUtils;
+import com.jx.hunter.lvzhengpc.frame.RSBLL;
+import com.jx.hunter.lvzhengpc.utils.ActionResultUtils;
+import com.jx.hunter.lvzhengpc.utils.EnterpriseUtils;
+import com.jx.hunter.lvzhengpc.utils.WAQUtils;
+import com.jx.service.enterprise.contract.ILvEnterpriseBusinessService;
+import com.jx.service.enterprise.entity.LvEnterpriseBusinessEntity;
+import com.jx.service.enterprise.entity.LvEnterpriseEntity;
+
+
+
+/**
+ * 对接工商
+ *
+ * <p>detailed comment</p>
+ * @author chuxuebao 2015年12月28日
+ * @see
+ * @since 1.0
+ */
+@Path("gov")
+public class GovController extends BaseController {
+
+	private String MYCENTER_URL = "http://mycenter.lvzheng.com";
+	
+	static{
+//		Env.initVerifyPath("D:/opt/blackface/webblack/javaOcrTrain");
+	}
+
+	@Path("/business/postGovFoundcheck")
+	public ActionResult postGovFoundcheck(){
+		JSONObject checkImgCode = CommonUtils.checkImgCode(beat());
+		if(!StringUtils.equals(checkImgCode.getString("ret"), "ok")){
+			return ActionResultUtils.renderJson(checkImgCode);
+		}
+		String industryCharacteristics = WAQUtils.HTMLEncode(request().getParameter("hangye"));
+		String mainBusinessUniteCode = WAQUtils.HTMLEncode(request().getParameter("hbdm"));
+		String mainBusinessCode = WAQUtils.HTMLEncode(request().getParameter("hydm"));
+		String shopName = WAQUtils.HTMLEncode(request().getParameter("zihao"));
+		String fullName = WAQUtils.HTMLEncode(request().getParameter("localCity")) 
+				+ WAQUtils.HTMLEncode(request().getParameter("zihaohangye")) 
+				+ WAQUtils.HTMLEncode(request().getParameter("organizationType"));
+		String foundCheck = EnterpriseUtils.foundCheck(industryCharacteristics, mainBusinessUniteCode, mainBusinessCode, fullName, shopName);
+		return ActionResultUtils.renderJson(foundCheck);
+	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@Path("business/checkNameCollection")
+	public ActionResult checkNameCollection(){
+		String data = WAQUtils.HTMLEncode(request().getParameter("data"));
+		String enterpriseIdStr = WAQUtils.HTMLEncode(request().getParameter("enterpriseId"));
+		if(StringUtils.isBlank(data)){
+			return ActionResultUtils.renderText("NULL");
+		}
+		JSONObject dataJson = JSONObject.parseObject(data);
+		// 业务信息保存
+		List<LvEnterpriseBusinessEntity> businessKeyList = null;
+		try {
+			businessKeyList = RSBLL.getstance().getEpEnterpriseBusinessService().getBusinessKeyListByType(ILvEnterpriseBusinessService.BUSINESS_TYPE_TWO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(businessKeyList != null && !businessKeyList.isEmpty()){
+			if(StringUtils.isBlank(enterpriseIdStr)){
+				LvEnterpriseEntity enterpriseEntity = new LvEnterpriseEntity();
+				Long enterpriseId = null;
+				try {
+					enterpriseId = RSBLL.getstance().getEpEnterpriseService().addEnterpriseEntity(enterpriseEntity, null) ;
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				enterpriseIdStr = enterpriseId + "";
+			}
+			for(LvEnterpriseBusinessEntity lvEnterpriseBusinessEntity:businessKeyList){
+				String businessKey = lvEnterpriseBusinessEntity.getBusinessKey();
+				long businessId = lvEnterpriseBusinessEntity.getBusinessId();
+				if(!dataJson.containsKey(businessKey)){
+					continue;
+				}
+				Map businessMap = dataJson.getObject(businessKey, Map.class);
+				try {
+					RSBLL.getstance().getEpEnterpriseBusinessDataService().saveEnterpriseBusinessData(enterpriseIdStr, businessId + "", businessMap, EnterpriseUtils.getLoginInfo(beat()));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return ActionResultUtils.renderText(MYCENTER_URL + "/mywf/page/" + enterpriseIdStr + "/checkNameCollect");
+	}
+}

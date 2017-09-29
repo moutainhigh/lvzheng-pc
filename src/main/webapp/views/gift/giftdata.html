@@ -1,0 +1,22 @@
+			<div class="cou-ts">
+			   <form id="J_form_gift">
+	               <p class="ts-name"></p>
+	                <div class="item-box">
+	                    <div class="item">
+	                        <input type="text" id="phoneNum" name="userphone" placeholder="请输入手机号">
+	                    </div>
+	                    <div class="item">
+	                        <input type="text" id="validatecode" name="validatecode" placeholder="请输入图形验证码">
+	                        <a class="imgcode"><img id="validateimg" onclick="$(this).attr('src','/picvalidate/$!{token}?'+new Date());" src="/picvalidate/$!{token}"></a>
+	                    </div>
+	                    <div class="item">
+	                        <input type="text" id="phoneM" name="phonecode"  placeholder="请输入手机验证码">
+	                        <input type="hidden" id="J_gift_token" name="token"  value="$!{token}"/>
+	                        <a class="getcode" id="J_send_code" onclick="sendMessage()">获取验证码</a>
+	                        
+	                    </div>  
+	                    
+	                    <button id="J_gift_btn" type="button" cc="0" onclick="drawgift()" class="coubtn">立即领取</button>
+	                </div>
+				</form>
+            </div> 

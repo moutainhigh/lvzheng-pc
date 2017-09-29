@@ -1,0 +1,242 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>公司变更买3免2，高效团队为您解决变更难题--国内领先的O2O自营法律服务提供商</title>
+<meta name="description" content="注册公司找小微律政,小微律政拥有专业的律师和会计团队,小微律政专注为创业公司及中小微企业提供代办公司注册,商标注册,代理记账,社保公积金开户,公司变更,合同拟定,公司章程等一站式企业服务，小微律政服务流程每一步都无微不至。">
+<meta name="keywords" content="小微律政,代办注册公司,公司注册,商标注册费用和流程" />
+
+<link href="http://static.lvzheng.com/lvzhengpc/css/index.css" type="text/css"  rel="stylesheet"/>
+<link href="http://static.lvzheng.com/lvzhengpc/css/ldy/bg_land.css" type="text/css"  rel="stylesheet"/>
+<link href="http://static.lvzheng.com/lvzhengpc/css/box.css" type="text/css"  rel="stylesheet"/>
+
+<script type="text/javascript" src="http://static.lvzheng.com/lvzhengpc/js/jquery-1.7.2.min.js"></script>
+<script src="http://static.lvzheng.com/lvzhengpc/js/jquery.touchSlider.js"></script>
+<script src="http://static.lvzheng.com/lvzhengpc/js/jquery.pslides.js"></script>
+<script type="text/javascript" src="http://static.lvzheng.com/lvzhengpc/js/owl.carousel.min.js"></script>
+<script type="text/javascript" src="http://static.lvzheng.com/lvzhengpc/js/box.js"></script> 
+<script src="http://static.lvzheng.com/lvzhengpc/js/jquery.tabs.js"></script>
+<script type="text/javascript">
+$(document).ready(function($){
+    $(window).scroll(function(){
+        var b=parseInt($(window).scrollTop());
+        if(b<800){
+            $(".bot-box").removeClass("bot-boxxf")
+        }
+        if(b>800){
+            $(".bot-box").addClass("bot-boxxf")
+        }
+    });
+    
+    
+    initZXbtn();
+
+    
+    //close popup
+      $('.cd-box1-zx-tel').on('click', function(event){
+      	if( $(event.target).is('.cd-popup-close') || $(event.target).is('.cd-box1-zx-tel') ) {
+      		event.preventDefault();
+      		$(this).removeClass('is-visible');
+      		$(".cd-box1").removeClass('is-visible');
+      	}
+      });
+});
+
+
+
+
+function initZXbtn(){
+	$('.zx_btn').unbind('click').on('click',function(){
+		$(this).unbind('click');
+		var teltext = $(this).parent().find(".zx_phone").val();
+		if(teltext == ''){
+			alert('请输入手机号码！');
+			initZXbtn();//重新绑定事件
+			return;
+		}
+		
+		var myreg = /^((1[0-9]{2})+\d{8})$/; 
+		if(!myreg.test(teltext)){
+			alert("手机号码格式错误");
+			initZXbtn();//重新绑定事件
+			return;
+		}
+		
+		sendMsgDingDing(teltext,'');
+		
+	});
+	
+
+}
+
+
+
+//发送钉钉消息
+function sendMsgDingDing(tel,msg){
+$.ajax({
+	url:"/ldy/sendDingDingMsg",
+	type:"post",
+	dataType:"json",
+	data:{'phone':tel,'type':3,'msg':msg},
+	success:function(data){
+		if(data.ret == 'false'){
+			$('.zxRetName').html("您的网络可能出现了问题！");
+			$('.zxRetText').html("请您重新提交一次哦~");
+		}
+		$('.cd-box1-zx-tel').addClass('is-visible');
+		
+		//免费电话咨询
+	    initZXbtn();
+	},
+	error:function(){
+		alert('未响应');
+		//免费电话咨询
+	    initZXbtn();
+	}
+});
+}
+
+
+function openwindow(url,name,iWidth,iHeight)
+{
+var url; //转向网页的地址;
+var name; //网页名称，可为空;
+var iWidth; //弹出窗口的宽度;
+var iHeight; //弹出窗口的高度;
+//window.screen.height获得屏幕的高，window.screen.width获得屏幕的宽
+var iTop = (window.screen.height-30-iHeight)/2; //获得窗口的垂直位置;
+var iLeft = (window.screen.width-10-iWidth)/2; //获得窗口的水平位置;
+window.open(url,name,'height='+iHeight+',,innerHeight='+iHeight+',width='+iWidth+',innerWidth='+iWidth+',top='+iTop+',left='+iLeft+',toolbar=no,menubar=no,scrollbars=auto,resizeable=no,location=no,status=no');
+}
+</script>
+</head>
+<body>
+<!-- 顶部信息条 -->
+    #parse("views/common/header.html")
+    <!-- logo区域 -->
+	 #parse("views/common/logo_normal.html")
+	 <!-- 导航 -->
+  	#parse("views/common/navigation.html")  
+<div class="land-box">
+    <div class="bannerbg">
+        <div class="banner">
+            <p class="btext"></p>
+            <a href="javascript:void(0);" onclick="openwindow('http://p.qiao.baidu.com/cps/chat?siteId=6550807&userId=10178186','在线咨询',600,600)" class="bbtn">在线咨询</a>
+            <p class="tel-box"><span class="tel"></span></p>
+        </div>
+    </div>
+
+    <div class="main-box">
+        <div class="titlebox">
+            <p class="name">工商变更 买三免二</p>
+        </div>
+        <div class="zz-box">
+            <p class="zz-text">注：财税变更及外资公司变更不参加活动，公司地址变更小微可提供变更用虚拟地址<br>（同一内资公司工商变更3类以内，取最高价收，其余两类不收费；多于3项，仅加收300元）<br>三证合一于2016.12.31日截止，小微可提供代办。</p>
+            <div class="zz-pic">
+                <div class="bling b1"><div class="dot"></div><div class="pulse"></div></div>
+                <div class="bling b2"><div class="dot"></div><div class="pulse"></div></div>
+                <div class="bling b3"><div class="dot"></div><div class="pulse"></div></div>
+                <div class="bling b4"><div class="dot"></div><div class="pulse"></div></div>
+                <div class="bling b5"><div class="dot"></div><div class="pulse"></div></div>
+                <div class="bling b6"><div class="dot"></div><div class="pulse"></div></div>
+
+                <div class="text t1">法人及股东或自然人变更 <span>￥598起</span><br>股东股权变更及转让 <span>¥798起</span></div>
+                <div class="text t2">营业期限变更 <span>￥598</span></div>
+                <div class="text t3">经营范围变更 <span>￥598</span></div>
+                <div class="text t4">公司名称变更（含重新刻章） <span>¥988起</span></div>
+                <div class="text t5">公司地址变更 <span>¥598起</span></div>
+                <div class="text t6">注册资本变更 <span>¥598起</span></div>
+            </div>
+        </div>
+
+        <div class="bg-box" >
+            <div class="titlebox">
+                <p class="name">专业变更团队为您解忧</p>
+            </div>
+            <div class="cp-box">
+                <div class="sbox">
+                    <p class="num">1</p>
+                    <p class="name">小微自营服务 更放心</p>
+                    <p class="text">在线下单，平台担保，与您签订纸质协议，服务期间有任何不满随时投诉极速解决，让您永无后顾之忧。</p>
+                    <div class="cp1">
+                        <p class="list">自营业务团队<br><span>（够专业）</span></p>
+                        <p class="list">甲乙方协议<br><span>（有保障）</span></p>
+                        <p class="list">极速投诉通道<br><span>（超放心）</span></p>
+                    </div>
+                </div>
+                <div class="sbox">
+                    <p class="num">2</p>
+                    <p class="name">工商局认证有保障</p>
+                    <p class="text">工商局权威认证特种行业许可，同时拥有代理人、刻章、代理记账等资质在全国代理机构仅有不到10%</p>
+                    <div class="cp-pic"><img src="/images/bgland/cp2.jpg"></div>
+                </div>
+                <div class="sbox">
+                    <p class="num">3</p>
+                    <p class="name">三重筛选 更专业</p>
+                    <p class="text">一重：小微律政的服务人员入门标准为法学专业本科生；二重：员工入职均会经过专业的入职培训；三重：培训结束需参加入职考试并通过后方可接受委托。三重筛选只为确保为您服务的人员都是最专业的。</p>
+                    <div class="cp-pic"><img src="/images/bgland/cp3.jpg"></div>
+                </div>
+                <div class="sbox">
+                    <p class="num">4</p>
+                    <p class="name">广受用户喜爱</p>
+                    <p class="text">小微律政不仅给用户带来了方便，也为行业带来一道曙光。</p>
+                    <div class="cp-pic"><img src="/images/bgland/cp4.jpg"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bz-box">
+            <div class="titlebox">
+                <p class="name">售后保障</p>
+            </div>
+            <div class="bz-list">
+                <div class="list ico1">
+                    <p class="name">服务过程中</p>
+                    <p class="text">对服务人员有任何不满，即可拨打 <span>010-50944206</span> 进行投诉，并可随时更换服务顾问。</p>
+                </div>
+                <div class="list ico2">
+                    <p class="name">服务完成</p>
+                    <p class="text">业务办理完毕，您在公司经营过程中遇到问题也可咨询小微，每一位客户都是小微的朋友。</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+    <div class="bot-box">
+        <div class="tel-box">
+            <div class="tel">咨询电话：010-50944206</div>
+            <div class="item">
+                <input type="text" class="w-text zx_phone" placeholder="请输入您的手机号">
+                <a class="btn pop_box1 zx_btn">免费电话咨询</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 提交电话 弹出框 -->
+    <div class="cd-popup cd-box1-zx-tel" role="alert"> 
+        <div class="cd-popup-container" id="submit-box">
+            <div class="submit">
+                <p class="name">您的电话已提交成功！</p>
+                <p class="text">稍后我们的服务人员将会给您致电解答您的疑问，感谢您的信任！</p>
+            </div> 
+            <a href="#" class="cd-popup-close img-replace">关闭</a>
+        </div>
+        
+    </div> 
+    <!-- 弹出框 -->
+<!-- 火箭返回顶部 -->
+    <div class="rocket-to-top">
+        <div class="level-2"></div>
+        <div class="level-3"></div>
+    </div>
+    
+    <a href="javascript:void(0)" onclick="openwindow('http://p.qiao.baidu.com/cps/chat?siteId=6550807&userId=10178186','在线咨询',600,600)" class="bd-fix-4206"></a>
+    <!-- 统计代码  CNZZ -->
+<span style="display:none;">
+	    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1254054374'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1254054374' type='text/javascript'%3E%3C/script%3E"));</script>
+</span>
+</div>
+</body>
+
+</html>

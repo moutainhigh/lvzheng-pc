@@ -1,0 +1,118 @@
+package com.jx.hunter.lvzhengpc.utils;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.jsoup.helper.StringUtil;
+
+import com.jx.blackface.tools.blackTrack.utils.ConfigUtils;
+
+public class RecommendUtils {
+
+	
+	private static String filePath = "";
+	private static List<String> startList ;
+	private static List<String> normalList ;
+	
+	private static Map<String,List<String>> keyMap;
+	
+	static {
+		filePath = "/opt/argo/"+ConfigUtils.getNamespace()+"/recommend.ini";
+		//初始化ini文件
+		IniReader.initFilePath(filePath);
+		
+		String startStr = IniReader.getInstance().getValue("collection","start");
+		String normalStr = IniReader.getInstance().getValue("collection","normal");
+		
+		startList = getCollectionList(startStr);
+		normalList = getCollectionList(normalStr);
+		
+		keyMap = new HashMap<String,List<String>>();
+		keyMap.put("start", IniReader.getInstance().getValues("start"));
+		keyMap.put("normal", IniReader.getInstance().getValues("normal"));
+		keyMap.put("other", IniReader.getInstance().getValues("other"));
+		
+	}
+	
+	public static void test(){
+		System.out.println("2222");
+		
+		
+		for(Entry ent : keyMap.entrySet()) {
+			System.out.println("=====>"+ent.getKey());
+			for (String str : (List<String>)ent.getValue()) {
+				System.out.println("==========>"+str);
+			}
+		}
+		
+	}
+	
+	
+	public static List<String> getCollectionList(String str) {
+		if (StringUtils.isBlank(str))
+			return null;
+		String [] arr = str.split(",");
+		List<String> list = new ArrayList<String>();
+		for (String cate : arr) {
+			list.add(cate);
+		}
+		return list;
+	}
+	
+	
+	
+	public static Map<String,String> recommendProduct(String parentCate,String childCate) {
+		
+		String key = "other";
+		
+		for (String cate : startList) {
+			if (cate.equals(parentCate) || cate.equals(childCate)) {
+				key = "start";
+				break;
+			}
+		}
+
+		for (String cate : normalList) {
+			if (cate.equals(parentCate) || cate.equals(childCate)) {
+				key = "normal";
+				break;
+			}
+		}
+		
+		List<String> recommendList = keyMap.get(key);
+		if (CollectionUtils.isEmpty(recommendList))
+			return null;
+		
+		Map<String,String> map = new LinkedHashMap<String,String>();
+		
+		//因为配置文件读进来之后，变成倒序了，所以用倒序的方式输出即可
+		for (int i = recommendList.size()-1 ; i>=0 ;i--) {
+			String recom = recommendList.get(i);
+			if (StringUtils.isBlank(recom))
+				continue;
+			
+			String [] arr = recom.split("&&");
+			if (arr.length < 2 || StringUtil.isBlank(arr[1]))
+				continue;
+			
+			map.put(arr[0],arr[1]);
+		}
+		
+		return map;
+	}
+	
+	
+	public static void main(String[] args) {
+		Map<String,String> map = RecommendUtils.recommendProduct("","GS-001004");
+		for (Entry ent : map.entrySet())
+			System.out.println(ent.getKey()+"===="+ent.getValue());
+	}
+	
+	
+}

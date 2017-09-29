@@ -1,0 +1,96 @@
+<!-- logo区域 -->
+#parse("views/common/logo_normal.html")
+ <!-- 导航 -->
+#parse("views/common/navigation.html")
+<link href="/css/report.css" type="text/css"  rel="stylesheet"/>
+<script type="text/javascript">
+$(function(){
+  $(window).scroll(function(){
+    var a=parseInt($(window).scrollTop());
+    if(a<550){
+      $(".bot-btn").removeClass("bot-btnxf")
+    }
+    if(a>550)
+      {
+      $(".bot-btn").addClass("bot-btnxf")
+      }
+  });
+})  
+
+/* var maxtime;
+if(window.name==''){ 
+    maxtime = 46*24*60*60; //设置倒计时间
+}
+else{
+    maxtime = window.name;
+}
+function CountDown(){
+    if(maxtime>=0){
+        days = Math.floor(maxtime / (60 * 60 * 24));
+        hours = Math.floor(maxtime / (60 * 60)) - (days * 24);
+        minutes = Math.floor(maxtime / 60) - (days * 24 * 60) - (hours * 60);
+        seconds = Math.floor(maxtime) - (days * 24 * 60 * 60) - (hours * 60 * 60) - (minutes * 60);
+        // msg = +days+"天"+hours+"时"+minutes+"分"+seconds+"秒"; //显示天 时 分 秒
+        if (days<10) {
+            days="0"+days
+        }
+        msg = days;  //仅显示天
+        document.all["timer"].innerHTML = msg;
+        --maxtime;
+        window.name = maxtime; 
+    }
+}
+timer = setInterval("CountDown()",1000); */
+</script>
+<div class="report-box">
+    <div class="report-banner">
+        <div class="banner-box">
+            <div class="report-tag"></div>
+            <div class="time-tag"><p id="timer">$!{timer}</p></div>
+            <div class="text-tag">
+                <span class="date">年报截止日期：6月20日  仅限100个名额</span>
+                <span class="area">活动区域：全北京均可享受</span>
+            </div>
+            <a href="/commondetail/detail/39140424390401.html" class="btn-tag">名额有限 立即抢购</a>
+        </div>
+    </div>   
+    <div class="report-main">
+        <div class="box1">
+            <div class="top-bg"></div>
+            <div class="text-box">
+                <p class="text-title">企业做年报的时间？</p>
+                <p class="text-body">每年<span>1月1日-6月30日</span>企业须公示披露上一年度经营情况</p>
+                <p class="text-title">企业不做年报怎么办？</p>
+                <p class="text-body">企业将会被纳入工商“异常经营名单”。</p>
+                <p class="text-body">如这期间被主管机关处罚，则被纳入企业信用黑名单。法人、高管有连带责任。</p>
+            </div>
+        </div>
+
+        <div class="box2">
+            <div class="top-bg"></div>
+            <div class="text-box">
+                <p class="text-title">我需要提供什么材料呢？</p>
+                <ul class="text-ul">
+                    <li>1、2015年12月份资产负债表，利润表</li>
+                    <li>2、营业执照副本复印件</li>
+                    <li>3、公司章程</li>
+                    <li>4、企业年报</li>
+                    <li>5、其他公司基本信息</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="box3">
+            <div class="top-bg"></div>
+            <div class="text-box">
+                <p class="text-body">准备好资料，<span>小微1天就帮您申报完毕！</span>是不是很激动〜</p>
+                <p class="text-body">申报完毕后您可以登陆“全国企业信用信息公示系统”如下图进行查询</p>
+                <p class="pic-box"><img src="/images/report/qy.jpg" /></p>
+            </div>
+        </div>
+        </div>        
+    </div>
+
+    <div class="bot-btn">
+        <a class="btn-box" href="/commondetail/detail/39140424390401.html">立即购买年报</a>
+    </div>

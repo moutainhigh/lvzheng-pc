@@ -1,0 +1,212 @@
+<script>
+$(function(){
+    // 左导航切换显示
+    $(".left-nav dd").hover(function(){
+        $(".nav-right",this).show();
+    });
+    $(".left-nav dd").mouseleave(function(){
+        $(".nav-right",this).hide();
+    });
+
+    $(window).scroll(function(){
+        var a=parseInt($(window).scrollTop());
+        if(a>220){
+            $(".adpic").addClass("picfixed")
+        }
+        if(a<220){
+            $(".adpic").removeClass("picfixed")
+        }
+    });
+    function openwin(url) {
+        var a = document.createElement("a");
+        a.setAttribute("href", url);
+        a.setAttribute("target", "_blank");
+        document.body.appendChild(a);
+        a.click();
+    }
+    $(".gofetch").click(function(){
+    	var packetId = $(this).attr("data-pid");
+    	var thisE = $(this);
+    	$.ajax({
+    		url:"/preferential/fetch",
+    		data:{"packetId":packetId},
+    		type:"post",
+    		dataType:"json",
+    		complete:function(data){
+    			if(data.readyState == 4 && data.status == 200){
+					var responeDataJSON = $.parseJSON(data.responseText);
+					if(responeDataJSON.success){
+						thisE.addClass("pop_box1").removeClass("gofetch");
+						//换样式
+						thisE.children().removeClass("on").addClass("off");
+						thisE.find(".get").text("已领取");
+					}else{
+						if(!!responeDataJSON.login){
+							window.location = (responeDataJSON.login);
+						}
+						if(!!responeDataJSON.msg){
+							alert(responeDataJSON.msg);
+						}
+					}
+    			}
+    		}
+    	})
+    });
+});
+
+
+
+//自动提交
+$(function(){
+	var J_packetId = $("#J_packetId").val();
+	if(J_packetId){
+		$.ajax({
+    		url:"/preferential/fetch",
+    		data:{"packetId":J_packetId},
+    		type:"post",
+    		dataType:"json",
+    		complete:function(data){
+    			if(data.readyState == 4 && data.status == 200){
+					var responeDataJSON = $.parseJSON(data.responseText);
+					if(responeDataJSON.success){
+						window.location = "http://www.lvzheng.com/preferential";
+					}else{
+						if(!!responeDataJSON.login){
+							window.location = (responeDataJSON.login);
+						}
+						if(!!responeDataJSON.msg){
+							alert(responeDataJSON.msg);
+						}
+					}
+    			}
+    		}
+    	})
+	}
+})
+</script>
+</head>
+
+<body class="no-js">
+<div id="continer">
+<!-- logo区域 -->
+    #parse("views/common/logo_normal.html")
+
+
+    <!-- 导航 -->
+     #parse("views/common/navigation.html")
+    <div class="coubg">
+        <div class="getcoupon">
+            <div class="crumbs">
+                <a href="http://www.lvzheng.com" class="crumb-link">首页</a>
+                <i class="crumb-line">></i>
+                <a class="crumb-link">领取优惠券</a>
+            </div>
+
+           <input type="hidden" id="J_packetId" value="$!{packetId}">
+            <div class="coupon-box">
+                <ul class="coupon">
+                #foreach($packet in $packets)
+                    <a data-pid="$!{packet.packetId}" class="link #if($packet.fetched == 1) pop_box1 #else gofetch #end">
+                    <li class=" #if($packet.fetched == 0) on #else off #end">
+                        <p class="price"><span>￥</span>$!{packet.quota}</p>
+                        <p class="type">
+                            <span class="name">$!{packet.packetName}</span>
+                            <span class="demand">$!{packet.unitName}</span>
+                            <span class="time">$!{packet.effect}~$!{packet.invalid}</span>
+                        </p>
+                        #if($packet.fetched == 0)
+                        <p class="get">立即领取</p>
+                        #else
+                        <p class="get">已领取</p>
+                        #end
+                    </li>
+                    </a>
+                 #end
+                </ul>
+            </div>
+            
+            <div class="cou-sp">
+                <div class="title-box">
+                    <p class="title">推荐商品</p>
+                </div>
+                <ul class="tj">
+                    <li>
+                        <p class="tag ico1">
+                            <span class="t1">公司<br>注册</span>
+                            <span class="plus">+</span>
+                            <span class="t2">代理<br>地址</span>
+                        </p>
+                        <p class="price">¥3988</p>
+                        <a href="http://www.lvzheng.com/commondetail/detail/38677678317569.html" class="btn">点击抢购</a>
+                    </li>
+                    <li>
+                        <p class="tag ico2">
+                            <span class="t1">公司<br>注册</span>
+                            <span class="plus">+</span>
+                            <span class="t2">代理<br>记账</span>
+                        </p>
+                        <p class="price">¥2298</p>
+                        <a href="http://www.lvzheng.com/commondetail/detail/38832591890689.html" class="btn">点击抢购</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="cou-sp">
+                <div class="title-box">
+                    <p class="title">热门单品</p>
+                </div>
+                <ul class="hot">
+                    <li>
+                        <p class="tag ico1">
+                            <span class="t1">公司<br>注册</span>
+                        </p>
+                        <p class="price">¥598</p>
+                        <a href="http://www.lvzheng.com/commondetail/detail/38229817543169.html" class="btn">点击抢购</a>
+                    </li>
+                    <li>
+                        <p class="tag ico2">
+                            <span class="t2">代理<br>记账</span>
+                        </p>
+                        <p class="price">¥2000/年</p>
+                        <a href="http://www.lvzheng.com/commondetail/detail/38253230296833.html" class="btn">点击抢购</a>
+                    </li>
+                    <li>
+                        <p class="tag ico2">
+                            <span class="t3">商标<br>注册</span>
+                        </p>
+                        <p class="price">¥800</p>
+                        <a href="http://www.lvzheng.com/commondetail/detail/38230926529537.html" class="btn">点击抢购</a>
+                    </li>
+                    <li>
+                        <p class="tag ico2">
+                            <span class="t4">代理<br>地址</span>
+                        </p>
+                        <p class="price">¥4000/起</p>
+                        <a href="http://www.lvzheng.com/addresslist.html" class="btn">点击抢购</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 优惠券领取 弹出框 -->
+        <div class="cd-popup cd-box1" role="alert"> 
+            <!-- 提示框 -->
+            <div class="cd-popup-container bl-box">
+                <div class="bl">
+                    <div class="item">
+                        <p class="coutext">亲，您已经领取过一次了,<br>不能再次领取~</p>
+                    </div>
+                    <div class="btn">
+                        <a class="confirm">确定</a>
+                    </div>
+                </div> 
+                <a href="#" class="cd-popup-close img-replace">关闭</a>
+            </div>
+        </div> 
+        <!-- 弹出框 -->
+
+    </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,231 @@
+ package com.jx.hunter.lvzhengpc.frame;
+
+import com.jx.argo.ArgoTool;
+import com.jx.blackface.gaea.sell.contract.ILvzProdcutTitleService;
+import com.jx.blackface.gaea.sell.contract.ILvzProductCateService;
+import com.jx.blackface.gaea.sell.contract.ILvzProductInfoService;
+import com.jx.blackface.gaea.sell.contract.ILvzProductService;
+import com.jx.blackface.gaea.sell.contract.ILvzSellProductService;
+import com.jx.blackface.gaea.usercenter.contract.IAreasService;
+import com.jx.blackface.gaea.usercenter.contract.ICouponsService;
+import com.jx.blackface.gaea.usercenter.contract.ILoginService;
+import com.jx.blackface.gaea.usercenter.contract.IUserCounponsService;
+import com.jx.blackface.servicecoreclient.contract.IOrderBFGService;
+import com.jx.service.enterprise.contract.ILvEnterpriseBusinessDataService;
+import com.jx.service.enterprise.contract.ILvEnterpriseBusinessService;
+import com.jx.service.enterprise.contract.ILvEnterpriseMainBusinessService;
+import com.jx.service.enterprise.contract.ILvEnterpriseRoleRelationService;
+import com.jx.service.enterprise.contract.ILvEnterpriseService;
+import com.jx.service.messagecenter.contract.IMoblieSmsService;
+import com.jx.service.newcore.contract.IArticleCateRelationService;
+import com.jx.service.newcore.contract.IFAQService;
+import com.jx.service.newcore.contract.IFollowupService;
+import com.jx.service.newcore.contract.IProductCategoryService;
+import com.jx.service.newcore.contract.IProductPropertiesService;
+import com.jx.service.newcore.contract.ISorderChildrenService;
+import com.jx.service.newcore.contract.ISorderService;
+import com.jx.service.newcore.contract.ISorderSuperService;
+import com.jx.service.workflow.contract.ILvFileService;
+import com.jx.spat.gaea.client.GaeaInit;
+import com.jx.spat.gaea.client.proxy.builder.ProxyFactory;
+
+public class RSBLL {
+	
+	private String GAEA_WF = "workflow";
+	private String GAEA_UC = "usercenter";
+	private String GAEA_EP = "enterprise";
+	private String GAEA_UN = "union";
+	private String GAEA_MSG ="jxmessage";
+	private String GAEA_SELL ="sellcore";
+	private String GAEA_SERVICE ="servicecore";
+	
+	static{
+		String url = ArgoTool.getConfigFolder()+ArgoTool.getNamespace()+"/gaea.config";
+		GaeaInit.init(url);
+	}
+	
+	private static RSBLL newstance = null;
+	private static Object lock = new Object();
+	public static RSBLL getstance(){
+		if(newstance == null){
+			synchronized (lock) {
+				if(newstance == null){
+					newstance = new RSBLL();
+				}
+			}
+		}
+		return newstance;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public ILvzProdcutTitleService getLvzProductTitleService(){
+		return ProxyFactory.create(ILvzProdcutTitleService.class, "tcp://sellcore/LvzProdcutTitleService");
+	} 
+	/**定价条目实体*/
+	public ILvzSellProductService getLvzSellProductService(){
+		ILvzSellProductService lvzSellProductService = ProxyFactory.create(ILvzSellProductService.class, "tcp://"+GAEA_SELL+"/LvzSellProductService");
+		return lvzSellProductService;
+	}
+
+
+	/**商品类别实体*/
+	public ILvzProductCateService getLvzProductCateService(){
+		ILvzProductCateService productCateService = ProxyFactory.create(ILvzProductCateService.class, "tcp://"+GAEA_SELL+"/LvzProductCateService");
+		return productCateService;
+	}
+	/**
+	 * 商品实体
+	 * @return
+	 */
+	public ILvzProductService getLvzProductService(){
+		ILvzProductService lvzProductService=ProxyFactory.create(ILvzProductService.class, "tcp://"+GAEA_SELL+"/LvzProductService");
+		return lvzProductService;
+	}
+	
+	/**
+	 * 地区服务
+	 * @return
+	 */
+	public IAreasService getCityService(){
+		IAreasService cityService = ProxyFactory.create(IAreasService.class, "tcp://"+GAEA_UC+"/AreasService");
+		return cityService;
+
+	}
+	
+	/**
+	 * 咨询类别商品库类别关系服务
+	 * @return
+	 */
+	public IArticleCateRelationService getArticleCateRelationService(){
+		String url = "tcp://jxcore/ArticleCateRelationService";
+		IArticleCateRelationService articleCateRelationService = ProxyFactory.create(IArticleCateRelationService.class, url);
+		return articleCateRelationService;
+	}
+	
+	/**
+	 * 资讯站问答服务
+	 * @return
+	 */
+	public IFAQService getFAQService(){
+		String url = "tcp://jxcore/FAQService";
+		IFAQService ifaqService = ProxyFactory.create(IFAQService.class, url);
+		return ifaqService;
+	}
+	
+	public IUserCounponsService getUserCounponsService(){
+		return ProxyFactory.create(IUserCounponsService.class, "tcp://"+GAEA_UC+"/UserCounponsService");
+	}
+	
+	
+	public ICouponsService getCounponsService(){
+		return ProxyFactory.create(ICouponsService.class, "tcp://"+GAEA_UC+"/CouponsService");
+	}
+	
+	/**
+	 * 商品信息服务
+	 * @return
+	 */
+	public ILvzProductInfoService getInfoService() {
+		ILvzProductInfoService infoService = ProxyFactory.create(ILvzProductInfoService.class, "tcp://"+GAEA_SELL+"/LvzProductInfoService");
+		return infoService;
+
+	}
+	public ILoginService getLoginService(){
+		return ProxyFactory.create(ILoginService.class, "tcp://usercenter/LoginService");
+	}
+
+
+
+	public IMoblieSmsService getMoblieSmsService() {
+		// TODO Auto-generated method stub
+		return ProxyFactory.create(IMoblieSmsService.class, "tcp://jxmessage/MoblieSmsService");
+	}
+	
+	/**
+	 * 企业库 - 行业特点信息
+	 * @return
+	 */
+	public ILvEnterpriseMainBusinessService getEpEnterpriseMainBusinessService(){
+		return ProxyFactory.create(ILvEnterpriseMainBusinessService.class, "tcp://" + GAEA_EP + "/LvEnterpriseMainBusinessService");
+	}
+	/**
+	 * 企业库 - 业务信息
+	 * @return
+	 */
+	public ILvEnterpriseBusinessService getEpEnterpriseBusinessService(){
+		return ProxyFactory.create(ILvEnterpriseBusinessService.class, "tcp://" + GAEA_EP + "/LvEnterpriseBusinessService");
+	}
+	/**
+	 * 企业库 - 业务扩展信息
+	 * @return
+	 */
+	public ILvEnterpriseBusinessDataService getEpEnterpriseBusinessDataService(){
+		return ProxyFactory.create(ILvEnterpriseBusinessDataService.class, "tcp://" + GAEA_EP + "/LvEnterpriseBusinessDataService");
+	}
+	/**
+	 * 企业库 - 主表信息
+	 * @return
+	 */
+	public ILvEnterpriseService getEpEnterpriseService(){
+		return ProxyFactory.create(ILvEnterpriseService.class, "tcp://" + GAEA_EP + "/LvEnterpriseService");
+	}
+	
+	
+	// activiti-服务流程
+	public ILvFileService getFileService(){
+		final String url = "tcp://" + GAEA_WF + "/LvFileService";
+		ILvFileService iLvFileService = ProxyFactory.create(ILvFileService.class, url);
+		return iLvFileService;
+	}
+	
+	
+	/**** SEM向老官网导流start*/
+	public ILvEnterpriseRoleRelationService getEnterpriseRoleRelationService(){
+		String url = "tcp://"+GAEA_EP+"/LvEnterpriseRoleRelationService";
+		return ProxyFactory.create(ILvEnterpriseRoleRelationService.class, url);
+	}
+	public IFollowupService getIFollowupService(){
+		String url ="tcp://jxcore/FollowupService";
+		IFollowupService iso = ProxyFactory.create(IFollowupService.class, url);
+		return iso;
+	}
+	public IProductPropertiesService getIProductPropertiesService(){
+		String url ="tcp://jxcore/ProductPropertiesService";
+		IProductPropertiesService ipe =  ProxyFactory.create(IProductPropertiesService.class, url);
+		return ipe;
+	}
+	public IProductCategoryService getProductCategoryService(){
+		String url ="tcp://jxcore/ProductCategoryService";
+		IProductCategoryService ipe =  ProxyFactory.create(IProductCategoryService.class, url);
+		return ipe;
+	}
+	public ISorderChildrenService getISorderChildrenService(){
+		String url ="tcp://jxcore/SorderChildrenService";
+		ISorderChildrenService isc = ProxyFactory.create(ISorderChildrenService.class, url);
+		return isc;
+	}
+	public ISorderService getISorderService(){
+		String url ="tcp://jxcore/SorderService";
+		ISorderService iso = ProxyFactory.create(ISorderService.class, url);
+		return iso;
+	}
+	public ISorderSuperService getSorderSuperService(){
+		String url = "tcp://jxcore/SorderSuperService";
+		ISorderSuperService ics = ProxyFactory.create(ISorderSuperService.class, url);
+		return ics;
+	}
+	/**** SEM向老官网导流end*/
+	
+	/********新增旧版优惠券*******/
+	public ICouponsService getCouponService(){
+		ICouponsService ics = ProxyFactory.create(ICouponsService.class, "tcp://" + GAEA_UC + "/CouponsService");
+		return ics;
+	}
+	
+	public IOrderBFGService getOrderBFGService(){
+		return ProxyFactory.create(IOrderBFGService.class, "tcp://" + GAEA_SERVICE + "/OrderBFGService");
+	}
+}

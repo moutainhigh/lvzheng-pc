@@ -1,0 +1,11 @@
+var lv_referrer = encodeURIComponent(document.referrer);
+function lv_ajaxsend(tracksrc) {
+    (new Image).src = encodeURI(tracksrc);
+}
+
+function lv_clickLog(clickfrom) {
+	lv_ajaxsend("/lv/empty.png?" + clickfrom + "&pageUrl" + lv_referrer + "&rand=" + Math.random());
+}
+
+// moudle=自助流程宣传页&userId=23423423&logName=weizhanlog&from=timeline&data_openId=234ljkalsdfq3
+

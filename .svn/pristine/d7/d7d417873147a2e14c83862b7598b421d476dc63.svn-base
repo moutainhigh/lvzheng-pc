@@ -1,0 +1,177 @@
+<link href="http://static.lvzheng.com/lvzhengpc/css/index.css" type="text/css"  rel="stylesheet"/>
+<link href="http://static.lvzheng.com/lvzhengpc/css/zt.css" type="text/css"  rel="stylesheet"/>
+<link href="http://static.lvzheng.com/lvzhengpc/css/box.css" type="text/css"  rel="stylesheet"/>
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<script src="http://static.lvzheng.com/lvzhengpc/js/jquery.touchSlider.js"></script>
+<script type="text/javascript" src="http://static.lvzheng.com/lvzhengpc/js/return-top.js"></script>
+<script type="text/javascript" src="http://static.lvzheng.com/lvzhengpc/js/box.js"></script> 
+<script type="text/javascript" src="http://static.lvzheng.com/lvzhengpc/js/common/util.js"></script> 
+<script type="text/javascript" src="http://static.lvzheng.com/lvzhengpc/js/common/sendPhoneCode.js"></script> 
+<script src="http://static.lvzheng.com/lvzhengpc/js/fun.js"></scrip>
+<script>
+$(function(){
+    // 左导航切换显示
+    $(".left-nav dd").hover(function(){
+        $(".nav-right",this).show();
+    });
+    $(".left-nav dd").mouseleave(function(){
+        $(".nav-right",this).hide();
+    });
+});
+
+function getCode(){
+	var phoneNum = $("#phoneNum").val();
+	if(validatemobile(phoneNum)){
+		jQuery.sendPhoneCode(phoneNum,".time",null);
+	}
+}
+//登录办理
+function loginBanli(){
+	var phoneNum = $("#phoneNum").val();
+	var code = $("#code").val();
+	if(jQuery.checkPhoneCode(phoneNum,code)){
+		window.location.href="/usePhoneNumLogin/"+phoneNum;
+	}
+}
+</script>
+<body>
+<div id="continer">
+	<!-- 顶部信息条 -->
+    <!-- logo区域 -->
+	#parse("views/common/logo_normal.html")
+    <!-- 导航 -->
+    #parse("views/common/navigation.html")
+   
+    <div class="ztreg-banner">
+        <div class="ban-box">
+            <p class="p-tag1"><!-- 全程：免费、快捷、方便、贴心 --></p>
+            #if($logen)
+            <a  class="login-btn " href="http://mycenter.lvzheng.com/mywf/page/reg">立即注册公司</a>
+            #else
+            <a  class="login-btn " href="/login.html?path=http://mycenter.lvzheng.com/mywf/page/reg">立即注册公司</a>
+            #end
+        </div>
+    </div>   
+
+    <div class="bl-nav">
+        <div class="bl-nav-bg">
+            #if($logen)
+            <a  class="btn" href="http://mycenter.lvzheng.com/mywf/page/reg">立即注册公司</a>
+            #else
+            <a  class="btn" href="/login.html?path=http://mycenter.lvzheng.com/mywf/page/reg">立即注册公司</a>
+            #end
+        </div>
+    </div>
+
+    <div class="ztreg-main">
+        <div class="f-step">
+            <div class="sname">只需四步 &nbsp; 拥有自己的公司</div>
+            <div class="comlist">
+                <ul>
+                    <li class="plist1">营业执照</li>
+                    <li class="plist2">公司章程</li>
+                    <li class="plist3">公司印章</li>
+                </ul>
+            </div>
+            <div class="title">
+                <p>自己的公司 &nbsp;&nbsp; 自己注册 &nbsp;&nbsp; 谨慎放心</p>
+            </div>
+            <div class="step-box">
+                <ul>
+                    <li class="s1">第一步：起个名称</li>
+                    <li class="s2">第二步：填写资料</li>
+                    <li class="s3">第三步：领取执照</li>
+                    <li class="s4">第四部：刻制印章</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="box1">
+            <div class="con">
+                <p class="peo"><img src="images/zt/regcom/peo1.png"></p>
+                <p class="name">轻松核名<span>快速反馈</span></p>
+            </div>
+        </div>
+        <div class="box2">
+            <div class="con">
+                <p class="peo"><img src="images/zt/regcom/peo2.png"></p>
+                <p class="name">一键约号<span>省心省力</span></p>
+            </div>
+        </div>
+        <div class="box1">
+            <div class="con">
+                <p class="peo"><img src="images/zt/regcom/peo4.png"></p>
+                <p class="name">快速领证<span>免费刻章</span></p>
+            </div>
+        </div>
+        <div class="box2">
+            <div class="con">
+                <p class="peo"><img src="images/zt/regcom/peo3.png"></p>
+                <p class="name">完成注册<br><span>开心报到(国、地)</span></p>
+            </div>
+        </div>
+
+        <div class="box5">
+            <div class="con">
+                <p class="peo"><img src="images/zt/regcom/peo5.png"></p>
+                <p class="name">三重惊喜</p>
+                <p class="text-box">
+                    <span class="text">1.  完成注册第一步(核名)，即可获得第一重惊喜<a>“云印名片一盒”</a></span>
+                    <span class="text">2.  注册完成的前50名公司，即可享受第二重惊喜<a>“免费刻章”</a></span>
+                    <span class="text">3.  注册完成，小微提供第三重惊喜<a>“免费代理记账3个月”</a></span>
+                </p>
+                <p class="ts-text">
+                   注册完成指核名、设立登记、领取证照、刻制印章四步完成；<br>
+                   国地税报到为公司开始运营所需必要条件。<br>
+                   该自助办理流程适用于北京市城六区的有限责任公司。<br>
+                   "免费刻章"暂支持北京市朝阳区、海淀区，北京市其他地区补贴300元刻章款。
+                </p>
+            </div>
+        </div>
+    </div>        
+
+    <!-- 请付款 弹出框 -->
+   <!--  <div class="cd-popup cd-box1" role="alert"> 
+        登录框
+        <div class="cd-popup-container login-box">
+            <div class="loginc">
+                <h4>登录</h4>
+                <div class="item">
+                    <p>
+                        <label>手机号</label>
+                        <input id="phoneNum" class="w-180" type="text" placeholder="输入手机号">
+                    </p>
+                    <p>
+                        <label>验证码</label>
+                        <input id="code" class="w-100" type="text" placeholder="输入验证码">
+                        <a onclick="getCode()" class="get-code">获取验证码</a>
+                        <span class="time"></span>
+                    </p>
+                </div>
+                <div class="btn"><a  onclick="loginBanli()">登录</a></div>
+            </div> 
+            <a href="#" class="cd-popup-close img-replace">关闭</a>
+        </div>
+
+        提示框
+        <div class="cd-popup-container bl-box">
+            <div class="bl">
+                <div class="item">
+                    <p>您已经正在办理公司注册了<br>是否需要再注册一个新公司？</p>
+                </div>
+                <div class="btn">
+                    <a href="">不，继续办理</a>
+                    <a href="">是，注册新公司</a>
+                </div>
+            </div> 
+            <a href="" class="cd-popup-close img-replace">关闭</a>
+        </div>
+
+    </div>  -->
+    <!-- 弹出框 -->     
+
+    <!-- 网站底部 -->
+
+
+
+</div>

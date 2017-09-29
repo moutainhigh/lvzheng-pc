@@ -1,0 +1,215 @@
+//右侧点击展开
+$(".click-cou").click(function() {
+	$('.view-box').animate({
+		width : 'show',
+		opacity : 'show'
+	}, 100, function() {
+		showCoupons();
+		$('.view-box').show();
+	});
+	$('.colse-btn').show();
+});
+
+function showCoupons(){
+	
+	var productCode = $("#J_pcode").val();
+	var productId = $("#J_pid").val();
+	var cityId = $("#J_cityid").val();
+	var areaId = $("#J_areaid").val();
+	
+	$.ajax({
+		url:"/preferential/getRecommend",
+		data:{"productId":productId,"productCode":productCode,"cityId":cityId,"areaId":areaId},
+		type:"post",
+		dataType:"json",
+		complete:function(data){
+			if (data == null)
+				return;
+			var result = $.parseJSON(data.responseText);
+			//这里是渲染可领优惠券
+			var avaList = eval(result.avaList);
+			$("#available_coupons").empty();
+			if (avaList != null && avaList.length != 0) {
+				var html = "";
+				for (var i=0;i<avaList.length ;i++) {
+					html+= getAvailableCouponHtml(avaList[i]);
+				}
+				$("#available_coupons").append(html);
+				$(".available_div").show();
+			} else {
+				$(".available_div").hide();
+			}
+			
+			//这里是渲染已领的优惠券
+			var holdList = eval(result.holdList);
+			$("#hold_coupons").empty();
+			if (holdList != null && holdList.length != 0) {
+				var html = "";
+				for (var i=0;i<holdList.length ;i++) {
+					html+= getHoldCouponHtml(holdList[i],1);
+				}
+				$("#hold_coupons").append(html);
+				
+				$(".hold_div").show();
+			} else {
+				$(".hold_div").hide();
+			}
+			
+		}
+	});
+	
+	
+	
+}
+
+function getAvailableCouponHtml(data){
+
+	var date = "";
+	if (data.invalidType >= 1) {
+		date = data.invalidName;
+	} else {
+		date = data.effectName+"~"+data.invalidName
+	}
+	
+	
+	var html = "";
+	html+="<a data-pid=\""+data.id+"\" class=\"link get-cou gofetch\" href=\"javascript:void(0);\">";
+	html+="<li class=\"on-cou\">";
+	html+="<p class=\"price\"><span>￥</span>"+data.quota+"</p>";
+	html+="<p class=\"type\">";
+	html+="<span class=\"name\">"+data.name+"</span>";
+	html+="<span class=\"demand\">"+data.unitName+"</span>";
+	html+="<span class=\"time\">"+date+"到期</span>";
+	html+="</p>";
+	html+="<p href=\"javascript:void(0);\" class=\"get\">立即领取</p>";
+	html+="</li>";
+	html+="<p class=\"succ\">";
+	html+="<span class=\"cname\">恭喜你，领取成功！</span>";
+	//html+="<span class=\"ctext\">优惠券将于5-10分钟后，发送到您的账户中。请注意查收哦〜</span>";
+	html+="</p>";
+	html+="</a>";
+	
+	return html;
+	
+}
+
+
+
+function getHoldCouponHtml(data){
+	var date = "";
+	
+	date = data.effectName+"~"+data.invalidName
+	
+	var html="";
+	html+="<a class=\"link\" href=\"javascript:void(0);\">";
+	html+="<li class=\"get-cou\">";
+	html+="<p class=\"price\"><span>￥</span>"+data.quota+"</p>";
+	html+="<p class=\"type\">";
+	html+="<span class=\"name\">"+data.name+"</span>";
+	html+="<span class=\"demand\">"+data.unitName+"</span>";
+	html+="<span class=\"time\">"+date+"到期</span>";
+	html+="</p>";
+	html+="<p class=\"get\">当前商品可用</p>";
+	html+="</li>";
+	html+="</a>";
+	return html;
+}
+
+//右侧收起按钮关闭
+$(".colse-btn").click(function() {
+	$('.view-box').animate({
+		width : 'hide',
+		opacity : 'hide'
+	}, 100, function() {
+		$('.view-box').hide();
+	});
+	$('.colse-btn').hide();
+});
+// 领取成功
+$(".get-cou.gofetch").live("click",function() {
+	var getElement = $(this);
+	
+});
+
+function showTigs(getElement,content,type){
+	if (type != 0) {//错误文字
+		$(getElement).find(".succ").find(".cname").html(content);
+		$(getElement).find(".succ").find(".ctext").html("");
+	} else {//正常状态领取的文字
+		$(getElement).find(".succ").find(".cname").html("恭喜你，领取成功！");
+		$(getElement).find(".succ").find(".ctext").html("优惠券将于5-10分钟后，发送到您的账户中。请注意查收哦〜");
+	}
+	$(getElement).find('.succ').slideDown();
+	$(getElement).find('.succ').delay(4000).slideUp(function() {
+
+		if (type != 0) {
+			return;
+		}
+		$(getElement).remove();
+		$(getElement).removeClass("get-cou").removeClass("gofetch");
+		$(getElement).find("li").removeClass("on-cou").addClass("get-cou");
+		$(getElement).find('.succ').remove();
+		$(getElement).find(".get").html("当前商品可用");
+		var holdLength = $("#hold_coupons").find("a").length;
+		if (holdLength == 0) {
+			$("#hold_coupons").append($(getElement));
+		} else {
+			$(getElement).insertBefore($("#hold_coupons").find("a").eq(0));
+		}
+		checkCoupons();
+	});
+}
+
+$(".get-cou.gofetch").live("click",function(){
+	var packetId = $(this).attr("data-pid");
+	var thisE = $(this);
+	$.ajax({
+		url:"/preferential/fetch",
+		data:{"packetId":packetId},
+		type:"post",
+		dataType:"json",
+		complete:function(data){
+			if(data.readyState == 4 && data.status == 200){
+				var responeJSON = $.parseJSON(data.responseText);
+				
+				if (responeJSON.code == 1) {
+					showTigs(thisE,"",0);
+				} else if (responeJSON.code == 2) {
+					showTigs(thisE,"",0);
+				} else if (responeJSON.code == -101) {
+					showTigs(thisE,"该红包不存在！","1");
+				} else if (responeJSON.code == -102) {
+					showTigs(thisE,"该红包状态错误！","1");
+				} else if (responeJSON.code == -103) {
+					showTigs(thisE,"该红包已过期！","1");
+				} else if (responeJSON.code == -104) {
+					showTigs(thisE,"该红包无库存！","1")
+				} else if (responeJSON.code == -105) {
+					showTigs(thisE,"未到可领取时间!","1");
+				} else if (responeJSON.code == -106) {
+					showTigs(thisE,"该红包未配置优惠单元！","1");
+				} else if (responeJSON.code == -999) {
+					window.location = "/login.html?test=1&path="+window.location.href;
+				} else {
+					showTigs(thisE,"系统异常!","1");
+				}
+				
+			}
+		}
+	})
+});
+
+function checkCoupons(){
+	var ava_length = $("#available_coupons").find("li").length;
+	if (ava_length <= 0) {
+		$(".available_div").hide();
+	} else {
+		$(".available_div").show();
+	}
+	var hold_length =  $("#hold_coupons").find("li").length;
+	if (hold_length <= 0) {
+		$(".hold_div").hide();
+	} else {
+		$(".hold_div").show();
+	}
+}

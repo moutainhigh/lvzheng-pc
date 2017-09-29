@@ -1,0 +1,87 @@
+@charset "utf-8";
+*{padding:0;margin:0;}
+body{padding:0;margin:0;font-size:12px;font-family:"微软雅黑";color: #333;background:#fff;}
+img{border:none;}
+a{text-decoration:none;cursor:pointer;color:#666;}
+a:hover,a:hover {text-decoration:none;color:#55acee;}
+input{color: #777;outline: none;}
+ul{padding:0;margin:0;list-style:none;}
+li,p{padding:0;margin:0;}
+.clear{clear:both;}
+::-webkit-input-placeholder { /* WebKit browsers */color: #ccc;}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */color: #ccc;}
+::-moz-placeholder { /* Mozilla Firefox 19+ */color: #ccc;}
+:-ms-input-placeholder { /* Internet Explorer 10+ */color: #ccc;}
+
+.land-box{width: 100%;min-height: 1500px; padding-bottom: 70px; overflow: hidden;}
+.land-box .bannerbg{width: 100%;height: 520px; background: url('/images/bgland/banner.jpg')  no-repeat center;}
+.land-box .banner{width: 1000px;height: 520px;margin: 0 auto;position: relative;}
+.land-box .banner .btext{width: 930px;height: 130px;background: url('/images/bgland/btext.png')  no-repeat center;position: absolute;top: 120px;left: 40px}
+.land-box .banner .bbtn{width: 180px;height: 50px; width: 180px;text-align: center;height: 50px;line-height: 50px; background: #ea584b; display: block;font-size: 18px;color: #fff; position: absolute;top: 310px;left: 410px}
+.land-box .banner .tel-box{width: 770px;height: 40px;background: url('/images/bgland/telline.png')  no-repeat center;position: absolute;top: 430px;left: 125px}
+.land-box .banner .tel-box span{display: block;width: 360px;height: 40px;margin: 0 auto;background: url('/images/bgland/btel.png')  no-repeat center;}
+
+.land-box .main-box{width: 100%; min-height: 1000px; margin: 20px auto 0;overflow: hidden;}
+.land-box .main-box .titlebox{width: 100%; height: 50px;line-height: 50px; background: url('/images/bgland/titleline.png')  repeat-x center;margin: 20px 0}
+.land-box .main-box .titlebox p.name{font-size: 44px;color: #000;width: 400px;background: #fff; text-align: center; height: 50px;line-height: 50px;margin: 0 auto}
+.land-box .main-box .zz-box{width: 1000px;min-height: 500px;margin: 0 auto}
+.land-box .main-box .zz-box .zz-text{font-size: 14px;color: #666;line-height: 20px;text-align: center;padding: 10px 0}
+.land-box .main-box .zz-box .zz-pic{width: 1000px;height: 730px;background: url('/images/bgland/zz_pic.png')  no-repeat center;position: relative;}
+.land-box .main-box .zz-box .zz-pic .b1{position: absolute;top: 349px;left: 309px}
+.land-box .main-box .zz-box .zz-pic .b2{position: absolute;top: 405px;left: 309px}
+.land-box .main-box .zz-box .zz-pic .b3{position: absolute;top: 425px;left: 309px}
+.land-box .main-box .zz-box .zz-pic .b4{position: absolute;top: 290px;right: 368px}
+.land-box .main-box .zz-box .zz-pic .b5{position: absolute;top: 329px;right: 306px}
+.land-box .main-box .zz-box .zz-pic .b6{position: absolute;top: 366px;right: 516px}
+.land-box .main-box .zz-box .zz-pic .text{font-size: 16px;line-height: 22px;color: #000}
+.land-box .main-box .zz-box .zz-pic .text span{color: #fa0000}
+.land-box .main-box .zz-box .zz-pic .t1{position: absolute;top: 235px;left: 15px}
+.land-box .main-box .zz-box .zz-pic .t2{position: absolute;top: 413px;left: 0px}
+.land-box .main-box .zz-box .zz-pic .t3{position: absolute;top: 500px;left: 80px}
+.land-box .main-box .zz-box .zz-pic .t4{position: absolute;top: 210px;right: 0px}
+.land-box .main-box .zz-box .zz-pic .t5{position: absolute;top: 338px;right: 0px}
+.land-box .main-box .zz-box .zz-pic .t6{position: absolute;top: 435px;right: 90px}
+
+.bg-box{width: 100%; background: #f1f7f8 url('/images/bgland/cpbg.jpg')  no-repeat center; min-height: 1000px;padding: 30px 0}
+.land-box .main-box .bg-box .titlebox{width: 100%; height: 50px;line-height: 50px; background: url('/images/bgland/titleline.png')  repeat-x center;margin: 30px 0}
+.land-box .main-box .bg-box .titlebox p.name{font-size: 44px;color: #000;width: 460px;background: #f1f7f8; text-align: center; height: 50px;line-height: 50px;margin: 0 auto}
+.bg-box .cp-box{width: 810px;min-height: 200px;margin: 20px auto;overflow: hidden;}
+.bg-box .cp-box .sbox .cp1{min-height: 110px;}
+.bg-box .cp-box .sbox{min-height: 180px;padding: 15px 20px 20px 90px;background: #fff;position: relative;margin-top: 15px}
+.bg-box .cp-box .sbox p.num{font-size: 18px;width: 54px; height: 70px;line-height: 55px; font-size: 36px;color: #fff; text-align: center; background: url('/images/bgland/numbg.png')  no-repeat center;position: absolute;top: -5px;left: 20px}
+.bg-box .cp-box .sbox p.name{font-size: 18px;color: #ee1a1a;font-weight: bold;height: 30px;line-height: 30px}
+.bg-box .cp-box .sbox p.text{font-size: 14px;color: #222;min-height: 20px;line-height: 20px;padding: 5px 0 20px}
+.bg-box .cp-box .sbox p.list{width: 200px; height: 60px; text-align: center; font-size: 18px;color: #ee363a; padding: 20px 10px;line-height: 30px;border: 1px solid #ff2b2b;float: left;}
+.bg-box .cp-box .sbox p.list span{display: inline-block;font-size: 16px}
+
+.land-box .bz-box{padding: 30px 0}
+.land-box .bz-box .bz-list{width: 1000px;min-height: 100px;margin: 20px auto}
+.land-box .bz-box .bz-list .list{width: 600px;margin: 20px auto;padding: 10px 0 10px 70px; min-height: 50px; }
+.land-box .bz-box .bz-list .list .name{font-size: 18px;color: #000;height: 25px;line-height: 25px;font-weight: bold;}
+.land-box .bz-box .bz-list .list .text{font-size: 14px;color: #000;height: 25px;line-height: 25px;}
+.land-box .bz-box .bz-list .ico1{ background:  url('/images/bgland/bz_ico1.png')  no-repeat center left;}
+.land-box .bz-box .bz-list .ico2{ background:  url('/images/bgland/bz_ico2.png')  no-repeat center left;}
+
+.bot-box{width: 100%;height: 40px; line-height: 40px; background: #182834;padding: 10px 0;display: none;}
+.bot-boxxf{position: fixed;bottom: 0px;display: block;}
+.bot-box .tel-box{width: 800px;margin: 0 auto}
+.bot-box .tel-box .tel{font-size: 24px;color: #ec373a;padding-left: 30px;background: url('/images/bgland/tel_ico.png')  no-repeat center left;float: left;}
+.bot-box .tel-box .item{float: left; width: 440px; margin-left: 30px}
+.bot-box .tel-box .item input.w-text{width: 270px;height: 40px; line-height: 40px; background: #fff;padding: 0 10px;border: none;float: left;font-size: 16px;color: #333}
+.bot-box .tel-box .item a.btn{width: 150px;text-align: center;height: 40px;line-height: 40px;font-size: 20px;color: #fff;background: #ec373a;display: block;float: left;}
+
+
+/*弹层*/
+#submit-box{margin-top: 10%;width: 420px;min-height: 100px;padding: 50px 0}
+#submit-box .submit{width: 260px;padding-left: 75px;margin: 0 auto;background: url('/images/bgland/c_ico.png')  no-repeat center left;}
+#submit-box .submit p.name{font-size: 18px;height: 40px;line-height: 40px;color: #000}
+#submit-box .submit p.text{font-size: 14px;min-height: 20px;line-height: 20px;color: #666}
+
+/*红点闪烁*/
+@keyframes warn {0% {transform: scale(0);opacity: 0.0;}25% {transform: scale(0);opacity: 0.1;}50% {transform: scale(0.1);opacity: 0.3;}75% {transform: scale(0.5);opacity: 0.5;}100% {transform: scale(1);opacity: 0.0;}}
+@-webkit-keyframes "warn" {0% {-webkit-transform: scale(0);opacity: 0.0;}25% {-webkit-transform: scale(0);opacity: 0.1;}50% {-webkit-transform: scale(0.1);opacity: 0.3;}75% {-webkit-transform: scale(0.5);opacity: 0.5;}100% {-webkit-transform: scale(1);opacity: 0.0;}}
+.bling {position: relative;width: 40px;height: 40px;}
+/* 保持大小不变的小圆圈  */
+.dot {position: absolute;width: 6px;height: 6px; background: #ea584b; left: 15px;top: 15px;-webkit-border-radius: 20px;-moz-border-radius: 20px;border: 2px solid #ea584b;border-radius: 20px;z-index: 2;}
+/* 产生动画（向外扩散变大）的圆圈  */
+.pulse {position: absolute;width: 14px; height: 14px;left: 7px;top: 7px;border: 6px solid #ea584b;-webkit-border-radius: 30px;-moz-border-radius: 30px;border-radius: 30px;z-index: 1;opacity: 0;-webkit-animation: warn 2s ease-out;-moz-animation: warn 2s ease-out;animation: warn 2s ease-out;-webkit-animation-iteration-count: infinite;-moz-animation-iteration-count: infinite;animation-iteration-count: infinite;}

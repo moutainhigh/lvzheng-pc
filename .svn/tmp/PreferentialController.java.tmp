@@ -1,0 +1,164 @@
+package com.jx.hunter.lvzhengpc.controllers;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+
+import com.alibaba.fastjson.JSONObject;
+import com.jx.argo.ActionResult;
+import com.jx.argo.annotations.Path;
+import com.jx.hunter.lvzhengpc.common.CommonUtils;
+import com.jx.hunter.lvzhengpc.common.LocationPage;
+import com.jx.hunter.lvzhengpc.utils.ActionResultUtils;
+import com.jx.hunter.lvzhengpc.vo.LoginUserVO;
+import com.jx.tradework.preferentialplug.buz.PreferentialPCBuz;
+import com.jx.tradework.preferentialplug.frame.RSBLL;
+import com.jx.tradework.vo.PacketVO;
+/**
+ * 本次优惠券发放准备红包id为：
+ * 满2000减50：39601420503297
+ * 满4000减100：39601455436289
+ * 满6000减200：39601499874049
+ * 满50.01减50：39601541210369（此为系统自动发放，不计入展示）
+ * @author eilir
+ *
+ */
+public class PreferentialController extends BaseController{
+	private static final Logger logger = org.slf4j.LoggerFactory.getLogger(PreferentialController.class);
+//	@Path("preferential")
+	public ActionResult ticketPage(){
+		//准备优惠券
+		long uid = CommonUtils.getLoginuserid(beat());
+		String userId = uid > 0 ? uid + "":null;
+		List<PacketVO> showPackets = new ArrayList<PacketVO>();
+		List<String> packetIds = new ArrayList<String>();
+		packetIds.add("39428073548801");
+		packetIds.add("39428893541121");
+		packetIds.add("39428995516417");
+		for(String id : packetIds){
+			PacketVO p = PreferentialPCBuz.getInstance().getPacketById(id,userId);
+			p.setPacketName("通用优惠券");
+			p.setEffect("2016.05.30");
+			if(null != p){
+				showPackets.add(p);
+			}
+		}
+		
+		String packetId = beat().getRequest().getParameter("packetId");
+		if(StringUtils.isNotEmpty(packetId)){
+			model().add( "packetId",packetId);
+		}
+		//准备推荐商品
+		//准备热门单品
+		model().add("packets", showPackets);
+		model().add("LocationPage", new LocationPage("preferential/coupon","index"));
+		model().add("auth",CommonUtils.getLoginuserid(beat()));
+		return view("/index");
+	}
+	
+//	@Path("preferential/fetch")
+	public ActionResult fetchPreferential(){
+		JSONObject json = new JSONObject();
+		json.put("success", false);
+		String ppid = beat().getRequest().getParameter("packetId");
+		LoginUserVO user = CommonUtils.getLoginEntity(beat());
+		if(null == user){
+			String path ="http://www.lvzheng.com/preferential";
+			json.put("login", "http://www.lvzheng.com/login.html?test=1&path="+path+"?packetId="+ppid);
+			return ActionResultUtils.renderJson(json);
+		}else{
+			if(StringUtils.isEmpty(ppid) || null == user){
+				json.put("msg", "参数错误：【packetid:"+ ppid +"】");
+				return ActionResultUtils.renderJson(json);
+			}
+			try {
+				long fetchResult = RSBLL.getInstance().getPreferentialAccountService().fetchPacket(Long.parseLong(ppid), user.getUserid());
+				if(fetchResult == 0){
+					json.put("msg", "您已经领取过该优惠券，不能重复领取！");
+				}else if(fetchResult == 1){
+					json.put("msg", "抱歉，优惠券已经领完！");
+				}else if(fetchResult > 4){
+					long fetchId = RSBLL.getInstance().getPreferentialFetchService().fetchPacket(user.getUserphone(), Long.parseLong(ppid));
+					if(fetchId > 0){
+						json.put("success", true);
+					}else{
+						logger.warn("【优惠券领取】领取统计表插入失败！packetid: "+ ppid +" userphone:"+user.getUserphone());
+					}
+				}else{
+					json.put("msg", "服务器错误，领取失败，请联系客服！");
+				}
+			} catch (NumberFormatException e) {
+				json.put("msg", "网络错误！");
+				e.printStackTrace();
+			} catch (Exception e) {
+				json.put("msg", "网络错误！");
+				e.printStackTrace();
+			}
+			return ActionResultUtils.renderJson(json);
+		}
+	}
+	
+	
+	private static List<String> PACKET_IDS;
+	static {
+		PACKET_IDS = new ArrayList<String>();
+		PACKET_IDS.add("39428073548801");
+		PACKET_IDS.add("39428893541121");
+		PACKET_IDS.add("39428995516417");
+	}
+	@Path("preferential/active")
+	public ActionResult activePage(){
+		boolean isTime = isTrueTime();
+		int timeFlag = isTime ? 1 : 0;
+		if (isTime) {
+			
+		}
+		long uid = CommonUtils.getLoginuserid(beat());
+		String userId = uid > 0 ? uid + "":null;
+		List<PacketVO> showPackets = new ArrayList<PacketVO>();
+		
+		for(String id : PACKET_IDS){
+			PacketVO p = PreferentialPCBuz.getInstance().getPacketById(id,userId);
+			p.setPacketName("通用优惠券");
+			p.setEffect("2016.05.30");
+			if(null != p){
+				showPackets.add(p);
+			}
+		}
+		
+		String packetId = beat().getRequest().getParameter("packetId");
+		if(StringUtils.isNotEmpty(packetId)){
+			model().add( "packetId",packetId);
+		}
+		//准备推荐商品
+		//准备热门单品
+		model().add("packets", showPackets);
+		model().add("LocationPage", new LocationPage("preferential/night","index"));
+		model().add("auth",CommonUtils.getLoginuserid(beat()));
+		return view("/index");
+		
+	}
+	
+	private boolean isTrueTime(){
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.HOUR_OF_DAY, 20);
+		cal.set(Calendar.MINUTE, 0);
+		cal.set(Calendar.SECOND, 0);
+		
+		long startTime = cal.getTime().getTime();
+		long endTime = startTime + 1000*60*60*4;
+		
+		long nowTime = System.currentTimeMillis();
+		
+		if (nowTime > startTime && nowTime < endTime)
+			return true;
+		
+		return false;
+	}
+	
+	
+}
+

@@ -1,0 +1,32 @@
+ <div class="top-box">
+        <div class="box-con">
+            <div class="left-box">
+            #if($logen)
+                <span class="item"><a href="javascript:void(0);">欢迎，$!{logen.username}</a></span>
+                <span class="item"><a href="javascript:void(0);" id="quitbutton">退出</a></span>
+                #else
+                 <span class="item"><a href="/login.html">登录</a></span>
+                <span class="item"><a href="/register.html">注册</a></span>
+                #end
+                <span class="phone"><a href="javascript:void(0);">手机访问小微<b class="v-phone" ><img src="/images/index/ewm.png" ></b></a></span>
+            </div>
+            <div class="right-box">
+                <span class="item"><a href="http://mycenter.lvzheng.com/mycenter/index.html">我的小微</a></span>
+                <!-- <span class="item"><a href="">消息<i>3</i></a></span> -->
+                <span class="item"><a href="http://mycenter.lvzheng.com/order/unpayorder.html">我的订单</a></span>
+                <span class="call-on"><a href="javascript:void(0);">010-57426695</a></span>
+            </div>
+        </div>
+        <script type="text/javascript">
+        $("#quitbutton").click(function(){
+        	$.ajax({url:"/logout",type: 'POST',
+        		dataType:"json",
+        		success:function(data){
+        			if(data.ret == "ok"){
+        				//window.location.reload();
+        				window.location.href="/";
+        			}
+        		}});
+        });
+        </script>
+    </div>

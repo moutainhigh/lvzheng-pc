@@ -1,0 +1,53 @@
+#if($!{packageSellList})
+<div class="yhtc-box">
+	<div class="tc-tabs">
+		#set($foo = 1)
+		#foreach($packageSellE in $!{packageSellList})
+			<p #if($!{foo} == 1) class='active' #end><a href="#tab$!{foo}">$!{packageSellE.package_name}</a></p>
+			#set($foo = $foo + 1 )
+		#end
+	</div>
+	<div class="tab_container">
+		#set($foo2 = 1)
+		#foreach($packageSellE in $!{packageSellList})
+			#set($foo3 = 1)
+			<div id="tab$!{foo2}" class="tc-con">
+				<div class="list">
+					<ul class="ul-list$!{foo2}">
+					#foreach($sellMap in $!{sellProductMap.get("$!{packageSellE.packagesell_id}")})
+						<li class="item">
+							<p class="ico">$!{sellMap.cate_name}</p>
+							<p class="name">$!{sellMap.sell_product_name}</p>
+							<p class="text">$!{ProductUtils.getProductInfoByProductId($!{sellMap.product_id}).tips}</p>
+							<p class="price">￥$!{sellMap.sell_overprice}</p> <!-- 成交价格 -->
+						</li>
+						#if($!{sellProductMap.size()} > $!{foo3} )
+						<li class="plus"></li>
+						#end
+						#set($foo3 = $foo3 + 1 )
+					#end
+					</ul>
+	
+					<div class="equ-box">
+						<div class="equal"></div>
+						<p class="t1">
+							<label>套餐价：</label><span>￥$!{packageSellE.sell_overprice}</span>
+						</p>
+						<p class="t2">
+							<label>原 价：</label><span>￥$!{packageSellE.sell_markprice}</span>
+						</p>
+						#set($ls = $!{packageSellE.sell_markprice} - $!{packageSellE.sell_overprice} )
+						<p class="t3">
+							<label>立 省：</label><span>￥$!{ls}</span>
+						</p>
+						<p class="t4">
+							<a href="/order/buyorderByPackage/39889771562241" class="btn">购买套装</a>
+						</p>
+					</div>
+				</div>
+			</div>
+			#set($foo2 = $foo2 + 1 )
+		#end
+	</div>
+</div>
+#end

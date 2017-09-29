@@ -1,0 +1,300 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>一个工作日出章，小微刻章极速安全有资质-国内领先的O2O自营法律服务提供商</title>
+<meta name="description" content="注册公司找小微律政,小微律政拥有专业的律师和会计团队,小微律政专注为创业公司及中小微企业提供代办公司注册,商标注册,代理记账,社保公积金开户,公司变更,合同拟定,公司章程等一站式企业服务，小微律政服务流程每一步都无微不至。">
+<meta name="keywords" content="小微律政,代办注册公司,公司注册,商标注册费用和流程" />
+
+
+<link href="http://static.lvzheng.com/lvzhengpc/css/ldy/kz_land.css" type="text/css"  rel="stylesheet"/>
+<link href="http://static.lvzheng.com/lvzhengpc/css/index.css" type="text/css"  rel="stylesheet"/>
+<link href="http://static.lvzheng.com/lvzhengpc/css/box.css" type="text/css"  rel="stylesheet"/>
+
+<script type="text/javascript" src="http://static.lvzheng.com/lvzhengpc/js/jquery-1.7.2.min.js"></script>
+<script src="http://static.lvzheng.com/lvzhengpc/js/jquery.touchSlider.js"></script>
+<script src="http://static.lvzheng.com/lvzhengpc/js/jquery.pslides.js"></script>
+<script type="text/javascript" src="http://static.lvzheng.com/lvzhengpc/js/owl.carousel.min.js"></script>
+<script type="text/javascript" src="http://static.lvzheng.com/lvzhengpc/js/box.js"></script> 
+<script src="http://static.lvzheng.com/lvzhengpc/js/jquery.tabs.js"></script>
+
+
+<script type="text/javascript">
+$(document).ready(function($){
+    $(window).scroll(function(){
+        var b=parseInt($(window).scrollTop());
+        if(b<800){
+            $(".bot-box").removeClass("bot-boxxf")
+        }
+        if(b>800){
+            $(".bot-box").addClass("bot-boxxf")
+        }
+    });
+    
+ 	initZXbtn();
+    
+    $('.cd-box1-zx-tel').on('click', function(event){
+      	if( $(event.target).is('.cd-popup-close') || $(event.target).is('.cd-box1-zx-tel') ) {
+      		event.preventDefault();
+      		$(this).removeClass('is-visible');
+      		$(".cd-box1").removeClass('is-visible');
+      	}
+      });
+
+});
+
+function initZXbtn(){
+	$('.zx_btn').unbind('click').on('click',function(){
+		$(this).unbind('click');
+		var teltext = $(this).parent().find(".zx_phone").val();
+		if(teltext == ''){
+			alert('请输入手机号码！');
+			initZXbtn();//重新绑定事件
+			return;
+		}
+		
+		var myreg = /^((1[0-9]{2})+\d{8})$/; 
+		if(!myreg.test(teltext)){
+			alert("手机号码格式错误");
+			initZXbtn();//重新绑定事件
+			return;
+		}
+		
+		sendMsgDingDing(teltext,'');
+		
+	});
+	
+
+}
+
+
+
+//发送钉钉消息
+function sendMsgDingDing(tel,msg){
+$.ajax({
+	url:"/ldy/sendDingDingMsg",
+	type:"post",
+	dataType:"json",
+	data:{'phone':tel,'type':5,'msg':msg},
+	success:function(data){
+		if(data.ret == 'false'){
+			$('.zxRetName').html("您的网络可能出现了问题！");
+			$('.zxRetText').html("请您重新提交一次哦~");
+		}
+		$('.cd-box1-zx-tel').addClass('is-visible');
+		
+		//免费电话咨询
+	    initZXbtn();
+	},
+	error:function(){
+		alert('未响应');
+		//免费电话咨询
+	    initZXbtn();
+	}
+});
+}
+
+
+function openwindow(url,name,iWidth,iHeight)
+{
+var url; //转向网页的地址;
+var name; //网页名称，可为空;
+var iWidth; //弹出窗口的宽度;
+var iHeight; //弹出窗口的高度;
+//window.screen.height获得屏幕的高，window.screen.width获得屏幕的宽
+var iTop = (window.screen.height-30-iHeight)/2; //获得窗口的垂直位置;
+var iLeft = (window.screen.width-10-iWidth)/2; //获得窗口的水平位置;
+window.open(url,name,'height='+iHeight+',,innerHeight='+iHeight+',width='+iWidth+',innerWidth='+iWidth+',top='+iTop+',left='+iLeft+',toolbar=no,menubar=no,scrollbars=auto,resizeable=no,location=no,status=no');
+}
+</script>
+</head>
+<body id="other-nav">
+#parse("views/common/header.html")
+    <!-- logo区域 -->
+	 #parse("views/common/logo_normal.html")
+	 <!-- 导航 -->
+  	#parse("views/common/navigation.html")  
+<div class="kz-box">
+    <div class="bannerbg">
+        <div class="banner">
+            <p class="btext"></p>
+            <p class="tel-box">010-57891402</p>
+        </div>
+    </div>
+
+    <div class="main-box">
+
+        <div class="fw-box">
+            <p class="name"><span>服务优势</span></p>
+            <div class="adv-box"></div>
+        </div>
+        <div class="fw-box">
+            <p class="name"><span>服务内容</span></p>
+            <p class="text">*** 如果您是新成立公司：您需要刻制全套印章（包含公章、合同章、发票章、财务章、法人章） ***</p>
+            <div class="adv-con">
+                <p class="price">全套仅需400元</p>
+                <a href="http://www.lvzheng.com/commondetail/detail/41414879665409.html?cityid=1&areaid=101" class="buybtn">立刻购买</a>
+            </div>
+        </div>
+
+        <div class="ch-box">
+            <div class="change">
+                <p class="title">如果您在公司经营过程中，遇到以下情况您需要刻制新的印章</p>
+                <div class="cbox1">
+                    <div class="step1">
+                        <p class="num">01</p>
+                        <p class="name">登报公示</p>
+                    </div>
+                    <div class="step2">
+                        <p class="num">02</p>
+                        <p class="name">公安局备案<br>(备案时需法人到场)</p>
+                    </div>
+                    <div class="step3">
+                        <p class="num">03</p>
+                        <p class="name">重新刻章</p>
+                    </div>
+                </div>
+                <div class="cbox2">
+                    <div class="step1">
+                        <p class="num">01</p>
+                        <p class="name">找专业刻章公司</p>
+                    </div>
+                    <div class="step2">
+                        <p class="num">02</p>
+                        <p class="name">公安局备案<br>(备案时不需法人到场)</p>
+                    </div>
+                    <div class="step3">
+                        <p class="num">03</p>
+                        <p class="name">销毁损章</p>
+                    </div>
+                    <div class="step4">
+                        <p class="num">04</p>
+                        <p class="name">重新刻章</p>
+                    </div>
+                </div>
+                <div class="cbox3">
+                    <div class="step1">
+                        <p class="num">01</p>
+                        <p class="name">找专业刻章公司</p>
+                    </div>
+                    <div class="step2">
+                        <p class="num">02</p>
+                        <p class="name">公安局备案<br>(备案时不需法人到场)</p>
+                    </div>
+                    <div class="step3">
+                        <p class="num">03</p>
+                        <p class="name">重新刻章</p>
+                    </div>
+                </div>
+                <div class="cbox4">
+                    <div class="text-box">
+                        <p class="name">我想多刻几枚章方便使用？</p>
+                        <p class="text">很多公司因为业务需要，需要多枚合同章，这时的合同章都需要去工商局备案生成唯一的识别编号和芯片。</p>
+                        <p class="remark">注：一家公司可以拥有多枚合同章、发票章、财务章，但是公章只能拥有一枚</p>
+                        <p class="remark">注：由于法人章并不需要在公安局备案，所以法人章可刻多枚；但如果法人章有在银行备案的话，则不可通用。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="wkz-box">
+            <div class="buy-box">
+                <a href="javascript:void(0);" onclick="openwindow('http://p.qiao.baidu.com/cps/chat?siteId=6550807&userId=10178186','在线咨询',600,600)" class="kzbtn">我要刻章</a>
+                <p class="tel">咨询电话：010-57891402</p>
+            </div>
+        </div>
+
+        <div class="fw-box">
+            <p class="name"><span>所需材料</span></p>
+            <div class="needcl">
+                <ul>
+                    <li>
+                        <div class="name">新公司设立刻章</div>
+                        <div class="text"><label>1、</label><p>公司出具申请；</p></div>
+                        <div class="text"><label>2、</label><p>营业执照副本原件和复印件；</p></div>
+                        <div class="text"><label>3、</label><p>法人身份证原件和复印件；</p></div>
+                        <div class="text"><label>4、</label><p>经办人身份证原件和复印件；</p></div>
+                        <div class="text"><label>5、</label><p>外资需要商委批准证书。</p></div>
+                    </li>
+                    <li>
+                        <div class="name">名称变更需刻章</div>
+                        <div class="text"><label>1、</label><p>公司开具介绍信；</p></div>
+                        <div class="text"><label>2、</label><p>法人身份证原件和复印件；</p></div>
+                        <div class="text"><label>3、</label><p>经办人身份证原件和复印件；</p></div>
+                        <div class="text"><label>4、</label><p>工商局核发的名称变更通知书；</p></div>
+                        <div class="text"><label>5、</label><p>变更后的营业执照副本原件和复印件；</p></div>
+                    </li>
+                    <li>
+                        <div class="name">更换公章、财务章须知</div>
+                        <div class="text"><label>1、</label><p>持营业执照副本原件和复印件；</p></div>
+                        <div class="text"><label>2、</label><p>法人身份证原件和复印件；</p></div>
+                        <div class="text"><label>3、</label><p>经办人身份证原件和复印件；</p></div>
+                        <div class="text"><label>4、</label><p>带着旧章，交由公司机关予以销毁；</p></div>
+                        <div class="text"><label>5、</label><p>与您的开户的银行联系，询问是否去银行先将旧章在银行做旧的印章留存；</p></div>
+                    </li>
+                    <li>
+                        <div class="name">加刻合同专用章</div>
+                        <div class="text"><label>1、</label><p>营业执照副本原件和复印件；</p></div>
+                        <div class="text"><label>2、</label><p>法人身份证原件和复印件；</p></div>
+                        <div class="text"><label>3、</label><p>经办人身份证原件和复印件；</p></div>
+                        <div class="text"><label>4、</label><p>公司开具介绍信（写明原来有几枚合同专用章，现在需要刻几枚，切记）；</p></div>
+                        <div class="text"><label>5、</label><p>公章和法人亲笔签字；</p></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="fw-box">
+            <p class="name"><span>我们的印章</span></p>
+            <div class="wyz-box">
+                <ul>
+                    <li class="list1">
+                        <p class="yzname">平纹章</p>
+                        <p class="price"><span>￥400</span>/套 ｜<span>￥200</span>/枚</p>
+                        <a class="zxbtn" href="javascript:void(0);" onclick="openwindow('http://p.qiao.baidu.com/cps/chat?siteId=6550807&userId=10178186','在线咨询',600,600)">在线咨询</a>
+                    </li>
+                    <li class="list2">
+                        <p class="yzname">螺纹章</p>
+                        <p class="price"><span>￥600</span>/套</p>
+                        <a class="zxbtn" href="javascript:void(0);" onclick="openwindow('http://p.qiao.baidu.com/cps/chat?siteId=6550807&userId=10178186','在线咨询',600,600)">在线咨询</a>
+                    </li>
+                    <li class="list3">
+                        <p class="yzname">翻转印章</p>
+                        <p class="price"><span>￥400</span>/枚</p>
+                        <a class="zxbtn" href="javascript:void(0);" onclick="openwindow('http://p.qiao.baidu.com/cps/chat?siteId=6550807&userId=10178186','在线咨询',600,600)">在线咨询</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    
+    <div class="bot-box">
+        <div class="tel-box">
+            <div class="tel">咨询电话：010-57891402</div>
+            <div class="item">
+                <input type="text" class="w-text zx_phone" placeholder="请输入您的手机号">
+                <a class="btn pop_box1 zx_btn">免费电话咨询</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 提交电话 弹出框 -->
+    <div class="cd-popup cd-box1-zx-tel" role="alert"> 
+        <div class="cd-popup-container" id="submit-box">
+            <div class="submit">
+                <p class="name">您的电话已提交成功！</p>
+                <p class="text">稍后我们的服务人员将会给您致电解答您的疑问，感谢您的信任！</p>
+            </div> 
+            <a href="#" class="cd-popup-close img-replace">关闭</a>
+        </div>
+        
+    </div> 
+    <span style="display:none">
+	    <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1254054374'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1254054374' type='text/javascript'%3E%3C/script%3E"));</script>
+	    <script type="text/javascript"> var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://"); document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fff07fd1b4594615ee70a3e2ece1c28c1' type='text/javascript'%3E%3C/script%3E")) </script>
+   	</span>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,121 @@
+package com.jx.hunter.lvzhengpc.utils;
+
+
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Properties;
+
+
+
+/**
+ * @author 
+ */
+public class IniReader {
+
+	protected HashMap<String,Properties> sections = new HashMap<String,Properties>();
+	private transient String currentSecion;
+	private transient Properties current;
+
+	private static IniReader instance = null; 
+	private static String iniFileName = "";
+	private static String filePath = "";
+	
+
+    public static IniReader getInstance(){
+		
+    	//iniFileName = "lvzheng.ini";
+		
+		 if (instance == null) {
+	        	syncInit();
+	     }
+		return instance;
+	}
+    
+    public static void initFilePath(String path) {
+    	filePath = path;
+    }
+	
+	private static synchronized void syncInit() {
+        if (instance == null) {
+        	try{
+        		instance = new IniReader();
+        	}catch(Exception e){
+        		e.printStackTrace();
+        	}
+        }
+    }
+	
+	public IniReader() throws IOException { 
+		//InputStream stream = getClass().getClassLoader().getResourceAsStream(iniFileName); 
+		BufferedReader reader = new BufferedReader(new FileReader(filePath)); 
+		//BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
+		read(reader); 
+		reader.close(); 
+	} 
+
+	protected void read(BufferedReader reader) throws IOException { 
+		String line; 
+		while ((line = reader.readLine()) != null) { 
+			parseLine(line); 
+			sections.put(currentSecion, current);
+		} 
+	} 
+
+	protected void parseLine(String line) { 
+		line = line.trim(); 
+		if (line.matches("\\[.*\\]")) { 
+			if (current != null) {
+				sections.put(currentSecion, current);
+			}
+			currentSecion = line.replaceFirst("\\[(.*)\\]", "$1"); 
+			current = new Properties(); 
+			sections.put(currentSecion, current); 
+		} else if (line.matches(".*=.*")) { 
+			if (current != null) { 
+				int i = line.indexOf('='); 
+				String name = line.substring(0, i); 
+				String value = line.substring(i + 1); 
+				current.setProperty(name, value); 
+			} 
+		} 
+	} 
+
+	public String getValue(String section, String name) { 
+		Properties p = (Properties) sections.get(section); 
+
+		if (p == null) { 
+			return null; 
+		} 
+
+		String value = p.getProperty(name); 
+			return value; 
+	} 
+	
+	public List<String> getValues(String section){
+		Properties p = (Properties) sections.get(section); 
+		if (p == null) { 
+			return null; 
+		}
+		List<String> list = new ArrayList<String>();
+		for (Object key : p.keySet()){
+			String value = p.getProperty(key.toString());
+			list.add(value);
+		}
+		return list;
+	}
+
+	public Properties getSection(String section){
+		return (Properties) sections.get(section);
+	}
+	
+	public static void main(String[] args) throws IOException {
+		//System.out.println(IniReader.getInstance(0).getValue("onlinesys", "ifonline"));
+		
+	}
+
+}

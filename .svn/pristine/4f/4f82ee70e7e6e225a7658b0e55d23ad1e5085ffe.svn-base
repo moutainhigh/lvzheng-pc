@@ -1,0 +1,142 @@
+package com.jx.hunter.lvzhengpc.controllers;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.lang.StringUtils;
+
+import com.jx.argo.ActionResult;
+import com.jx.argo.Model;
+import com.jx.argo.annotations.Path;
+import com.jx.blackface.gaea.sell.entity.LvzSellProductEntity;
+import com.jx.blackface.gaea.usercenter.entity.BFAreasEntity;
+import com.jx.blackface.orderplug.buzs.OrderBuzForHunter;
+import com.jx.hunter.lvzhengpc.annotaion.CheckLogin;
+import com.jx.hunter.lvzhengpc.common.CommonUtils;
+import com.jx.hunter.lvzhengpc.common.LocationPage;
+import com.jx.hunter.lvzhengpc.frame.RSBLL;
+
+/***
+ * 订单操作controller
+ * @author duxiaofei
+ * @date   2016年3月22日
+ */
+@Path("/order")
+@CheckLogin
+public class OrderInfoController extends BaseController{
+//	private static List<String> productCode = new ArrayList<String>();
+//	static{
+//		productCode.add("GS-001001-238292");
+//		productCode.add("GS-001003-952112");
+//		productCode.add("BG-001001-367499");
+//		productCode.add("BG-001001-542812");
+//		productCode.add("CS-001001-207671");
+//		productCode.add("CS-001001-978728");
+//		productCode.add("ZS-001001-134872");
+//	}
+
+	@Path("/index/{sellid:\\d+}.html")
+	public ActionResult gotoIndex(long sellid){
+		Model model = beat().getModel();
+		Map<String,Object> sellProductMap = null ;//new HashMap<String, String>();
+		try {
+			LvzSellProductEntity sellProductEntity = RSBLL.getstance().getLvzSellProductService().getSellProductEntityById(sellid);
+			sellProductMap = BeanUtils.describe(sellProductEntity);
+			Map<String,Object> map = new HashMap<String, Object>();
+			BFAreasEntity aeasEntity = RSBLL.getstance().getCityService().getAeasEntityById(sellProductEntity.getArea_id());
+			if(aeasEntity != null){
+				map.put("aeasname", aeasEntity.getName());
+				map.put("aeasid", aeasEntity.getAreaid());
+				BFAreasEntity cityEntity = RSBLL.getstance().getCityService().getAeasEntityById(Long.valueOf(aeasEntity.getParentid()));
+				map.put("cityname", cityEntity.getName());
+				map.put("cityid", cityEntity.getAreaid());
+			}
+			sellProductMap.put("queryData", "true");
+			sellProductMap.putAll(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(null != sellProductMap && !sellProductMap.isEmpty()){
+			model.add("sellProductMap", sellProductMap);
+		}
+		//转到的页面路径
+		model.add("LocationPage", new LocationPage("order/order","index"));
+		return view("/index");
+	}
+	public static final int channel = 1;  //官网
+	/***
+	 * 提交订单
+	 * @param sellids
+	 * @return
+	 */
+	@Path("/submitOrder")
+	public ActionResult submitOrder(){
+		Model model = beat().getModel();
+		String sellids = request().getParameter("sellids")==null?"":request().getParameter("sellids");  //定价条目ids
+		if(StringUtils.isBlank(sellids)){
+			System.out.println("商品id为空!");
+			return redirect("/menu");
+		}
+		
+		//获取登录用户id
+		long userid = CommonUtils.getLoginuserid(beat());
+		//调用下订单
+		Map<String, Object> orderPlace = OrderBuzForHunter.obfhunter.orderPlace(sellids, userid, "", channel);
+//		//售前分派订单
+//		if(orderPlace.containsKey("before")){
+//			List<Long> pidlist =(List<Long>) orderPlace.get("before");
+//			AssignmentOrderBuz.assignment.AssignmentStrategyByList(pidlist);
+//		}
+		if(null != orderPlace && !orderPlace.isEmpty()){
+			Long pid = (Long) orderPlace.get("after");
+			String url = "http://pay.lvzheng.com/reqpay/"+pid;
+			return redirect(url);
+//			//after售后 before售前
+//			if(orderPlace.containsKey("after") && orderPlace.containsKey("before")){
+//				Long pid = (Long) orderPlace.get("after");
+//				List<Long> pidlist =(List<Long>) orderPlace.get("before");
+//				String sb_pid = getPids(pidlist);
+//				String url = "http://pay.lvzheng.com/reqpay/"+pid+"?";
+//				if("".equals(sb_pid)){
+//					url += "beforePids="+sb_pid;
+//				}
+//				return redirect(url);
+//			}else if(orderPlace.containsKey("after")){
+//				Long pid = (Long) orderPlace.get("after");
+//				String url = "http://pay.lvzheng.com/reqpay/"+pid;
+//				return redirect(url);
+//			}else if(orderPlace.containsKey("before")){ //只为售前商品不跳转到支付只在本系统中展示结果页面即可
+//				model.add("LocationPage", new LocationPage("pay/beforePaySucc", "index"));
+//				return view("/index");
+//			}
+		}
+		//如果有问题跳转到首页 应跳转到错误页面
+		return redirect("/menu");
+	}
+	
+	public String getPids(List<Long> pidlist){
+		StringBuffer sb_pid = new StringBuffer();
+		if(null != pidlist && !pidlist.isEmpty()){
+			for(Long tempPid : pidlist){
+				if("".equals(sb_pid)){
+					sb_pid.append(tempPid);
+				}else{
+					sb_pid.append(",").append(tempPid);
+				}
+			}
+		}
+		return sb_pid.toString();
+	}
+	
+//	/**
+//	 * 确认付款页面
+//	 * @return
+//	 */
+//	@Path("")
+//	public ActionResult confirmPayment(){
+//		
+//		return view("index");
+//	}
+}

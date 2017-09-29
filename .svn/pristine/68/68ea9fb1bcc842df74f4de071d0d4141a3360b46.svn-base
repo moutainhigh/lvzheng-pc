@@ -1,0 +1,266 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>小微律政-国内领先的O2O自营法律服务提供商</title>
+<meta name="description" content="注册公司找小微律政,小微律政拥有专业的律师和会计团队,小微律政专注为创业公司及中小微企业提供代办公司注册,商标注册,代理记账,社保公积金开户,公司变更,合同拟定,公司章程等一站式企业服务，小微律政服务流程每一步都无微不至。">
+<meta name="keywords" content="小微律政,代办注册公司,公司注册,商标注册费用和流程" />
+<link href="news/css/index.css" type="text/css"  rel="stylesheet"/>
+<link href="news/css/box.css" type="text/css"  rel="stylesheet"/>
+<script type="text/javascript" src="news/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="news/js/box.js"></script> 
+<script>
+$(function(){
+    // 选择支付方式
+    $(".type-box li").each(function(){
+        $(this).click(function(){
+            $(".type-box li").addClass("b-box").removeClass("checked");
+            $(this).addClass("checked").removeClass("b-box");
+        })
+    });
+
+    $('a.more').bind('click', function () { 
+        var txt = $('a.more').text(); 
+        if (txt == '订单明细') { 
+            $('#morediv').show(); 
+            $('a.more').text('收起详情').addClass('top-arr').removeClass('bot-arr'); 
+        } else { 
+            $('#morediv').hide(); 
+            $('a.more').text('订单明细').removeClass('top-arr').addClass('bot-arr'); 
+        } 
+    }) 
+});
+</script>
+</head>
+<body>
+<div id="continer">
+	<!-- 顶部信息条 -->
+    <div class="top-box">
+        <div class="box-con">
+            <div class="left-box">
+                <span class="item"><a href="">欢迎，18277711222</a></span>
+                <span class="item"><a href="">退出</a></span>
+                <span class="phone"><a href="">手机访问小微<b class="v-phone" ><img src="news/images/index/ewm.png" ></b></a></span>
+            </div>
+            <div class="right-box">
+                <span class="item"><a href="">我的小微</a></span>
+                <span class="item"><a href="">消息<i>3</i></a></span>
+                <span class="item"><a href="">我的订单</a></span>
+                <span class="call-on"><a href="">010-84463639</a></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- logo区域 -->
+    <div class="logo-box">
+        <a href="" class="logo"></a>
+        <span class="order-info">订单信息</span>
+        <div class="flow-box">
+            <a href="" class="over">
+                <span class="num">1</span>
+                <span class="name">1.购买商品</span>
+            </a>
+            <a href="" class="over">
+                <span class="num">2</span>
+                <span class="name">2.提交订单</span>
+            </a>
+            <a href="" class="on">
+                <span class="num">3</span>
+                <span class="name">3.支付到小微</span>
+            </a>
+            <a href="" class="un">
+                <span class="num">4</span>
+                <span class="name">4.开始小微服务</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- 订单详情 -->
+    <div class="order-box">
+        <!-- 购买的商品 -->
+        <div class="buy-pro">
+            <p class="pay-title">订单提交成功，请尽快付款<span>应付金额：<a>￥900</a></span></p>
+            <p class="zk-btn"><a class="more bot-arr">订单明细</a></p>
+            <div class="tab" id="morediv">
+                <table>
+                    <tr>
+                        <th width="25%">商品</th>
+                        <th width="20%">区域</th>
+                        <th width="15%">城市</th>
+                        <th width="15%">数量</th>
+                        <th width="15%">价格</th>
+                    </tr>
+                    <tr>
+                        <td>工商注册</td>
+                        <td>北京</td>
+                        <td>朝阳</td>
+                        <td>1</td>
+                        <td><span class="price">¥598.00</span></td>
+                    </tr>
+                    <tr>
+                        <td>国税报到</td>
+                        <td>北京</td>
+                        <td>朝阳</td>
+                        <td>1</td>
+                        <td><span class="price">¥598.00</span></td>
+                    </tr>
+                    <tr>
+                        <td>银行开户</td>
+                        <td>北京</td>
+                        <td>朝阳</td>
+                        <td>1</td>
+                        <td><span class="price">¥598.00</span></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="pay-type">
+            <p class="type-title">选择支付方式</p>
+            <div class="type-box">
+                <div class="list">
+                    <p class="pt">支付平台</p>
+                    <div class="type-list">
+                        <ul>
+                            <li class="b-box"><img src="news/images/pay/type/zfb.png"></li>
+                            <li class="b-box"><img src="news/images/pay/type/wx.png"></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="list">
+                    <p class="pt">储蓄卡</p>
+                    <div class="type-list">
+                        <ul>
+                            <li class="b-box"><img src="news/images/pay/type/gsyh.png"></li>
+                            <li class="b-box"><img src="news/images/pay/type/jsyh.png"></li>
+                            <li class="b-box"><img src="news/images/pay/type/zsyh.png"></li>
+                            <li class="b-box"><img src="news/images/pay/type/nyyh.png"></li>
+                            <li class="b-box"><img src="news/images/pay/type/jtyh.png"></li>
+                            <li class="b-box"><img src="news/images/pay/type/gfyh.png"></li>
+                            <li class="b-box"><img src="news/images/pay/type/zgyh.png"></li>
+                            <li class="b-box"><img src="news/images/pay/type/msyh.png"></li>
+                            <li class="b-box"><img src="news/images/pay/type/hxyh.png"></li>
+                            <li class="b-box"><img src="news/images/pay/type/xyyh.png"></li>
+                            <li class="b-box"><img src="news/images/pay/type/gdyh.png"></li>
+                            <li class="b-box"><img src="news/images/pay/type/yzyh.png"></li>
+                            <li class="b-box"><img src="news/images/pay/type/zxyh.png"></li>
+                            <li class="b-box"><img src="news/images/pay/type/shyh.png"></li>
+                            <li class="b-box"><img src="news/images/pay/type/pfyh.png"></li>
+                            <li class="b-box"><img src="news/images/pay/type/bjyh.png"></li>
+                            <li class="b-box"><img src="news/images/pay/type/shnsyh.png"></li>
+                            <li class="b-box"><img src="news/images/pay/type/wzyh.png"></li>
+                            <li class="b-box"><img src="news/images/pay/type/jsuyh.png"></li>
+                            <li class="b-box"><img src="news/images/pay/type/cdyh.png"></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="btn-box">
+            <a href="" class="btn pop_box1">确认付款</a>
+        </div>
+    </div>
+    
+    <!-- 请付款 弹出框 -->
+    <div class="cd-popup cd-box1" role="alert"> 
+        <div class="cd-popup-container p-pay-box">
+            <div class="p-pay">
+                <h4>请付款</h4>
+                <p class="pay_tx">请您在新打开的页面上完成付款</p>
+                <ul class="pay_c">
+                    <li>付款完成前请不要关闭此窗口</li>
+                    <li>完成付款后请根据您的情况点击下面的按钮</li>
+                </ul>
+                <div class="pay_btn">
+                    <a class="padding_r">已完成付款</a>
+                    <a>付款遇到问题</a>
+                </div>
+                <p class="pay_back"> <a>>> 返回选择其他支付方式</a></p>
+            </div> 
+            <a href="#" class="cd-popup-close img-replace">关闭</a>
+        </div>
+    </div> 
+    <!-- 弹出框 -->      
+
+
+    <!-- 网站底部 -->
+    <div class="bot-main">
+        <!-- 友情连接 -->
+        <div class="link-main">
+            <div class="link-box">
+                <div class="list">
+                    <label>热门服务：</label>
+                    <div class="con">
+                        <ul>
+                            <li><a href="">北京公司注册</a></li>
+                            <li><a href="">北京公司变更</a></li>
+                            <li><a href="">北京公司记账</a></li>
+                            <li><a href="">北京鲜花绿植</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="list">
+                    <label>友情链接：</label>
+                    <div class="con">
+                        <ul>
+                            <li><a href="">中国艺术设计联盟</a></li>
+                            <li><a href="">中电云集</a></li>
+                            <li><a href="">搜狗网址导航</a></li>
+                            <li><a href="">蜂鸟网</a></li>
+                            <li><a href="">中国艺术设计联盟</a></li>
+                            <li><a href="">搜狗网址导航</a></li>
+                            <li><a href="">中国艺术设计联盟</a></li>
+                            <li><a href="">中国艺术设计联盟</a></li>
+                            <li><a href="">搜狗网址导航</a></li>
+                            <li><a href="">更多</a></li>
+                        </ul>
+                    </div>
+                </div>                                         
+            </div>
+        </div>
+        
+        <!-- 底部宣传 -->
+        <div class="bot-ad">
+            <div class="ad-box">
+                <ul>
+                    <li class="ad-box1">
+                        <p class="t1">价格透明</p>
+                        <p class="t2">众创计划创业者半年免费</p>
+                    </li>
+                    <li class="ad-box2">
+                        <p class="t1">价格透明</p>
+                        <p class="t2">众创计划创业者半年免费</p>
+                    </li>
+                    <li class="ad-box3">
+                        <p class="t1">价格透明</p>
+                        <p class="t2">众创计划创业者半年免费</p>
+                    </li>
+                    <li class="ad-box4">
+                        <p class="t1">价格透明</p>
+                        <p class="t2">众创计划创业者半年免费</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="bot-bg">
+            <div class="bot-box">
+                <div class="map">
+                    <a href="">关于我们</a>
+                    <a href="">人才招聘</a>
+                    <a href="">网站地图</a>
+                    <a href="">常见问题</a>
+                    <a href="">加盟合作</a>
+                </div> 
+                <div class="text">©lvzheng.com 2014-2016 京ICP备15002212号-1</div> 
+                <div class="text">北京佶象信息技术有限公司</div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</body>
+
+</html>

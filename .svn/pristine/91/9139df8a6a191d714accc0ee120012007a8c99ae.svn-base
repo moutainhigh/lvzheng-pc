@@ -1,0 +1,145 @@
+@charset "utf-8";
+*{padding:0;margin:0;}
+body{padding:0;margin:0;font-size:12px;font-family:"微软雅黑";color: #333;background:#fff;}
+img{border:none;}
+a{text-decoration:none;cursor:pointer;color:#666;}
+a:hover,a:hover {text-decoration:none;color:#55acee;}
+input{color: #777;outline: none;}
+ul{padding:0;margin:0;list-style:none;}
+li,p{padding:0;margin:0;}
+.clear{clear:both;}
+::-webkit-input-placeholder { /* WebKit browsers */color: #ccc;}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */color: #ccc;}
+::-moz-placeholder { /* Mozilla Firefox 19+ */color: #ccc;}
+:-ms-input-placeholder { /* Internet Explorer 10+ */color: #ccc;}
+
+.book-box{width: 100%;min-height: 1500px; padding-bottom: 100px; background:  url('/images/book/banner.jpg')  no-repeat center top;overflow: hidden;}
+.book-box .banner{width: 1100px;height: 420px;margin: 0 auto;position: relative;}
+.book-box .banner .btag1{width: 920px;height: 140px;background: url('/images/book/tag1.png')  no-repeat center;position: absolute;top: 60px;left: 90px}
+.book-box .banner .btag2{width: 920px;height: 190px;background: url('/images/book/tag2.png')  no-repeat center;position: absolute;top: 230px;left: 90px}
+.book-box .banner .bbtn{width: 174px;height: 56px;background: url('/images/book/bbtn.png')  no-repeat center;position: absolute;top: 270px;left: 490px}
+.book-box .banner .btel{width: 282px;height: 53px;background: url('/images/book/btel.png')  no-repeat center;position: absolute;top: 0px;right: 0px}
+
+.book-box .md-hover{height: 1px}
+
+.book-box .main-box{width: 1100px; min-height: 1000px; margin: 0 auto}
+.book-box .bserbox{width: 790px;height: 400px;background: #f7f7f7 url('/images/book/bserbg.png')  no-repeat center bottom;position: relative;margin-bottom: 10px;}
+.book-box .bserbox .name{width: 400px;height: 45px;background: url('/images/book/sername.png')  no-repeat center;position: absolute;top: 30px;left: 50px;}
+.book-box .bserbox .fwbox ul{overflow: hidden;width: 620px;min-height: 100px;padding-left: 60px}
+.book-box .bserbox .jcfw {position: absolute;top: 110px;left: 50px}
+.book-box .bserbox .jcfw .tag{position: absolute;width: 34px;text-align: center;height: 80px;padding: 2px 0 18px; margin-top: 5px; line-height: 20px;font-size: 18px; font-weight: bold; color: #fff;background: url('/images/book/stag1.png')  no-repeat center;}
+.book-box .bserbox .jcfw ul li{float: left;min-width: 50px;text-align: center;padding: 0 10px; background: #ecf1f8;  font-size: 15px;color: #000; height: 30px;line-height: 30px;border: 2px solid #d4dfef;border-radius: 8px;margin: 5px 8px}
+.book-box .bserbox .jcfw ul li:hover{float: left;min-width: 50px;text-align: center;padding: 0 10px; background: #D8E1F0; font-size: 15px;color: #000; height: 30px;line-height: 30px;border: 2px solid #d4dfef;border-radius: 8px;margin: 5px 8px}
+.book-box .bserbox .jcfw ul li label{display: inline-block;padding-right: 5px;}
+.book-box .bserbox .zsfw {position: absolute;top: 275px;left: 50px}
+.book-box .bserbox .zsfw .tag{position: absolute;width: 34px;text-align: center;height: 80px;padding: 2px 0 18px; margin-top: 5px; line-height: 20px;font-size: 18px; font-weight: bold; color: #fff;background: url('/images/book/stag2.png')  no-repeat center;}
+.book-box .bserbox .zsfw ul li{float: left;min-width: 50px;text-align: center;padding: 0 10px; background: #ecf1f8;  font-size: 15px;color: #8e6338; height: 30px;line-height: 30px;border: 2px solid #d4dfef;border-radius: 8px;margin: 5px 8px}
+.book-box .bserbox .zsfw ul li:hover{float: left;min-width: 50px;text-align: center;padding: 0 10px; background: #D8E1F0;  font-size: 15px;color: #8e6338; height: 30px;line-height: 30px;border: 2px solid #d4dfef;border-radius: 8px;margin: 5px 8px}
+.book-box .bserbox .zsfw ul li label{display: inline-block;padding-right: 5px;color: #e60f47}
+
+.book-box .serflow{width: 790px;height: 390px;margin-bottom: 10px;}
+
+.book-box .zbbox{width: 790px;height: 390px;margin-bottom: 10px;position: relative;background: url('/images/book/zbbg.jpg')  no-repeat center;}
+.book-box .zbbox .text-box{width: 540px;min-height: 130px;position: absolute;left: 130px;top: 160px;}
+.book-box .zbbox .text-box .text{font-size: 16px;color: #425e85;height: 20px;line-height: 20px;padding: 5px 0}
+
+.book-box .feebox{width: 790px;height: 390px;margin-bottom: 10px;position: relative;background: url('/images/book/feebg.jpg')  no-repeat center;}
+.book-box .feebox .text{font-size: 18px;color: #425e85;height: 20px;line-height: 20px;position: absolute;top: 120px;left: 210px}
+.book-box .feebox .n1{height: 30px; line-height: 30px; width: 80px;text-align: center; font-size: 16px;color: #fff;position: absolute;top: 185px;left: 215px;}
+.book-box .feebox .p1{height: 30px; line-height: 30px; width: 120px;text-align: center; font-size: 16px;color: #3f6190;position: absolute;top: 185px;left: 295px;}
+.book-box .feebox .n2{height: 30px; line-height: 30px; width: 120px;text-align: center; font-size: 16px;color: #fff;position: absolute;top: 185px;left: 440px;}
+.book-box .feebox .p2{height: 30px; line-height: 30px; width: 120px;text-align: center; font-size: 16px;color: #3f6190;position: absolute;top: 185px;left: 570px;}
+.book-box .feebox .n3{height: 30px; line-height: 30px; width: 120px;text-align: center; font-size: 16px;color: #fff;position: absolute;top: 237px;left: 210px;}
+.book-box .feebox .p3{height: 30px; line-height: 30px; width: 120px;text-align: center; font-size: 16px;color: #3f6190;position: absolute;top: 237px;left: 350px;}
+.book-box .feebox .n4{height: 30px; line-height: 30px; width: 120px;text-align: center; font-size: 16px;color: #fff;position: absolute;top: 237px;left: 490px;}
+.book-box .feebox .p4{height: 30px; line-height: 30px; width: 120px;text-align: center; font-size: 16px;color: #3f6190;position: absolute;top: 237px;left: 620px;}
+.book-box .feebox .n5{height: 30px; line-height: 30px; width: 120px;text-align: center; font-size: 16px;color: #fff;position: absolute;top: 292px;left: 210px;}
+.book-box .feebox .p5{height: 30px; line-height: 30px; width: 120px;text-align: center; font-size: 16px;color: #3f6190;position: absolute;top: 292px;left: 340px;}
+
+.book-box .needbox{width: 790px;height: 390px;margin-bottom: 10px;position: relative;background: url('/images/book/needbg.jpg')  no-repeat center;}
+.book-box .needbox p{font-size: 14px;color: #fff;height: 40px;line-height: 20px;width: 130px; padding: 140px 10px 0 10px; text-align: center;background: url('/images/book/needoff.png')  no-repeat center top 10px;}
+.book-box .needbox p:hover{font-size: 14px;color: #fff;height: 40px;line-height: 20px;width: 130px; padding: 140px 10px 0 10px; text-align: center;background: url('/images/book/needon.png')  no-repeat center top;}
+.book-box .needbox p a.zxbtn{font-size: 16px;color: #fff; width: 90px;text-align: center;height: 35px;line-height: 35px; background: #FF2F37;border-radius: 4px;cursor: pointer;display: block;position: absolute;top: 50px;left: 30px;display: none;}
+.book-box .needbox p.t1{position: absolute;top: 160px;left: 25px}
+.book-box .needbox p.t1:hover span.ico1{display: none;}
+.book-box .needbox p.t1:hover a.zxbtn{display: block;}
+.book-box .needbox p.t1 span.ico1{display: block;width: 130px;height: 130px;position: absolute; top: 0px; background: url('/images/book/ico1.png')  no-repeat center;}
+.book-box .needbox p.t2{position: absolute;top: 160px;left: 180px}
+.book-box .needbox p.t2:hover span.ico2{display: none;}
+.book-box .needbox p.t2:hover a.zxbtn{display: block;}
+.book-box .needbox p.t2 span.ico2{display: block;width: 130px;height: 130px;position: absolute; top: 0px; background: url('/images/book/ico2.png')  no-repeat center;}
+.book-box .needbox p.t3{position: absolute;top: 160px;left: 330px}
+.book-box .needbox p.t3:hover span.ico3{display: none;}
+.book-box .needbox p.t3:hover a.zxbtn{display: block;}
+.book-box .needbox p.t3 span.ico3{display: block;width: 130px;height: 130px;position: absolute; top: 0px; background: url('/images/book/ico3.png')  no-repeat center;}
+.book-box .needbox p.t4{position: absolute;top: 160px;left: 480px}
+.book-box .needbox p.t4:hover span.ico4{display: none;}
+.book-box .needbox p.t4:hover a.zxbtn{display: block;}
+.book-box .needbox p.t4 span.ico4{display: block;width: 130px;height: 130px;position: absolute; top: 0px; background: url('/images/book/ico4.png')  no-repeat center;}
+.book-box .needbox p.t5{position: absolute;top: 160px;left: 630px}
+.book-box .needbox p.t5:hover span.ico5{display: none;}
+.book-box .needbox p.t5:hover a.zxbtn{display: block;}
+.book-box .needbox p.t5 span.ico5{display: block;width: 130px;height: 130px;position: absolute; top: 0px; background: url('/images/book/ico5.png')  no-repeat center;}
+
+.book-box .bzbox{width: 790px;height: 110px;background: url('/images/book/serbz.jpg')  no-repeat center;}
+
+.book-box .left-box{width: 788px;min-height: 1000px;margin-right: 12px;float: left;}
+.book-box .left-box .cp-box{width: 788px;min-height: 200px;}
+.book-box .left-box .cp-box .sbox{min-height: 180px;padding: 15px 20px 20px 90px;background: #f1f6fc;position: relative;margin-top: 5px;margin-bottom: 10px}
+.book-box .left-box .cp-box .sbox p.num{font-size: 18px;width: 54px; height: 70px;line-height: 55px; font-size: 36px;color: #fff; text-align: center; background: url('/images/book/numbg.png')  no-repeat center;position: absolute;top: -5px;left: 20px}
+.book-box .left-box .cp-box .sbox p.name{font-size: 18px;color: #ee1a1a;font-weight: bold;height: 30px;line-height: 30px}
+.book-box .left-box .cp-box .sbox p.text{font-size: 14px;color: #222;min-height: 20px;line-height: 20px;padding: 5px 0 20px}
+.book-box .left-box .cp-box .sbox p.list{width: 200px; height: 60px; text-align: center; font-size: 18px;color: #ee363a; padding: 20px 10px;line-height: 30px;border: 1px solid #ff2b2b;float: left;}
+.book-box .left-box .cp-box .sbox p.list span{display: inline-block;font-size: 16px}
+.book-box .left-box .cp-box .sbox .cp-pic{}
+
+.book-box .main-box .right-box{width: 300px;  min-height: 1000px;float: left;}
+.book-box .right-box .zx-box{width: 300px;background: #fff;margin-bottom: 15px;border: 1px solid #eeeeee}
+.book-box .right-box .zx-box .titlebox{height: 35px;line-height: 35px;border-bottom: 1px solid #e5e5e5}
+.book-box .right-box .zx-box .titlebox .title{font-size: 16px; display: inline-block; margin-left: 15px; color: #000;padding: 0 5px;border-bottom: 1px solid #6083b3}
+.book-box .right-box .zx-box .conbox{padding: 5px 15px;}
+.book-box .right-box .zx-box .conbox .text{font-size: 14px;color: #000;line-height: 20px;padding: 5px 0}
+.book-box .right-box .zx-box .conbox .w-text{padding: 8px 0}
+.book-box .right-box .zx-box .conbox .w-text input{width: 238px;padding: 0 10px;height: 35px;line-height: 35px;font-size: 14px;color: #000;border: 1px solid #dddddd;background: #f7f7f7;border-radius: 5px}
+.book-box .right-box .zx-box .conbox a.tbtn{display: block;width: 260px; text-align: center; height: 40px;line-height: 40px;font-size: 18px;color: #fff;background: #eb3639;margin: 5px 0 10px}
+.book-box .right-box .tel-box {height: 50px;line-height: 50px; text-align: center; background: #f8f8f8;margin-bottom: 15px;border: 1px solid #eeeeee}
+.book-box .right-box .tel-box .tel{font-size: 18px; display: inline-block; color: #222;padding-left: 35px;background: url('/images/book/tel_ico.png')  no-repeat center left;}
+.book-box .right-box .tel-box .tel span{color: #ed363a}
+.book-box .right-fixed{position: fixed;top: 0px}
+
+.book-box .conbox .hot-tab {width: 270px; height: 25px; border-bottom: 1px solid #6083b3;margin-top: 10px}
+.book-box .conbox .hot-tab li a {display:block; height: 25px;line-height: 25px; width:75px;text-align:center;font-size:14px; color: #666; float: left; cursor:pointer;}
+.book-box .conbox .hot-tab li.current a {background:#6083b3;color:#fff;font-weight: 800;border-radius: 3px}
+
+.book-box .conbox .hot-con{padding: 5px 0;min-height: 200px;width: 270px; }
+.book-box .conbox .hot-con .sublist .list .hname{font-size: 14px;color: #000;min-height: 20px;line-height: 20px; margin: 8px 0; cursor: pointer; padding: 0 0 0 15px;background: url('/images/book/dot.png')  no-repeat left top;}
+.book-box .conbox .hot-con .sublist .list:hover .hname{color: #ee3332}
+/*.book-box .conbox .hot-con .sublist .list:hover .ans{display: block;}*/
+.book-box .conbox .hot-con .sublist .list .ans{padding: 3px 8px; width: 250px; border: 1px solid #ecbc88; position: relative; border-radius: 4px;display: none;background: #fffdef;font-size: 14px;color: #666;}
+.book-box .conbox .hot-con .sublist .list .ts-arr{display: block; width: 15px;height: 7px;background: url('/images/book/ts_arr.png')  no-repeat center;position: absolute;top: -7px;left: 30px}
+
+
+.book-box .bot-box{width: 100%;height: 40px; line-height: 40px; background: #182834;padding: 10px 0;display: none;}
+.book-box .bot-boxxf{position: fixed;bottom: 0px;display: block;}
+.book-box .bot-box .tel-box{width: 800px;margin: 0 auto}
+.book-box .bot-box .tel-box .tel{font-size: 24px;color: #ec373a;padding-left: 30px;background: url('/images/book/tel_ico.png')  no-repeat center left;float: left;}
+.book-box .bot-box .tel-box .item{float: left; width: 440px; margin-left: 30px}
+.book-box .bot-box .tel-box .item input.w-text{width: 270px;height: 40px; line-height: 40px; background: #fff;padding: 0 10px;border: none;float: left;font-size: 16px;color: #333}
+.book-box .bot-box .tel-box .item a.btn{width: 150px;text-align: center;height: 40px;line-height: 40px;font-size: 20px;color: #fff;background: #ec373a;display: block;float: left;}
+
+/*左侧描点 浮动导航*/
+.book-box .bklist-nav{width: 60px;min-height: 55px; position: absolute; top: 20px; left: -100px; }
+.book-box .bklist-nav .spnav{width: 60px;margin: 0 auto;}
+.book-box .bklist-nav .spnav ul{}
+.book-box .bklist-nav .spnav ul li a{width: 60px;height: 40px; text-align: center; margin: 10px; line-height: 20px;padding: 10px 0; font-size: 12px;color: #222; display: block;background: #f7f7f7;border-radius: 50%}
+.book-box .bklist-nav .spnav ul li a:hover{cursor: pointer;color: #fff;background: #ed363a}
+.book-box .bklist-nav .spnav ul li a.cur{background: #ed363a; color: #fff; width: 70px;height: 50px;  line-height: 25px;padding: 10px 0; margin: 5px;  font-size: 16px; display: block;border-radius: 50%}
+.book-box .bklist-navxf { position: fixed; top: 20px; left: 50%; margin-left: -650px; z-index: 9000; display: block;}
+.book-box .main-bklist{position: relative;}
+
+
+/*弹层*/
+#submit-box{margin-top: 10%;width: 420px;min-height: 100px;padding: 50px 0}
+#submit-box .submit{width: 260px;padding-left: 75px;margin: 0 auto;background: url('/images/book/c_ico.png')  no-repeat center left;}
+#submit-box .submit p.name{font-size: 18px;height: 40px;line-height: 40px;color: #000}
+#submit-box .submit p.text{font-size: 14px;min-height: 20px;line-height: 20px;color: #666}

@@ -1,0 +1,63 @@
+<link src="http://static.lvzheng.com/lvzhengpc/css/index.css" type="text/css"  rel="stylesheet"/>
+<script type="text/javascript" src="http://static.lvzheng.com/lvzhengpc/js/jquery-1.7.2.min.js"></script>
+<script src="http://static.lvzheng.com/lvzhengpc/js/jquery.jquery.tabs.js"></script>
+<script type="text/javascript" src="http://static.lvzheng.com/lvzhengpc/js/return-top.js"></script>
+<script>
+$(function(){
+    // 左导航切换显示
+    $(".left-nav dd").hover(function(){
+        $(".nav-right",this).show();
+    });
+    $(".left-nav dd").mouseleave(function(){
+        $(".nav-right",this).hide();
+    });
+});
+</script>
+</head>
+
+<body>
+<div id="continer">
+    <!-- 顶部信息条 -->
+   <!-- logo区域 -->
+    #parse("views/common/logo_normal.html")
+
+
+    <!-- 导航 -->
+     #parse("views/common/navigation.html")
+	<div class="xwabout">
+		<div class="bleft">
+			#parse("views/common/aboutmanu.html")
+		</div>
+		<div class="bright">
+			<div class="about-content">
+				<div class="about-banner"><img src="/images/about/join_banner.jpg" width="720" height="210" /></div>
+					<div class="join-info">
+						<p>小微是什么？是品牌？是机构？是代理？还是一个或有或无的服务？</p>
+						<p>不！我想说，小微不是你们想象的这个样子！它应该是一个朋友，分担你的喜怒哀乐；更是一个值得信赖的创业伙伴，承担你创业路途中的坎坷艰辛！</p>
+						<p>（通俗版——小微律政是一家自营O2O法律电商平台，是目前最专业的也是发展最快的新型互联网企业，我们为创业者、小微企业提供最好的一站式法律服务，让创业变得更简单、更高效、更安全！）</p>
+						<p>如果你已经厌烦了整日枯燥的重复性的工作；如果你也在愤愤不平这个并不能激发你欲望和潜力的工作；如果你也不甘平庸，力求改变；如果你才华横溢，少不得志，总苦恼找不到能促膝长谈人生理想的伙伴，如果.......</p>
+						<p>等等，你是否想，改变，现在的生活状态，或者，重拾你的创业梦想？</p>
+						<p>更甚是，你可以试着加入我们，然后，试着去改变它，也改变自己！请准备好你的简历和你的故事，当然，也可以有你的感悟，你的特长，你的女（男）朋友，先投来这里—— hr@lvzheng.com 。</p>
+						<p>只要我们有精力，我们会认真阅读每一份简历，然后，邀请你来这里喷喷理想，侃侃大牛，谈谈人生......总之，尽你所能！</p>
+						<p>当然，更实际一点——一份不错得（gao）薪（xin）水，各种补贴福利温尔儒雅的同事，知书达理的BOSS无限的发展空间，只要你能，我们就给！</p>
+						<p>我们有理由有信心让你相信，这样的团队，因为有你，而变得更加弥足珍贵！</p>
+					</div>
+			</div>
+		</div>
+		<div class="job">
+			<p>小微热门招聘职位</p>
+			<ul>
+				<a target="_blank" href="http://www.lagou.com/gongsi/42704.html"><li><img src="/images/about/lagou.png"></li></a>
+				<a target="_blank" href="http://www.jobtong.com/e/8683"><li><img src="/images/about/tong.png"></li></a>
+				<a target="_blank" href="http://company.zhaopin.com/CC227382538.htm"><li><img src="/images/about/zhilian.png"></li></a>
+			</ul>
+		</div>
+	</div>
+
+    <!-- 网站底部 -->
+    
+</div>
+
+</body>
+
+</html>

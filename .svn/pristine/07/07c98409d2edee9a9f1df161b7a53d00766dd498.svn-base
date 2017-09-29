@@ -1,0 +1,715 @@
+<link href="/css/index.css" type="text/css"  rel="stylesheet"/>
+
+<script>
+$(function(){
+	//新加的悬浮代码
+	$(window).scroll(function(){
+        var a=parseInt($(window).scrollTop());
+        if(a>800){
+            $(".wdhot").addClass("wdhot-fixed")
+        }
+        if(a<800){
+            $(".wdhot").removeClass("wdhot-fixed")
+        }
+    });
+	
+	
+	//根据后台的参数选中相关内容
+	var cityid = "$!{cityid}";
+	var productid = "$!{productid}";
+	var areaid = "$!{areaid}";
+	if(productid){
+		$("#J_prod_ul").find("li").each(function(){
+			var pid = $(this).attr("oid");
+			if(productid == pid){
+				$(this).attr("class","checked");
+			}else{
+				$(this).attr("class","b-box hide");
+			}
+		})
+	}
+	
+	/*各类评分总记录数*/
+	getAllCountByEvaluationScope();
+	
+    $(".hot-tab").tabso({
+        cntSelect:".hot-con",
+        tabEvent:"click",
+        tabStyle:"normal"
+    });
+
+    
+    
+    
+ // 区域城市
+    $(".showbox").hover(function(){
+        $(".careabox").parent().addClass('hover')
+    });
+    $(".carea").mouseleave(function(){
+        $('.careabox').parent().removeClass('hover')
+    });
+    
+    //切换城市
+    $("#J_city_ul").find("li").each(function(){
+    	$(this).click(function(){
+    		var cityid = $(this).attr("oid");
+    		$("#J_cityid").val(cityid);
+    		
+    		$("#szbox").html("请选择")
+    		var pid = $("#J_pid").val();
+    		//ajax获取支持的区域
+    		 $.ajax({
+
+                url:"/commondetail/detail/queryCity",
+
+                type:"post",
+
+                data:{"pid":pid,"cityid":cityid},
+
+                success:function(data){
+
+                	$("#J_area_ul").empty().append(data);
+                	
+                	//绑定区域点击事件
+                	areaMethod();
+                	
+                	//展开标签
+		    		 $('#tab1').hide();
+		    	     $('#tab2').show();
+		    	     $(".xzcity").removeClass('active');
+		    	     $(".xzarea").addClass('active');
+                }
+
+            });
+             
+    		
+    	})
+    })
+    
+     //切换区域
+    areaMethod();
+    
+    /* $("ul.city li.bj").click(function(){
+        $('#tab1').hide();
+        $('#tab2').show();
+        $(".xzcity").removeClass('active');
+        $(".xzarea").addClass('active');
+    });
+    $("ul.city li.sz").click(function(){
+        $('#tab1').hide();
+        $('#tab2').hide();
+        $('#tab3').show();
+        $(".xzcity").removeClass('active');
+        $(".xzarea").addClass('active');
+    }); */
+    var cityval="";
+    $("#tab1 ul li").each(function(index){
+        $(this).click(function(){
+            cityval = $(this).html();
+            $("#bjbox").html(cityval)
+        });
+    });
+    var areaval="";
+    $(".tc-area ul li").each(function(index){
+        $(this).click(function(){
+            areaval = $(this).html();
+            $("#szbox").html(areaval)
+        });
+    });
+    $(".xzcity").click(function(){
+        $("#szbox").html("请选择")
+    });
+    // 区域城市
+    
+    
+    //热门问答-li选中
+    
+    $(".hot-tab").find("li").each(function(){
+    	$(this).click(function(){
+    		$(".hot-tab").find("li").removeClass("current");
+    		$(this).addClass("current");
+    	})
+    })
+    
+    // 左导航切换显示
+    $(".left-nav dd").hover(function(){
+        $(".nav-right",this).show();
+    });
+    $(".left-nav dd").mouseleave(function(){
+        $(".nav-right",this).hide();
+    });
+    $("dd a.hover").each(function(){
+        $(this).mousemove(function(){
+            $("dd a.hover").addClass("nav-left").removeClass("nav-on");
+            $(this).addClass("nav-on").removeClass("nav-left");
+        });
+    });
+
+    // 做菜单自适应
+    if($(".left-nav dd").length<=6){
+        $(".left-nav dd").addClass("dd6")
+    }else if($(".left-nav dd").length==7){
+        $(".left-nav dd").addClass("dd7")
+    }else if($(".left-nav dd").length==8){
+        $(".left-nav dd").addClass("dd8")  
+    };
+
+    // 选择商品
+    $(".c-sp li").each(function(){
+        $(this).click(function(){
+            $(".c-sp li").addClass("b-box").removeClass("checked");
+            $(this).addClass("checked").removeClass("b-box");
+            
+            //获取id
+            var pid = $(this).attr("oid");
+            $("#J_pid").val(pid);
+            var cid = $("#J_cityid").val();
+            var aid = $("#J_areaid").val();
+            
+            var myurl = "/commondetail/detail/"+pid+".html?cityid="+cid+"&areaid="+aid+"";
+            window.location.href = myurl;
+        })
+    });
+
+	 // 新评价模块js
+    $('.tab').tab();
+    
+    // 无忧套餐切换
+    $(".tc-con").hide(); 
+    $(".tc-tabs p:first").addClass("active").show(); 
+    $(".tc-con:first").show(); 
+    $(".tc-tabs p").click(function() {
+        $(".tc-tabs p").removeClass("active"); 
+        $(this).addClass("active"); 
+        $(".tc-con").hide(); 
+        var activeTab = $(this).find("a").attr("href"); 
+        $(activeTab).fadeIn(); 
+        return false;
+    });
+
+    // 中部menu
+    $(window).scroll(function(){
+        var top = $(document).scrollTop();          
+        var menu = $("#menu");                      
+        var items = $("#content").find(".md-hover"); 
+        var curId = "";                             
+        items.each(function(){
+            var m = $(this);                        
+            var itemsTop = m.offset().top;        
+            if(top > itemsTop-100){
+                curId = "#" + m.attr("id");
+            }else{
+                return false;
+            }
+        });
+
+        var curLink = menu.find(".cur");
+        if( curId && curLink.attr("href") != curId ){
+            curLink.removeClass("cur");
+            menu.find( "[href=" + curId + "]" ).addClass("cur");
+        }
+    });
+
+    // 图片上下滚动
+    var pic_length = $('.ullist li').length; 
+    var n = 0; 
+    $('#totop').click(function(){ 
+        if (!$('.ullist').is(':animated') && n) { 
+            $('.ullist').animate({top:'+=125px'},500); 
+            n--; 
+        } 
+    }); 
+    $('#tobot').click(function(){ 
+        if (!$('.ullist').is(':animated') && pic_length > n+3) { 
+            $('.ullist').animate({top:'-=125px'},500); 
+            n++; 
+        } 
+    }); 
+
+    // 听录音
+    $(".listen").click(function(){
+        $(this).hide();
+        $('.listened').show();
+    });
+
+    // 听录音
+    $(".osound li").click(function(){
+        if($(this).hasClass("sou-off")){
+            $(".osound li").addClass("sou-off").removeClass("sou-on");
+            $(this).addClass("sou-on").removeClass("sou-off");
+        }else{
+            $(this).addClass("sou-off").removeClass("sou-on");
+        }
+    });
+
+
+    // 问答展开
+    $('.hot-con .list').click(function(){
+        $(this).children('.ans').slideToggle().parents('.list').siblings('.list').children('.ans').hide();
+    });  
+
+    // 热门问答标题切换
+    $(".sub1 p.li").click(function(){
+        if($(this).hasClass("hname")){
+            $(".sub1 p.li").addClass("hname").removeClass("hname-on");
+            $(this).addClass("hname-on").removeClass("hname");
+        }else{
+            $(this).addClass("hname").removeClass("hname-on");
+        }
+    });
+
+    $(".sub2 p.li").click(function(){
+        if($(this).hasClass("hname")){
+            $(".sub2 p.li").addClass("hname").removeClass("hname-on");
+            $(this).addClass("hname-on").removeClass("hname");
+        }else{
+            $(this).addClass("hname").removeClass("hname-on");
+        }
+    });
+
+    $(".sub3 p.li").click(function(){
+        if($(this).hasClass("hname")){
+            $(".sub3 p.li").addClass("hname").removeClass("hname-on");
+            $(this).addClass("hname-on").removeClass("hname");
+        }else{
+            $(this).addClass("hname").removeClass("hname-on");
+        }
+    });
+
+
+
+});
+
+
+//新评价模块tab
+$.fn.tab=function (){
+    this.each(function (){
+      var oParent=$(this);
+      var aBtn=oParent.find('.md-hr-tab-lists li a');
+      
+      var aCont=oParent.find('.tab-conts-h');
+     
+      aBtn.click(function (){
+        aBtn.removeClass('active');
+        aCont.removeClass('show');
+        
+        $(this).addClass('active');
+        var index=$(this).index(".md-hr-tab-lists li a");
+        aCont.eq(index).addClass('show');
+        var scope = $(this).parent().attr('data-value');
+        loadCusEvaluation(scope);
+      });
+      
+      /*初始化客户评价*/
+  	$('.md-hr-tab-lists li:first').find('a').click();
+    });
+  };
+  
+  function loadCusEvaluation(scope){
+		//异步加载客户问答
+	    $.ajax({
+	    	url:"/cusEvaluation/getPageListCusEvalByPrdtId",
+	    	type:"post",
+	    	dataType:"html",
+	    	async:false,
+	    	data:{"productId":"$!{productid}","scope":scope},
+	    	success:function(data){
+	    		var aCont=$(document).find('.tab-conts-h');
+	    		var index = $(document).find('.md-hr-tab-lists li a.active').index('.md-hr-tab-lists li a');
+	    		aCont.eq(index).children().remove();
+	    		aCont.eq(index).append(data);
+	    		
+	    		//显示分数
+	    		$(".show-number li p").each(function(index, element) {
+	    		  var num=$(this).attr("tip");
+	    		  var www=num*2*9;
+	    		  $(this).css("width",www);
+	    		  $(this).parent(".star-Show").siblings("span").text(num);
+	    		});
+	    		
+	    		//显示分数2
+	    		$(".show-number2 li p").each(function(index, element) {
+	    		  var num=$(this).attr("tip");
+	    		  var www=num*2*6;
+	    		  $(this).css("width",www);
+	    		  $(this).parent(".star-Show2").siblings("span").text(num);
+	    		});
+	    	},
+	    	error:function(){
+	    		//alert("未响应");
+	    	}
+	    });
+	}
+
+  
+  function getAllCountByEvaluationScope(){
+		var scope = "";
+		$('.md-hr-tab-lists').find('li').each(function(i){
+			scope += $(this).attr("data-value") + "|";
+		});
+		
+		$.ajax({
+			url:"/commondetail/getAllCountByEvaluationScope",
+			type:"post",
+			dataType:"json",
+			data:{"scope":scope,"productid":"$!{productid}"},
+			success:function(data){
+				var sums = data['pingfenCountall'];
+				//替换2处总评价条数
+				$("#J_pj_num1").text(sums);
+				$("#J_pj_num2").text(sums);
+				$("#J_pj_num3").text(sums);
+				$('.md-hr-tab-lists').find('li').each(function(j){
+					var para = $(this).attr("data-count");
+					var num = data[para];
+					var html = $(this).find('a').html() + "("+num+")";
+					$(this).find('a').html(html);
+				});
+			},
+			error:function(){}
+		});
+	}
+  
+  
+  //切换区域
+  function areaMethod(){
+	  $("#J_area_ul").find("li").each(function(){
+	    	$(this).click(function(){
+	    		var areaid = $(this).attr("oid");
+	    		$("#J_areaid").val(areaid);
+	    		var pid = $("#J_pid").val();
+	    		var cityid =$("#J_cityid").val();
+	    		
+	    		 var myurl = "/commondetail/detail/"+pid+".html?cityid="+cityid+"&areaid="+areaid+"";
+	             window.location.href = myurl;
+	    	})
+	    })
+  }
+</script>
+
+<body id="other-nav">
+<div id="continer">
+
+ <!-- logo区域 -->
+    #parse("views/common/logo_normal.html")
+
+
+    <!-- 导航 -->
+     #parse("views/common/navigation.html")
+   
+    <!-- 商品详情 -->
+    <div class="sp-detail">
+        <div class="crumbs">
+            <a class="crumb-link" href="/">首页</a>
+            <i class="crumb-line">></i>
+            <a class="crumb-link" href="/navigation/index/$!{catModel.cate_id}.html">$!{catModel.cate_name}</a>
+            <i class="crumb-line">></i>
+            <a class="crumb-link" >$!{catModel2.cate_name}</a>
+            <i class="crumb-line">></i>
+            <a class="crumb-link" href="/commondetail/detail/$!{productid}.html">$!{pModel.product_name}</a>
+        </div>
+        <div class="new-detail">
+            <div class="head-box">
+                <div class="soundbox">
+                    
+                    #foreach($m in $!img)
+                   	 <img src="/file/download/$!{m}">
+                    #end
+                    <!-- <div class="listen"><p class="text">听听其他人的疑问会不会对您有些帮助呢</p></div>
+                    <div class="listened">
+                        <p class="text">听听其他人的疑问会不会对您有些帮助呢</p>
+                        <audio controls=true style="width:300px; height:30px;">
+                            <source src="/images/detail/music.mp3" />
+                            <source src="/images/detail/music.ogg" />
+                        </audio>
+                    </div> -->
+
+                    <div class="zxtel">咨询电话：010-57891402</div>
+                </div>
+                <input type="hidden" id="J_pid"     value="$!{productid}"/>
+	            <input type="hidden" id="J_pcode"   value="$!{productcode}"/>
+	            <input type="hidden" id="J_cityid"  value="$!{cityid}"/>
+	            <input type="hidden" id="J_areaid"  value="$!{areaid}"/>
+                <div class="ncenterbox">
+                    <p class="name">$!{pModel.product_name}</p>
+                    <p class="text">$!{info.tips}</p>
+                    <div class="price-box">
+                        <div class="price">
+                            <label class="name">促销价</label>
+                            <p class="xj" id="J_top_pri">￥$!{model.sell_overprice}</p>
+                            <p class="yj" id="J_top_mark_pri">￥$!{model.sell_markprice}</p>
+                            <!-- <p class="tag">满100减20</p>
+                            <p class="tag">满300减30</p> -->
+                            <p class="eval">累计评价<br><a href="#a2" id="J_pj_num1" style="color: #477aa9">512</a></p>
+                        </div>
+                      #if($!{packageSellList})
+                        <div class="tcbox" id="J_package_div">
+                            #parse("views/package/packageData.html")
+                            
+                        </div>
+                        #end
+                    </div>
+                    <div class="area-type">
+							<div class="area">
+								<label class="name">城市</label>
+								<div class="carea">
+
+									<div class="showbox">$!{cityname}$!{areaname}</div>
+									<div class="careabox">
+										<div class="spacer"></div>
+										<div class="con">
+
+											<div class="tc-tabs">
+												<p class="xzcity active">
+													<a href="#tab1" id="bjbox">$!{cityname}</a>
+												</p>
+												<p class="xzarea">
+													<a href="#tab2" id="szbox">$!{areaname}</a>
+												</p>
+											</div>
+											<div class="tab-con">
+												<div id="tab1" class="tc-con">
+													<ul class="city" id="J_city_ul">
+														<!-- <li class="bj">北京</li>
+														<li class="sz">深圳</li> -->
+														 #foreach($m in $!city)
+						                                 	#if ($velocityCount == 1 )
+						                                 	<li class="bj" oid="$!{m.areaid}">$!{m.name}</li>
+						                                 	#else
+						                                 	<li class="sz" oid="$!{m.areaid}">$!{m.name}</li>
+						                                 	#end
+						                                 #end
+													</ul>
+												</div>
+												<div id="tab2" class="tc-con tc-area">
+													<ul id="J_area_ul">
+														#foreach($m in $!area)
+						                                 	<li  oid="$!{m.areaid}">$!{m.name}</li>
+						                                #end
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="type">
+                            <label class="name">类型</label>
+                            <div class="cho c-sp">
+                                <ul id="J_prod_ul">
+                                     #foreach($m in $!list)
+                                 	
+                                 	#if ($velocityCount == 1 )
+                                 	<li class="checked" oid="$!{m.product_id}">$!{m.product_name}</li>
+                                 	#else
+                                 	
+                                 	<li class="b-box hide" oid="$!{m.product_id}">$!{m.product_name}</li>
+                                 	#end
+                                 #end
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btn-box">
+                        <a href="/order/index/$!{model.sell_id}.html" class="buybtn" id="J_buy_btn">立即购买</a>
+                        <a target="_blank" href="http://p.qiao.baidu.com/cps/chatIndex?reqParam=%7B%22from%22%3A0%2C%22sid%22%3A%22-100%22%2C%22tid%22%3A%22-1%22%2C%22ttype%22%3A1%2C%22siteId%22%3A%226550807%22%2C%22userId%22%3A%2210178186%22%7D" class="zxbtn">免费咨询</a>
+                    </div>
+                </div>
+                <div class="nrightbox">
+                    <p class="name">相关推荐</p>
+                    <div class="morebox">
+                        <ul class="ullist">
+                        #foreach($recom in $!recommendList)
+                        	<li><a href="$!{recom.url}"><img src="$!{recom.picUrl}"><p class="text">$!{recom.name}  #if ($recom.price == 0 ) #else ￥$!{recom.price} #end</p></a></li>
+                        #end
+                        
+                           
+                        </ul>
+                    </div>
+                    <p id="totop"></p>
+                    <p id="tobot"></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-spcon" id="new-main">
+            <div class="new-wdbox">
+                <!-- <div class="osound">
+                    <p class="httit">听听别人问什么？</p>
+                    <ul class="list">
+                        <li class="sou-off">
+                            <p class="name">我想注册个科技类型公司</p>
+                            <p class="time">04:28</p>
+                        </li>
+                        <li class="sou-off">
+                            <p class="name">注册公司必须有地址么</p>
+                            <p class="time">04:28</p>
+                        </li>
+                        <li class="sou-off">
+                            <p class="name">广告类的公司您们能代办么</p>
+                            <p class="time">04:28</p>
+                        </li>
+                        <li class="sou-off">
+                            <p class="name">我想注册教育类的公司</p>
+                            <p class="time">04:28</p>
+                        </li>
+                    </ul>
+                </div> -->
+                <div class="osound wdhot">
+                    <p class="wdtit">热门问答</p>
+                    <div class="conbox">
+                        #if($!{catModel2.cate_name}=='公司注册')
+                        <ul class="hot-tab">
+                            <li class="current"><a>注册相关</a></li>
+                            <li><a>地址相关</a></li>
+                            <li><a>综合类</a></li>
+                        </ul>
+                        #end
+                        <div class="hot-con">
+                            #if($!{catModel2.cate_name}=='公司注册')
+                            	#parse("views/detail/gszc_data.html")
+                            #elseif($!{catModel2.cate_name}=='商标')
+                            	#parse("views/detail/sbzc_data.html")
+                            #elseif($!{catModel2.cate_name}=='内资变更')
+                            	#parse("views/detail/gsbg_data.html")
+                            #elseif($!{catModel2.cate_name}=='代理记账')
+                            	#parse("views/detail/dljz_data.html")
+                            #else
+                            	#parse("views/detail/other_data.html")	
+                            #end
+                        </div>  
+
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="con-left book-box" id="content">
+                <div class="tit-nav">
+                    <ul>
+                        <a href="#a1"><li class="on">产品详情</li></a>
+                        <a href="#a2"><li>服务评价(<span id="J_pj_num2">96</span>)</li></a>
+                        <a href="#a3"><li>售后保障</li></a>
+                    </ul>
+                </div>
+                <p class="md-hover" id="a1"></p>
+
+                <div class="">
+                         $!{info.service_text}
+                   
+                </div>
+                
+                <p class="md-hover" id="a2"></p>
+                <div class="s-box">
+                 	<div class="title">
+                        <p>用户评价</p>
+                    </div>
+                   <div class="md-hr-tab tab" >
+                    <div class="md-hr-tab-list">
+                         <ul class="md-hr-tab-lists">
+                             <li data-value="all" data-count="pingfenCountall"><a href="javascript:void(0)" class="active">全部评价</a></li>
+                             <li data-value="5~" data-count="pingfenCount5~"><a href="javascript:void(0)">5分评价</a></li>
+                             <li data-value="4~5" data-count="pingfenCount4~5"><a href="javascript:void(0)">4-5分评价</a></li>
+                             <li data-value="3~4" data-count="pingfenCount3~4"><a href="javascript:void(0)"> 3-4分评价</a></li>
+                             <li data-value="1~3" data-count="pingfenCount1~3"><a href="javascript:void(0)">1-3分评价</a></li> 
+                         </ul>
+                    </div>
+
+                        <div class="md-tab-conts " >
+                          <div class="tab-conts-h show">
+                             <dl class="clrfix">
+                                 
+                             </dl>
+                             <dl class="clrfix">
+                                
+                             </dl>
+                           </div>
+                        </div>   
+
+                        <div class="md-tab-conts" >
+                          <div class="tab-conts-h">
+                             <dl class="clrfix">
+                                
+                             </dl>
+                             <dl class="clrfix">
+                                
+                             </dl>
+                           </div>
+                        </div> 
+
+                        <div class="md-tab-conts" >
+                          <div class="tab-conts-h">
+                             <dl class="clrfix">
+                                
+                                    
+                             </dl>
+                             <dl class="clrfix">
+                                 
+                             </dl>
+                           </div>
+                        </div>   
+
+                        <div class="md-tab-conts" >
+                          <div class="tab-conts-h">
+                             <dl class="clrfix">
+                               
+                             </dl>
+                             <dl class="clrfix">
+                                
+                             </dl>
+                           </div>
+                        </div> 
+
+                        <div class="md-tab-conts" >
+                          <div class="tab-conts-h">
+                             <dl class="clrfix">
+                                
+                             </dl>
+                             <dl class="clrfix">
+                                 
+                             </dl>
+                           </div>
+                        </div>    
+     
+                    </div> <!--新的模块结束  -->
+                    
+                </div>
+                
+                <p class="md-hover" id="a3"></p>
+                    
+                    <div class="">
+                            $!{info.saleContent_text}
+                    </div>
+
+        </div>
+
+    </div>        
+
+
+
+</div>
+    <!-- 中部menu -->
+    <div class="sp-nav-box" id="menu">
+        <div class="new-spnav">
+            <ul>
+                <li><a href="#a1" class="cur">产品详情</a></li>
+                <li><a href="#a2">服务评价(<span id="J_pj_num3">96</span>)</a></li>
+                <li><a href="#a3">售后保障</a></li>
+            </ul>
+            <div class="cp-nav">
+                <span class="cp">$!{cityname}$!{areaname}$!{pModel.product_name}：</span>
+                <span class="xj" id="J_hd_pri">$!{model.sell_overprice}</span>
+                <span class="yj" id="J_hd_mark_pri">￥$!{model.sell_markprice}</span>
+            </div>
+            <div class="nav-r">
+                <a href="" class="zx">免费咨询</a>
+                <a href="/order/index/$!{model.sell_id}.html" id="J_buy_btn_2">立即购买</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 网站底部 -->
+</body>
+
+

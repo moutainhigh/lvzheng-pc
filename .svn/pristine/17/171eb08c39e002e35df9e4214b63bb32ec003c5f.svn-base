@@ -1,0 +1,174 @@
+
+/*注册公司专题页面*/
+.ztreg-banner{width: 100%; min-width:1200px; height: 500px;background: #227AD4 url('http://static.lvzheng.com/lvzhengpc/images/zt/regcom/zt_banner.jpg')  no-repeat center;}
+.ztreg-banner .ban-box{width: 1200px;margin: 0 auto;height: 500px;position: relative;}
+.ztreg-banner .ban-box p.p-tag1{width: 720px;height: 120px;position: absolute;top: 270px;left: 230px;background:url('http://static.lvzheng.com/lvzhengpc/images/zt/regcom/p_tag1.png') no-repeat center;}
+.ztreg-banner .ban-box p.text{font-size: 30px; color: #fff;position: absolute;top: 280px;left: 390px}
+.ztreg-banner .ban-box a.login-btn{display: inline-block;width: 200px;text-align: center;height: 58px;line-height: 58px;font-size: 24px;font-weight: bold; color: #fff; background: #ffa200;border-radius: 5px;position: absolute;top: 400px;left: 500px}
+.ztreg-main {width: 100%; min-width:1200px; }
+.ztreg-main .f-step{width: 1200px;margin: 0 auto;padding: 30px 0}
+.ztreg-main .f-step .sname{font-size: 30px;color: #fff;width: 490px;height: 65px;line-height: 65px; text-align: center; margin: 10px auto; background: url('http://static.lvzheng.com/lvzhengpc/images/zt/regcom/sdbg.png') no-repeat center;}
+.ztreg-main .f-step .comlist{width: 700px;margin: 10px auto;}
+.ztreg-main .f-step .comlist ul{overflow: hidden;padding: 40px 0}
+.ztreg-main .f-step .comlist ul li{width: 170px;height: 20px;line-height: 20px;color: #999;font-size: 14px;text-align: center;float: left;margin: 0 30px}
+.ztreg-main .f-step .comlist ul li.plist1{padding-top: 130px;background: url('http://static.lvzheng.com/lvzhengpc/images/zt/regcom/plist1.png')  no-repeat center top;}
+.ztreg-main .f-step .comlist ul li.plist2{padding-top: 130px;background: url('http://static.lvzheng.com/lvzhengpc/images/zt/regcom/plist2.png')  no-repeat center top;}
+.ztreg-main .f-step .comlist ul li.plist3{padding-top: 130px;background: url('http://static.lvzheng.com/lvzhengpc/images/zt/regcom/plist3.png')  no-repeat center top;}
+
+.ztreg-main .f-step .title{width: 1000px;margin: 0 auto;height: 50px;background: url('http://static.lvzheng.com/lvzhengpc/images/zt/regcom/line_bg.png') center repeat-x }
+.ztreg-main .f-step .title p{font-size: 24px;height: 50px;line-height: 50px;color: #333; width: 370px; text-align: center; margin: 0 auto; padding: 0 10px;background: #fff  url('http://static.lvzheng.com/lvzhengpc/images/zt/regcom/dotbg.png')  no-repeat center;}
+.ztreg-main .f-step .step-box{width: 1000px;margin: 40px auto 20px}
+.ztreg-main .f-step .step-box ul{overflow: hidden;}
+.ztreg-main .f-step .step-box ul li{width: 210px; text-align: center; height: 40px;line-height: 40px;padding: 100px 20px 10px; font-size: 18px;color: #333; float: left;}
+.ztreg-main .f-step .step-box ul li.s1{background: url('http://static.lvzheng.com/lvzhengpc/images/zt/regcom/s1_ico.png')  no-repeat center top;}
+.ztreg-main .f-step .step-box ul li.s2{background: url('http://static.lvzheng.com/lvzhengpc/images/zt/regcom/s2_ico.png')  no-repeat center top;}
+.ztreg-main .f-step .step-box ul li.s3{background: url('http://static.lvzheng.com/lvzhengpc/images/zt/regcom/s3_ico.png')  no-repeat center top;}
+.ztreg-main .f-step .step-box ul li.s4{background: url('http://static.lvzheng.com/lvzhengpc/images/zt/regcom/s4_ico.png')  no-repeat center top;}
+
+.ztreg-main .box1{width: 100%; min-width:1200px; height: 410px;background: #FEFEFE url('http://static.lvzheng.com/lvzhengpc/images/zt/regcom/boxbg1.jpg')  no-repeat center;}
+.ztreg-main .box1 .con{width: 1200px;margin: 0 auto;height: 410px;position: relative;}
+.ztreg-main .box1 .con p.peo{position: absolute;top: 90px;left: 220px}
+.ztreg-main .box1 .con p.name{font-size: 48px;height: 50px;line-height: 50px;color: #000;position: absolute;top: 150px;left: 560px}
+.ztreg-main .box1 .con p.name span{color: #01ac72;font-weight: bold;}
+.ztreg-main .box1 .con span.text1{ display: inline-block; font-size: 14px;height: 20px;line-height: 20px; padding: 2px 15px; color: #fff; background: #dfdfdf;border-radius: 5px;position: absolute;top: 250px;left: 700px}
+.ztreg-main .box1 .con span.text2{ display: inline-block; font-size: 14px;height: 20px;line-height: 20px; padding: 2px 15px; color: #fff; background: #cbe3f0;border-radius: 5px;position: absolute;top: 280px;left: 755px}
+.ztreg-main .box1 .con span.text3{ display: inline-block; font-size: 14px;height: 20px;line-height: 20px; padding: 2px 15px; color: #fff; background: #fab948;border-radius: 5px;position: absolute;top: 310px;left: 730px}
+
+.ztreg-main .box2{width: 100%; min-width:1200px; height: 410px;background: #fff;}
+.ztreg-main .box2 .con{width: 1200px;margin: 0 auto;height: 410px;position: relative;}
+.ztreg-main .box2 .con p.peo{position: absolute;top: 90px;left: 690px}
+.ztreg-main .box2 .con p.name{font-size: 48px;height: 50px;line-height: 50px;color: #000;position: absolute;top: 150px;left: 160px}
+.ztreg-main .box2 .con p.name span{color: #01ac72;font-weight: bold;}
+.ztreg-main .box2 .con span.text1{ display: inline-block; font-size: 14px;height: 20px;line-height: 20px; padding: 2px 15px; color: #fff; background: #cbe3f0;border-radius: 5px;position: absolute;top: 260px;left: 160px}
+.ztreg-main .box2 .con span.text2{ display: inline-block; font-size: 14px;height: 20px;line-height: 20px; padding: 2px 15px; color: #fff; background: #dfdfdf;border-radius: 5px;position: absolute;top: 290px;left: 250px}
+.ztreg-main .box2 .con span.text3{ display: inline-block; font-size: 14px;height: 20px;line-height: 20px; padding: 2px 15px; color: #fff; background: #fab948;border-radius: 5px;position: absolute;top: 320px;left: 190px}
+
+.ztreg-main .box5{width: 100%; min-width:1200px; height: 410px;background: #FEFEFE url('http://static.lvzheng.com/lvzhengpc/images/zt/regcom/boxbg1.jpg')  no-repeat center;}
+.ztreg-main .box5 .con{width: 1200px;margin: 0 auto;height: 410px;position: relative;}
+.ztreg-main .box5 .con p.peo{position: absolute;top: 70px;left: 150px}
+.ztreg-main .box5 .con p.name{font-size: 48px;height: 50px;line-height: 50px;color: #000;position: absolute;top: 70px;left: 430px}
+.ztreg-main .box5 .con p.name1{position: absolute;top: 150px;left: 425px;}
+.ztreg-main .box5 .con p.text-box{position: absolute;top: 150px;left: 430px;}
+.ztreg-main .box5 .con p.text-box span.text{ display: block; font-size: 18px;height: 25px;line-height: 25px; color: #000;padding: 5px 0}
+.ztreg-main .box5 .con p.text-box span.text a{color: #fc3c3c;cursor: text;}
+.ztreg-main .box5 .con p.ts-text{font-size: 14px;color: #999;line-height: 25px;position: absolute;top: 270px;left: 430px}
+
+
+.bl-nav{width: 100%; min-width:1200px; height: 50px; padding: 20px 0; background: url('http://static.lvzheng.com/lvzhengpc/images/zt/regcom/barbg.png')  repeat-x center; display: none;}
+/*.bl-nav{width: 100%; min-width:1200px; height: 70px; background: url('http://static.lvzheng.com/lvzhengpc/images/zt/regcom/barbg.png')  repeat-x center; display: none;}*/
+.bl-nav-bg{width: 1000px;margin: 0 auto; height: 70px; text-align: center;}
+.bl-nav-bg .item{display: inline-block;float: left;position: relative;}
+.bl-nav-bg .item label{display: inline-block;width: 70px; text-align: right; padding: 0 5px 0 15px;color: #fff;font-size: 16px}
+.bl-nav-bg .item input{width: 230px;padding: 0 10px;border: 1px solid #fff;background: #fff;border-radius: 5px;height: 48px;line-height: 48px;font-size: 16px;color: #333}
+.bl-nav-bg .item a.get-code{position: absolute;top: 10px;right: 5px;display: inline-block;padding: 5px 10px; height: 20px;line-height: 20px; color: #55ACEE; font-size: 14px;background: #eeeeee;border-radius: 2px}
+.bl-nav-bg a.btn{width: 150px; margin: 0 auto; height: 50px;line-height: 50px;font-size: 22px;color: #fff;background: #ffa200; border-radius: 5px;  margin: 0 15px; display: inline-block;}
+/*.bl-nav-bg a.btn{width: 300px;height: 70px;line-height: 70px;font-size: 24px;color: #fff;background: #ffa200;  display: inline-block;}*/
+.bl-nav-bg span.time{display: inline-block;min-width: 60px;padding: 5px 10px;font-size: 16px;color: #999;background: #fff;margin-top: 10px}
+.bl-nav-bg span.time a{color: #ff6666}
+.bl-navxf {position: fixed;bottom: 0px;z-index: 9000;display: block;}
+.bar-bot{padding-bottom: 70px}
+
+
+/*注册311*/
+.zc-banner{width: 100%; min-width:1200px; height: 500px;background: #000D28 url('http://static.lvzheng.com/lvzhengpc/images/zc/banner.jpg')  no-repeat center;}
+.zc-banner .ban-box{width: 1200px;margin: 0 auto;height: 500px;position: relative;}
+.zc-banner .ban-box p.p-tag1{width: 1200px;height: 200px;position: absolute;top: 70px;background:url('http://static.lvzheng.com/lvzhengpc/images/zc/btag1.png') no-repeat center;}
+.zc-banner .ban-box p.text{font-size: 18px; color: #fff;position: absolute;top: 300px; width: 1200px; text-align: center;}
+.zc-banner .ban-box a.login-btn{display: inline-block;width: 220px;text-align: center;height: 58px;line-height: 58px;font-size: 24px;font-weight: bold; color: #fff; background: #ffa200;border-radius: 5px;position: absolute;top: 380px;left: 490px}
+.zcreg-main {width: 100%; min-width:1200px; }
+.zcreg-main .box1 .con{width: 1200px;margin: 0 auto;height: 460px;position: relative;}
+.zcreg-main .box1 .con .tag{position: absolute;top: 90px;left: 260px}
+.zcreg-main .box1 .con .tag3{position: absolute;top: 0px;left: 255px}
+.zcreg-main .box1 .con .name{font-size: 48px;font-weight: bold;color: #01ac72;position: absolute;top: 150px;right: 230px}
+.zcreg-main .box1 .con .text{font-size: 24px;color: #999;position: absolute;top: 230px;right: 230px;text-align: right;}
+
+.zcreg-main .box2{width: 100%; height: 460px; background: #FEFEFE url('http://static.lvzheng.com/lvzhengpc/images/zt/regcom/boxbg1.jpg')  no-repeat center;}
+.zcreg-main .box2 .con{width: 1200px;margin: 0 auto;height: 460px;position: relative;}
+.zcreg-main .box2 .con .tag{position: absolute;top: 0px;right: 230px}
+.zcreg-main .box2 .con .tag4{position: absolute;top: 0px;right: 250px}
+.zcreg-main .box2 .con .name{font-size: 48px;font-weight: bold;color: #01ac72;position: absolute;top: 150px;left: 230px}
+.zcreg-main .box2 .con .text{font-size: 24px;color: #999;position: absolute;top: 230px;left: 230px;text-align: left;}
+.zcreg-main .btext{font-size: 48px;color: #6fa7ca;height: 120px;line-height: 120px;text-align: center;background: #eff9ff url('http://static.lvzheng.com/lvzhengpc/images/zc/bot_text.png')  no-repeat center;}
+
+.zc-nav{width: 100%;height: 60px;background: #2d2d2d; display: none;}
+.zc-nav a.btn{display: block; margin: 0 auto; text-align: center; font-size: 24px;color: #fff;width: 360px;height: 60px;line-height: 60px;background: #ff8400}
+.zc-navxf {position: fixed;bottom: 0px;z-index: 9000;display: block;}
+
+
+
+/*3.21落地页*/
+.land-banner{width: 100%;height: 550px;background: #4f6e9d url('http://static.lvzheng.com/lvzhengpc/images/land/landbanner.jpg')  no-repeat center;}
+.land-banner .ban-box{width: 1200px;margin: 0 auto;height: 500px;position: relative;}
+.land-banner .ban-box p.text1{font-size: 48px; color: #fff;position: absolute; width: 700px;height: 60px; top: 120px;left: 230px}
+.land-banner .ban-box p.text2{font-size: 56px; color: #fff;position: absolute; width: 700px;line-height: 80px;top: 210px;left: 230px}
+.land-banner .ban-box p.text2 span{display: inline-block;min-width:180px; font-size: 65px; text-align: center;background: #cf2e38;border-radius: 6px; padding: 0 20px }
+.land-banner .ban-box p.text3{font-size: 24px;  color: #fff;position: absolute;top: 450px;left: 230px}
+.land-banner .ban-box p.text3 span{display: inline-block; height: 40px;line-height: 40px; margin-right: 50px;float: left;}
+.land-banner .ban-box p.text3 span a{font-size: 30px; color: #ffe400;font-weight: bold;cursor: text;}
+.land-banner .ban-box p.text3 span.hot-tel{padding-left: 40px;background: url('http://static.lvzheng.com/lvzhengpc/images/land/hot_tel.png')  no-repeat top left;}
+
+.land-main{width: 100%}
+.land-main .box{padding: 10px 0;}
+.land-main .bbg{background: #f1fbff}
+.land-main .box .tit-box{width: 560px;margin: 0 auto;}
+.land-main .box .tit-box p.name{font-size: 44px;color: #333;padding: 25px 0;text-align: center;border-bottom: 1px solid #e5e5e5}
+.land-main .box .tit-box p.text{font-size: 15px; line-height: 25px; color: #808080;padding: 25px 0;text-align: center;}
+.land-main .box .step{width: 1000px; min-height: 280px; margin: 0 auto;position: relative;}
+.land-main .box .step .stag1{width: 770px;height: 240px;position: absolute;top: 20px;left: 60px;}
+.land-main .box .step .stag2{width: 110px;height: 90px; padding: 10px 0; text-align: center; background: url('http://static.lvzheng.com/lvzhengpc/images/land/stag2.png')  no-repeat center;position: absolute;top: 80px;right: 60px}
+.land-main .box .step .stag2 p.t1{font-size: 43px;color: #fff}
+.land-main .box .step .stag2 p.t1 span{font-size: 24px;}
+.land-main .box .step .stag2 p.t2{font-size: 18px;color: #fff; text-decoration: line-through;}
+
+.land-main .box .step ul.list{overflow: hidden;padding: 40px 0}
+.land-main .box .step ul.list li{width: 240px;padding: 0 5px;float: left;text-align: center;}
+.land-main .box .step ul.list li p.name1{width: 110px;height: 110px; line-height: 110px; margin: 0 auto 40px;font-size: 20px;color: #fff;text-align: center; background: url('http://static.lvzheng.com/lvzhengpc/images/land/li_ico1.png')  no-repeat center;}
+.land-main .box .step ul.list li p.name2{width: 110px;height: 110px; line-height: 110px; margin: 0 auto 40px;font-size: 20px;color: #fff;text-align: center; background: url('http://static.lvzheng.com/lvzhengpc/images/land/li_ico2.png')  no-repeat center;}
+.land-main .box .step ul.list li p.name3{width: 110px;height: 110px; line-height: 110px; margin: 0 auto 40px;font-size: 20px;color: #fff;text-align: center; background: url('http://static.lvzheng.com/lvzhengpc/images/land/li_ico3.png')  no-repeat center;}
+.land-main .box .step ul.list li p.name4{width: 110px;height: 110px; line-height: 110px; margin: 0 auto 40px;font-size: 20px;color: #fff;text-align: center; background: url('http://static.lvzheng.com/lvzhengpc/images/land/li_ico4.png')  no-repeat center;}
+.land-main .box .step ul.list li p.text{font-size: 15px; line-height: 25px; color: #000;text-align: center;}
+.land-main .box .step ul.list li p.text span{color: #f94444}
+
+.land-main .box .step ul.fast-ul{overflow: hidden; padding:40px 0}
+.land-main .box .step ul.fast-ul li{float:left;margin:0 10px;text-align:center;font-size:14px;line-height:26px;color:#898989;display:inline;}
+.land-main .box .step ul.fast-ul .icon{width:105px;}
+.land-main .box .step ul.fast-ul .arrow{height:100px;width:130px;background:url(http://static.lvzheng.com/lvzhengpc/images/land/fast_arr.png) no-repeat;}
+.land-main .box .step ul.fast-ul .arrow div{color: #87bde1;padding-top: 25px}
+.land-main .box .step ul.fast-ul li span{color:#f94444;}
+.land-main .box .step ul.fast-ul li p{padding-top: 15px;color: #8ec1e3}
+
+.land-main .box .step ul.more{overflow: hidden; padding:70px 0}
+.land-main .box .step ul.more li{float:left;margin:0 40px;width: 120px;height: 160px;cursor: pointer;}
+.land-main .box .step ul.more li.more-ico1{background: url(http://static.lvzheng.com/lvzhengpc/images/land/more_ico1.png) no-repeat center;}
+.land-main .box .step ul.more li.more-ico2{background: url(http://static.lvzheng.com/lvzhengpc/images/land/more_ico2.png) no-repeat center;}
+.land-main .box .step ul.more li.more-ico3{background: url(http://static.lvzheng.com/lvzhengpc/images/land/more_ico3.png) no-repeat center;}
+.land-main .box .step ul.more li.more-ico4{background: url(http://static.lvzheng.com/lvzhengpc/images/land/more_ico4.png) no-repeat center;}
+.land-main .box .step ul.more li.more-ico5{background: url(http://static.lvzheng.com/lvzhengpc/images/land/more_ico5.png) no-repeat center;}
+
+.land-main .box .step ul.customer{overflow: hidden; padding:40px 0}
+.land-main .box .step ul.customer li{float:left;margin:20px 13px;width: 140px;height: 50px; cursor: pointer;}
+.land-main .box .step ul.customer li.cus-ico1{background: url(http://static.lvzheng.com/lvzhengpc/images/land/cus_ico1.png) no-repeat center;}
+.land-main .box .step ul.customer li.cus-ico2{background: url(http://static.lvzheng.com/lvzhengpc/images/land/cus_ico2.png) no-repeat center;}
+.land-main .box .step ul.customer li.cus-ico3{background: url(http://static.lvzheng.com/lvzhengpc/images/land/cus_ico3.png) no-repeat center;}
+.land-main .box .step ul.customer li.cus-ico4{background: url(http://static.lvzheng.com/lvzhengpc/images/land/cus_ico4.png) no-repeat center;}
+.land-main .box .step ul.customer li.cus-ico5{background: url(http://static.lvzheng.com/lvzhengpc/images/land/cus_ico5.png) no-repeat center;}
+.land-main .box .step ul.customer li.cus-ico6{background: url(http://static.lvzheng.com/lvzhengpc/images/land/cus_ico6.png) no-repeat center;}
+.land-main .box .step ul.customer li.cus-ico7{background: url(http://static.lvzheng.com/lvzhengpc/images/land/cus_ico7.png) no-repeat center;}
+.land-main .box .step ul.customer li.cus-ico8{background: url(http://static.lvzheng.com/lvzhengpc/images/land/cus_ico8.png) no-repeat center;}
+.land-main .box .step ul.customer li.cus-ico9{background: url(http://static.lvzheng.com/lvzhengpc/images/land/cus_ico9.png) no-repeat center;}
+.land-main .box .step ul.customer li.cus-ico10{background: url(http://static.lvzheng.com/lvzhengpc/images/land/cus_ico10.png) no-repeat center;}
+.land-main .box .step ul.customer li.cus-ico11{background: url(http://static.lvzheng.com/lvzhengpc/images/land/cus_ico11.png) no-repeat center;}
+.land-main .box .step ul.customer li.cus-ico12{background: url(http://static.lvzheng.com/lvzhengpc/images/land/cus_ico12.png) no-repeat center;}
+
+.land-nav{width: 100%;height: 90px; background: url('http://static.lvzheng.com/lvzhengpc/images/zt/regcom/barbg.png')  repeat-x center; display: none;}
+.land-nav-bg{width: 1000px;margin: 20px auto; height: 50px; text-align: center;}
+.land-nav-bg .item{display: inline-block;float: left;position: relative;}
+.land-nav-bg .item label{display: inline-block;min-width: 70px; text-align: right; padding: 0 5px 0 15px;color: #fff;font-size: 16px}
+.land-nav-bg .item input{width: 230px;padding: 0 10px;border: 1px solid #fff;background: #fff;border-radius: 5px;height: 48px;line-height: 48px;font-size: 16px;color: #333}
+.land-nav-bg .item a.get-code{position: absolute;top: 10px;right: 5px;display: inline-block;padding: 5px 10px; height: 20px;line-height: 20px; color: #55ACEE; font-size: 14px;background: #eeeeee;border-radius: 2px}
+.land-nav-bg a.btn{width: 150px;height: 50px;line-height: 50px;font-size: 24px;color: #fff;background: #f45757; border-radius: 5px; float: left; margin: 0 15px; display: inline-block;}
+/*.land-nav-bg a.btn{width: 300px;height: 70px;line-height: 70px;font-size: 24px;color: #fff;background: #ffa200;  display: inline-block;}*/
+.land-nav-bg span.time{display: inline-block;min-width: 60px;padding: 5px 10px;font-size: 16px;color: #999;background: #fff;margin-top: 10px}
+.land-nav-bg span.time a{color: #ff6666}
+.land-navxf {position: fixed;bottom: 0px;z-index: 9000;display: block;}
+.land-bot{padding-bottom: 70px}

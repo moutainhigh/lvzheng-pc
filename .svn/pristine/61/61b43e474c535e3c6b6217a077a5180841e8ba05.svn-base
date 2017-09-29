@@ -1,0 +1,23 @@
+# 相关服务
+
+ref1.name=自助注册公司
+ref1.tip=免费办理公司注册
+ref1.price=0
+ref1.path=http://mycenter.lvzheng.com/mywf/page/reg
+
+ref2.name=公司注册
+ref2.tip=为企业办理公司注册
+ref2.price= 598
+ref2.path=/commondetail/detail/38229817543169
+
+ref3.name=虚拟地址
+ref3.tip=可靠地址，放心注册
+ref3.price=4000
+ref3.path=/addresslist.html
+
+
+
+
+# 文件生成目录[操作系统linux(包括MAC) | windows]
+outpath.linux=/tmp/code-generater-outpath
+outpath.win=C://code-generater-outpath

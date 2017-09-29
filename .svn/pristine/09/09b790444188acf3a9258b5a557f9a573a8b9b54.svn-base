@@ -1,0 +1,283 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>商标推荐</title>
+<meta name="description" content="注册公司找小微律政,小微律政拥有专业的律师和会计团队,小微律政专注为创业公司及中小微企业提供代办公司注册,商标注册,代理记账,社保公积金开户,公司变更,合同拟定,公司章程等一站式企业服务，小微律政服务流程每一步都无微不至。">
+<meta name="keywords" content="小微律政公司介绍,小微律政怎么样" />
+<link href="/css/index.css" type="text/css"  rel="stylesheet"/>
+<script type="text/javascript" src="/js/jquery-1.7.2.min.js"></script>
+<script src="/js/jquery.tabs.js"></script>
+<script type="text/javascript" src="/js/return-top.js"></script>
+<!-- <script type="text/javascript" src="/js/brandData.js"></script> -->
+<script>
+$(function(){
+    // 左导航切换显示
+    $(".left-nav dd").hover(function(){
+        $(".nav-right",this).show();
+    });
+    $(".left-nav dd").mouseleave(function(){
+        $(".nav-right",this).hide();
+    });
+
+    // 行业领域
+    $(".list-ul1 li").each(function(){
+        $(this).click(function(){
+            $(".list-ul1 li").addClass("b-box").removeClass("checked");
+            $(this).addClass("checked").removeClass("b-box");
+        })
+    });
+
+     // 行业特点  选中样式
+    /* $(".list-ul2 li").each(function(){
+        $(this).click(function(){
+            $(".list-ul2 li").addClass("b-box").removeClass("checked");
+            $(this).addClass("checked").removeClass("b-box");
+        })
+    }); */
+
+    $(window).scroll(function(){
+        var a=parseInt($(window).scrollTop());
+        if(a>220){
+            $(".adpic").addClass("picfixed")
+        }
+        if(a<220){
+            $(".adpic").removeClass("picfixed")
+        }
+    });
+    
+    
+    //**************************************************
+    //行业领域li click event
+    $('.industryFieldUL').find('li').bind('click',function(){
+    	var id = $(this).attr('data-id');
+   		var comboData = getData("/brand/getBrandCharactCombo",id);
+   			$('.industryCharactUL').find('li').remove();
+   			$.each(comboData,function(k,li){
+   				$('.industryCharactUL').append("<li class=\"b-box\" data-id=\""+li.id+"\">"+li.title+"</li>");
+   			})
+	   
+   			$('.brandResult').hide();
+   			$('.brandNo').show();
+   			$('.brandNoResult').hide();
+   			industryCharactFun();
+    })
+    
+    $('.industryFieldUL').find('li:first').click();
+    
+});
+
+function industryCharactFun(){
+	//行业特点li click event
+	$('.industryCharactUL').find('li').bind('click',function(){
+		var id = $(this).attr('data-id');
+		$('.brandResult').find('div.show-list').remove();
+		$('.brandResult').show();
+		$('.brandNoResult').hide();
+		$('.brandNo').hide();
+		// 行业特点  选中样式
+		$(".list-ul2 li").addClass("b-box").removeClass("checked");
+	    $(this).addClass("checked").removeClass("b-box");
+			var listData = getData("/brand/getBrandList",id);
+				if(listData == null){
+					$('.brandNoResult').show();
+					$('.brandResult').hide();
+					return;
+				}
+				var zntypeArr = listData.zntype;
+				$.each(zntypeArr,function(j,zn){
+					var cgArr = zn.cg;
+					var cgnum = zn.cgnum;
+					var title = zn.title;
+					
+					var liHtml = '<div class="show-list">'+
+									'<p class="title">第'+cgnum+'类 '+zn.title+'</p>'+
+										'<ul>';
+					
+					$.each(cgArr,function(k,cg){
+						var thArr = cg.th;
+						$.each(thArr,function(n,th){
+							liHtml += '<li>'+th.cgnum+' '+th.title+'</li>'
+						})
+					});
+					
+					liHtml += '</ul></div>';
+					$('.brandResult').append(liHtml);
+				})
+	})
+}
+
+function getData(url,parentId){
+	var resData = null;
+	$.ajax({
+		url: url,
+		type: "post",
+		dataType: "json",
+		async: false,
+		data:{
+			"parentId" : parentId,
+		},
+		success:function(data){
+			resData = data;
+		},
+		error:function(){
+			alert("未响应");
+		}
+	});
+	
+	return resData;
+}
+</script>
+</head>
+
+<body class="no-js">
+
+  <!-- logo区域 -->
+    #parse("views/common/logo_normal.html")
+
+
+    <!-- 导航 -->
+     #parse("views/common/navigation.html")
+     
+<div id="continer">
+    <div class="intell">
+        <div class="crumbs">
+            <a class="crumb-link" href="http://www.lvzheng.com">首页</a>
+            <i class="crumb-line">></i>
+            <a class="crumb-link" href="http://www.lvzheng.com/brand/index">商标推荐</a>
+        </div>
+        <div class="intell-box">
+            <div class="intell-left">
+                <div class="ts-tag blod">
+                    <label>小微提示：</label>
+                    <p class="text">您可以填写您的行业特点，小微通过您的行业为您匹配您可以注册的商标</p>
+                </div>
+                <div class="sea-box">
+                    <div class="list-box">
+                        <label>行业领域：</label>
+                        <ul class="list-ul1 industryFieldUL">
+                            <li class="b-box" data-id="1">IT|通信.电子.互联网等</li>
+                            <li class="b-box" data-id="218">服饰|服装.珠宝.化妆品等</li>
+                            <li class="b-box" data-id="228">食品饮料|生鲜.保健.烟酒茶等</li>
+                            <li class="b-box" data-id="706">医保化工|医药.化工.能源等</li>
+                            <li class="b-box" data-id="1312">交通运输|运输.物流.仓储等</li>
+                            <li class="b-box" data-id="1802">房产建材|房产.建筑.物管等</li>
+                            <li class="b-box" data-id="2382">商业服务|广告.法律.金融等</li>
+                            <li class="b-box" data-id="2728">机械制造|机械.车辆等</li>
+                            <li class="b-box" data-id="3027">农业领域|农.林.牧.渔等</li>
+                            <li class="b-box" data-id="3533">服务业|餐饮.维修等</li>
+                            <li class="b-box" data-id="3762">文教娱|文化.传媒.娱乐.教育</li>
+                        </ul>
+                    </div>
+                    <div class="list-box">
+                        <label>主要特点：</label>
+                        <ul class="list-ul2 industryCharactUL">
+                            <li class="b-box" data-id="2">通讯信息</li>
+                            <li class="b-box" data-id="75">智能设备</li>
+                            <li class="b-box" data-id="152">计算机及周边产品</li>
+                            <li class="b-box" data-id="350">家用电器</li>
+                            <li class="b-box" data-id="1465">软件开发运维</li>
+                            <li class="b-box" data-id="1566">网上商城</li>
+                            <li class="b-box" data-id="1752">社交论坛</li>
+                            <li class="b-box" data-id="1851">游戏行业</li>
+                            <li class="b-box" data-id="1962">在线服务</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="show-box brandResult">
+                    <div class="ts-tag">
+                        <p class="text">如果您对以下结果不满意，您还可以咨询我们的专业顾问，电话：010-57891402</p>
+                    </div>
+                    <div class="show-list">
+                        <p class="title">第6类 金属材料</p>
+                        <ul>
+                            <li>060011 钢管</li>
+                            <li>060127 金属管</li>
+                            <li>060170 可移动金属建筑物</li>
+                            <li>060347 门用铁制品</li>
+                            <li>060206 弹簧(金属制品)</li>
+                            <li>060011 钢管</li>
+                            <li>060127 金属管</li>
+                            <li>060170 可移动金属建筑物</li>
+                            <li>060347 门用铁制品</li>
+                            <li>060206 弹簧(金属制品)</li>
+                        </ul>
+                    </div>
+                    <div class="show-list">
+                        <p class="title">第19类 建筑材料</p>
+                        <ul>
+                            <li>060011 钢管</li>
+                            <li>060127 金属管</li>
+                            <li>060170 可移动金属建筑物</li>
+                            <li>060347 门用铁制品</li>
+                            <li>060206 弹簧(金属制品)</li>
+                        </ul>
+                    </div>
+                    <div class="show-list">
+                        <p class="title">第26类 金属材料</p>
+                        <ul>
+                            <li>060011 钢管</li>
+                            <li>060127 金属管</li>
+                            <li>060170 可移动金属建筑物</li>
+                            <li>060347 门用铁制品</li>
+                            <li>060206 弹簧(金属制品)</li>
+                            <li>060011 钢管</li>
+                            <li>060127 金属管</li>
+                            <li>060170 可移动金属建筑物</li>
+                            <li>060347 门用铁制品</li>
+                            <li>060206 弹簧(金属制品)</li>
+                            <li>060170 可移动金属建筑物</li>
+                            <li>060347 门用铁制品</li>
+                            <li>060206 弹簧(金属制品)</li>
+                            <li>060011 钢管</li>
+                            <li>060127 金属管</li>
+                            <li>060170 可移动金属建筑物</li>
+                            <li>060347 门用铁制品</li>
+                            <li>060206 弹簧(金属制品)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="show-none brandNo">
+                    <p class="ts-text">
+                        亲，您还没有选择您的行业特点<br>请选择上方的行业小微会为您匹配相应的商标~
+                    </p>
+                </div>
+                
+                
+                <div class="show-none brandNoResult">
+                    <p class="ts-text">
+                       	亲，未查询到相关结果哦!<br/>如有疑问，您还可以咨询我们的专业顾问。<br/>电话：010-57891402
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="intell-right">
+                <a class="adpic" href="/commondetail/detail/38230926529537.html">
+                    <img src="/images/product/ad_buy.jpg">
+                </a>
+            </div>
+        </div>
+    </div>
+
+	<!-- 网站底部 -->
+    <div class="bot-main">
+        <!-- 友情连接 -->
+   		#parse("views/common/friendlink.html")
+        <!-- 底部宣传 -->
+   		#parse("views/common/bottom.html")
+    </div>
+    
+
+    <!-- 火箭返回顶部 -->
+    <div class="rocket-to-top">
+        <div class="level-2"></div>
+        <div class="level-3"></div>
+    </div>
+
+</div>
+</body>
+
+</html>

@@ -1,0 +1,17 @@
+<div class="list">
+                    <label>价格：</label>            
+                    <ul class="c-price">
+                        <li class="b-box"><a href="$!{url}$!{pricequeryurl}0">不限</a></li>
+                        <li #if($pricequery.toString() == "3000-4000") class="checked" #else class="b-box" #end data-value="3000-4000">
+                        <a href="$!{url}$!{pricequeryurl}3000-4000">3000-4000元/年</a>
+                        </li>
+                        <li #if($pricequery.toString() == "4000-5000") class="checked" #else class="b-box" #end data-value="4000-5000">
+                        <a href="$!{url}$!{pricequeryurl}4000-5000">4000-5000元/年</a>
+                        </li>
+                        <li #if($pricequery.toString() == "5000-6000") class="checked" #else class="b-box" #end data-value="5000-6000">
+                        <a href="$!{url}$!{pricequeryurl}5000-6000">5000-6000元/年</a>
+                        </li>
+                        <li  #if($pricequery.toString() == "6000") class="checked" #else class="b-box" #end  data-value="6000">
+                        <a href="$!{url}$!{pricequeryurl}6000">6000元/年以上</a></li>
+                    </ul>
+                </div>

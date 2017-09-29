@@ -1,0 +1,109 @@
+
+    <!-- logo区域 -->
+    <div class="botb">
+        <div class="logo-box">
+            <a href="/" class="logo"></a>
+            <span class="order-info">网站地图</span>
+            <div class="ad-box">
+                <ul>
+                    <li class="ico1">价格透明</li>
+                    <li class="ico2">信息保密</li>
+                    <li class="ico3">进度掌控</li>
+                    <li class="ico4">售后无忧</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="zx-list">
+        <div class="crumbs">
+            <a class="crumb-link" href="/">首页</a>
+            <i class="crumb-line">></i>
+            <a class="crumb-link" href="/sitemap">网站地图</a>
+        </div>
+        <div class="map-title">服务品类介绍</div>
+        <div class="map-box">
+        #foreach($catefirst in $one_)
+            <div class="box">
+                <a href="/navigation/index/$!{catefirst.cate_id}.html"><p class="title">$!{catefirst.cate_name}</p></a>
+                <ul>
+                #foreach($y in $!one)
+                    #foreach($item in $y.entrySet())  
+                     #if($item.key == $catefirst.cate_id)
+                        #foreach($z in $!item.value)  <!-- 这里是第三层map《“名称”，List《“id”,"name"》》 -->
+                          #foreach($z1 in $!z.entrySet()) 
+                           <li>
+	                        <p class="name">$z1.key</p>
+	                        <p class="cname">
+	                             #foreach($zz in $z1.value)
+                                 <span><a href="/commondetail/detail/$!{zz.pid}.html">$!{zz.pname}</a></span>
+                                #end
+	                        </p>
+                               
+                          #end
+                    #end
+                   #end 
+                  #end
+                  #end
+                </ul>
+            </div>
+         #end  
+        </div>
+        <div class="map-title">关于小微</div>
+        <div class="map-box">
+            <div class="box">
+                <ul>
+                    <li>
+                        <a href="http://www.lvzheng.com/about.html"><p class="name">关于我们</p></a>
+                        <p class="cname">
+                            <span><a href="http://www.lvzheng.com/about.html">小微形象</a></span>
+                            <span><a href="http://www.lvzheng.com/history.html">发展历程</a></span>
+                            <span><a href="http://www.lvzheng.com/contact.html">联系我们</a></span>
+                        </p>
+                    </li>
+                    <li>
+                        <p class="name">人才招聘</p>
+                        <p class="cname">
+                            <span><a href="http://www.lvzheng.com/join.html">人才招聘</a></span>
+                        </p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="map-title">小微问答</div>
+        <div class="map-box">
+            <div class="box">
+                <ul>
+                #foreach($faqcate in $faqSitemap)
+                    <li>
+                       <a href="$!{faqcate.url}"><p class="name">$!{faqcate.name}</p></a> 
+                        <p class="cname">
+                        	#foreach($faqsecond in $!{faqcate.secondlist})
+                            <span><a href="$!{faqsecond.url}">$!{faqsecond.name}</a></span>
+                            #end
+                        </p>
+                    </li>
+                #end
+                </ul>
+            </div>
+        </div>
+        <div class="map-title">小微资讯</div>
+        <div class="map-box">
+            <div class="box">
+                <ul>
+                #foreach($articlecate in $articleSitemap)
+                    <li>
+                       <a href="$!{articlecate.url}"><p class="name">$!{articlecate.name}</p></a> 
+                        <p class="cname">
+                        	#foreach($artsecond in $!{articlecate.secondlist})
+                            <span><a href="$!{artsecond.url}">$!{artsecond.name}</a></span>
+                            #end
+                        </p>
+                    </li>
+                #end
+                </ul>
+            </div>
+        </div>
+
+    </div>    
+

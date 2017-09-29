@@ -1,0 +1,85 @@
+<link href="/css/index.css" type="text/css"  rel="stylesheet"/>
+<script type="text/javascript" src="/js/jquery-1.7.2.min.js"></script>
+<script src="/js/jquery.jquery.tabs.js"></script>
+<script type="text/javascript" src="/js/return-top.js"></script>
+<script>
+$(function(){
+    // 左导航切换显示
+    $(".left-nav dd").hover(function(){
+        $(".nav-right",this).show();
+    });
+    $(".left-nav dd").mouseleave(function(){
+        $(".nav-right",this).hide();
+    });
+});
+</script>
+</head>
+
+<body>
+<div id="continer">
+   <!-- logo区域 -->
+    #parse("views/common/logo_normal.html")
+
+
+    <!-- 导航 -->
+     #parse("views/common/navigation.html")
+	<div class="xwabout">
+		<div class="bleft">
+			<ul class="about-tit">
+				<li><a href='about.html'>关于我们</a></li>
+				<li><a href='history.html'>发展历程</a></li>
+				<li><a href='join.html'>人才招聘</a></li>
+				<li class='xz'><a href='contact.html'>联系我们</a></li>
+			</ul>
+		</div>
+		<div class="bright">
+			<div class="about-content">
+				<div class="about-banner"><img src="/images/about/contact_banner.jpg" width="720" height="210" /></div>
+				<div class="contact-info">
+					<p>地址：北京市朝阳区霞光里15号霄云中心A座809</p>
+					<ul>
+						<li class="contact-icon1"></li>
+						<li class="contact-card">
+							<p class="icon1">业务咨询</p>
+							<p>联系人：王小姐</p>
+							<p>电话：15313280104</p>
+							<p>邮箱：jessica_wang@lvzheng.com</p>
+						</li>
+						<li class="contact-icon2"></li>
+						<li class="contact-card">
+							<p class="icon2">市场合作</p>
+							<p>联系人：彭先生</p>
+							<p>电话：010-57426695</p>
+							<p>邮箱：frank_peng@lvzheng.com</p>
+						</li>
+					</ul>
+					<div class="clear"></div>
+					<ul>
+						<li class="contact-icon3"></li>
+						<li class="contact-card">
+							<p class="icon3">客户服务</p>
+							<p>联系人：李先生</p>
+							<p>电话：010-84463639</p>
+							<p>邮箱：murphy_li@lvzheng.com</p>
+						</li>
+						<li class="contact-icon4"></li>
+						<li class="contact-card">
+							<p class="icon4">加入小微</p>
+							<p>联系人：杨小姐</p>
+							<p>电话：010-84463676</p>
+							<p>邮箱：yangrongrong@lvzheng.com</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+    <!-- 网站底部 -->
+
+
+</div>
+
+</body>
+
+</html>

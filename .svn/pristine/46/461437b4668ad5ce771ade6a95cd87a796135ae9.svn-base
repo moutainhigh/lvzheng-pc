@@ -1,0 +1,460 @@
+<!-- logo区域 -->
+#parse("views/common/logo_order.html")
+
+<!-- 订单详情 -->
+<div class="order-box">
+    <!-- 购买的商品 -->
+    <div class="buy-pro">
+        <p class="title">您购买的商品</p>
+        <div class="tab">
+            <div class="tab-title">
+            	<input type="hidden" id="commonArea" value="$!{sellProductMap.aeasname}" />
+            	<input type="hidden" id="commonCity" value="$!{sellProductMap.cityname}" />
+                <ul>
+                    <li>商品</li>
+                    <li>城市</li>
+                    <li>区域</li>
+                    <li>数量</li>
+                    <li>优惠券</li>
+                    <li>价格</li>
+                    <li class="del"></li>
+                </ul>
+            </div>
+            <!-- 点击定价条目显示列表 -->
+            #if($!{sellProductMap})
+            <div class="tab-splist">
+                <ul>
+                	<li style="display: none;" class="mysellid">$!{sellProductMap.sell_id}</li>
+                    <li>$!{sellProductMap.sell_product_name}</li>
+                    <li>$!{sellProductMap.cityname}</li>
+                    <li>$!{sellProductMap.aeasname}</li>
+                    <li>$!{sellProductMap.sell_amount}</li>
+                    <li>
+                    	#if($sellProductMap.coupons.size() > 0)
+                    	<div class="n-select w-220" style="width:165px;" name="coupon-select">
+							<input class="n-val coupon_input" type="text" value="$!{sellProductMap.coupons.get(0).getTitleNameString()}"
+								readonly data-discount="$!{sellProductMap.coupons.get(0).realQuota}"
+								data-id="$!{sellProductMap.coupons.get(0).id}" />
+							<ul>
+								#foreach($coupon in $!{sellProductMap.coupons})
+								<li data-value="$!{coupon.realQuota}" data-id="$!{coupon.id}">$!{coupon.getTitleNameString()}</li>
+								#end
+								<li data-value="">不使用优惠券</li>
+							</ul>
+						</div>
+						#end
+                    
+                    
+                    </li>
+                    <li>¥<span class="price">$!{sellProductMap.sell_overprice}</span></li>
+                    <li class="del"><a class="del pop_box1"></a></li>
+                </ul>
+            </div>
+            <div class="showsp-box"></div>
+            <div class="showtc-box"></div>
+            #end
+            
+            <!-- 点击商品包显示列表 -->
+            #if($!{packageMapList.size()} > 0 )
+            <div class="tc-coupon-box">
+             <div class="tc-coupon">
+                 <ul>
+    	 			 <li style="display: none;" class="mypackagesellid">$!{lvzPackageSellEntity.packagesell_id}</li>
+                     <li>$!{lvzPackageSellEntity.package_name}</li>
+                     <li></li>
+                     <li></li>
+                     <li></li>
+                     <li></li>
+                     <li>¥<span class="price">$!{lvzPackageSellEntity.sell_overprice}</span></li>
+                     <li class="del"><a class="del" ></a></li>
+                 </ul>
+             </div>
+             #foreach($packageMap in $!{packageMapList})
+             <div class="tc-list">
+                 <ul>
+                     <li>$!{packageMap.sell_product_name}</li>
+                     <li>$!{packageMap.cityname}</li>
+                     <li>$!{packageMap.aeasname}</li>
+                     <li>$!{packageMap.sell_amount}</li>
+                     <li></li>
+                     <li>¥<span class="price">$!{packageMap.sell_overprice}</span></li>
+                 </ul>
+             </div>
+             #end
+            </div>
+            <div class="showsp-box"></div>
+            <div class="showtc-box"></div>
+            #end
+        </div>
+    </div>
+
+    <!-- 选择商品 -->
+    <div class="pro-box">
+        <div class="product">  
+            <ul class="p-type" id="pro-type">
+                <!-- 如果选购的为商品包则不推荐商品包 -->
+            	#if($!{isPackage} == 'false' &&  $!{packageSellList})
+                <li><a>您可能需要的优惠套餐</a></li>
+            	#end                                        
+                <li><a>您可能需要的推荐商品</a></li>  
+            </ul>
+            <div class="procon" id="pro-con">
+            	<!-- 如果选购的为商品包则不推荐商品包 -->
+	            #if($!{isPackage} == 'false' &&  $!{packageSellList})
+	                <div class="sublist">
+	                    <div class="tc-box">
+	                        <div class="tc-tabs">
+							#set($foo = 1)
+							#foreach($packageSellE in $!{packageSellList})
+								<p #if($!{foo} == 1) class='active' #end><a href="#tab$!{foo}">$!{packageSellE.package_name}</a></p>
+								#set($foo = $foo + 1 )
+							#end
+	                        </div>
+	                        <div class="tab_container">
+								#set($foo2 = 1)
+								#foreach($packageSellE in $!{packageSellList})
+									#set($foo3 = 1)
+									<div id="tab$!{foo2}" class="tc-con">
+										<div class="list">
+											<ul class="ul-list$!{foo2}">
+											#foreach($sellMap in $!{sellProductMap2.get("$!{packageSellE.packagesell_id}")})
+												<li class="item">
+													<p class="ico">$!{sellMap.cate_name}</p>
+													<p class="name">$!{sellMap.sell_product_name}</p>
+													<p class="text">$!{ProductUtils.getProductInfoByProductId($!{sellMap.product_id}).tips}</p>
+													<p class="price">￥$!{sellMap.sell_overprice}</p> <!-- 成交价格 -->
+												</li>
+												#if($!{sellProductMap2.get("$!{packageSellE.packagesell_id}").size()} > $!{foo3} )
+												<li class="plus"></li>
+												#end
+												#set($foo3 = $foo3 + 1 )
+											#end
+											</ul>
+							
+											<div class="equ-box">
+												<div class="equal"></div>
+												<p class="t1">
+													<label>套餐价：</label><span>￥$!{packageSellE.sell_overprice}</span>
+												</p>
+												<p class="t2">
+													<label>原 价：</label><span>￥$!{packageSellE.sell_markprice}</span>
+												</p>
+												#set($ls = $!{packageSellE.sell_markprice} - $!{packageSellE.sell_overprice} )
+												<p class="t3">
+													<label>立 省：</label><span>￥$!{ls}</span>
+												</p>
+	                                            <p class="t4"><a class="btn packageSellBtn" t_package="$!{packageSellE.packagesell_id}" t_packageprice="$!{packageSellE.sell_overprice}" >购买套装</a></p>
+											</div>
+										</div>
+									</div>
+								#set($foo2 = $foo2 + 1 )
+								#end
+	                        </div>
+	                    </div>
+	                </div>
+	            #end
+                
+	            <div class="procon" id="pro-con">
+	            	<div class="sublist">
+	                    <div class="tj-box">
+	                        <div class="tab">
+	                            <table>
+	                                <tr>
+	                                    <th width="30%">类型</th>
+	                                    <th width="40%">描述</th>
+	                                    <th width="20%">价格</th>
+	                                    <th width="10%"></th>
+	                                </tr>
+	                                <tr>
+	                                    <td style="display: none;">38504614216705</td>
+	                                    <td>内资一般纳税人记账（1年）</td>
+	                                    <td>专业会计，为您省时省力</td>
+	                                    <td><span class="price">¥6000.00</span></td>
+	                                    <td style="display: none;">6000</td>
+	                                    <td style="display: none;">全北京</td>
+	                                    <td style="display: none;">全北京</td>
+	                                    <td><a class="btn sellBtn" t_sellid="38504614216705" t_sellprice="6000">添加</td>
+	                                </tr>
+	                                <tr>
+	                                    <td style="display: none;">38504603418881</td>
+	                                    <td>内资小规模记账（1年）</td>
+	                                    <td>专业会计，为您省时省力</td>
+	                                    <td><span class="price">¥2000.00</span></td>
+	                                    <td style="display: none;">2000</td>
+	                                    <td style="display: none;">全北京</td>
+	                                    <td style="display: none;">全北京</td>
+	                                    <td><a class="btn sellBtn" t_sellid="38504603418881" t_sellprice="2000">添加</td>
+	                                </tr>
+	                                <tr>
+	                                    <td style="display: none;">38504626554369</td>
+	                                    <td>商标注册</td>
+	                                    <td>专注高效，实时掌控，让您享受贴心的专业服务</td>
+	                                    <td><span class="price">¥800.00</span></td>
+	                                    <td style="display: none;">800</td>
+	                                    <td style="display: none;">全国</td>
+	                                    <td style="display: none;">全国</td>
+	                                    <td><a class="btn sellBtn" t_sellid="38504626554369" t_sellprice="800">添加</td>
+	                                </tr>
+	                                <tr>
+	                                    <td style="display: none;">38504723975425</td>
+	                                    <td>文字作品登记</td>
+	                                    <td>快速提交，全程跟踪， 省心省力</td>
+	                                    <td><span class="price">¥700.00</span></td>
+	                                    <td style="display: none;">700</td>
+	                                    <td style="display: none;">全国</td>
+	                                    <td style="display: none;">全国</td>
+	                                    <td><a class="btn sellBtn" t_sellid="38504723975425" t_sellprice="700">添加</td>
+	                                </tr>
+	                            </table>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+        	</div>
+        </div>
+    </div>
+
+    <!-- 结算 -->
+    <div class="js-box">
+        <p class="t1"><span id="curNum">1</span>件商品，订单金额：￥<span id="curPrice">#if($!{sellProductMap}) $!{sellProductMap.sell_overprice} #end #if($!{packageMapList.size()} > 0 ) $!{lvzPackageSellEntity.sell_overprice} #end</span></p>
+        <!-- <div class="n-select w-220" name="n-select">
+            <input class="n-val" type="text" value="请选择优惠券" readonly>
+            <ul>
+                <li data-value="1">50元优惠券</li>
+                <li data-value="2">100元优惠券</li>
+            </ul>
+        </div> -->
+        <p class="yhq">商品优惠：－￥<span id="curDiscount">0</span></p>
+        <p class="yf">应付金额：<span id="curPayCount">￥ #if($!{sellProductMap}) $!{sellProductMap.sell_overprice} #end #if($!{packageMapList.size()} > 0 ) $!{lvzPackageSellEntity.sell_overprice} #end</span></p>
+        <p class="tj">
+           <!--  <span><input type="checkbox" checked="check"><label>我已阅读并同意《小微律政客户服务合同》</label></span> -->
+            <a   class="btn myOrderSubmit">提交订单</a>
+        </p>
+    </div>
+    
+    <form name="mySellForm" id="mySellForm"  method='post'  action="/order/submitOrder"> 
+    	<input type='hidden' name="sellids" id="sellids">
+    	<input type='hidden' name="packagesellids" id="packagesellids">
+    	<input type="hidden" name="sellcoupons" id="sellcoupons" />
+    </form> 
+</div>
+<span style="display:none;" id="recommend_coupons">$!{recommend_coupons}</span>
+
+<script type="text/javascript">
+$(function(){
+	
+	//初始化重新计算商品价格，数量
+    reSetPrice();
+	
+    $("#pro-type").tabso({
+        cntSelect:"#pro-con",
+        tabEvent:"click",
+        onStyle : "current",
+        tabStyle:"normal"
+    }); 
+
+    // 无忧套餐切换
+    $(".tc-con").hide(); 
+    $(".tc-tabs p:first").addClass("active").show(); 
+    $(".tc-con:first").show(); 
+    $(".tc-tabs p").click(function() {
+        $(".tc-tabs p").removeClass("active"); 
+        $(this).addClass("active"); 
+        $(".tc-con").hide(); 
+        var activeTab = $(this).find("a").attr("href"); 
+        $(activeTab).fadeIn(); 
+        return false;
+    });
+    
+    
+    /**
+    *提交信息
+    */
+    $(".myOrderSubmit").click(function(){
+        var sellids = "";
+        var sellpackageids = "";
+        var sell_coupons = "";
+    	$(".mysellid").each(function(e){
+			sellids += $(this).text() + ",";
+    	});
+    	sellids = sellids.replace(/,$/,'');
+    	
+    	$(".mypackagesellid").each(function(e){
+    		sellpackageids += $(this).text() + ",";
+    	});
+    	sellpackageids = sellpackageids.replace(/,$/,'');
+    	
+    	
+    	$(".tab-splist").each(function(){
+    		var sell_id = $(this).find(".mysellid").text();
+    		var coupon_id = $(this).find(".coupon_input").attr("data-id");
+    		if (coupon_id != null && coupon_id != "") {
+	    		sell_coupons +=sell_id+"_"+coupon_id+",";
+    		}
+    	});
+    	
+    	sell_coupons = sell_coupons.replace(/,$/,'');
+    	
+    	if(sellids.length == 0 && sellpackageids.length == 0){
+    		alert("您没有购买任何商品!");
+    		return false;
+    	}
+    	$("#sellids").val(sellids);
+    	$("#packagesellids").val(sellpackageids);
+    	$("#sellcoupons").val(sell_coupons);
+    	$("#mySellForm").submit();
+    });
+    
+    
+    /******
+     *针对商品包所做改动
+     *****/
+    // 删除单条列表
+    $(".tab-splist a.del").live("click",function () {
+    	if(window.confirm("确定要删除吗？")){
+        	$(this).parent().parent().parent().remove();
+        	var tempPrice = $(this).parent().parent().find(".price").html();
+        	//setPrice('minus',tempPrice);   //重新计算价格
+        	//setProductNumber('minus');     //设置购买的商品数量
+        	reSetPrice();//重新计算商品价格、商品数量
+    	}
+    });
+
+    // 删除套装列表
+    $(".tc-coupon-box a.del").live("click",function () {
+    	if(window.confirm("确定要删除吗?")){
+			$(this).parent().parent().parent().parent().remove();
+			var tempPrice = $(this).parent().parent().find(".price").html();
+			//setPrice('minus',tempPrice); //重新计算价格
+			//setProductNumber('minus');   //设置购买的商品数量
+			reSetPrice();//重新计算商品价格、商品数量
+    	}
+    });
+    
+ 	//添加单条
+    $(".sellBtn").live("click",function(){
+		var sellid = $(this).attr("t_sellid");       //获得定价条目ID
+		var calPrice = $(this).attr("t_sellprice");      //定价条目价格
+        $.post("/order/postSellProduct/"+sellid,function(data){
+        	$(".showtc-box").after(data);
+	        reSetPrice();//重新计算商品价格、商品数量
+        });
+        //计算价格
+        //setPrice('add',calPrice);
+        //计算商品数量
+        //setProductNumber('add');
+    }); 
+    // 添加套装
+    $(".packageSellBtn").live("click",function(){
+    	var packagesellid = $(this).attr("t_package");  //获得套餐id
+    	var calPrice = $(this).attr("t_packageprice"); //获得套餐价格
+    	$.post("/order/postPackageSellList/"+packagesellid,function(data){
+    		$(".showsp-box").after(data); 
+	        reSetPrice();//重新计算商品价格、商品数量
+    	});
+        //计算价格
+        //setPrice('add',calPrice);
+        //计算商品数量
+        //setProductNumber('add');
+    }); 
+});
+
+/*
+ * 计算价格
+ */
+function setPrice(type,priceParam){
+	var curprice = $("#curPrice").html();  //订单金额
+	var tempPrice = 0;
+	if(type == "add"){
+		tempPrice = parseInt(priceParam) + parseInt(curprice) ;
+	}else{
+		tempPrice = parseInt(curprice) - parseInt(priceParam) ;
+	}
+	
+	var curDiscount = 0;
+	$(".coupon_input").each(function(){
+		var dis = $(this).attr("data-discount");
+		curDiscount = curDiscount + parseInt(dis);
+	});
+	
+	$("#curDiscount").html(curDiscount);   //优惠金额
+	$("#curPayCount").html("￥"+tempPrice);   //应付金额
+	$("#curPrice").html((tempPrice - curDiscount));   //应付金额
+} 
+
+
+function reSetPrice(){
+	
+	var totalPrice = 0;
+	var discountPrice = 0;
+	var count = 0;
+	//普通商品
+	$(".tab-splist").each(function(){
+		var price = $(this).find(".price").html();
+		totalPrice = totalPrice + Number(price);
+		count++;
+	});
+	
+	//商品包
+	$(".tc-coupon").each(function(){
+		var price = $(this).find(".price").html();
+		totalPrice = totalPrice + Number(price);
+		count++;
+	});
+	
+	//优惠券
+	$(".coupon_input").each(function(){
+		var dis = $(this).attr("data-discount");
+		discountPrice = discountPrice + Number(dis);
+	});
+	var money = accAdd(totalPrice ,-discountPrice) <=0 ? 0 : accAdd(totalPrice ,-discountPrice);
+	$("#curDiscount").html(discountPrice);   //优惠金额
+	$("#curPayCount").html("￥"+money);   //应付金额
+	$("#curPrice").html(totalPrice);   //订单金额
+	$("#curNum").html(count);//商品数量
+}
+
+/***
+ * 设置购买的商品数量
+ */
+function setProductNumber(type){
+	var sellNum = $("#curNum").text();
+	if(type == "add"){
+		var tempNum = parseInt(sellNum) + 1;
+	}else{
+		var tempNum = parseInt(sellNum) - 1;
+	}
+	$("#curNum").html(tempNum);
+}
+
+
+//乘法
+function accMul(arg1,arg2) {
+	var m=0,s1=arg1.toString(),s2=arg2.toString();
+	try{m+=s1.split(".")[1].length;}catch(e){}
+	try{m+=s2.split(".")[1].length;}catch(e){}
+	return Number(s1.replace(".",""))*Number(s2.replace(".",""))/Math.pow(10,m);
+}
+//除法
+function accDiv(arg1,arg2){
+    var t1=0,t2=0,r1,r2;
+    try{t1=arg1.toString().split(".")[1].length;}catch(e){}
+    try{t2=arg2.toString().split(".")[1].length;}catch(e){}
+    with(Math){
+        r1=Number(arg1.toString().replace(".",""));
+        r2=Number(arg2.toString().replace(".",""));
+        return (r1/r2)*pow(10,t2-t1);
+    }
+}
+//加法
+function accAdd(arg1,arg2){
+    var r1,r2,m;
+    try{r1=arg1.toString().split(".")[1].length;}catch(e){r1=0;}
+    try{r2=arg2.toString().split(".")[1].length;}catch(e){r2=0;}
+    m=Math.pow(10,Math.max(r1,r2));
+    return (arg1*m+arg2*m)/m;
+}
+
+</script>
+<script type="text/javascript" src="/js/order/order_preferential.js"></script>
+

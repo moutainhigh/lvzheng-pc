@@ -1,0 +1,137 @@
+
+<script>
+$(function(){
+    // 左导航切换显示
+    $(".left-nav dd").hover(function(){
+        $(".nav-right",this).show();
+    });
+    $(".left-nav dd").mouseleave(function(){
+        $(".nav-right",this).hide();
+    });
+    $("dd a.hover").each(function(){
+        $(this).mousemove(function(){
+            $("dd a.hover").addClass("nav-left").removeClass("nav-on");
+            $(this).addClass("nav-on").removeClass("nav-left");
+        });
+    });
+
+    // 做菜单自适应
+    if($(".left-nav dd").length<=6){
+        $(".left-nav dd").addClass("dd6")
+    }else if($(".left-nav dd").length==7){
+        $(".left-nav dd").addClass("dd7")
+    }else if($(".left-nav dd").length==8){
+        $(".left-nav dd").addClass("dd8")  
+    };
+
+    // 描点
+    $(window).scroll(function(){
+        var top = $(document).scrollTop();          
+        var menu = $("#menu");                      
+        var items = $("#content").find(".vir-hover"); 
+        var curId = "";                             
+        items.each(function(){
+            var m = $(this);                        
+            var itemsTop = m.offset().top;        
+            if(top > itemsTop-100){
+                curId = "#" + m.attr("id");
+            }else{
+                return false;
+            }
+        });
+        var curLink = menu.find(".cur");
+        if( curId && curLink.attr("href") != curId ){
+            curLink.removeClass("cur");
+            menu.find( "[href=" + curId + "]" ).addClass("cur");
+        }
+    });
+
+    $(window).scroll(function(){
+        var a=parseInt($(window).scrollTop());
+        if(a>520){
+            $(".fix-box").addClass("left-fixed")
+        }
+        if(a<520){
+            $(".fix-box").removeClass("left-fixed")
+        }
+    });
+
+
+});
+</script>
+
+<body id="other-nav">
+<div id="continer">
+
+     <!-- logo区域 -->
+    #parse("views/common/logo_normal.html")
+
+
+    <!-- 导航 -->
+     #parse("views/common/navigation.html")
+   
+    <div class="virtual-address">
+        <a href="http://www.lvzheng.com/ldy/midautumn.html"><div class="vir-banner"></div></a>
+        <div class="vir-addbox" id="content">
+
+            <div class="fix-box" id="menu">
+                <ul>
+                   <!--  <li><a href="#a1" class="cur">北京<br>朝阳区</a></li>
+                    <li><a href="#a2">北京<br>海淀区</a></li>
+                    <li><a href="#a3">北京<br>丰台区</a></li>
+                    <li><a href="#a4">北京<br>通州区</a></li>
+                    <li><a href="#a5">北京<br>昌平区</a></li> -->
+                    #foreach($m in $!listvo)
+                     <li><a href="#a$!{m.ordersby}">$!{m.city_name}<br>$!{m.area_name}</a></li>
+                    #end
+                </ul>
+            </div>  
+
+
+			 #foreach($m in $!listvo)
+			 	<div class="virbox">
+                <p class="vir-hover" id="a$!{m.ordersby}"></p>
+                 #foreach($n in $!m.confvo)
+                <a href="/address/detail/$!{n.address_conf_id}.html">
+                <div class="list">
+                    <p class="name">$!{n.address_name}</p>
+                    <p class="act">$!{n.descpation}</p>
+                    <div class="fw-box">
+                        <label>适用经营范围：</label>
+                        <div class="tagbox">
+                        #set ($i=0)
+                        #foreach($o in $!n.tags)
+                            #if($i < 6)
+	                        <p class="tag"><i class="left"></i><span>$!{o.titlename}</span><i class="right"></i></p>
+  							#end
+  							#set($i=$i+1)                  
+                        #end
+                        </div>
+                    </div>
+                    <div class="listpic"><a href="/address/detail/$!{n.address_conf_id}.html"><img width="430" height="130" src="/file/download/$!{n.pic_link}"></a></div>
+                    <div class="price-box">
+                        <a target="_blank" href="/order/index/$!{n.address_id}.html" class="btn">立即购买</a>
+                        <span class="xj">￥$!{n.over_price} </span>
+                        <span class="yj">￥$!{n.market_price} </span>
+                    </div>
+                    <a class="detailbtn" href="/address/detail/$!{n.address_conf_id}.html">查看详情</a>
+                </div>
+                </a>
+                #end
+
+
+            </div>
+			 #end
+            
+
+
+            
+            
+            
+            
+
+        </div>
+    </div>
+
+  
+

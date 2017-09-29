@@ -1,0 +1,361 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>小微律政-国内领先的O2O自营法律服务提供商</title>
+<meta name="description" content="注册公司找小微律政,小微律政拥有专业的律师和会计团队,小微律政专注为创业公司及中小微企业提供代办公司注册,商标注册,代理记账,社保公积金开户,公司变更,合同拟定,公司章程等一站式企业服务，小微律政服务流程每一步都无微不至。"/>
+<meta name="keywords" content="小微律政,代办注册公司,公司注册,商标注册费用和流程" />
+<link href="/sem/css/index.css" type="text/css"  rel="stylesheet"/>
+<link href="/sem/css/zt.css" type="text/css"  rel="stylesheet"/>
+<script type="text/javascript" src="/sem/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="/sem/js/return-top.js"></script>
+<script type="text/javascript" src="/sem/js/util.js"></script>
+<script>
+$(function(){
+  $(window).scroll(function(){
+    var a=parseInt($(window).scrollTop());
+    if(a<550){
+      $(".land-nav").removeClass("land-navxf")
+    }
+    if(a>550)
+      {
+      $(".land-nav").addClass("land-navxf")
+      }
+  });
+  
+  //点击 立即办理
+  $(".pop_box1").on('click',function(){
+	  	var userphone = $("#userphone").val();
+	  	var username  = $("#username").val();
+	  	var validatecode  = $("#validatecode").val();
+		if(!checkPhoneNumberAlert(userphone)){
+			return;
+		}
+		if(username.length > 6){
+			alert("输入的名称过长!");
+			return;
+		}
+		if(isEmpty(validatecode)){
+			alert("图形验证码不能为空!");
+			return;
+		}
+		$.ajax({
+			type:'post',
+			url : '/sem/submitOrder.html',
+			data:{'userphone':userphone,'username':username,'validatecode':validatecode,'tokenstr':'$!{token}'},
+			success:function(msg){
+				if(msg.success){
+					$("#validateimg").click();
+					alert("你已经预约我们的服务，请等待我们的客服与你确定。");
+				}else if(!msg.success){
+					$("#validateimg").click();
+					alert(msg.msg);
+				}
+			},
+			error:function(){
+				$("#validateimg").click();
+				alert("操作失败!请联系客服:010-84463639");
+			}
+		});
+  });
+});
+
+$("#quitbutton").click(function(){
+	$.ajax({url:"/logout",type: 'POST',
+		dataType:"json",
+		success:function(data){
+			if(data.ret == "ok"){
+				window.location.href="/";
+			}
+		}});
+});
+</script>
+
+</head>
+<body>
+<div id="continer">
+	<!-- 顶部信息条 -->
+    <div class="top-box">
+        <div class="box-con">
+            <div class="left-box">
+            	#if($logen)
+                <span class="item"><a href="javascript:void(0);">欢迎，$!{logen.username}</a></span>
+                <span class="item"><a href="javascript:void(0);" id="quitbutton">退出</a></span>
+                #else
+                 <span class="item"><a href="/login.html">登录</a></span>
+                <span class="item"><a href="/register.html">注册</a></span>
+                #end
+                <span class="phone"><a href="javascript:void(0);">手机访问小微<b class="v-phone" ><img src="/sem/images/index/ewm.png" ></b></a></span>
+            </div>
+            <div class="right-box">
+                <span class="item"><a href="http://mycenter.lvzheng.com/mycenter/index.html">我的小微</a></span>
+                <!-- <span class="item"><a href="">消息<i>3</i></a></span> -->
+                <span class="item"><a href="http://mycenter.lvzheng.com/order/unpayorder.html">我的订单</a></span>
+                <span class="call-on"><a href="javascript:void(0);">010-57891402</a></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- logo区域 -->
+	<div class="logo-box">
+	    <a href="/" class="logo"></a>
+	    <span class="logo-text"></span>
+	    <div class="ad-box">
+	        <ul>
+	            <li class="ico1">价格透明</li>
+	            <li class="ico2">信息保密</li>
+	            <li class="ico3">进度掌控</li>
+	            <li class="ico4">售后无忧</li>
+	        </ul>
+	    </div>
+	</div>
+
+    <div class="land-banner">
+        <div class="ban-box">
+            <p class="text1">小微律政创办以来</p>
+            <p class="text2">已为 <span>27300</span> 余位创业者提供服务</p>
+            <p class="text3">
+                <span>现在拨打电话注册公司只需<a>￥598</a></span>
+                <span class="hot-tel">服务热线：010-57891402</span>  
+            </p>
+        </div>
+    </div>   
+
+    <div class="land-nav">
+        <div class="land-nav-bg">
+            <span class="item">
+                <label>联系人：</label>
+                <input type="text" name="username" id="username" />
+            </span>
+            <span class="item">
+                <label>联系电话：</label>
+                <input type="text" name="userphone" id="userphone" />
+            </span>
+            <span class="item">
+                <label>验证码：</label>
+                <img id="validateimg" onclick="$(this).attr('src','/picvalidate/$!{token}?'+new Date());" src="/picvalidate/$!{token}" />
+                <input class="w_box2" id="validatecode" name="validatecode" type="text" placeholder="输入验证码" />
+            </span>
+            <a  class="btn pop_box1">立即办理</a>
+        </div>
+    </div>
+
+    <div class="land-main">
+        <div class="box">
+            <div class="tit-box">
+                <p class="name">20天极速注册公司</p>
+                <p class="text">我们为什么不一样？不是我们多么高冷孤傲，而是想你所想，事必亲为，我们是新型的互联网公司，不是为了取悦任何人，我们只是认真。</p>
+            </div>
+            <div class="step">
+                <div class="stag1"><img src="/sem/images/land/stag1.png"></div>
+
+                <div class="stag2"><p class="t1"><span>￥</span>598</p><p class="t2">￥1999</p></div>
+            </div>
+        </div>
+
+        <div class="box bbg">
+            <div class="tit-box">
+                <p class="name">核心服务</p>
+                <p class="text">小微提供的每一款产品都是精心打磨，用心酿制，我相信它不是靠低价来俘获芳心，更是用超出你体验的服务来让你拍案叫绝，开启体验，你只需一个点击。</p>
+            </div>
+            <div class="step">
+                <ul class="list">
+                    <li>
+                        <p class="name1">公司注册</p>
+                        <p class="text">一证五章<br>全程一站式办理</p>
+                        <p class="text">标准价：<span>598</span>元</p>
+                    </li>
+                    <li>
+                        <p class="name2">公司变更</p>
+                        <p class="text">10大变更类型<br>你只需改变人才让我来改变公司</p>
+                        <p class="text">最低价：<span>598</span>元</p>
+                    </li>
+                    <li>
+                        <p class="name3">商标注册</p>
+                        <p class="text">大注册类目  只免费怎能服众 <br>服务还可以更给力</p>
+                        <p class="text">标准价：<span>800</span>/类</p>
+                    </li>
+                    <li>
+                        <p class="name4">代理记账</p>
+                        <p class="text">8大北京城区 给予你的<br>不仅是合法 更在于它的优质和安全</p>
+                        <p class="text">良心价：<span>2000</span>/年</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="tit-box">
+                <p class="name">岂止于快</p>
+                <p class="text">你只需拿起电话开始咨询，剩下的就交给小微吧！</p>
+            </div>
+            <div class="step">
+                <ul class="fast-ul">
+                    <li class="icon">
+                        <img src="/sem/images/land/fast_ico1.png" />
+                        <p>立即咨询<br>即刻响应</p>
+                    </li>
+                    <li class="arrow">
+                        <div>15分钟快速响应</div>
+                    </li>
+                    <li  class="icon">
+                        <img src="/sem/images/land/fast_ico2.png" />
+                        <p>一站式办理<br>全程实时沟通</p>
+                    </li>
+                    <li class="arrow">
+                        <div>20工作日极速出证<br>（公司注册）</div>
+                    </li>
+                    <li  class="icon">
+                        <img src="/sem/images/land/fast_ico3.png" />
+                        <p>顺丰邮寄材料<br>快速安全</p>
+                    </li>
+                    <li class="arrow">
+                        <div>2日神速签收</div>
+                    </li>
+                    <li class="icon">
+                        <img src="/sem/images/land/fast_ico4.png" />
+                        <p>签收五星好评<br>后续服务跟进</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="box bbg">
+            <div class="tit-box">
+                <p class="name">注册公司还会用到的...</p>
+            </div>
+            <div class="step">
+                <ul class="more">
+                    <li class="more-ico1"></li>
+                    <li class="more-ico2"></li>
+                    <li class="more-ico3"></li>
+                    <li class="more-ico4"></li>
+                    <li class="more-ico5"></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="box">
+            <div class="tit-box">
+                <p class="name">服务过的客户</p>
+            </div>
+            <div class="step">
+                <ul class="customer">
+                    <li class="cus-ico1"></li>
+                    <li class="cus-ico2"></li>
+                    <li class="cus-ico3"></li>
+                    <li class="cus-ico4"></li>
+                    <li class="cus-ico5"></li>
+                    <li class="cus-ico6"></li>
+                    <li class="cus-ico7"></li>
+                    <li class="cus-ico8"></li>
+                    <li class="cus-ico9"></li>
+                    <li class="cus-ico10"></li>
+                    <li class="cus-ico11"></li>
+                    <li class="cus-ico12"></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+   
+    <!-- 网站底部 -->
+    <div class="bot-main">
+        <!-- 友情连接 -->
+		<div class="link-main">
+		    <div class="link-box">
+		        <div class="list">
+		            <label>热门服务：</label>
+		            <div class="con">
+		                <ul>
+		                    <li><a href="/reg_bj.html">北京公司注册</a></li>
+		                    <li><a href="/change_bj.html">北京公司变更</a></li>
+		                    <li><a href="/bookkeeping_bj.html">北京公司记账</a></li>
+		                    <li><a href="/addresslist.html">北京注册地址</a></li>
+		                </ul>
+		            </div>
+		        </div>
+		        <div class="list">
+		            <label>友情链接：</label>
+		            <div class="con">
+		                <ul>
+		                  
+							<li><a href="http://www.lvzheng.com/xiaoweishuo.html"	  target="_blank" >			小微说           </a></li>
+							<li><a href="http://www.lawtime.cn/shenzhen"	         target="_blank"  >			深圳律师          </a></li>
+							<li><a href="http://www.qianlima.com/zb/area_9/"	     target="_blank"  >			河北招标投标网       </a></li>
+							<li><a href="http://bj.58.com/lvshi/"	                 target="_blank" >			北京法律咨询        </a></li>
+							<li><a href="http://www.lawtv.com.cn/"	                  target="_blank">			法治            </a></li>
+							<li><a href="http://house.focus.cn/fangdaijisuanqi/shangyedaikuan/" target="_blank">			商业贷款计算器       </a></li>
+							<li><a href="http://www.9ask.cn/qingdao/"	              target="_blank"  >          律师咨询           </a></li>
+							<li><a href="http://www.maxlaw.cn/"                  target="_blank">			律师网             </a></li>
+							<li><a href="http://www.hkatreg.net.cn"               target="_blank"  >			注册香港公司          </a></li>
+							<li><a href="http://news.360guakao.net/"	target="_blank">			资质代办            </a></li>
+							<li><a href="http://www.dnlunwen.com"	target="_blank" >			东南毕业论文          </a></li>
+							<li><a href="http://www.anxin.com/fund/"		target="_blank" >			基金理财产品          </a></li>
+							<li><a href="http://www6.cdcctz.com"	target="_blank">			成都公司注册          </a></li>
+							<li><a href="http://www.jia.com/shenzhen/" target="_blank" >			深圳装修            </a></li>
+							<li><a href="http://www.315fangwei.com"	    target="_blank" >			防伪查询            </a></li>
+							<li><a href="http://www.smeoa.com"	target="_blank" >			小微OA            </a></li>
+							<li><a href="http://www.bjyhwy.com"	target="_blank" >			榻榻米价格           </a></li>
+							<li><a href="http://sz.diandianzu.com/	"		   target="_blank"  >			点点租             </a></li>
+							<li><a href="http://www.99inf.com/zyfw/	"	      target="_blank"  >			免费发布信息          </a></li>
+							<li><a href="http://www.cnrencai.com/jingpin/"	target="_blank" >			竞聘演讲            </a></li>
+							<li><a href="http://www.qianyilc.com/"	       target="_blank">			理财平台            </a></li>
+							<li><a href="http://lz.focus.cn"						target="_blank">			兰州房地产           </a></li>
+		                </ul>
+		            </div>
+		        </div>                                         
+		    </div>
+		</div>
+        <!-- 底部宣传 -->
+   		<div class="bot-ad">
+		    <div class="ad-box">
+		        <ul>
+		            <li class="ad-box1">
+		                <p class="t1">价格透明</p>
+		                <p class="t2">明码标价不欺瞒用户</p>
+		            </li>
+		            <li class="ad-box2">
+		                <p class="t1">信息保密</p>
+		                <p class="t2">个人信息安全有保障</p>
+		            </li>
+		            <li class="ad-box3">
+		                <p class="t1">进度掌握</p>
+		                <p class="t2">服务全程进行跟进</p>
+		            </li>
+		            <li class="ad-box4">
+		                <p class="t1">售后无忧</p>
+		                <p class="t2">售后保障全程无忧</p>
+		            </li>
+		        </ul>
+		    </div>
+		</div>
+		<div class="bot-bg">
+		    <div class="bot-box">
+		        <div class="map">
+		            <a href="/about.html">关于我们</a>
+		            <a href="/join.html">人才招聘</a>
+		            <a href="">网站地图</a>
+		            <a href="">常见问题</a>
+		            <a href="/contact.html">加盟合作</a>
+		        </div> 
+		        <div class="text">©lvzheng.com 2014-2015 京ICP备15002212号-1</div> 
+		        <div class="text">北京佶象信息技术有限公司</div>
+		    </div>
+		</div>
+    </div>
+
+
+    <!-- 火箭返回顶部 -->
+    <div class="rocket-to-top">
+        <div class="level-2"></div>
+        <div class="level-3"></div>
+    </div>
+
+
+</div>	
+<!-- 统计代码 -->
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1254054374'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s95.cnzz.com/z_stat.php%3Fid%3D1254054374' type='text/javascript'%3E%3C/script%3E"));</script>
+<script type="text/javascript"> var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://"); document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Fff07fd1b4594615ee70a3e2ece1c28c1' type='text/javascript'%3E%3C/script%3E")) </script>
+</body>
+
+</html>

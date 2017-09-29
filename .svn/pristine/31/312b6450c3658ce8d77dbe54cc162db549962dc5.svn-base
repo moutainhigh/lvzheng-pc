@@ -1,0 +1,3 @@
+#foreach($m in $!area)
+	<li oid="$!{m.areaid}">$!{m.name}</li>
+#end

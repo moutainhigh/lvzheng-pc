@@ -1,0 +1,77 @@
+<script type="text/javascript">
+var InterValObj; //timer变量，控制时间  
+var count = 120; //间隔函数，1秒执行  
+var curCount;//当前剩余秒数  
+
+function sendMessage() {
+    curCount = count;  
+    var jbPhone =  $("#phoneNum").val(); 
+  
+    var validatecode = $("#validatecode").val();
+    var tokenstr = $("#token").val();
+    if (jbPhone != "") {  
+    	if($("#phoneNum").attr("class")=="w_box1"){ 
+    		$("#box_btn").attr("disabled",true);
+    		 $("#box_btn").html("剩余" + curCount + "s");  
+    		 InterValObj = window.setInterval(SetRemainTime, 1000); // 启动计时器，1秒执行一次  
+            // 向后台发送处理数据  
+            $.ajax({  
+                type: "POST", // 用POST方式传输  
+                dataType: "json", // 数据格式:JSON  
+                url: "/common/sendPhoneCode", // 目标地址  
+                data: "phoneNum=" + jbPhone+"&tokenstr="+tokenstr+"&validatecode="+validatecode,
+                success:function(data){
+                	if(data.flag == "8"){
+                		$("#validateimg").click();
+                		$("#box_btn").removeAttr("disabled");
+                		alert("请您输入验证码！");
+                		curCount = 0;
+                		return false;
+                	}
+                	if(data.flag == "9"){
+                		$("#validateimg").click();
+                		alert("输入验证码不正确!");
+                		$("#box_btn").removeAttr("disabled");
+                		curCount = 0;
+                		return false;
+                	}
+                	if(data.flag == "-1"){
+                		$("#validateimg").click();
+                		$("#box_btn").removeAttr("disabled");
+                		curCount = 0;
+                		alert("验证码发送失败!请重新发送");
+                		return false;
+                	}
+                	if(data.flag == "1" || data.flag == "2"){
+                        // 设置button效果，开始计时  
+                        $("#box_btn").attr("class","t_box_btn1");
+                        
+                	}
+                }
+            });  
+    	}
+          
+    }else{
+    	$("#phoneNum").attr("class","w_box1 w_error");
+    	$('span[name="enter_right_phone"]').hide();
+    	$('span[name="enter_error_phone"]').show();
+    	
+    	
+    } 
+}  
+
+//timer处理函数  
+function SetRemainTime() {  
+    if (curCount == 0) {                  
+        window.clearInterval(InterValObj);// 停止计时器  
+        $("#box_btn").attr("class","t_box_btn");
+		$("#box_btn").attr("disabled",false);
+        $("#box_btn").val("重新发送");  
+    }else {  
+        curCount--;  
+       // $("#box_btn").val("请在" + curCount + "秒内输入验证码");  
+        $("#box_btn").attr("value","剩余" + curCount + "s"); 
+    }  
+} 
+
+</script>

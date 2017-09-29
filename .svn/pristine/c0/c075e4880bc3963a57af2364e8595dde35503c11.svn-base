@@ -1,0 +1,121 @@
+<!-- 导航 -->
+<div class="nav-box">
+        <div class="box-con">
+            <!-- 全部分类 -->
+           <div class="n-left">全部分类
+               <div class="banner-nav">
+                   <div class="left-nav">
+                       <dl>
+                              #foreach($x in $!one_)
+                                 	<dd>
+                               <a href="/navigation/index/$!{x.cate_id}.html" class="nav-left">$!{x.cate_name}</a>
+                               <div class="nav-right">
+                                   <div class="main-box">
+                                       <div class="left">
+                                           #foreach($y in $!one)
+                                             #foreach($item in $y.entrySet())  
+                                              #if($item.key == $x.cate_id)
+                                                 #foreach($z in $!item.value)  <!-- 这里是第三层map《“名称”，List《“id”,"name"》》 -->
+                                                   #foreach($z1 in $!z.entrySet())  
+		                                           <div class="list">
+		                                               <div class="title"><p>$z1.key</p></div>
+		                                               <div class="text">
+		                                                   <ul>            
+		                                                       #foreach($zz in $z1.value)
+		                                                       <li><a href="/commondetail/detail/$!{zz.pid}.html">$!{zz.pname}</a></li>
+		                                                       #end
+		                                                   </ul>
+		                                               </div>
+		                                           </div>
+                                                   #end
+                                             #end
+                                            #end 
+                                           #end
+                                           #end
+
+                                       </div>
+                                       <div class="right">
+                                           <div class="pic">
+                                           <!--动态配置图片  -->
+                                          <!--  #foreach($img in $!imgMap.entrySet()) 
+                                               #if($!img.key == $!x.cate_id)
+                                                  #foreach($p in $!img.value) 
+                                                  
+                                                    <img src="/file/download/$!{p}">
+                                                  #end
+                                               #end
+                                           #end -->
+                                              <!--静态图片  -->
+                                               <a href="http://mycenter.lvzheng.com/mywf/page/reg"><img src="/images/index/pic/zzlc.jpg"><span>可靠地址 放心注册</span>  </a>
+                                               <a href="/addresslist.html"><img src="/images/index/pic/xndz.jpg">                        <span>专业会计 为您省时省力</span></a>
+                                               <a href="/commondetail/detail/38253214893569.html"><img src="/images/index/pic/dljz.jpg">      <span>自己注册公司 无需百度</span></a>
+                                               
+
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+                           </dd>
+
+                                 #end
+                           
+
+                           
+                           
+                       </dl>
+                   </div>
+               </div>
+           </div>
+           <ul class="nav-ul">
+               <!-- <li><a href="/"  #if($!{nav}=='home')class="current"#end>首页</a></li> -->
+               <li><a href="/commondetail/detail/38229817543169.html" #if($!{catModel.cate_name}=='工商注册')class="current"#end>公司注册</a></li>
+               <li><a href="/commondetail/detail/38253214893569.html" #if($!{catModel.cate_name}=='财税服务')class="current"#end>代理记账</a></li>
+               <li><a href="/commondetail/detail/38230926529537.html" #if($!{catModel.cate_name}=='知识产权')class="current"#end>商标注册</a></li>
+               <li><a href="/commondetail/detail/38230152382977.html" #if($!{catModel.cate_name}=='公司变更')class="current"#end>公司变更</a></li>
+               <li><a href="/addresslist.html" #if($!{nav}=='address')class="current"#end>虚拟地址</a></li>
+               <li><a href="/commondetail/detail/39186221829377.html" #if($!{catModel.cate_name}=='企业服务')class="current"#end>法律服务</a></li>
+               
+               <li class="hm-nav"><a href="/business/checkname/detail.html"   #if($!{nav}=='query')class="current"#end><img src="/images/product/hm_nav.gif"></a></li>
+               
+               
+           </ul>
+       </div>
+   </div>
+
+<script type="text/javascript">
+$("#flow-name").tabso({
+    cntSelect:"#flow-con",
+    tabEvent:"mouseover",
+    tabStyle:"normal"
+}); 
+
+// 左导航切换显示
+$(".left-nav dd").hover(function(){
+    $(".nav-right",this).show();
+});
+$(".left-nav dd").mouseleave(function(){
+    $(".nav-right",this).hide();
+});
+
+$('#cy-act').owlCarousel({
+    items: 4,
+    navigation: true,
+    navigationText: ["",""],
+    scrollPerPage: true
+});
+
+$('#ser-eval').owlCarousel({
+    items: 2,
+    navigation: true,
+    navigationText: ["",""],
+    scrollPerPage: true
+});
+
+$('#ent-info').owlCarousel({
+    items: 1,
+    navigation: true,
+    navigationText: ["",""],
+    scrollPerPage: true
+});
+
+</script>

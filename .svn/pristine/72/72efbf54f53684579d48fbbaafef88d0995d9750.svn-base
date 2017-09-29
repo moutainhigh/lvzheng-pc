@@ -1,0 +1,13 @@
+<!-- 动态添加定价条目 -->
+<div class="tab-splist">
+    <ul>
+    	<li style="display: none;" class="mysellid">$!{postSellProductMap.sell_id}</li>
+        <li>$!{postSellProductMap.sell_product_name}</li>
+        <li>$!{postSellProductMap.cityname}</li>
+        <li>$!{postSellProductMap.aeasname}</li>
+        <li>$!{postSellProductMap.sell_amount}</li>
+        <li></li>
+        <li>¥<span class="price">$!{postSellProductMap.sell_overprice}</span></li>
+        <li class="del"><a class="del" ></a></li>
+    </ul>
+</div>

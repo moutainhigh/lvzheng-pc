@@ -1,0 +1,230 @@
+package com.jx.hunter.lvzhengpc.service;
+
+import com.jx.blackface.orderplug.buzs.OrderBuzForHunter;
+
+/***
+ * SEM落地页操作类
+ * @author lvzheng-duxf
+ */
+public class SEMService {
+	private static  SEMService tempNeedService = null;
+	
+	public static SEMService getStance(){
+		if(null == tempNeedService){
+			tempNeedService = new SEMService();
+		}
+		return tempNeedService;
+	}
+	
+	/**
+	 * sem投放
+	 */
+	private static final String sellid = "38830686270721";
+	private static final int channel = 101;  //SEM渠道
+	public void addSEMOrderByLvzheng(Long userid){
+		OrderBuzForHunter.obfhunter.orderPlace(sellid, userid, "", channel);
+	}
+	
+	
+	
+//	public static void main(String[] args) {
+//		String propertes ="[{\"propertyid\":\"city\",\"propertyval\":\"1\"},{\"propertyid\":\"area\",\"propertyval\":\"101\"},{\"propertyid\":\"35\",\"propertyval\":\"companytype\"}]";
+//		
+//		try {
+//			SEMService.getStance().addNewOrderBySEM("1101", "35422031366401", "18811144804", "新官网SEM导流单", 598, 598);
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
+	
+	
+//	/**
+//	 * 获得用户企业中的公司名称
+//	 * @param userId
+//	 * @return
+//	 */
+//	public LvEnterpriseEntity  getLastIncByUserId(long userId){
+//		List<LvEnterpriseEntity> enterpriseList = null;
+//		try {
+//			enterpriseList = RSBLL.getstance().getEpEnterpriseService().getEnterpriseListByRoleTypeAndRoleIdWork(ILvEnterpriseRoleRelationService.ROLETYPE_ORDERPERSON, userId + "");
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		if(enterpriseList != null && !enterpriseList.isEmpty()){
+//			return enterpriseList.get(0);
+//		}
+//		return null;
+//	}
+//	
+//	/**
+//	 * 
+//	 * @param enterpriseMap
+//	 * @param beat
+//	 * @return
+//	 * @throws Exception
+//	 */
+//	public long addEnterpriseEntity(String userId, Map<String,String> enterpriseMap, BeatContext beat) throws Exception{
+//		Long id = 0L;
+//		Map<String, String> loginInfo = null;
+////		try {
+////			loginInfo = EnterpriseUtils.getLoginInfo(beat);
+////		} catch (Exception e1) {
+////			e1.printStackTrace();
+////		}
+//		try {
+//			id = RSBLL.getstance().getEpEnterpriseService().saveEnterpriseAllEntity(enterpriseMap, loginInfo);
+//		} catch (Exception e1) {
+//			e1.printStackTrace();
+//		}
+//		if(id > 0L){
+//			// 保存企业关联人员
+//			try {
+//				RSBLL.getstance().getEnterpriseRoleRelationService().saveRoleRelationEntity(id, ILvEnterpriseRoleRelationService.ROLETYPE_ORDERPERSON, Long.parseLong(userId), null, loginInfo);
+//			} catch (Exception e2) {
+//				e2.printStackTrace();
+//			}
+//		}
+//		return id;
+//	}
+//	
+//	
+//	/**
+//	 * 新官网向老官网导流主方法
+//	 */
+//	public void addNewOrderBySEM(String productID,String userid,String userPhone,String beizhu,Integer totalmoney,Integer orderPrice) throws Exception{
+//		long nowtime = new Date().getTime();
+//		long busId  = 0l;
+//		if(StringUtils.isNotEmpty(userid)){
+//			LvEnterpriseEntity bb = getLastIncByUserId(Long.valueOf(userid));
+//			if(bb!=null){
+//				busId = bb.getEnterpriseId();
+//			}else{
+//				busId = addEnterpriseEntity(userid, null, null);
+//			}
+//		}
+//		
+//		long superid = addSuper(nowtime, userPhone, beizhu,String.valueOf(totalmoney), Long.valueOf(userid));
+//		
+//		
+//		long orderid = addOrder(nowtime, "1", Float.parseFloat(totalmoney.toString()),Float.parseFloat(orderPrice.toString()), beizhu, productID, Long.valueOf(userid), superid, String.valueOf(busId));
+//		addChild_com("1", "101", productID, orderid);
+//		
+//		//添加t_followup
+//		FollowupEntity followupEntity = new FollowupEntity();
+//		followupEntity.setOrderid(orderid);
+//		followupEntity.setAddtime(nowtime);
+//		followupEntity.setIntentcode(2);
+//		followupEntity.setContent(beizhu);
+//		followupEntity.setEmpid(Long.valueOf(userid));
+//		RSBLL.getstance().getIFollowupService().addFollowupEntity(followupEntity);
+//	}
+//	
+//	
+//	/**
+//	 * @see   //公司注册的子单
+//	 * @param J_sel_city
+//	 * @param J_sel_area
+//	 * @param J_productid
+//	 * @param orderid
+//	 * @throws Exception
+//	 */
+//	private void addChild_com(String J_sel_city, String J_sel_area,String J_productid, long orderid) throws Exception {
+//		SorderChildrenEntity childModel = new SorderChildrenEntity();
+//		//拼装属性json串
+//		List<Map<String,String>> list = new ArrayList<Map<String,String>>();
+//		for (int i = 0; i < 3; i++) {
+//			Map map = new HashMap<String, String>(); 
+//			if(i==0){
+//				map.put("propertyid","city");
+//				map.put("propertyval",J_sel_city);
+//			}else if(i==1){
+//				map.put("propertyid","area");
+//				map.put("propertyval",J_sel_area);
+//			}else if(i==2){
+//				long a = RSBLL.getstance().getIProductPropertiesService().getProductPropertiesEntitys(" proname='内资公司'", 1, 1, "proid").size()>0?RSBLL.getstance().getIProductPropertiesService().getProductPropertiesEntitys(" proname='内资公司'", 1, 1, "proid").get(0).getProid():0;
+//				map.put("propertyid",a+"");
+//				map.put("propertyval","companytype");
+//			}
+//			list.add(map);
+//		}
+//		childModel.setPropertid(net.sf.json.JSONArray.fromObject(list).toString());
+//		if("1".equals(J_sel_city)){
+//			if("101".equals(J_sel_area)){ //朝阳
+//				childModel.setPrice(598);
+//				childModel.setMinprice(598);
+//			}else{
+//				childModel.setPrice(598);
+//				childModel.setMinprice(598);
+//			}
+//		}
+//		
+//		childModel.setOrderid(orderid);
+//		
+//		long cid = RSBLL.getstance().getProductCategoryService().getProductCategoryEntitys(" cname='公司注册' and productid="+J_productid+" and cityid="+J_sel_city, 1, 1, "cid").size()>0?RSBLL.getstance().getProductCategoryService().getProductCategoryEntitys(" cname='公司注册' and productid="+J_productid+" and cityid="+J_sel_city, 1, 1, "cid").get(0).getCid():0;
+//		
+//		childModel.setProdcateid(Integer.parseInt(String.valueOf(cid)));//公司注册
+//		RSBLL.getstance().getISorderChildrenService().addSorderChildrenEntity(childModel);
+//	}
+////	
+//	/**
+//	 * @param nowtime
+//	 * @param J_sel_city
+//	 * @param J_sel_price
+//	 * @param J_remark
+//	 * @param J_productid
+//	 * @param uid
+//	 * @param superid
+//	 * @return
+//	 * @throws Exception
+//	 */
+//	private long addOrder(long nowtime, String J_sel_city, float totalmoney,float realMoney,String J_remark, String J_productid, long uid, long superid,String J_bus_id) throws Exception {
+//		//@1公司注册
+//		SorderEntity orderModel = new SorderEntity();
+//		orderModel.setSuperid(superid);
+//		orderModel.setProductid(Long.valueOf(J_productid));
+//		orderModel.setUserid(uid);
+//		orderModel.setOrderstate(7);
+//		orderModel.setPaystate(0);
+//		orderModel.setServerstate(0);
+//		orderModel.setDescription(J_remark);
+//		if(StringUtils.isNotEmpty(J_bus_id)){
+//			orderModel.setBusid(Long.valueOf(J_bus_id));
+//		}
+//		orderModel.setTotalmoney(totalmoney);
+//		orderModel.setPaymoneycount(realMoney);
+//		orderModel.setPostime(nowtime);
+//		orderModel.setOrderform(2);
+//		orderModel.setOrdercity(StringUtils.isEmpty(J_sel_city)?0:Integer.parseInt(J_sel_city));
+//		orderModel.setUpdatetime(nowtime);
+////		orderModel.setIsnewprocess(1);
+//		long  orderid = RSBLL.getstance().getISorderService().addSorderEntity(orderModel);
+//		return orderid;
+//	}
+////	
+////	
+////	/***
+////	 * 添加超级母单 
+////	 * @param userId 用户ID
+////	 * @param userphone 用户手机号
+////	 * @param description 描述
+////	 * @param totalmoney 总金额
+////	 * @return 超级母单ID
+////	 * @throws Exception
+////	 */
+//	private long addSuper(long nowtime, String J_mobile, String J_remark,String J_total, long uid) throws Exception {
+//		SorderSuperEntity superModel = new SorderSuperEntity();
+//		//userid待写
+//		superModel.setUser_id(uid );
+//		superModel.setTotalmoney(StringUtils.isEmpty(J_total)?0:Float.parseFloat(J_total));
+//		superModel.setPhone(J_mobile);
+//		superModel.setDescription(J_remark);
+//		
+//		superModel.setOrderstate(7);
+//		superModel.setPaystate(0);
+//		superModel.setPostime(nowtime);
+//		superModel.setUpdatetime(nowtime);
+//		long superid = RSBLL.getstance().getSorderSuperService().addSorderSuperEntity(superModel);
+//		return superid;
+//	}
+
+}

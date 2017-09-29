@@ -1,0 +1,206 @@
+a.link{color: #000}
+a.link:hover{color: #ff6868;text-decoration: underline;}
+/*资讯导航*/
+.zx-nav{width: 100%;height: 40px;line-height: 40px;background: #3b99d8}
+.zx-nav .nav-main{width: 1200px;margin: 0 auto}
+.zx-nav .nav-main p.navm{min-width: 40px; height: 38px; border-left:1px solid #3b99d8;border-right:1px solid #3b99d8; margin-left: -2px;  line-height: 38px;margin-top: 2px; float: left;font-size: 16px;color: #fff;text-align: center;background: url(http://static.lvzheng.com/lvzhengpc/images/zixun/index/nav_line.png) no-repeat center right }
+.zx-nav .nav-main p.navm:hover{background: #fff;color: #3b99d8;font-weight: bold;}
+.zx-nav .nav-main p.navm:hover a{color: #3b99d8}
+.zx-nav .nav-main .navm a{color: #fff;display: inline-block;height: 38px;padding: 0 20px;}
+.zx-nav .nav-main p.selected{background: #fff;color: #3b99d8;font-weight: bold;}
+.zx-nav .nav-main p.selected a{color: #3b99d8}
+
+.ejnav{height: 44px; line-height: 44px; width: 100%;border-bottom: 1px solid #e6e6e6}
+.ejnav .enav{width: 1200px;margin: 0 auto}
+.ejnav .enav ul{overflow: hidden;}
+.ejnav .enav ul li{float: left;min-width: 50px;padding: 0 20px;font-size: 14px;color: #666}
+.ejnav .enav ul li a.on{color: #258cca}
+
+
+/*咨询首页*/
+.zx-main{width: 1200px;margin: 30px auto 20px;min-height: 500px;overflow: hidden;}
+.zx-focus{min-height: 280px;margin-bottom: 30px;overflow: hidden;}
+.zx-focus .left-box{width: 300px;min-height: 280px;float: left;}
+.zx-focus .left-box p.tag{width: 80px;height: 23px;line-height: 20px;padding-right: 5px;font-size: 16px;color: #fff; text-align: center; background: url(http://static.lvzheng.com/lvzhengpc/images/zixun/index/tag_ico.png) no-repeat center left}
+.zx-focus .left-box p.title{font-size: 18px;color: #333;height: 25px;line-height: 25px;padding: 10px 0 0;overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width: 300px;}
+.zx-focus .left-box p.text {font-size: 14px;color: #999;line-height: 20px;margin: 5px auto 15px;max-height: 40px;overflow: hidden;  text-overflow: ellipsis; width: 300px;}
+.zx-focus .left-box div.list{min-height: 50px;padding: 10px 0;border-top: 1px solid #e6e6e6;font-size: 14px;color: #333}
+.zx-focus .left-box div.list ul{overflow: hidden;}
+.zx-focus .left-box div.list ul li{height: 16px;line-height: 16px;padding: 6px 0;padding-left: 15px; width: 280px; overflow: hidden; text-overflow: ellipsis;white-space: nowrap;background: url(http://static.lvzheng.com/lvzhengpc/images/zixun/list/list_dot.png) no-repeat center left;}
+
+.zx-focus .cen-box{width: 580px;height: 280px;margin: 0 20px;float: left;position: relative;}
+#slides { display:block; width:580px; height:280px; list-style:none; padding:0; margin:0; position:relative}
+#slides li { display:block; width:100%; height:100%; list-style:none; padding:0; margin:0; position:absolute}
+#slides li a { display:block; width:100%; height:100%; text-indent:-9999px}
+#slides li p.text{position: absolute;bottom: 0px;height: 38px;line-height: 38px;padding: 0 10px;font-size: 16px;color: #fff; width: 560px; background: url(http://static.lvzheng.com/lvzhengpc/images/zixun/index/btbg.png) repeat-x}
+#pagination { display:block; list-style:none; position:absolute; left:85%; top:250px; z-index:9900;  padding:7px; margin:0}
+#pagination li { display:block; list-style:none; width:10px; height:10px; border-radius: 5px; float:left; margin-left:5px; background:#FFF }
+#pagination li a { display:block; width:100%; height:100%; padding:0; margin:0;  text-indent:-9999px;}
+#pagination li.current { background:#0092CE}
+
+.zx-focus .right-box{width: 248px; float: left; min-height: 258px;padding: 10px 15px;border: 1px solid #cde9f5;border-radius: 3px;background: #f2f9fc;}
+.zx-focus .right-box p.tag{font-size: 16px;color: #3b99d8;padding-left: 20px;background: url(http://static.lvzheng.com/lvzhengpc/images/zixun/index/rtag_ico.png) no-repeat center left;}
+.zx-focus .right-box .box{border-bottom: 1px solid #e6e6e6;min-height: 50px;padding-bottom: 15px;}
+.zx-focus .right-box .box:last-child{border-bottom: none;}
+.zx-focus .right-box .box p.name{font-size: 18px;color: #333;height: 20px;line-height: 20px;margin: 15px 0 10px;overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width: 250px;}
+.zx-focus .right-box .box ul{overflow: hidden;}
+.zx-focus .right-box .box ul li{height: 20px;line-height: 20px;padding: 5px 0 5px 10px;font-size: 14px;color: #333; width: 240px; overflow: hidden; text-overflow: ellipsis;white-space: nowrap; background: url(http://static.lvzheng.com/lvzhengpc/images/zixun/list/list_dot.png) no-repeat center left;}
+
+.list-box{margin-bottom: 20px}
+.type{float: left;font-size: 18px;color: #000; margin-top: 5px; height: 28px;line-height: 28px;padding-left: 10px;border-left: 5px solid #1cabeb}
+.namebox{height:45px;background:#f3f3f3;border:1px solid #e6e6e6; width: 1198px;}
+.listname { float: right;}
+.listname li {float:left;position:relative;}
+.listname li a {display:block;float:left; font-size: 14px;color: #666; min-width: 60px; padding: 0 10px; text-align: center;height: 42px;line-height: 42px; cursor:pointer;overflow:hidden;}
+.listname li.current a {color: #ff4444;border-bottom: 1px solid #ff4444}
+.zx-list .listcon{width: 770px;margin-right: 20px;float: left;min-height: 500px;overflow: hidden;}
+.listcon {top:0px;background: #fff;position:relative;min-height:100px;}
+.listcon .sublist {padding:10px 20px;border: 1px solid #e6e6e6;border-top: none;overflow:hidden;position: relative;}
+.listcon .sublist a.morebtn{display: inline-block;position: absolute;right: 0px;top: 25%;font-size: 12px;color: #258cca;width: 14px; text-align: center; padding: 8px 5px;background: #e8f0f4;border-radius: 2px}
+.listcon .sublist a.morebtn:hover{background: #1cabeb;color: #fff}
+.listcon .box{width: 770px;min-height: 100px;padding-bottom: 10px;float: left;}
+.listcon .box .con{padding: 20px 5px;min-height: 135px;border-bottom: 1px dashed #e5e5e5;}
+.listcon .box .con .pic{float: left;width: 200px;height: 135px}
+.listcon .box .con .pic img{width: 200px;height: 135px}
+.listcon .box .con .text-box{float: left;width: 520px;margin-left: 30px}
+.listcon .box .con .text-box .name{font-size: 18px;color: #000; font-weight: bold; height: 20px;line-height: 20px;margin-bottom: 5px;padding: 3px 0;overflow: hidden; white-space: nowrap; text-overflow: ellipsis; width: 520px;}
+.listcon .box .con .text-box .text{font-size: 14px;color: #666;min-height: 50px; max-height: 100px; line-height: 25px;padding: 5px 0;overflow: hidden;  text-overflow: ellipsis; }
+.listcon .box .list{padding: 20px 0; font-size: 14px;color: #333}
+.listcon .box .list ul{overflow: hidden;}
+.listcon .box .list ul li{float: left;width: 340px;  padding: 5px 20px; overflow: hidden; text-overflow: ellipsis;white-space: nowrap; background: url(http://static.lvzheng.com/lvzhengpc/images/zixun/list/list_dot.png) no-repeat center left;}
+.listcon .box1{float: left;width: 365px; padding:10px 0 10px 20px; font-size: 14px;color: #333}
+.listcon .box1 .list ul{overflow: hidden;}
+.listcon .box1 .list ul li{float: left;width: 330px;  padding: 5px 20px; overflow: hidden; text-overflow: ellipsis;white-space: nowrap; background: url(http://static.lvzheng.com/lvzhengpc/images/zixun/list/list_dot.png) no-repeat center left;}
+.listcon .box-x{width: 1160px;min-height: 100px;padding-bottom: 10px;float: left;}
+.listcon .box-x .list{padding: 20px 0; font-size: 14px;color: #333}
+.listcon .box-x .list ul{overflow: hidden;}
+.listcon .box-x .list ul li{float: left;width: 345px;  padding: 5px 20px; overflow: hidden; text-overflow: ellipsis;white-space: nowrap; background: url(http://static.lvzheng.com/lvzhengpc/images/zixun/list/list_dot.png) no-repeat center left;}
+
+/*咨询列表*/
+.zx-list{width: 1200px;margin: 0 auto 20px;min-height: 500px;overflow: hidden;}
+.zx-list .crumbs{font-size: 14px;color: #999;height: 30px;line-height: 30px;padding: 15px 0}
+.zx-list .left-listbox{width: 880px;margin-right: 20px;float: left;min-height: 500px;position: relative;}
+.left-listbox .box{width: 880px;min-height: 200px;padding-bottom: 10px}
+.left-listbox .box .title{height: 28px;line-height: 28px; padding: 10px; border-top: 4px solid #3b99d8;border-bottom: 1px solid #e6e6e6}
+.left-listbox .box .title span{font-size: 18px;color: #3b99d8;font-weight: bold;}
+.left-listbox .box .title a.more{font-size: 14px;color: #999;float: right;}
+.left-listbox .box .title a.more:hover{color: #1cabeb}
+.left-listbox .box .con{padding: 25px 15px;min-height: 135px;border-bottom: 1px dashed #e5e5e5;}
+.left-listbox .box .con .pic{float: left;width: 200px;height: 135px}
+.left-listbox .box .con .pic img{width: 200px;height: 135px}
+.left-listbox .box .con .text-box{float: left;width: 620px;margin-left: 30px}
+.left-listbox .box .con .text-box .name{font-size: 18px;color: #000; font-weight: bold; height: 20px;line-height: 20px;margin-bottom: 5px;padding: 5px 0; }
+.left-listbox .box .con .text-box .name a.link{overflow: hidden; white-space: nowrap; text-overflow: ellipsis;width: 390px;display: inline-block;}
+.left-listbox .box .con .text-box .name span{font-size: 12px;color: #999;float: right;}
+.left-listbox .box .con .text-box .name span a.num{padding-left: 20px}
+.left-listbox .box .con .text-box .name span a.num i{color: #f22828;font-style: normal;}
+.left-listbox .box .con .text-box .text{font-size: 14px;color: #666;min-height: 50px; max-height: 100px; line-height: 25px;padding: 5px 0;overflow: hidden;  text-overflow: ellipsis;}
+.left-listbox .box .list{padding: 20px 0; font-size: 14px;color: #333}
+.left-listbox .box .list ul{overflow: hidden;}
+.left-listbox .box .list ul li{float: left;width: 400px;  padding: 5px 20px; overflow: hidden; text-overflow: ellipsis;white-space: nowrap; background: url(http://static.lvzheng.com/lvzhengpc/images/zixun/list/list_dot.png) no-repeat center left;}
+
+.right-listbox{float: left;width: 300px;min-height: 200px}
+.right-listbox .box{width: 280px; padding: 10px;min-height: 200px;background: #f5f7fa;margin-bottom: 15px}
+.right-listbox .box .title{font-size: 16px;color: #000;height: 20px;line-height: 20px;padding: 5px 5px 10px;}
+.right-listbox .box .list{padding: 10px 5px 10px 0;background: #fff;}
+.right-listbox .box .list ul{overflow: hidden;}
+.right-listbox .box .list ul li{padding: 5px 5px 5px 0;font-size: 14px;color: #666;height: 20px;line-height: 20px;}
+.right-listbox .box .list ul li label{display: inline-block;width: 18px; float: left; padding-right: 12px; text-align: center; color: #fff}
+.right-listbox .box .list ul li .list-green{background: url(http://static.lvzheng.com/lvzhengpc/images/zixun/list/list_green.png) no-repeat center left;}
+.right-listbox .box .list ul li .list-gray{background: url(http://static.lvzheng.com/lvzhengpc/images/zixun/list/list_gray.png) no-repeat center left;}
+.right-listbox .box .list ul li span{display: inline-block; width: 235px; float: left; overflow: hidden; text-overflow: ellipsis;white-space: nowrap;}
+.right-listbox .box .list span.litext{display: inline-block; width: 250px; height: 20px;line-height: 20px; margin-left: 10px; padding-left: 10px; float: left; overflow: hidden; text-overflow: ellipsis;white-space: nowrap;background: url(http://static.lvzheng.com/lvzhengpc/images/zixun/list/list_dot.png) no-repeat center left;}
+
+.right-listbox .box .con ul{overflow: hidden;}
+.right-listbox .box .con ul li{padding: 20px;background: #fff;border: 1px solid #fff;border-radius: 5px;margin: 2px 0}
+.right-listbox .box .con ul li:hover{border: 1px solid #2899df;}
+.right-listbox .box .con ul li p.t1{width: 230px;padding-left: 20px;height: 20px;line-height: 20px;text-align: left;font-size: 14px;color: #000;background:url(http://static.lvzheng.com/lvzhengpc/images/product/li_ico.png) no-repeat left center;}
+.right-listbox .box .con ul li p.t2{width: 230px;padding: 10px 20px;text-align: left;font-size: 14px;color: #999999;line-height: 22px}
+.right-listbox .box .con ul li p.t3{width: 230px;padding-left: 20px;text-align: left;height: 30px;line-height: 30px}
+.right-listbox .box .con ul li p.t3 span.s1{font-size: 14px;color: #667789}
+.right-listbox .box .con ul li p.t3 span.s2{font-size: 14px;color: #fa5b5e}
+.right-listbox .box .con ul li p.t3 a{display: inline-block;width: 70px; text-align: center; height: 30px;line-height: 30px;border: 1px solid #fff;background: #fff;color: #1cabeb;float: right;border-radius: 5px}
+.right-listbox .box .con ul li p.t3 a:hover{background: #2899df;color: #fff;border: 1px solid #2899df;}
+
+/*翻页标签*/
+div.page-turn {margin: 3px;padding: 30px 3px;text-align: center;width: 95%;}
+div.page-turn a {color: #288cca;font-size: 12px;margin: 2px;padding: 2px 5px;}
+div.page-turn a.current {color: #fff;font-size: 14px;font-weight: bold;margin: 2px;padding: 2px 5px;background: #2b8dcb;-moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px;}
+
+/*小微问答*/
+.xwwd-box {width:100%;position:relative;margin-top: 20px}
+.tabbtn {height:45px;background:#f8f9fa;border:solid 1px #EDF3F8;border-bottom:solid 1px #9ccceb;}
+.tabbtn li {float:left;position:relative;margin:0 0 0 -1px;}
+.tabbtn li a {display:block;float:left; color: #000; min-width: 80px; padding: 0 20px; text-align: center;height: 45px;line-height: 45px; font-size:16px;cursor:pointer;overflow:hidden;}
+.tabbtn li span.ico{color: #fff;background: #f54848; font-size: 12px; line-height: 18px; display: inline-block; padding:0 5px; position: absolute; top: 3px; -moz-border-radius: 10px; -webkit-border-radius: 10px; border-radius: 10px; }
+.tabbtn li.current {border-left:solid 1px #9ccceb;border-right:solid 1px #9ccceb;border-top: 1px solid #9ccceb;}
+.tabbtn li.current a {background:#fff;color:#3b99d8;font-weight: bold;}
+.tabcon {top:0px;background: #fff;position:relative;min-height:400px;overflow:hidden;}
+.tabcon .sublist {padding:10px 0;border: none;}
+.tabcon .sublist .list ul{overflow: hidden;}
+.tabcon .sublist .list ul li{height: 20px;line-height: 20px;padding: 15px 5px 15px 15px;border-bottom: 1px solid #ebebeb;font-size: 14px}
+.tabcon .sublist .list ul li:hover{background: #f5fafd}
+.tabcon .sublist .list ul li span.text{color: #333;display: inline-block;width: 510px; padding-right: 20px; float: left; overflow: hidden; text-overflow: ellipsis;white-space: nowrap;}
+.tabcon .sublist .list ul li span.ctype{color: #bbbbbb;display: inline-block;width: 110px;float: left; padding-left: 30px;background: url(http://static.lvzheng.com/lvzhengpc/images/zixun/list/type_ico.png) no-repeat left center;}
+.tabcon .sublist .list ul li span.num{color: #bbbbbb;display: inline-block;width: 90px;float: left; border-right: 1px solid #bbb}
+.tabcon .sublist .list ul li span.time{color: #bbbbbb;display: inline-block;width: 80px;float: left; padding-left: 15px}
+
+#tab-list{width: 880px; padding-top:15px; border-top: 1px solid #e5e5e5}
+#tab-list .tab-menu{z-index:1; height: 30px; min-height: 30px;padding: 8px 0px 18px;font-size: 14px;color: #000}
+#tab-list .tab-menu li {float:left; height:30px;line-height:30px;cursor:pointer;text-align:center;margin-right:10px;}
+#tab-list .tab-menu li a{display: inline-block;min-width:50px; padding: 0 15px;  cursor:pointer;text-align:center;background: #e6edf2; -moz-border-radius: 15px; -webkit-border-radius: 15px; border-radius: 15px;}
+#tab-list .tab-box{min-height:0px; border:1px solid #c0deef; background:#ffffff;}
+#tab-list .tab-menu .selected{padding-bottom: 19px; background: url(http://static.lvzheng.com/lvzhengpc/images/zixun/list/arr_ico.png) no-repeat center bottom;}
+#tab-list .tab-menu .selected a{color: #ffffff;background: #3b99d8;}
+#tab-list .tab-box ul{padding: 10px;overflow: hidden;}
+#tab-list .tab-box ul li{float: left;padding:5px 15px;cursor: pointer;font-size: 14px;color: #666}
+#tab-list .tab-box ul li:hover{color: #288cca}
+#tab-list .tab-box ul li.c2{color: #288cca}
+.hide{display:none;}
+
+
+/*网站地图*/
+.botb{border-bottom: 2px solid #1cabeb}
+.map-title{height: 20px;line-height: 20px;font-size: 18px;color: #000;padding-left: 15px;border-left: 5px solid #1cabeb;margin: 10px 0 8px}
+.map-box{padding: 0 20px; margin-bottom: 30px; min-height: 100px; background: #fafafa;border: 1px solid #e5e5e5;border-radius: 3px}
+.map-box .box{border-bottom: 1px solid #e1e1e1;padding: 20px 0}
+.map-box .box:last-child{border-bottom: none;}
+.map-box .box .title{font-size: 16px;color: #fff;height: 22px;line-height: 20px;width: 75px;padding-right: 10px; margin: 5px 0; text-align: center;background: url(http://static.lvzheng.com/lvzhengpc/images/zixun/map/tit_ico.png) no-repeat left center;}
+.map-box .box ul{overflow: hidden;}
+.map-box .box ul li{float: left;min-width: 545px;padding-right: 30px}
+.map-box .box ul li p.name{font-size: 14px;color: #000;height: 20px;line-height: 20px;padding: 3px 0;font-weight: bold;}
+.map-box .box ul li p.cname{font-size: 14px;color: #666}
+.map-box .box ul li p.cname span{display: inline-block;min-width: 50px;padding:2px 15px 8px 0; }
+
+/*文章详情*/
+.left-listbox .detail-con{background: #fff; overflow: hidden;padding: 20px 5px;overflow: hidden;border-top: 1px solid #e6e6e6;border-bottom: 1px solid #e6e6e6;}
+.left-listbox .detail-con .title{font-size: 30px;line-height: 50px;color: #333;text-align: center;margin: 10px 0}
+.left-listbox .detail-con .info{font-size: 14px;line-height: 20px;color: #999;text-align: center;margin-bottom: 20px;overflow: hidden;}
+.left-listbox .detail-con .info span{display: inline-block;margin: 0 10px}
+.left-listbox .detail-con .info span b{font-weight: normal; color: #fa2626}
+.left-listbox .detail-con p.text{font-size: 14px;color: #666;line-height: 25px;padding: 10px 0;overflow: hidden;}
+.left-listbox .detail-con .blog-pic{ text-align: center; padding: 10px 0}
+.left-listbox .detail-con .blog-pic img{max-width: 550px;}
+.left-listbox .blog-menu{ min-height: 20px; line-height: 20px; margin: 30px auto;}
+.left-listbox .blog-menu ul li{float: left; width: 400px; font-size: 14px; color: #999; padding-right: 20px; overflow: hidden;  text-overflow: ellipsis; white-space: nowrap;}
+.left-listbox .blog-menu ul li a{color: #2e91d6}
+.left-listbox .other-info{ margin:25px auto 0; padding: 15px 0; background: #fff}
+.left-listbox .other-info .title{font-size: 18px;color: #000000;line-height: 23px;  border-left: 4px solid #96caea;padding-left: 10px}
+.left-listbox .other-info  ul{ padding:10px 15px; overflow: hidden;}
+.left-listbox .other-info  ul li{float: left;width: 380px;padding:0 30px 0 15px;font-size: 14px;color: #333333;line-height: 30px;background:url(http://static.lvzheng.com/lvzhengpc/images/zixun/list/list_dot.png) no-repeat center left;overflow: hidden;  text-overflow: ellipsis; white-space: nowrap;}
+.left-listbox .other-info  ul li a:hover{color: #ff6868}
+.wz-tc{width: 1200px;margin: 0 auto 20px;}
+
+/*问题详情*/
+.left-listbox .borbno{border-bottom: none}
+.left-listbox .detail-con .que-info p.name{min-height: 30px;line-height: 30px; text-align: left; font-size: 18px;color: #333;padding: 15px 0 15px 30px; background:url(http://static.lvzheng.com/lvzhengpc/images/zixun/news/que_ico.png) no-repeat center left;}
+.left-listbox .detail-con .que-info p.otherinfo {font-size: 14px;color: #bbb;height: 16px;line-height: 16px;padding: 10px 5px 10px 30px}
+.left-listbox .detail-con .que-info p.otherinfo span{display: inline-block;;min-width: 60px;margin-right: 20px}
+.left-listbox .detail-con .que-info p.otherinfo span.qtype{padding:0 20px 0 25px; border-right: 1px solid #e5e5e5; background: url(http://static.lvzheng.com/lvzhengpc/images/zixun/list/type_ico.png) no-repeat left center;}
+.left-listbox .detail-con .que-info p.otherinfo span.qtime{float: right;}
+.left-listbox .detail-con .ans-box{background: #f6fdfa;padding: 10px 30px;min-height: 100px;margin: 20px 0}
+.left-listbox .detail-con .ans-box p.tag{width: 80px;height: 24px;line-height: 24px;font-size: 14px;color: #fff; margin: 5px 0; text-align: center; background: #4bc991;border-radius: 5px}
+.left-listbox .detail-con .ans-box p.text{font-size: 14px;color: #000;line-height: 25px;padding: 5px 0;overflow: hidden;}
+
+/*分享按钮*/
+.jiathis_style_24x24{position: absolute;top: 5px ;right: 0px}

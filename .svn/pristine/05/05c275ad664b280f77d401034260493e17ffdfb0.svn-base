@@ -1,0 +1,46 @@
+<!-- 友情连接 -->
+<div class="link-main">
+    <div class="link-box">
+        <div class="list">
+            <label>热门服务：</label>
+            <div class="con">
+                <ul>
+                    <li><a href="/reg_bj.html">北京公司注册</a></li>
+                    <li><a href="/change_bj.html">北京公司变更</a></li>
+                    <li><a href="/bookkeeping_bj.html">北京公司记账</a></li>
+                    <li><a href="/addresslist.html">北京注册地址</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="list">
+            <label>友情链接：</label>
+            <div class="con">
+                <ul>
+                  
+					<li><a href="http://www.lvzheng.com/xiaoweishuo.html"	  target="_blank" >			小微说           </a></li>
+					<li><a href="http://www.lawtime.cn/shenzhen"	         target="_blank"  >			深圳律师          </a></li>
+					<li><a href="http://www.qianlima.com/zb/area_9/"	     target="_blank"  >			河北招标投标网       </a></li>
+					<li><a href="http://bj.58.com/lvshi/"	                 target="_blank" >			北京法律咨询        </a></li>
+					<li><a href="http://www.lawtv.com.cn/"	                  target="_blank">			法治            </a></li>
+					<li><a href="http://house.focus.cn/fangdaijisuanqi/shangyedaikuan/" target="_blank">			商业贷款计算器       </a></li>
+					<li><a href="http://www.9ask.cn/qingdao/"	              target="_blank"  >          律师咨询           </a></li>
+					<li><a href="http://www.maxlaw.cn/"                  target="_blank">			律师网             </a></li>
+					<li><a href="http://www.hkatreg.net.cn"               target="_blank"  >			注册香港公司          </a></li>
+					<li><a href="http://news.360guakao.net/"	target="_blank">			资质代办            </a></li>
+					<li><a href="http://www.dnlunwen.com"	target="_blank" >			东南毕业论文          </a></li>
+					<li><a href="http://www.anxin.com/fund/"		target="_blank" >			基金理财产品          </a></li>
+					<li><a href="http://www6.cdcctz.com"	target="_blank">			成都公司注册          </a></li>
+					<li><a href="http://www.jia.com/shenzhen/" target="_blank" >			深圳装修            </a></li>
+					<li><a href="http://www.315fangwei.com"	    target="_blank" >			防伪查询            </a></li>
+					<li><a href="http://www.smeoa.com"	target="_blank" >			小微OA            </a></li>
+					<li><a href="http://www.bjyhwy.com"	target="_blank" >			榻榻米价格           </a></li>
+					<li><a href="http://sz.diandianzu.com/	"		   target="_blank"  >			点点租             </a></li>
+					<li><a href="http://www.99inf.com/zyfw/	"	      target="_blank"  >			免费发布信息          </a></li>
+					<li><a href="http://www.cnrencai.com/jingpin/"	target="_blank" >			竞聘演讲            </a></li>
+					<li><a href="http://www.qianyilc.com/"	       target="_blank">			理财平台            </a></li>
+					<li><a href="http://lz.focus.cn"						target="_blank">			兰州房地产           </a></li>
+                </ul>
+            </div>
+        </div>                                         
+    </div>
+</div>

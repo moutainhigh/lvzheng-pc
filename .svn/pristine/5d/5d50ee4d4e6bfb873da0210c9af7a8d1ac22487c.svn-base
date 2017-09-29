@@ -1,0 +1,108 @@
+package com.jx.hunter.lvzhengpc.controllers;
+
+import java.util.List;
+
+import org.apache.commons.lang.StringUtils;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.jx.argo.ActionResult;
+import com.jx.argo.annotations.Path;
+import com.jx.blackface.tools.webblack.utils.JSONUtils;
+import com.jx.hunter.lvzhengpc.common.CommonUtils;
+import com.jx.hunter.lvzhengpc.common.LocationPage;
+import com.jx.hunter.lvzhengpc.frame.RSBLL;
+import com.jx.hunter.lvzhengpc.utils.ActionResultUtils;
+import com.jx.hunter.lvzhengpc.utils.EnterpriseUtils;
+import com.jx.hunter.lvzhengpc.utils.WAQUtils;
+import com.jx.service.enterprise.entity.LvEnterpriseMainBusinessEntity;
+
+/***
+ * 业务controller类
+ * @author duxiaofei
+ * @date   2016年3月21日
+ */
+@Path("business")
+public class BusinessController extends BaseController {
+
+	private int DEF_MAIN_BUS_SIZE = 99;
+	
+	/**
+	 * 公司注册
+	 * */
+	
+	/**
+	 * 商标注册
+	 * */
+	
+	/**
+	 * 名称查询
+	 * */
+	@Path("checkname/detail.html")
+	public ActionResult checkNameDetail(){
+		String shopName = WAQUtils.HTMLEncode(request().getParameter("shopName"));
+		String industryCharacteristics = WAQUtils.HTMLEncode(request().getParameter("industry"));
+		String mainBusinessCode = WAQUtils.HTMLEncode(request().getParameter("mainBusCode"));
+		String tokenstr = beat().getRequest().getParameter("tokenstr");
+		String validatecode = beat().getRequest().getParameter("valCode");
+		LvEnterpriseMainBusinessEntity mainBusEntity = null;
+		try {
+			mainBusEntity = RSBLL.getstance().getEpEnterpriseMainBusinessService().loadByCode(mainBusinessCode);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+		if(mainBusEntity != null){
+			model().add("mainBusiness", mainBusEntity.getCodeName());
+			model().add("mainBusinessCode", mainBusEntity.getCode());
+			model().add("mainBusinessUniteCode", mainBusEntity.getUniteCode());
+			String scope = mainBusEntity.getScope();
+			if(StringUtils.isBlank(scope)){
+				scope = mainBusEntity.getCodeName();
+			}
+			model().add("operatingRange", scope + "；");
+		}
+		model().add("shopName", shopName);
+		model().add("industryCharacteristics", industryCharacteristics);
+		
+		String sevali = (String) beat().getRequest().getSession().getAttribute("valicode" + tokenstr);
+		if(StringUtils.isNotBlank(shopName) 
+				&& StringUtils.isNotBlank(mainBusinessCode) 
+				&& StringUtils.isNotBlank(industryCharacteristics)
+				&& mainBusEntity != null
+				&& StringUtils.equalsIgnoreCase(sevali,validatecode)){
+
+			// 去验证名称
+			String foundCheck = EnterpriseUtils.foundCheck(industryCharacteristics, mainBusEntity.getUniteCode(), 
+					mainBusinessCode, "北京" + shopName + industryCharacteristics + "有限公司" , shopName);
+			if(StringUtils.isNotBlank(foundCheck) && JSONUtils.mayBeJSON(foundCheck)){
+				JSONObject foundCheckJson = JSON.parseObject(foundCheck);
+				model().add("foundCheckJson", foundCheckJson);
+			}
+		}
+		
+		/**
+		 * 默认行业特点
+		 */
+		List<LvEnterpriseMainBusinessEntity> mainBusinessList = null;
+		try {
+			mainBusinessList = RSBLL.getstance().getEpEnterpriseMainBusinessService().getDefaultMainBusinessList(DEF_MAIN_BUS_SIZE);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(mainBusinessList != null){
+			model().add("mainBusinessList", mainBusinessList);
+		}
+		// 图形验证码
+		CommonUtils.geneCode(beat());
+		
+		model().add("LocationPage", new LocationPage("business/checkname-detail","index"));
+		model().add("nav", "query");
+		return view("/index");
+	}
+	
+	@Path("checkImgCode")
+	public ActionResult checkImgCode(){
+		JSONObject checkImgCode = CommonUtils.checkImgCode(beat());
+		return ActionResultUtils.renderJson(checkImgCode.toString());
+	}
+}

@@ -1,0 +1,155 @@
+<link href="/css/index.css" type="text/css"  rel="stylesheet"/>
+<script type="text/javascript" src="/js/jquery-1.7.2.min.js"></script>
+<script src="/js/jquery.jquery.tabs.js"></script>
+<script type="text/javascript" src="/js/return-top.js"></script>
+<script>
+$(function(){
+    // 左导航切换显示
+    $(".left-nav dd").hover(function(){
+        $(".nav-right",this).show();
+    });
+    $(".left-nav dd").mouseleave(function(){
+        $(".nav-right",this).hide();
+    });
+});
+</script>
+</head>
+
+<body class="no-js">
+<div id="continer">
+    <!-- 顶部信息条 -->
+   <!-- logo区域 -->
+    #parse("views/common/logo_normal.html")
+
+
+    <!-- 导航 -->
+     #parse("views/common/navigation.html")
+
+	<div class="xwabout">
+		<div class="bleft">
+			<ul class="about-tit">
+				<li class='xz'><a href='/about.html'>关于我们</a></li>
+				<li><a href='/history.html'>发展历程</a></li>
+				<li><a href='/join.html'>人才招聘</a></li>
+				<li><a href='/contact.html'>联系我们</a></li>
+			</ul>
+		</div>
+	
+		<div class="bright">
+			<div class="about-content">
+				<div class="about_banner"><img src="/images/about/about_banner.jpg" width="720" height="210" /></div>
+
+				<div class="about-text">
+					<p class="title">关于我们</p>
+					<p>小微律政（www.lvzheng.com）于2014年12月12日在北京创立，是由北京佶象信息技术有限公司、小微律政（北京）管理咨询有限公司、小微律政（深圳）管理咨询有限公司、北京小微律政登记注册代理事务所（普通合伙）组成的综合性法律、财税服务机构。小微律政秉承“让创业更简单！”的宗旨，专注于为中小微企业提供一站式的基础法律、财税服务，如公司注册、公司变更、商标注册、代理记账、报税、发票管理、许可证申请等服务。</p>
+					<p>在商事登记领域，各城市、同一城市的各区规定多有不同，业务之复杂为常人所难把握。小微律政通过专业的法律政策研究团队深入了解各城市、各区域工商、税务、外管等政府部门出台的法规、规定、通知等，熟稔掌握办事流程、要求。并由专业的客户经理与客户沟通，了解客户需求、准备专业文件，可快速、高效地完成服务。</p>
+					<p>小微律政总部设在北京，业务覆盖北京各区域，并在深圳设立了分支机构。目前，团队成员130多人，包括工商代理人、记账会计、税务会计、商标代理人、版权代理人等。</p>
+					<p>小微律政并不直接对客户提供法律意见，也并不以UPL模式（主要指无律师资格者从事法律实务）进行经营，但公司将发挥现代互联网手段和线下人力资源相结合的优势，建设智能化服务平台。在以自营的方式完成工商登记、代理记账等基础法律、财税服务的同时，基于与客户的紧密接触、为客户提供一般性的法律咨询，对疑难问题则利用平台撮合用户和线下律师进行对接。小微律政期待着凭借高素质的专业队伍、高标准的服务质量，并以优秀的服务品质赢得客户的高度评价。客户的利益是我们考虑一切问题的立足点和出发点，我们将不断努力，为您提供一站式的法律、财税服务，成为您值得信赖的合作伙伴。</p>
+				</div>
+
+				<div class="about-text">
+					<p class="title">投资人介绍</p>
+					<div class="box">
+						<p class="pic"><img src="/images/about/new/lanci.png" width="150px" height="150px"></p>
+						<div class="pic-text">
+							<p>蓝驰创投（BlueRun Ventures）成立于1998年，是一家专注早期创业公司的环球风险投资公司，管理基金超过10亿美元，成功投资案例包括：PayPal(被eBay 收购) 、Topsy（被Apple收购）、Champ（被Apple收购）、Like.com（被Google收购）、Slide（被Google收购）等。</p>
+							<p>蓝驰创投点关注移动互联网消费服务、半导体领域。作为一个环球基金， 蓝驰创投在美国硅谷、北京、上海、首尔、都设有分支机构。蓝驰创投中国成立于2005年，专注互联网早期创业投资，致力做创业者的第一个投资人。所投项目覆盖“医疗健康、教育培训、互联网金融、企业服务、电子商务、游戏、智能硬件、社交、O2O....”全行业。也是PPTV、美丽说、赶集网、唱吧、趣分期、春雨医生、云家政等创业项目的早期投资人。</p>
+						</div>					
+					</div>
+					<div class="box">
+						<p class="pic"><img src="/images/about/new/chenxiaohua.png" width="150px" height="150px"></p>
+						<div class="pic-text">
+							<p>陈小华，58到家CEO, 中国O2O先锋人物</p>
+							<p>陈小华原为点石互动创始人，2007年加入58同城，成为58同城创始人之一。长期以来负责58同城产品运营中心日常工作，多次在商业模式、产品模式等重要创新过程中起到关键性作用。2014年5月，出任58同城首席战略官，同时担任产品委员会主席，专注于公司竞争策略、新业务孵化及投资并购。2014年11月，58同城宣布正式成立“58到家”新品牌，58同城首席战略官陈小华出任58到家CEO。2015年10月12日，作为中国最大的本地生活服务平台，58同城宣布为旗下58到家公司签署一项有约束力的A轮股权融资协议。融资金额为3亿美元，投资方包括阿里巴巴集团，全球投资巨头KKR和平安创投。</p>
+						</div>					
+					</div>
+				</div>
+
+				<div class="about-text">
+					<p class="title">小微形象</p>
+					<div class="xw-pic">
+						<img src="/images/about/new/xw_pic.jpg" width="640px">
+					</div>
+				</div>
+
+				<div class="about-text">
+					<p class="title">服务优势</p>
+					<div class="adv-box">
+						<ul>
+							<li>
+								<div class="box1">
+									<p class="name">高效办理  全程可控</p>
+									<p class="text">服务进度实时短信/微信通知</p>
+								</div>
+							</li>
+							<li>
+								<div class="box2">
+									<p class="name">一站式服务 省时省心</p>
+									<p class="text">咨询、注册、商标、财税、社保、许可等<br>一站式服务 快捷轻松</p>
+								</div>
+							</li>
+							<li>
+								<div class="box3">
+									<p class="name">价格透明 高性价比</p>
+									<p class="text">自营模式 无中间收费 价格透明低廉</p>
+								</div>
+							</li>
+							<li>
+								<div class="box4">
+									<p class="name">资深顾问 一对一解答</p>
+									<p class="text">专业顾问免费提供咨询，全程为您的公司保驾护航</p>
+								</div>
+							</li>
+							<li>
+								<div class="box5">
+									<p class="name">信息保密 保障权益</p>
+									<p class="text">签署保障协议 保证每位客户个人权益</p>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="about-text">
+					<p class="title">我们的客户</p>
+					<div class="our-cus">
+						<ul>
+							<li>
+								<p class="name">互联网</p>
+								<p class="cus-ico"><img src="/images/about/new/cus_ico1-1.png"></p>
+								<p class="cus-ico"><img src="/images/about/new/cus_ico1-2.png"></p>
+								<p class="cus-ico"><img src="/images/about/new/cus_ico1-3.png"></p>
+							</li>
+							<li>
+								<p class="name">金融类</p>
+								<p class="cus-ico"><img src="/images/about/new/cus_ico2-1.png"></p>
+								<p class="cus-ico"><img src="/images/about/new/cus_ico2-2.png"></p>
+								<p class="cus-ico"><img src="/images/about/new/cus_ico2-3.png"></p>
+							</li>
+							<li>
+								<p class="name">教育类</p>
+								<p class="cus-ico"><img src="/images/about/new/cus_ico3-1.png"></p>
+								<p class="cus-ico"><img src="/images/about/new/cus_ico3-2.png"></p>
+								<p class="cus-ico"><img src="/images/about/new/cus_ico3-3.png"></p>
+							</li>
+							<li>
+								<p class="name">服装类</p>
+								<p class="cus-ico"><img src="/images/about/new/cus_ico4-1.png"></p>
+								<p class="cus-ico"><img src="/images/about/new/cus_ico4-2.png"></p>
+								<p class="cus-ico"><img src="/images/about/new/cus_ico4-3.png"></p>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+    <!-- 网站底部 -->
+
+
+</div>
+</body>
+
+</html>

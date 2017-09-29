@@ -1,0 +1,68 @@
+ <!-- 导航 -->
+<!-- logo区域 -->
+#parse("views/common/logo_normal.html")
+
+#parse("views/common/navigation.html")
+    <!-- 网站优惠券 -->
+    <div class="pccoupon">
+        <div class="banner"></div>
+
+        <div class="coupon">
+            <div class="coupon-box">
+                <div class="box pop_box1">
+                    <p class="price"><span>￥</span>100</p>
+                    <p class="name">公司注册专属</p>
+                    <p class="btn" onclick="location.href='http://www.lvzheng.com/commondetail/detail/38229817543169.html'">去使用></p>
+                    <p class="time">有效期:领取日后十天</p>
+                </div>
+                <div class="box pop_box1">
+                    <p class="price"><span>￥</span>100</p>
+                    <p class="name">代理记账专属</p>
+                    <p class="btn" onclick="location.href='http://www.lvzheng.com/commondetail/detail/38253230296833.html'">去使用></p>
+                    <p class="time">有效期:领取日后十天</p>
+                </div>
+
+                <div class="box pop_box1">
+                    <p class="price"><span>￥</span>50</p>
+                    <p class="name">商标注册专属</p>
+                    <p class="btn" onclick="location.href='http://www.lvzheng.com/commondetail/detail/38230926529537.html'">去使用></p>
+                    <p class="time">有效期:领取日后十天</p>
+                </div>
+
+                <div class="box pop_box1">
+                    <p class="price"><span>￥</span>50</p>
+                    <p class="name">软件著作权专属</p>
+                    <p class="btn" onclick="location.href='http://www.lvzheng.com/commondetail/detail/38231039879425.html'">去使用></p>
+                    <p class="time">有效期:领取日后十天</p>
+                </div>
+
+                <div class="box pop_box1">
+                    <p class="price"><span>￥</span>1000</p>
+                    <p class="name">法律顾问专享</p>
+                    <p class="btn" onclick="location.href='http://www.lvzheng.com/commondetail/detail/39186171276289.html'">去使用></p>
+                    <p class="time">有效期:领取日后十天</p>
+                </div>
+            </div>
+
+            <div class="par-bg">
+                <div class="pbox com1">
+                    <p class="name">创业基金办公室租赁首月租金9折</p>
+                    <p class="text">好租，由58赶集集团投资的国内最大规模O2O互联网办公服务平台</p>
+                    <a class="tel" href="tel:4001147755">400-114-7755</a>
+                </div>
+                <div class="pbox com2">
+                    <p class="name">49元服务器优惠券</p>
+                    <p class="text">新网，提供包括域名、云计算、协同通讯等在内的基础互联网服务。</p>
+                    <a class="tel" href="tel:4008196688">400-819-6688</a>
+                </div>
+                <div class="pbox com3">
+                    <p class="name">300元BAT工程师预约券大礼包 </p>
+                    <p class="text">「实现网」基于共享经济的理念让创业公司短期雇佣BAT技术人才坐班兼职。</p>
+                    <a class="tel" href="tel:18514783764">18514783764</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+

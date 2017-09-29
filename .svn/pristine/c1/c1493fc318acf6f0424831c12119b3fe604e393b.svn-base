@@ -1,0 +1,619 @@
+package com.jx.hunter.lvzhengpc.controllers;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.RandomUtils;
+
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.jx.argo.ActionResult;
+import com.jx.argo.annotations.Path;
+import com.jx.blackface.gaea.sell.entity.LvzProductEntity;
+import com.jx.blackface.gaea.usercenter.contract.ILoginService;
+import com.jx.blackface.gaea.usercenter.entity.BFLoginEntity;
+import com.jx.blackface.gaea.usercenter.entity.CouponsBFGEntity;
+import com.jx.blackface.gaea.usercenter.entity.UserCounponsBFGEntity;
+import com.jx.blackface.orderplug.buzs.OrderBuz;
+import com.jx.blackface.orderplug.buzs.OrderBuzForHunter;
+import com.jx.blackface.orderplug.vo.OrderBFVo;
+import com.jx.blackface.orderplug.vo.PayOrderBFVo;
+import com.jx.blackface.tools.webblack.utils.JSONUtils;
+import com.jx.hunter.lvzhengpc.common.CommonUtils;
+import com.jx.hunter.lvzhengpc.common.LocationPage;
+import com.jx.hunter.lvzhengpc.frame.RSBLL;
+import com.jx.hunter.lvzhengpc.utils.ActionResultUtils;
+import com.jx.hunter.lvzhengpc.utils.CookieUtils;
+import com.jx.hunter.lvzhengpc.utils.DingdingUtils;
+import com.jx.hunter.lvzhengpc.utils.EnterpriseUtils;
+import com.jx.hunter.lvzhengpc.utils.Timers;
+import com.jx.hunter.lvzhengpc.utils.WAQUtils;
+import com.jx.hunter.lvzhengpc.vo.CounponVo;
+import com.jx.hunter.lvzhengpc.vo.LoginUserVO;
+import com.jx.service.enterprise.entity.LvEnterpriseMainBusinessEntity;
+
+/***
+ * 业务controller类
+ * @author duxiaofei
+ * @date   2016年3月21日
+ */
+@Path("business")
+public class BusinessController extends BaseController {
+
+	private int DEF_MAIN_BUS_SIZE = 99;
+	
+	private Long COUNPON_ACTIVITY_ID = 1L;
+	
+	/**
+	 * 公司注册
+	 * */
+	
+	/**
+	 * 商标注册
+	 * */
+	
+	/**
+	 * 名称查询
+	 * */
+	@Path("checkname/detail.html")
+	public ActionResult checkNameDetail(){
+		String shopName = WAQUtils.HTMLEncode(request().getParameter("shopName"));
+		String industryCharacteristics = WAQUtils.HTMLEncode(request().getParameter("industry"));
+		String mainBusinessCode = WAQUtils.HTMLEncode(request().getParameter("mainBusCode"));
+		String tokenstr = beat().getRequest().getParameter("tokenstr");
+		String validatecode = beat().getRequest().getParameter("valCode");
+		LvEnterpriseMainBusinessEntity mainBusEntity = null;
+		try {
+			mainBusEntity = RSBLL.getstance().getEpEnterpriseMainBusinessService().loadByCode(mainBusinessCode);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+		if(mainBusEntity != null){
+			model().add("mainBusiness", mainBusEntity.getCodeName());
+			model().add("mainBusinessCode", mainBusEntity.getCode());
+			model().add("mainBusinessUniteCode", mainBusEntity.getUniteCode());
+			String scope = mainBusEntity.getScope();
+			if(StringUtils.isBlank(scope)){
+				scope = mainBusEntity.getCodeName();
+			}
+			model().add("operatingRange", scope + "；");
+		}
+		model().add("shopName", shopName);
+		model().add("industryCharacteristics", industryCharacteristics);
+		
+		String sevali = (String) beat().getRequest().getSession().getAttribute("valicode" + tokenstr);
+		if(StringUtils.isNotBlank(shopName) 
+				&& StringUtils.isNotBlank(mainBusinessCode) 
+				&& StringUtils.isNotBlank(industryCharacteristics)
+				&& mainBusEntity != null
+				&& StringUtils.equalsIgnoreCase(sevali,validatecode)){
+
+			// 去验证名称
+			String foundCheck = EnterpriseUtils.foundCheck(industryCharacteristics, mainBusEntity.getUniteCode(), 
+					mainBusinessCode, "北京" + shopName + industryCharacteristics + "有限公司" , shopName);
+			if(StringUtils.isNotBlank(foundCheck) && JSONUtils.mayBeJSON(foundCheck)){
+				JSONObject foundCheckJson = JSON.parseObject(foundCheck);
+				model().add("foundCheckJson", foundCheckJson);
+			}
+		}
+		
+		/**
+		 * 默认行业特点
+		 */
+		List<LvEnterpriseMainBusinessEntity> mainBusinessList = null;
+		try {
+			mainBusinessList = RSBLL.getstance().getEpEnterpriseMainBusinessService().getDefaultMainBusinessList(DEF_MAIN_BUS_SIZE);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(mainBusinessList != null){
+			model().add("mainBusinessList", mainBusinessList);
+		}
+		// 图形验证码
+		CommonUtils.geneCode(beat());
+		
+		model().add("LocationPage", new LocationPage("business/checkname-detail","index"));
+		model().add("nav", "query");
+		return view("/index");
+	}
+	
+	@Path("checkImgCode")
+	public ActionResult checkImgCode(){
+		JSONObject checkImgCode = CommonUtils.checkImgCode(beat());
+		return ActionResultUtils.renderJson(checkImgCode.toString());
+	}
+	
+	/**
+	 * 查询已支付订单数量
+	 * @param userId
+	 * @return
+	 */
+	private int getPayedOrderCount(Long userId){
+		int ordernumber = 0;
+		if(userId > 0){
+			String condition = "userid=" + userId + " and paystate=1";
+			try {
+				ordernumber = RSBLL.getstance().getOrderBFGService().getOrderCountBycondition(condition);
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+		}
+		return ordernumber;
+	}
+	
+	@Path("luckyDraw.html")
+	public ActionResult luckyDraw(){
+		long userId = CommonUtils.getLoginuserid(beat());
+		if(userId > 0L){
+			int payedOrderCount = getPayedOrderCount(userId);
+			if(payedOrderCount > 0){
+				model().add("oldUser", "true");
+			}
+			// 我的奖品
+			List<UserCounponsBFGEntity> ucounponsInUserList = null;
+			try {
+				ucounponsInUserList = RSBLL.getstance().getUserCounponsService().getUcounponsInUserBypage(userId, COUNPON_ACTIVITY_ID, 1, 10, "");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			if(ucounponsInUserList != null && !ucounponsInUserList.isEmpty()){
+				UserCounponsBFGEntity userCounponsBFGEntity = ucounponsInUserList.get(0);
+				CounponVo counponVo = transferCounponVo(userCounponsBFGEntity);
+				model().add("luckDrawObj", counponVo);
+			}
+		}
+		// 获取中奖名单
+		List<UserCounponsBFGEntity> ucouponsInActivityList = null;
+		try {
+			ucouponsInActivityList = RSBLL.getstance().getUserCounponsService().getUcouponsInActivityByPage(COUNPON_ACTIVITY_ID, 1, 20, "gettime desc");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		List<CounponVo> counponListVo = transferCounponListVo(ucouponsInActivityList);
+		if(counponListVo != null && !counponListVo.isEmpty()){
+			model().add("allLuckyDrawList", counponListVo);
+		}
+		CommonUtils.geneCode(beat());
+		model().add("LocationPage", new LocationPage("business/luckyDraw","index"));
+		return view("/index");
+	}
+	
+	private List<CounponVo> transferCounponListVo(List<UserCounponsBFGEntity> ucouponsInActivityList){
+		List<CounponVo> reList = new ArrayList<CounponVo>();
+		if(ucouponsInActivityList != null && !ucouponsInActivityList.isEmpty()){
+			for(UserCounponsBFGEntity userCounponsBFGEntity:ucouponsInActivityList){
+				reList.add(transferCounponVo(userCounponsBFGEntity));
+			}
+		}
+		return reList;
+	}
+	
+	private CounponVo transferCounponVo(UserCounponsBFGEntity userCounponsBFGEntity){
+		CounponVo counponVo = new CounponVo();
+		counponVo.setCounponId(userCounponsBFGEntity.getCouponsid());
+		counponVo.setCounponName(userCounponsBFGEntity.getCname());
+		counponVo.setSendTime(Timers.formatLongDate("yyyy-MM-dd", userCounponsBFGEntity.getGettime()));
+		long userid = userCounponsBFGEntity.getUserid();
+		BFLoginEntity loginEntity = null;
+		try {
+			loginEntity = RSBLL.getstance().getLoginService().getLoginEntityById(userid);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(loginEntity != null){
+			counponVo.setUserPhone(loginEntity.getUserphone());
+		}
+		String substring = StringUtils.substring(counponVo.getUserPhone(), 3, 7);
+		counponVo.setUserPhoneWithOut(StringUtils.replace(counponVo.getUserPhone(), substring, "****", 1));
+		counponVo.setUseUrl(useUrlMap.get(counponVo.getCounponId()));
+		return counponVo;
+	}
+	
+	/**
+	 * @param userId
+	 * @param couponsid
+	 * @param couponsname
+	 * @return
+	 */
+	private Map<String, Object> transferCounponVo(long userId, long couponsid, String couponsname) {
+		CounponVo counponVo = new CounponVo();
+		counponVo.setCounponId(couponsid);
+		counponVo.setCounponName(couponsname);
+		counponVo.setSendTime(Timers.formatLongDate("yyyy-MM-dd", System.currentTimeMillis()));
+		BFLoginEntity loginEntity = null;
+		try {
+			loginEntity = RSBLL.getstance().getLoginService().getLoginEntityById(userId);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(loginEntity != null){
+			counponVo.setUserPhone(loginEntity.getUserphone());
+		}
+		String substring = StringUtils.substring(counponVo.getUserPhone(), 3, 7);
+		counponVo.setUserPhoneWithOut(StringUtils.replace(counponVo.getUserPhone(), substring, "****", 1));
+		counponVo.setUseUrl(useUrlMap.get(counponVo.getCounponId()));
+		return JSON.parseObject(counponVo.toString());
+	}
+	
+	@Path("getLuckyDraw")
+	public ActionResult getLuckyDraw(){
+		LoginUserVO loginEntity = CommonUtils.getLoginEntity(beat());
+		JSONObject jr = new JSONObject();
+		jr.put("oldUser", false);
+		if(loginEntity != null){
+			long userId = loginEntity.getUserid();
+			int userorderCount = getPayedOrderCount(userId);
+			if(userorderCount > 0){
+				// 老用户，不允许抽奖
+				jr.put("oldUser", true);
+				return ActionResultUtils.renderJson(jr);
+			}
+			// 已登录
+			List<UserCounponsBFGEntity> ucounponsInUserList = null;
+			try {
+				ucounponsInUserList = RSBLL.getstance().getUserCounponsService().getUcounponsInUserBypage(userId, COUNPON_ACTIVITY_ID, 1, 10, "");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			if(ucounponsInUserList != null && !ucounponsInUserList.isEmpty()){
+				// 中过奖
+				UserCounponsBFGEntity userCounponsBFGEntity = ucounponsInUserList.get(0);
+				jr.putAll(JSON.parseObject(JSON.toJSONString(transferCounponVo(userCounponsBFGEntity))));
+			}else{
+				String luckDrawId = assignmentLuckDraw(userId);
+				if(StringUtils.isNotBlank(luckDrawId)){
+					CouponsBFGEntity couponsBFGEntity = null;
+					try {
+						couponsBFGEntity = RSBLL.getstance().getCounponsService().getCouponsById(Long.parseLong(luckDrawId));
+					} catch (Exception e1) {
+						e1.printStackTrace();
+					}
+					if(couponsBFGEntity != null){
+						// 发放奖品
+						long couponsid = couponsBFGEntity.getCouponsid();
+						try {
+							OrderBuz.ob.addUserCouponOfDraw(userId + "", couponsid + "");
+							int couponsStockCount = RSBLL.getstance().getCounponsService().getCouponsStockCount(couponsid);
+							String content = "【抽奖领取优惠券通知】有人领取了一个优惠券，userId=" + userId + "，手机号码：" + loginEntity.getUserphone() + "，优惠券名称：" + couponsBFGEntity.getCouponsname()
+									+ "，编号：" + couponsid + "，库存为" + couponsStockCount + "个。";
+							DingdingUtils.sendDingding("chate219cc16ad66cad0b4c0cdd83dae07ea", "01352150202208", content);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						jr.putAll(transferCounponVo(userId, couponsid, couponsBFGEntity.getCouponsname()));
+					}else{
+						System.out.println("getUsercounponsById luckDrawId = " + luckDrawId);
+					}
+				}
+			}
+		}
+		return ActionResultUtils.renderJson(jr);
+	}
+	
+
+
+	/**
+	 * 200012340; 商标注册50元
+	 * 200012341; 虚拟地址200元
+	 * 200012342; 代理记账200元
+	 * 200012343; 计算机著作权100元
+	 * 200012344; 虚拟地址100元
+	 * 200012345; 公司注册100元
+	 * 200012346; 0元公司注册
+	 * 0; 再玩一次
+	 */
+	
+	private static Map<String, String> productToCoupon = new HashMap<String, String>();
+	static{
+		productToCoupon.put("ZS-001001-141006", "200012343"); // 计算机著作权
+	}
+	private static Map<String, String> productCatToCoupon = new HashMap<String, String>();
+	static{
+		productCatToCoupon.put("ZS-001003", "200012340"); // 商标注册
+		productCatToCoupon.put("GS-001003", "200012344"); // 虚拟地址
+		productCatToCoupon.put("GS-001001", "200012345"); // 公司注册
+		productCatToCoupon.put("CS-001001", "200012342"); // 代理记账
+	}
+	
+	private static Map<Long, String> useUrlMap = new HashMap<Long, String>();
+	static{
+		useUrlMap.put(200012340L, "http://www.lvzheng.com/commondetail/detail/38230926529537.html"); // 50元商标注册抵用券
+		useUrlMap.put(200012341L, "http://www.lvzheng.com/addresslist.html"); // 200元抵用券虚拟地址
+		useUrlMap.put(200012342L, "http://www.lvzheng.com/commondetail/detail/38253214893569.html"); // 200元代理记账抵用券
+		useUrlMap.put(200012344L, "http://www.lvzheng.com/addresslist.html"); // 100元虚拟地址抵用券
+		useUrlMap.put(200012343L, "http://www.lvzheng.com/commondetail/detail/38231039879425.html"); // 100元计算机著作权抵用券
+		useUrlMap.put(200012345L, "http://www.lvzheng.com/commondetail/detail/38229817543169.html"); // 100元公司注册抵用券
+		useUrlMap.put(200012346L, "http://www.lvzheng.com/commondetail/detail/38229817543169.html"); // 0元公司注册
+	}
+	
+	private String assignmentLuckDraw(Long userId){
+		String luckDraw = null;
+		if(userId > 0L){
+			// 已登录
+			// 获取未支付的订单
+			int userUnpaycount = 0;
+			try {
+				userUnpaycount = OrderBuzForHunter.obfhunter.getUserUnpaycount(userId);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			if(userUnpaycount > 0){
+				// 有未支付的订单
+				List<PayOrderBFVo> userUnpaylist = null;
+				try {
+					userUnpaylist = OrderBuzForHunter.obfhunter.getUserUnpaylist(userId, 1, 99, " addtime desc ");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				if(userUnpaylist != null){
+					loop:
+					for(PayOrderBFVo payOrderBFVo:userUnpaylist){
+						long payid = payOrderBFVo.getPayid();
+						List<OrderBFVo> orderBFGbypayorder = null;
+						String condition = " payid=" + payid;
+						try {
+							orderBFGbypayorder = OrderBuzForHunter.obfhunter.getOrderVolistBypage(condition, 1, 99, "");
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						if(orderBFGbypayorder != null){
+							for(OrderBFVo orderBFVo:orderBFGbypayorder){
+								long productid = orderBFVo.getProductid();
+								LvzProductEntity productEntity = null;
+								try {
+									productEntity = OrderBuzForHunter.obfhunter.getProductByid(productid);
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+								if(productEntity != null){
+									String product_code = productEntity.getProduct_code();
+									luckDraw = productToCoupon.get(product_code);
+									if(StringUtils.isBlank(luckDraw)){
+										String parent_cate_code = productEntity.getChild_cate_code();
+										luckDraw = productCatToCoupon.get(parent_cate_code);
+									}
+								}
+								if(StringUtils.isNotBlank(luckDraw)){
+									break loop;
+								}
+							}
+						}
+						
+					}
+				}
+			}
+			if(StringUtils.isBlank(luckDraw)){
+				// 未获得到商品对应的优惠券
+				BFLoginEntity loginEntity = null;
+				try {
+					loginEntity = RSBLL.getstance().getLoginService().getLoginEntityById(userId);
+				} catch (Exception e) {
+					System.out.println("获取用户失败userid:" + userId);
+					e.printStackTrace();
+				}
+				if(null != loginEntity){
+					int payedOrderCount = getPayedOrderCount(userId);
+					if(payedOrderCount <= 0){
+						// 新用户
+						Long addtime = loginEntity.getAddtime();
+						Long duraion = System.currentTimeMillis() - addtime;
+						if(duraion > 15 * 24 * 60 * 60 * 1000){
+							// 大于15天
+							luckDraw = getCouponByRandom("200012342;200012344;200012345;");
+						}else if(duraion > 3 * 24 * 60 * 60 * 1000){
+							// 3至15天
+							luckDraw = getCouponByRandom("200012341;200012342;200012344;200012345;");
+						}else{
+							// 3天内
+							luckDraw = getCouponByRandom("200012341;200012345;200012346;");
+						}
+					}
+				}
+			}
+		}else{
+			// 未登录
+			luckDraw = getCouponByRandom("200012341;200012342;200012343;200012344;200012345;0;");
+		}
+		if(StringUtils.isBlank(luckDraw)){
+			// 全局，随机取一个
+			luckDraw = getCouponByRandom("200012340;200012341;200012342;200012343;200012344;200012345;200012346;0;");
+		}
+		return luckDraw;
+	}
+	
+	private String getCouponByRandom(String couponArrayStr){
+		if(StringUtils.isBlank(couponArrayStr)){
+			return null;
+		}
+		String[] couponArray = StringUtils.split(couponArrayStr, ";");
+		int nextInt = RandomUtils.nextInt(0, couponArray.length-1);
+		String couponStr = couponArray[nextInt];
+		// 判断库存
+		long couponsid = Long.parseLong(couponStr);
+		int couponsStockCount = 0;
+		long ucouponsInTime = 0L;
+		try {
+			couponsStockCount = RSBLL.getstance().getCounponsService().getCouponsStockCount(couponsid);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		 // TODO 写死，0元公司注册，一天放一个
+		if(couponsid == 12321L){
+			Calendar before = Calendar.getInstance();
+			before.set(Calendar.HOUR, 0);
+			before.set(Calendar.MINUTE, 0);
+			before.set(Calendar.SECOND, 0);
+			
+			Calendar after = Calendar.getInstance();
+			after.set(Calendar.HOUR, 23);
+			after.set(Calendar.MINUTE, 59);
+			after.set(Calendar.SECOND, 59);
+			try {
+				ucouponsInTime = RSBLL.getstance().getUserCounponsService().getUcouponsInTime(couponsid, " gettime >  " + before.getTimeInMillis() + " gettime < " + after.getTimeInMillis());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		if(couponsStockCount <= 0 || ucouponsInTime >= 1){
+			couponArrayStr = StringUtils.replace(couponArrayStr, couponStr + ";", "");
+			return getCouponByRandom(couponArrayStr);
+		}
+		return couponStr;
+	}
+	
+	@Path("checkLogin")
+	public ActionResult checkLogin(){
+		boolean loginFlag = false;
+		LoginUserVO loginEntity = CommonUtils.getLoginEntity(beat());
+		JSONObject json = new JSONObject();
+		if(loginEntity != null){
+			loginFlag = true;
+		}
+		json.put("loginFlag", loginFlag);
+		return ActionResultUtils.renderJson(json);
+	}
+	
+	@Path("loginAward")
+	public ActionResult loginAward(){
+		ILoginService ls = RSBLL.getstance().getLoginService();
+		String tokenstr = beat().getRequest().getParameter("token");
+		String userphone = beat().getRequest().getParameter("userphone");
+		String validatecode = beat().getRequest().getParameter("validatecode");
+		String phonecode = beat().getRequest().getParameter("phonecode");
+		JSONObject jr = new JSONObject();
+		if(null == tokenstr || "".equals(tokenstr)){
+			jr.put("ret", "fail");
+			jr.put("msg", "图形验证码失败！请刷新后重试!");
+			return ActionResultUtils.renderJson(jr.toString());
+		}
+		if(validatecode == null || "".equals(validatecode)){
+			jr.put("ret", "fail");
+			jr.put("msg", "图形验证码错误!");
+			return ActionResultUtils.renderJson(jr.toString());
+		}else{
+			String sevali = (String) beat().getRequest().getSession().getAttribute("valicode"+tokenstr);
+			if(!StringUtils.equalsIgnoreCase(sevali,validatecode)){
+				jr.put("ret", "fail");
+				jr.put("msg", "图形验证码错误!");
+				return ActionResultUtils.renderJson(jr.toString());
+			}
+		}
+		if(phonecode == null || "".equals(phonecode)){
+			jr.put("ret", "fail");
+			jr.put("msg", "手机验证码错误");
+			return ActionResultUtils.renderJson(jr.toString());
+		} else{
+			boolean checkVerifyCode = false;
+			try {
+				checkVerifyCode = RSBLL.getstance().getMoblieSmsService().checkVerifyCode(userphone, phonecode);
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+			if(!checkVerifyCode){
+				jr.put("ret", "fail");
+				jr.put("msg", "手机验证码错误");
+				return ActionResultUtils.renderJson(jr.toString());
+			}
+		}
+		if(StringUtils.isBlank(userphone)){
+			jr.put("ret", "fail");
+			jr.put("msg", "手机号码为空");
+			return ActionResultUtils.renderJson(jr.toString());
+		}
+		String condition = "userphone='"+userphone+"'";
+		List<BFLoginEntity> list = null;
+		try {
+			list = ls.getLoginEntity(condition, 1, 1, "userid");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		long userId = 0;
+		int cookieTime = 60 * 60 * 24;
+		if(list != null && !list.isEmpty()){
+			userId = list.get(0).getUserid();
+			// 用户已经存在，查看是否已经抽奖，如果已经抽奖则返回对应的奖品
+			// 已登录 且 中过奖
+			List<UserCounponsBFGEntity> ucounponsInUserList = null;
+			try {
+				ucounponsInUserList = RSBLL.getstance().getUserCounponsService().getUcounponsInUserBypage(userId, COUNPON_ACTIVITY_ID, 1, 10, "");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			if(ucounponsInUserList != null && !ucounponsInUserList.isEmpty()){
+				UserCounponsBFGEntity userCounponsBFGEntity = ucounponsInUserList.get(0);
+				CounponVo counponVo = transferCounponVo(userCounponsBFGEntity);
+				jr.put("ret", "ok");
+				jr.put("reAward", true); // 已中过奖
+				jr.putAll(JSON.parseObject(counponVo.toString()));
+				// 如果选中了记住我则cookie保存7天
+				try {
+					CookieUtils.saveCookie(userId, response(), cookieTime);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				return ActionResultUtils.renderJson(jr);
+			}
+		}else{
+			// 创建用户
+			BFLoginEntity bf = new BFLoginEntity();
+			bf.setUserphone(userphone);
+			bf.setUsername(userphone);
+			bf.setAddtime(new Date().getTime());
+			bf.setChannel(19);
+			try {
+				userId = ls.addLoginEntity(bf);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		if(userId > 0){
+			// 如果选中了记住我则cookie保存7天
+			try {
+				CookieUtils.saveCookie(userId, response(), cookieTime);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			int payedOrderCount = getPayedOrderCount(userId);
+			if(payedOrderCount > 0){
+				// 老用户，不允许抽奖
+				jr.put("ret", "ok");
+				jr.put("oldUser", true);
+				return ActionResultUtils.renderJson(jr);
+			}
+			// 获得的奖品
+			String luckDrawId = assignmentLuckDraw(userId);
+			if(StringUtils.isNotBlank(luckDrawId)){
+				CouponsBFGEntity usercounpons = null;
+				try {
+					usercounpons = RSBLL.getstance().getCounponsService().getCouponsById(Long.parseLong(luckDrawId));
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				if(usercounpons != null){
+					// 发放奖品
+					long couponsid = usercounpons.getCouponsid();
+					try {
+						OrderBuz.ob.addUserCouponOfDraw(userId + "", couponsid + "");
+						int couponsStockCount = RSBLL.getstance().getCounponsService().getCouponsStockCount(couponsid);
+						String content = "【抽奖领取优惠券通知】有人领取了一个优惠券，userId=" + userId + "，手机号码：" + userphone + "，优惠券名称：" + usercounpons.getCouponsname()
+								+ "，编号：" + couponsid + "，库存为" + couponsStockCount + "个。";
+						DingdingUtils.sendDingding("chate219cc16ad66cad0b4c0cdd83dae07ea", "01352150202208", content);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					jr.put("ret", "ok");
+					jr.putAll(JSON.parseObject(JSON.toJSONString(transferCounponVo(userId, couponsid, usercounpons.getCouponsname() ))));
+				}
+			}
+		}else{
+			jr.put("ret", "fail");
+			jr.put("msg", "添加用户失败!");
+		}
+		return ActionResultUtils.renderJson(jr.toString());
+	}
+}

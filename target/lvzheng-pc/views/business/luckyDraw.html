@@ -1,0 +1,511 @@
+  <!-- logo区域 -->
+    #parse("views/common/logo_normal.html")
+
+
+    <!-- 导航 -->
+     #parse("views/common/navigation.html")
+     
+     
+<link href="/css/cj.css" type="text/css"  rel="stylesheet"/>
+<script type="text/javascript" src="/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="/js/box.js"></script> 
+<script type="text/javascript" src="/js/awardRotate.js"></script>
+<script type="text/javascript" src="/js/jquery.validate.js"></script>
+
+<script type="text/javascript">
+$(function (){
+	
+	//close popup
+	$('.cd-boxLogin').on('click', function(event){
+		if( $(event.target).is('.cd-popup-close') || $(event.target).is('.cd-boxLogin') ) {
+			event.preventDefault();
+			$(this).removeClass('is-visible');
+		}
+	});
+	//close popup when clicking the esc keyboard button
+	$(document).keyup(function(event){
+    	if(event.which=='27'){
+    		$('.cd-boxLogin').removeClass('is-visible');
+	    }
+    });
+	
+	//close popup
+	$('.cd-boxLoginedAward').on('click', function(event){
+		if( $(event.target).is('.cd-popup-close') || $(event.target).is('.cd-boxLoginedAward') ) {
+			event.preventDefault();
+			window.location.reload(true);
+		}
+	});
+	//close popup when clicking the esc keyboard button
+	$(document).keyup(function(event){
+    	if(event.which=='27'){
+    		window.location.reload(true);
+	    }
+    });
+	//close popup
+	$('.cd-boxoldUser').on('click', function(event){
+		if( $(event.target).is('.cd-popup-close') || $(event.target).is('.cd-boxoldUser') ) {
+			event.preventDefault();
+			$('.cd-boxoldUser').removeClass('is-visible');
+		}
+	});
+	//close popup when clicking the esc keyboard button
+	$(document).keyup(function(event){
+    	if(event.which=='27'){
+    		$('.cd-boxoldUser').removeClass('is-visible');
+	    }
+    });
+	
+    var rotateTimeOut = function (){
+        $('#rotate').rotate({
+            angle:0,
+            animateTo:2160,
+            duration:8000,
+            callback:function (){
+                alert('网络超时，请检查您的网络设置！');
+            }
+        });
+    };
+    var bRotate = false;
+
+    var rotateFn = function (awards, angles, txt, url){
+        bRotate = !bRotate;
+        $('#rotate').stopRotate();
+        $('#rotate').rotate({
+            angle:0,
+            animateTo:angles+1800,
+            duration:3000,
+            callback:function (){
+            	if(awards == '0'){
+            		// 再玩一次
+            		return;
+            	}
+            	$(".awardChannce").text("0");
+                // 判断是否已经登陆
+            	if(checkLogin() == true){
+            		$(".cd-boxLoginedAward .awardName").text(txt);
+            		$(".cd-boxLoginedAward .awardUrl").attr("href", url);
+            		$(".cd-boxLoginedAward").addClass("is-visible");
+            	}else{
+            		$(".cd-boxLogin").addClass("is-visible");
+            	}
+                bRotate = !bRotate;
+            }
+        })
+    };
+
+    $('.pointer').click(function (){
+    	#if($luckDrawObj)
+    	$(".cd-boxwin .awardText").text("奖品：" + "$!{luckDrawObj.getCounponName()}");
+		$(".cd-boxwin .awardUseBtn").attr("href", "$!{luckDrawObj.getUseUrl()}");
+		$(".cd-boxwin").addClass("is-visible");
+    	#else
+   		// 判断是否已经登陆
+        if(checkLogin() == false){
+       		// 未登录
+       		$(".cd-boxLogin").addClass("is-visible");
+       		return;
+       	}
+        if(bRotate)
+        	return;
+        var item = rnd();
+        switch (item.counponId) {
+            case 0:
+                //var angle = [26, 88, 137, 185, 235, 287, 337];
+                rotateFn(0, 337, '在玩一次', '');
+                break;
+            case 200012340:
+                //var angle = [88, 137, 185, 235, 287];
+                rotateFn(200012340, 26, item.counponName, item.useUrl );
+                break;
+            case 200012346:
+                //var angle = [137, 185, 235, 287];
+                rotateFn(200012346, 88, item.counponName, item.useUrl );
+                break;
+            case 200012344:
+                //var angle = [137, 185, 235, 287];
+                rotateFn(200012344, 137, item.counponName, item.useUrl );
+                break;
+            case 200012343:
+                //var angle = [185, 235, 287];
+                rotateFn(200012343, 185, item.counponName, item.useUrl );
+                break;
+            case 200012342:
+                //var angle = [235, 287];
+                rotateFn(200012342, 235, item.counponName, item.useUrl );
+                break;
+            case 200012341:
+                //var angle = [287];
+                rotateFn(200012341, 287, item.counponName, item.useUrl );
+                break;
+        };
+        
+        #end
+    });
+    
+    // 登陆领取奖品
+    $(".loginAwardBtn").click(function(){
+    	var jbPhone = $("#phoneNum").val();
+    	var validatecode = $("#validatecode").val();
+    	var tokenstr = $("#token").val();
+    	var phonecode = $("#phonecode").val();
+    	var param = "token=" + tokenstr + "&userphone=" + jbPhone + "&validatecode=" + validatecode + "&phonecode=" + phonecode;
+    	$.ajax({
+    		url:"/business/loginAward",
+    		type:'get',    
+    	    data: param,
+    	    dataType : 'json',  
+    	    async:false,
+    		success:function(data){
+    			if(data.ret != 'ok'){
+    				alert(data.msg);
+    				return;
+    			}
+   				$(".cd-boxLogin").removeClass("is-visible");
+    			if(data.oldUser == true){
+    				// 老用户
+    				$(".cd-boxoldUser").addClass("is-visible");
+    				return;
+    			}
+    			// 已经中过奖了
+    			if(data.reAward == true){
+	    			$(".cd-boxwin .awardText").text("奖品：" + data.counponName);
+	           		$(".cd-boxwin .awardUseBtn").attr("href", data.useUrl);
+	           		$(".cd-boxwin").addClass("is-visible");
+    			}else{
+	    			// 第一次中奖
+    				$(".cd-boxLoginedAward .awardName").text(data.counponName);
+            		$(".cd-boxLoginedAward .awardUrl").attr("href", data.useUrl);
+            		$(".cd-boxLoginedAward").addClass("is-visible");
+    			}
+    		}
+    	});
+    });
+    
+    $(".closeOldUserWin").click(function(){
+    	$(".cd-boxoldUser").removeClass("is-visible");
+    });
+    
+});
+function rnd(){
+	var reVal = 0;
+	$.ajax({
+		url:"/business/getLuckyDraw",
+		type:'get',    
+	    data:'',
+	    dataType : 'json',  
+	    async:false,
+		success:function(data){
+			if(data.oldUser == true){
+				// 老用户
+				$(".cd-boxoldUser").addClass("is-visible");
+				return;
+			}
+			if(data != undefined && data != 'null' && data != '' && data.counponId != undefined){
+				reVal = data;
+			}else{
+				// 未登录
+	       		$(".cd-boxLogin").addClass("is-visible");
+			}
+		}
+	});
+	return reVal;
+}
+
+function checkLogin(){
+	var reVal = false;
+	$.ajax({
+		url:"/business/checkLogin",
+		type:'get',    
+	    data:'',
+	    dataType : 'json',  
+	    async:false,
+		success:function(data){
+			if(data != undefined && data != 'null'){
+				reVal = data.loginFlag;
+			}
+		}
+	});
+	return reVal;
+}
+
+// 滚动
+function autoScroll(obj){  
+    $(obj).find("ul").animate({  
+        marginTop : "-39px"  
+    },500,function(){  
+        $(this).css({marginTop : "0px"}).find("li:first").appendTo(this);  
+    })  
+}  
+$(function(){  
+    if ($(".listone li").length > 3) {
+        setInterval('autoScroll(".listone")',2000);
+    }
+    if ($(".listtwo li").length > 3) {
+        setInterval('autoScroll(".listtwo")',2000);
+    }
+}); 
+
+
+var InterValObj; //timer变量，控制时间  
+var count = 120; //间隔函数，1秒执行  
+var curCount;//当前剩余秒数  
+
+function sendMessage() {
+	curCount = count;
+	var jbPhone = $("#phoneNum").val();
+	var myreg = /^((1[0-9]{2})+\d{8})$/; 
+	if(!myreg.test(jbPhone)){
+		alert("手机号码格式错误");
+		return;
+	}
+	var validatecode = $("#validatecode").val();
+	var tokenstr = $("#token").val();
+
+	if (jbPhone != "") {
+		$("#box_btn").attr("disabled", true);
+		$("#box_btn").html("剩余" + curCount + "s");
+		InterValObj = window.setInterval(SetRemainTime, 1000); // 启动计时器，1秒执行一次  
+		// 向后台发送处理数据  
+		$.ajax({
+			type : "POST", // 用POST方式传输  
+			dataType : "json", // 数据格式:JSON  
+			url : "/common/sendPhoneCode", // 目标地址  
+			data : "phoneNum=" + jbPhone + "&tokenstr=" + tokenstr + "&validatecode=" + validatecode,
+			success : function(data) {
+				if (data.flag == "8") {
+					$("#validateimg").click();
+					$("#box_btn").removeAttr("disabled");
+					alert("请您输入验证码！");
+					curCount = 0;
+					return false;
+				}
+				if (data.flag == "9") {
+					$("#validateimg").click();
+					alert("输入验证码不正确!");
+					$("#box_btn").removeAttr("disabled");
+					curCount = 0;
+					return false;
+				}
+				if (data.flag == "-1") {
+					$("#validateimg").click();
+					$("#box_btn").removeAttr("disabled");
+					curCount = 0;
+					alert("验证码发送失败!请重新发送");
+					return false;
+				}
+				if (data.flag == "1" || data.flag == "2") {
+					// 设置button效果，开始计时  
+				}
+			}
+		});
+	} else {
+		alert("手机号码不能为空");
+	}
+}
+
+//timer处理函数  
+function SetRemainTime() {
+	if (curCount == 0) {
+		window.clearInterval(InterValObj);// 停止计时器  
+		$('#box_btn').attr('onclick', 'sendMessage();');
+		$("#box_btn").text("重新发送");
+	} else {
+		curCount--;
+		// $("#box_btn").val("请在" + curCount + "秒内输入验证码");  
+		$("#box_btn").text("剩余" + curCount + "s");
+		$('#box_btn').removeAttr('onclick');
+	}
+}
+</script>
+
+<div class="hot-box">
+    <div class="hot-banner"></div>   
+    <div class="hot-main">
+        <div class="disc-box">
+            <div class="disc">
+                <div class="pointer"><img src="/images/hot/pointer.png" alt="pointer"/></div>
+                <div class="rotate" ><img id="rotate" src="/images/hot/disc.png" alt="turntable"/></div>
+            </div>
+            <div class="base">
+                <div class="base-text">
+                    <p class="text"><label>活动条件：</label><span>新用户</span></p>
+                    <p class="text"><label>领奖说明：</label><span>领取后，奖品会放入您的优惠券账户中哦</span></p>
+                </div>
+            </div>
+        </div>
+        <div class="info-box">
+            <div class="chance">
+                <p class="text">您有<span class="awardChannce" >#if($luckDrawObj || $!{oldUser} == 'true')0#else 1#end</span>次抽奖机会</p>
+            </div>
+
+			#if($luckDrawObj)
+            <div class="prize">
+                <p class="name">我的奖品</p>
+                <div class="list">
+                    <p class="listname">
+                        <span class="t1">我的奖品</span>
+                        <span class="t2">中奖日期</span>
+                    </p>
+                    <div class="maquee listone">
+                        <ul>
+                            <li>
+                                <p class="listprize">
+                                    <span class="t1">$!{luckDrawObj.getCounponName()}</span>
+                                    <span class="t2">$!{luckDrawObj.getSendTime()}</span>
+                                </p>
+                            </li>
+                    </div>        
+                </div>
+            </div>
+			#else
+            <div class="prize">
+                <p class="name">我的奖品</p>
+                <div class="nolist">
+                    <p class="text">你还没有奖品哦，快去抽奖吧〜</p>
+                </div>
+            </div>
+			#end
+			
+            <div class="winner">
+                <p class="name">中奖名单</p>
+                <div class="list">
+                    <p class="listname">
+                        <span class="t1">手机号</span>
+                        <span class="t2">奖品</span>
+                    </p>
+                    <div class="maquee listtwo">
+                        <ul>
+                        	#foreach($luckDraw in $allLuckyDrawList)
+                            <li>
+                                <p class="listwinner">
+                                    <span class="t1">$!{luckDraw.getUserPhoneWithOut()}</span>
+                                    <span class="t2">$!{luckDraw.getCounponName()}</span>
+                                </p>
+                            </li>
+                            #end
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+                                                
+    <div class="pro-box">
+        <ul>
+            <li>
+                <p class="name">公司注册</p>
+                <a class="btn" href="http://www.lvzheng.com/commondetail/detail/38229817543169.html" >立即<br>购买</a>
+            </li>
+            <li>
+                <p class="name">商标注册</p>
+                <a class="btn" href="http://www.lvzheng.com/commondetail/detail/38230926529537.html" >立即<br>购买</a>
+            </li>
+            <li>
+                <p class="name">代理记账</p>
+                <a class="btn" href="http://www.lvzheng.com/commondetail/detail/38253214893569.html" >立即<br>购买</a>
+            </li>
+            <li>
+                <p class="name">虚拟地址</p>
+                <a class="btn" href="http://www.lvzheng.com/addresslist.html" >立即<br>购买</a>
+            </li>
+        </ul>
+    </div>
+
+    <!--  弹出框 -->
+    <div class="cd-popup cd-boxoldUser" role="alert"> 
+        <!-- 提示框 -->
+        <div class="cd-popup-container hot-ceng">
+            <div class="hot">
+                <div class="item">
+                    <p class="text">这是新用户专题活动……<br><span>更多优惠活动马上就来啦~<br></span>别着急哈~</p>
+                </div>
+                <div class="btn">
+                    <a href="javascript:void(0);" class="closeOldUserWin" >好的</a>
+                </div>
+            </div> 
+            <a href="javascript:void(0);" class="cd-popup-close img-replace">关闭</a>
+        </div>
+    </div> 
+    <!-- 弹出框 -->     
+	
+    <!--  弹出框 -->
+    <div class="cd-popup cd-boxLoginedAward" role="alert"> 
+        <!-- 提示框 -->
+        <div class="cd-popup-container hot-ceng">
+            <div class="hot">
+                <div class="item1">
+                    <p class="text1">中奖啦~</p>
+                    <div class="ts">
+                        <p class="dtext">
+                            <label>奖品详情：</label>
+                            <span class="awardName" ></span>
+                        </p>
+                        <p class="dtext center">
+                            <a>大奖已经放入您的优惠券帐户中，快去使用吧～</a>
+                        </p>
+                    </div>
+                </div>
+                <div class="btn">
+                    <a href="http://www.lvzheng.com">先逛逛~</a>
+                    <a class="awardUrl" href="javascript:void(0);">去使用</a>
+                </div>
+            </div> 
+            <a href="javascript:void(0);" class="cd-popup-close img-replace">关闭</a>
+        </div>
+    </div> 
+    <!-- 弹出框 -->   
+
+    <!--  弹出框 -->
+    <div class="cd-popup cd-boxwin" role="alert"> 
+        <!-- 提示框 -->
+        <div class="cd-popup-container hot-ceng">
+            <div class="hot">
+                <div class="item">
+                    <p class="text">您已参与过本活动……<br><span class="awardText" ><br></span></p>
+                </div>
+                <div class="btn">
+                    <a href="javascript:void(0);" class="awardUseBtn" >去使用</a>
+                </div>
+            </div> 
+        </div>
+    </div> 
+    <!-- 弹出框 -->   
+
+
+    <!--  弹出框 -->
+    <div class="cd-popup cd-boxLogin" role="alert"> 
+        <!-- 提示框 -->
+        <div class="cd-popup-container hot-ceng" >
+            <div class="hot">
+                <div class="item2">
+                	<input type="hidden" id="token" name="token" value="$!{token}">
+                    <p class="text1">中奖啦~</p>
+                    <div class="w-box">
+                        <p class="w-text-box">
+                            <input type="text" id="phoneNum" class="fn-tinput" placeholder="请输入手机号" />
+                        </p>
+                        <p class="w-text-box">
+                            <input type="text" id="validatecode" class="fn-tinput" placeholder="请输入图形验证码" />
+                            <a href="javascript:void(0);" class="img-code">
+                            	<img onclick="$(this).attr('src','/picvalidate/$!{token}?'+new Date());" src="/picvalidate/$!{token}" >
+                            </a>
+                        </p>
+                        <p class="w-text-box">
+                            <input type="text" id="phonecode" name="phonecode" class="fn-tinput" placeholder="请输入手机验证码" />
+                            <a href="javascript:void(0);" class="phone-code" id="box_btn" onclick="sendMessage();" >获取验证码</a>
+                        </p>
+                    </div>
+                </div>
+                <div class="btn">
+                    <button type="submit" class="loginAwardBtn" >领奖咯~</button>
+                </div>
+            </div> 
+        </div>
+    </div> 
+    <!-- 弹出框 -->  
+
+
+
+</div>

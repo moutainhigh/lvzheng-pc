@@ -1,0 +1,53 @@
+@charset "utf-8";
+*{padding:0;margin:0;}
+body{padding:0;margin:0;font-size:12px;font-family:"微软雅黑";color: #333;background:#fff;}
+img{border:none;}
+a{text-decoration:none;cursor:pointer;color:#666;}
+a:hover,a:hover {text-decoration:none;color:#55acee;}
+input{color: #777;}
+ul{padding:0;margin:0;list-style:none;}
+li,p{padding:0;margin:0;}
+.clear{clear:both;}
+::-webkit-input-placeholder { /* WebKit browsers */color: #ccc;}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */color: #ccc;}
+::-moz-placeholder { /* Mozilla Firefox 19+ */color: #ccc;}
+:-ms-input-placeholder { /* Internet Explorer 10+ */color: #ccc;}
+
+.law-box{background: #fff;padding-bottom: 70px}
+.law-banner{width: 100%; min-width:1200px; height: 520px;background: #8273f3 }
+.law-banner .banner-box{width: 1200px; height: 520px; margin: 0 auto; background: #8273f3 url('../images/law/law_banner.jpg')  no-repeat center; position: relative;}
+.law-banner .banner-box1{width: 1200px; height: 520px; margin: 0 auto; background: #8273f3 url('../images/law/zy_banner.jpg')  no-repeat center; position: relative;}
+.law-banner .banner-box a.btn-tag{display: block;width: 292px;height: 76px;text-align: center;line-height: 76px; font-size: 30px; color: #fff; background: url('../images/law/law_btn.png')  no-repeat center;position: absolute;top: 370px;left: 270px}
+
+.law-main{width: 1005px;  min-height: 1000px; margin: 0 auto;}
+.law-main .law-box1{width: 1005px;height: 451px; background: url('../images/law/law_box1.jpg')  no-repeat center;position: relative;}
+.law-main .law-box1 p.text1{font-size: 32px;color: #ff2c2c;height: 40px;line-height: 40px;padding: 15px 30px;position: absolute;top: 95px;left: 110px}
+.law-main .law-box1 p.text2{font-size: 40px;color: #00a97f;height: 50px;line-height: 50px;padding: 15px 20px;position: absolute;top: 215px;left: 330px}
+
+.law-main .law-box2{width: 1005px;height: 451px; background: url('../images/law/law_box2.jpg')  no-repeat center;position: relative;}
+.law-main .law-box2 p.text1{font-size: 32px;color: #ff2c2c;height: 40px;line-height: 40px;padding: 15px 30px;position: absolute;top: 115px;left: 495px}
+.law-main .law-box2 p.text2{font-size: 40px;color: #00a97f;height: 50px;line-height: 50px;padding: 15px 20px;position: absolute;top: 235px;left: 280px}
+
+.law-main .law-box3{width: 1005px;height: 451px; background: url('../images/law/law_box3.jpg')  no-repeat center;position: relative;}
+.law-main .law-box3 p.text1{font-size: 32px;color: #ff2c2c;height: 40px;line-height: 40px;padding: 15px 30px;position: absolute;top: 110px;left: 110px}
+.law-main .law-box3 p.text2{font-size: 40px;color: #00a97f;height: 50px;line-height: 50px;padding: 15px 20px;position: absolute;top: 240px;left: 280px}
+
+.law-main .law-box4{width: 1005px;height: 451px; background: url('../images/law/law_box4.jpg')  no-repeat center;position: relative;}
+.law-main .law-box4 p.text1{font-size: 32px;color: #ff2c2c;height: 40px;line-height: 40px;padding: 15px 30px;position: absolute;top: 110px;left: 400px}
+.law-main .law-box4 p.text2{font-size: 40px;color: #00a97f;height: 50px;line-height: 50px;padding: 15px 20px;position: absolute;top: 240px;left: 340px}
+
+.law-main .law-box5{width: 1005px;height: 452px; background: url('../images/law/law_box5.jpg')  no-repeat center;position: relative;}
+.law-main .law-box5 p.text1{font-size: 32px;color: #ff2c2c;min-height: 50px;line-height: 50px;padding: 15px 30px;position: absolute;top: 130px;left: 100px}
+.law-main .law-box5 p.text1 span{color: #00a97f}
+
+.bot-ad{height: 100px;width: 100%;background: #eff6fd}
+.bot-ad .ad-text{width: 600px; margin: 2px auto 0; padding-left: 300px;font-size: 36px;height: 100px;line-height: 100px;color: #61aae7;background: url('../images/law/kt.png')  no-repeat center left;}
+
+.bot-btn{height: 70px;line-height: 70px; width: 100%; background: #192934;display: none;}
+.bot-btn a.btn-box{ display: block; width: 380px;margin: 0 auto;color: #f3f5ff;font-size: 30px; cursor: pointer; font-weight: bold; text-align: center;background: #e91414}
+.bot-btn a.btn-box:hover{background: #b60e0e}
+.bot-btnxf {position: fixed;bottom: 0px;z-index: 9000;display: block;}
+
+.bot1-btn{height: 70px;line-height: 70px; width: 100%; background: #191919;display: none;}
+.bot1-btn a.btn-box{ display: block; width: 430px;margin: 0 auto;color: #d62a28;font-size: 30px; cursor: pointer; font-weight: bold; text-align: center; padding-left: 60px; background: #191919  url('../images/law/bot_tel.jpg')  no-repeat center left;}
+.bot1-btnxf {position: fixed;bottom: 0px;z-index: 9000;display: block;}

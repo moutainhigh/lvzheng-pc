@@ -1,0 +1,42 @@
+
+body,li,p,ul { margin: 0;padding: 0;font: 12px/1 微软雅黑 "\5b8b\4f53", 微软雅黑;}
+ul, li, ol { list-style: none; }
+
+/* 重置文本格式元素 */
+a { text-decoration: none; cursor: pointer; color:#333333; font-size:14px;}
+a:hover { text-decoration: none; }
+
+/*星星样式*/
+.clearfix::after{ display:block; content:''; height:0; overflow:hidden; clear:both;} 
+.show-number{ padding-left:0px; padding-top:0px;}
+.show-number li{ width:240px;  padding:10px; margin-right:5px; margin-bottom:10px;}
+.star-Show{background:url(../images/stark.png); width:90px; background-size: 18px; height:15px;  position:relative; float:left; }
+.star-Show p{ background:url(../images/stars.png);left:0; background-size: 18px; height:15px; width:114px;}
+.show-number li span{ display:inline-block; line-height:18px;padding-left: 10px; color: #e70d0d; font-weight: bold;font-size: 14px;}
+
+/*星星样式2*/
+.clearfix2::after{ display:block; content:''; height:0; overflow:hidden; clear:both;} 
+.show-number2{ padding-left:0px; padding-top:0px;}
+.show-number2 li{ width:240px;  padding:0px; margin-right:0px; margin-bottom:0px;}
+.star-Show2{background:url(../images/stark.png); width:60px; background-size: 12px; height:10px;  position:relative; float:left; }
+.star-Show2 p{ background:url(../images/stars.png);left:0; background-size: 12px; height:10px; width:80px;}
+.show-number2 li span{ display:inline-block; line-height:21px;padding-left: 10px; color: #e70d0d;    }
+
+.show-number2 li span {
+    display: inline-block;
+    line-height: 11px;
+    padding-left: 10px;
+    color: #e70d0d;
+    font-weight: bold;
+    position: absolute;
+    font-size: 11px;
+    
+    
+}
+.show-number2 li {
+    width: 240px;
+    padding: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    padding-top: 15px;
+}

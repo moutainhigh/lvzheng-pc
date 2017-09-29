@@ -1,0 +1,555 @@
+<link type="text/css" rel="stylesheet" href="/css/star.css">
+<script>
+$(function(){
+    $("#flow-name").tabso({
+        cntSelect:"#flow-con",
+        tabEvent:"click",
+        tabStyle:"normal"
+    }); 
+
+    // 左导航切换显示
+    $(".left-nav dd").hover(function(){
+        $(".nav-right",this).show();
+    });
+    $(".left-nav dd").mouseleave(function(){
+        $(".nav-right",this).hide();
+    });
+    $("dd a.hover").each(function(){
+        $(this).mousemove(function(){
+            $("dd a.hover").addClass("nav-left").removeClass("nav-on");
+            $(this).addClass("nav-on").removeClass("nav-left");
+        });
+
+
+    });
+
+    // 做菜单自适应
+    if($(".left-nav dd").length<=6){
+        $(".left-nav dd").addClass("dd6")
+    }else if($(".left-nav dd").length==7){
+        $(".left-nav dd").addClass("dd7")
+    }else if($(".left-nav dd").length==8){
+        $(".left-nav dd").addClass("dd8")  
+    };
+
+
+
+    // 选择商品
+    $(".c-sp li").each(function(){
+        $(this).click(function(){
+            $(".c-sp li").addClass("b-box").removeClass("checked");
+            $(this).addClass("checked").removeClass("b-box");
+        })
+    });
+
+    // 选择区域
+    $(".c-area li").each(function(){
+        $(this).click(function(){
+            $(".c-area li").addClass("b-box").removeClass("checked");
+            $(this).addClass("checked").removeClass("b-box");
+        })
+    });
+    // 选择城市
+    $(".c-city li").each(function(){
+        $(this).click(function(){
+            $(".c-city li").addClass("b-box").removeClass("checked");
+            $(this).addClass("checked").removeClass("b-box");
+        })
+    });
+
+    // 无忧套餐切换
+    $(".tc-con").hide(); 
+    $(".tc-tabs p:first").addClass("active").show(); 
+    $(".tc-con:first").show(); 
+    $(".tc-tabs p").click(function() {
+        $(".tc-tabs p").removeClass("active"); 
+        $(this).addClass("active"); 
+        $(".tc-con").hide(); 
+        var activeTab = $(this).find("a").attr("href"); 
+        $(activeTab).fadeIn(); 
+        return false;
+    });
+
+    // 中部menu
+    $(window).scroll(function(){
+        var top = $(document).scrollTop();          
+        var menu = $("#menu");                      
+        var items = $("#content").find(".md-hover"); 
+        var curId = "";                             
+        items.each(function(){
+            var m = $(this);                        
+            var itemsTop = m.offset().top;        
+            if(top > itemsTop-100){
+                curId = "#" + m.attr("id");
+            }else{
+                return false;
+            }
+        });
+
+        var curLink = menu.find(".cur");
+        if( curId && curLink.attr("href") != curId ){
+            curLink.removeClass("cur");
+            menu.find( "[href=" + curId + "]" ).addClass("cur");
+        }
+    });
+    
+    
+    
+    
+    
+    
+    /*各类评分总记录数*/
+	getAllCountByEvaluationScope();
+	
+	$("#flow-name").find('li').unbind('click').on('click',function(){
+		$("#flow-name").find('li').removeClass('current');
+		$(this).addClass('current');
+		
+		var val = $(this).attr("value");
+		var cityId = "$!{cityid}";
+		//异步加载客户问答
+	    $.ajax({
+	    	url:"/commondetail/getPageListQAinfoByPrdtId",
+	    	type:"post",
+	    	dataType:"html",
+	    	data:{"productId":"$!{productid}","QAtype":val,"cityId":cityId},
+	    	success:function(data){
+	    		$("#flow-con").children().remove();
+	    		$("#flow-con").append(data);
+	    	},
+	    	error:function(){
+	    		//alert("未响应");
+	    	}
+	    });
+	});
+	// 根据li个数自动计算ul宽度
+    var num = $(".ul-list1 li.item").length;
+    $(".ul-list1").width(305*num);
+    var num = $(".ul-list2 li.item").length;
+    $(".ul-list2").width(303*num);
+    var num = $(".ul-list3 li.item").length;
+    $(".ul-list3").width(303*num);
+    var num = $(".ul-list4 li.item").length;
+    $(".ul-list4").width(303*num);
+	
+	//初始化客户问答
+	$("#flow-name").find('li.current').click();
+	
+	
+	
+	// 新评价模块js
+    $('.tab').tab();
+	
+});
+
+
+
+
+
+var showPackageList = function(){
+	// 无忧套餐切换
+    $(".tc-con").hide(); 
+    $(".tc-tabs p:first").addClass("active").show(); 
+    $(".tc-con:first").show(); 
+    $(".tc-tabs p").click(function() {
+        $(".tc-tabs p").removeClass("active"); 
+        $(this).addClass("active"); 
+        $(".tc-con").hide(); 
+        var activeTab = $(this).find("a").attr("href"); 
+        $(activeTab).fadeIn(); 
+        return false;
+    });
+}
+
+//新评价模块tab
+$.fn.tab=function (){
+    this.each(function (){
+      var oParent=$(this);
+      var aBtn=oParent.find('.md-hr-tab-lists li a');
+      
+      var aCont=oParent.find('.tab-conts-h');
+     
+      aBtn.click(function (){
+        aBtn.removeClass('active');
+        aCont.removeClass('show');
+        
+        $(this).addClass('active');
+        var index=$(this).index(".md-hr-tab-lists li a");
+        aCont.eq(index).addClass('show');
+        var scope = $(this).parent().attr('data-value');
+        loadCusEvaluation(scope);
+      });
+      
+      /*初始化客户评价*/
+  	$('.md-hr-tab-lists li:first').find('a').click();
+    });
+  };
+  
+  
+  function loadCusEvaluation(scope){
+		//异步加载客户问答
+	    $.ajax({
+	    	url:"/cusEvaluation/getPageListCusEvalByPrdtId",
+	    	type:"post",
+	    	dataType:"html",
+	    	async:false,
+	    	data:{"productId":"$!{productid}","scope":scope},
+	    	success:function(data){
+	    		var aCont=$(document).find('.tab-conts-h');
+	    		var index = $(document).find('.md-hr-tab-lists li a.active').index('.md-hr-tab-lists li a');
+	    		aCont.eq(index).children().remove();
+	    		aCont.eq(index).append(data);
+	    		
+	    		//显示分数
+	    		$(".show-number li p").each(function(index, element) {
+	    		  var num=$(this).attr("tip");
+	    		  var www=num*2*9;
+	    		  $(this).css("width",www);
+	    		  $(this).parent(".star-Show").siblings("span").text(num);
+	    		});
+	    		
+	    		//显示分数2
+	    		$(".show-number2 li p").each(function(index, element) {
+	    		  var num=$(this).attr("tip");
+	    		  var www=num*2*6;
+	    		  $(this).css("width",www);
+	    		  $(this).parent(".star-Show2").siblings("span").text(num);
+	    		});
+	    	},
+	    	error:function(){
+	    		//alert("未响应");
+	    	}
+	    });
+	}
+
+
+	function getAllCountByEvaluationScope(){
+		var scope = "";
+		$('.md-hr-tab-lists').find('li').each(function(i){
+			scope += $(this).attr("data-value") + "|";
+		});
+		
+		$.ajax({
+			url:"/commondetail/getAllCountByEvaluationScope",
+			type:"post",
+			dataType:"json",
+			data:{"scope":scope,"productid":"$!{productid}"},
+			success:function(data){
+				$('.md-hr-tab-lists').find('li').each(function(j){
+					var para = $(this).attr("data-count");
+					var num = data[para];
+					var html = $(this).find('a').html() + "("+num+")";
+					$(this).find('a').html(html);
+				});
+			},
+			error:function(){}
+		});
+	}
+
+</script>
+
+<body id="other-nav">
+<div id="continer">
+	
+	
+	<!-- logo区域 -->
+    #parse("views/common/logo_normal.html")
+
+
+    <!-- 导航 -->
+     #parse("views/common/navigation.html")
+   
+    <!-- 商品详情 -->
+    <div class="sp-detail">
+        <div class="crumbs">
+            <a class="crumb-link" href="">首页</a>
+            <i class="crumb-line">></i>
+            <a class="crumb-link" href="">虚拟地址</a>
+            <i class="crumb-line">></i>
+            <a class="crumb-link" href="">$!{conf.address_name}</a>
+        </div>
+
+        
+        <div class="virtual-cp">
+            <div class="title-box">
+                <p class="title">$!{conf.address_name}</p>
+                <p class="tag-box"><span class="tag"><i class="angle1"><s></s></i>$!{conf.descpation}</span></p>
+            </div>
+            <div class="cp-list">
+                <ul>
+                    <li class="list1"><label>适用经营范围：</label>
+                    #foreach($o in $!seltags)
+	                        <span class="tag">$!{o.titlename}</span>
+                    #end
+                    </li>
+                    <li class="list2"><label>适用公司类型：</label><span class="cpval">$!{conf.com_type}</span></li>
+                    <li class="list3"><label>适用注册资本：</label><span class="cpval">$!{conf.reg_money}</span></li>
+                    <li class="list4"><label>适用税务信息：</label><span class="cpval">$!{conf.sw_info}</span></li>
+                    <li class="list5"><label>适用发票信息：</label><span class="cpval">#if($!{conf.invoice}==1)可#else不可#end开具发票（邮寄）</span></li>
+                    <li class="list6"><label>地址使用期限：</label><span class="cpval">一年</span></li>
+                </ul>
+            </div>
+            <div class="dt-box"><a target="_blank" href="$!{conf.pic_url}"><img width="400" height="175" src="/file/download/$!{conf.pic_link}"></a></div>
+            <div class="price-box">
+                <div class="coupon">
+                    <label>优惠券：</label>
+                    <span class="tag">满500减50  <a href="">点击领取</a></span>
+                    <span class="tag">满500减50  <a href="">点击领取</a></span>
+                </div>
+                <div class="price">
+                    <a target="_blank" href="/order/index/$!{conf.address_id}.html" class="btn">立即购买</a>
+                    <span class="xj">￥$!{sellM.sell_overprice}</span>
+                    <span class="yj">￥$!{sellM.sell_markprice}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 优惠套餐START -->
+        <div id="packageList">
+    	   #parse("views/package/packageList.html")
+        </div>
+        <!-- 优惠套餐END -->
+        
+        
+        <div class="main-spcon">
+            <div class="con-left" id="content">
+                <div class="tit-nav">
+                    <ul>
+                        <a href="#a1"><li class="on">服务标准</li></a>
+                       <!--  <a href="#a2"><li>价格透明</li></a> -->
+                        <a href="#a3"><li>客户问答</li></a>
+                        <a href="#a4"><li>用户评价</li></a>
+                        <a href="#a5"><li>售后保障</li></a>
+                    </ul>
+                </div>
+                <p class="md-hover" id="a1"></p>
+                <div class="s-box">
+                    <div class="title">
+                        <p>服务标准</p>
+                    </div>
+                    <div class="tab1">
+                            $!{conf.pc_fwbz}
+                    </div>
+                </div>
+              <!--   <p class="md-hover" id="a2"></p> -->
+                <!-- <div class="s-box">
+                    <div class="title">
+                        <p>收费透明</p>
+                    </div>
+                    <div class="tab2">
+                            $!{info.price_text}
+                    </div>
+                </div>  -->
+                <p class="md-hover" id="a3"></p>
+                <!-- <div class="s-box">
+                    <div class="title">
+                        <p>客户问题</p>
+                    </div>
+                    <div class="que-box">
+	                    #foreach($m in $!faqlist)
+	                    
+	                        <div class="q1">
+	                            <p class="que">
+	                                <label></label>
+	                                <span>$!m.questions</span>
+	                            </p>
+	                            <p class="ans">$!m.answer</p>
+	                        </div>
+	                    #end
+                    </div>
+                </div> -->  
+                
+                <!-- 修改客户问题 -->
+                <div class="s-box">
+                    <div class="title">
+                        <p>客户问答</p>
+                    </div>
+                    <div class="service-box">
+                        <div class="s-flow">  
+                            <ul class="s-name" id="flow-name">                                        
+                                <li class="current" value="1"><a>常见问题</a></li>
+                                <li value="2"><a>服务相关</a></li>  
+                                <li value="3"><a>办理时长</a></li>  
+                                <li value="4"><a>支付及发票</a></li>  
+                            </ul>
+                            <div class="flowcon" id="flow-con">
+                                
+                            </div>
+                        </div>  
+                    </div>
+                </div>    
+                <!-- 修改客户问题 -->
+                
+                <p class="md-hover" id="a4"></p>
+                <div class="s-box">
+                    <div class="title">
+                        <p>用户评价</p>
+                    </div>
+                    <!-- <div class="user-box">
+                        <div class="tx"><img src="/images/product/tx.png"></div>
+                        <div class="box">
+                            <p class="info">
+                                <span>北京新西兰留学生旅游管理公司</span>
+                                <span>王先生</span>
+                                <span>2015-12-25  17:53</span>
+                            </p>
+                            <p class="text">公司印章主要包括公章、财务章、合同章、发票章、法人代表人名章；除法人章外，其它4个章章主要包括公章、财务章、合同章、发票章、法人代表人名章；除法、公安、开户银行备案或预留印鉴。</p>
+                        </div>
+                    </div>
+                    <div class="user-box">
+                        <div class="tx"><img src="/images/product/tx.png"></div>
+                        <div class="box">
+                            <p class="info">
+                                <span>北京新西兰留学生旅游管理公司</span>
+                                <span>王先生</span>
+                                <span>2015-12-25  17:53</span>
+                            </p>
+                            <p class="text">公司印章主要包括公章、财务章、合同章、发票章、法人代表人名章；除法人章外，其它4个章章主要包括公章、财务章、合同章、发票章、法人代表人名章；除法、公安、开户银行备案或预留印鉴。</p>
+                        </div>
+                    </div> -->
+                    <div class="md-hr-tab tab" >
+                    <div class="md-hr-tab-list">
+                         <ul class="md-hr-tab-lists">
+                             <li data-value="all" data-count="pingfenCountall"><a href="javascript:void(0)" class="active">全部评价</a></li>
+                             <li data-value="5~" data-count="pingfenCount5~"><a href="javascript:void(0)">5分评价</a></li>
+                             <li data-value="4~5" data-count="pingfenCount4~5"><a href="javascript:void(0)">4-5分评价</a></li>
+                             <li data-value="3~4" data-count="pingfenCount3~4"><a href="javascript:void(0)"> 3-4分评价</a></li>
+                             <li data-value="1~3" data-count="pingfenCount1~3"><a href="javascript:void(0)">1-3分评价</a></li> 
+                         </ul>
+                    </div>
+
+                        <div class="md-tab-conts " >
+                          <div class="tab-conts-h show">
+                             <dl class="clrfix">
+                                 
+                             </dl>
+                             <dl class="clrfix">
+                                
+                             </dl>
+                           </div>
+                        </div>   
+
+                        <div class="md-tab-conts" >
+                          <div class="tab-conts-h">
+                             <dl class="clrfix">
+                                
+                             </dl>
+                             <dl class="clrfix">
+                                
+                             </dl>
+                           </div>
+                        </div> 
+
+                        <div class="md-tab-conts" >
+                          <div class="tab-conts-h">
+                             <dl class="clrfix">
+                                
+                                    
+                             </dl>
+                             <dl class="clrfix">
+                                 
+                             </dl>
+                           </div>
+                        </div>   
+
+                        <div class="md-tab-conts" >
+                          <div class="tab-conts-h">
+                             <dl class="clrfix">
+                               
+                             </dl>
+                             <dl class="clrfix">
+                                
+                             </dl>
+                           </div>
+                        </div> 
+
+                        <div class="md-tab-conts" >
+                          <div class="tab-conts-h">
+                             <dl class="clrfix">
+                                
+                             </dl>
+                             <dl class="clrfix">
+                                 
+                             </dl>
+                           </div>
+                        </div>    
+     
+                    </div> <!--新的模块结束  -->
+                    
+                </div>    
+                
+                <p class="md-hover" id="a5"></p>
+				<div class="s-box">
+                    <div class="title">
+                        <p>售后保障</p>
+                    </div>
+                    <div class="tab2">
+                            $!{info.saleContent_text}
+                    </div>
+                </div>
+            </div>
+
+            <div class="con-right">
+                <div class="box1">
+                    <div class="title">相关服务</div>
+                    <div class="con">
+                        <ul>
+                            #foreach($m in $!reflist)
+                            <li>
+                                <p class="t1">$!{m.name}</p>
+                                <p class="t2">$!{m.tip}</p>
+                                <p class="t3">
+                                    <span class="s1">小微价：</span>
+                                    <span class="s2">￥$!{m.price}</span>
+                                    <a href="$!{m.path}">去购买</a>
+                                </p>
+                            </li>
+                            #end
+                            <!-- <li>
+                                <p class="t1">公司注册</p>
+                                <p class="t2">为企业办理公司注册</p>
+                                <p class="t3">
+                                    <span class="s1">小微价：</span>
+                                    <span class="s2">￥598</span>
+                                    <a href="/commondetail/detail/38229817543169">去购买</a>
+                                </p>
+                            </li>
+                            <li>
+                                <p class="t1">虚拟地址</p>
+                                <p class="t2">可靠地址，放心注册</p>
+                                <p class="t3">
+                                    <span class="s1">小微价：</span>
+                                    <span class="s2">￥400</span>
+                                    <a href="/addresslist.html">去购买</a>
+                                </p>
+                            </li> -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>        
+
+    <!-- 中部menu -->
+    <div class="sp-nav-box" id="menu">
+        <div class="new-spnav">
+            <ul>
+                <li><a href="#a1" class="cur">服务标准</a></li>
+               <!--  <li><a href="#a2">价格透明</a></li> -->
+                <li><a href="#a3">客户问答</a></li>
+                <li><a href="#a4">用户评价</a></li>
+                <li><a href="#a5">售后保障</a></li>
+            </ul>
+            <div class="nav-r">
+                <span class="t2">￥</span><span class="t3" id="J_hd_pri">$!{sellM.sell_overprice}</span>
+                <span class="t1" id="J_hd_mark_pri">￥$!{sellM.sell_markprice}</span>
+                <a href="/order/index/$!{sellM.sell_id}.html" id="J_buy_btn_2">立即购买</a>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+</body>
+

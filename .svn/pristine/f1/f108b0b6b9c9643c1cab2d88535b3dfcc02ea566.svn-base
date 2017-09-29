@@ -1,0 +1,239 @@
+package com.jx.hunter.lvzhengpc.utils;
+
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+import java.util.Set;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
+import com.jx.argo.ArgoTool;
+import com.jx.blackface.gaea.sell.entity.LvzProductCateEntity;
+import com.jx.blackface.gaea.sell.entity.LvzProductEntity;
+import com.jx.blackface.gaea.sell.entity.LvzProductInfoEntity;
+import com.jx.hunter.lvzhengpc.common.MemcachedUtil;
+import com.jx.hunter.lvzhengpc.frame.RSBLL;
+import com.jx.hunter.lvzhengpc.vo.Bannervo;
+
+
+public class MenuUtils {
+	public static MenuUtils menuUtils = new MenuUtils();
+	
+	
+	public  List<LvzProductCateEntity> one_ = null;
+	
+	public  List<Map<String,List<Map<String,List<Map<String,Object>>>>>> one = null ;
+	
+	/**
+	 * 从缓存中取出菜单数据[2级]
+	 * 
+	 * @throws Exception
+	 */
+	public List<Map<String,List<Map<String,List<Map<String,Object>>>>>> getMenuTwoByCached() throws Exception {
+		
+		
+		 setVal();
+		 
+		 if(one_==null||one==null){
+			 addMenu2Cached();
+		 }
+		 
+		 setVal();
+		 
+		 return one;
+		 
+	}
+	
+	/**
+	 * 从缓存中取出菜单数据[1级]
+	 * 
+	 * @throws Exception
+	 */
+	public List<LvzProductCateEntity> getMenuOneByCached() throws Exception {
+		
+		
+		 setVal();
+		 
+		 if(one_==null||one==null){
+			 addMenu2Cached();
+		 }
+		 
+		 setVal();
+		 
+		 return one_;
+		 
+	}
+
+
+	/**
+	 * 
+	 */
+	public void setVal() {
+		 one_ = (List<LvzProductCateEntity>) MemcachedUtil.get("one_");
+		 one = (List<Map<String, List<Map<String, List<Map<String, Object>>>>>>) MemcachedUtil.get("one");
+	}
+	
+	
+	/**
+	 * 添加菜单数据到缓存中
+	 * 
+	 * @throws Exception
+	 */
+	public void addMenu2Cached() throws Exception {
+		List<LvzProductCateEntity> one_ = RSBLL.getstance().getLvzProductCateService().getProductCateEntityList(" parent_cateid = 0 and cate_state = 1 ", 1, 99, null);
+		
+		
+		//查询一级类的图片
+		Map imgMap =new HashMap<String, List<String>>(); 
+		if(one_!=null){
+			for (LvzProductCateEntity m: one_) {
+				//商品相关信息查询
+				LvzProductInfoEntity info = RSBLL.getstance().getInfoService().getProductInfoEntityList(" typid=1 and info_id="+m.getCate_id(), 1, 1, "").size()>0?RSBLL.getstance().getInfoService().getProductInfoEntityList(" typid=1 and info_id="+m.getCate_id(), 1, 1, "").get(0):null;
+				if(info!=null){
+					List<String> img = new ArrayList<String>();
+					String images = info.getImage_url();
+					String[] str = images.split(",");
+					for(String s:str){
+						img.add(s);
+					}
+					imgMap.put(String.valueOf(m.getCate_id()), img);
+				}
+			}
+			
+		}
+		
+		List<Map<String,List<Map<String,List<Map<String,Object>>>>>> one = new ArrayList<Map<String,List<Map<String,List<Map<String,Object>>>>>>();
+		//去掉不上的5个商品【%名称核准% %设立登记%  %领取证照% %刻制印章%】
+		String wheresql = getWheresql();
+		
+		for(LvzProductCateEntity m:one_){
+			Map<String,List<Map<String,List<Map<String,Object>>>>> map_1 = new HashMap<String,List<Map<String,List<Map<String,Object>>>>>();
+			List<Map<String,List<Map<String,Object>>>> two = new ArrayList<Map<String,List<Map<String,Object>>>>();
+			long id_ = m.getCate_id();
+			List<LvzProductCateEntity> two_ = RSBLL.getstance().getLvzProductCateService().getProductCateEntityList(" parent_cateid="+id_+" and cate_state = 1  ", 1, 99, "");
+			
+			for(LvzProductCateEntity n:two_){
+				String code_ = n.getCate_code();
+				
+				
+				
+					String catename = n.getCate_name();
+					Map<String,List<Map<String,Object>>> map_2 = new HashMap<String,List<Map<String,Object>>>();
+					
+					//最里层的产品类别-3
+					List<LvzProductEntity> three_ = RSBLL.getstance().getLvzProductService().getProductEntityByChildcatecode(code_);
+					List<Map<String,Object>> three = new ArrayList<Map<String,Object>>();
+					if(three_!=null){
+						if(three_.size()>0){
+							
+							for(LvzProductEntity x:three_){
+								
+								if(!wheresql.contains(String.valueOf(x.getProduct_id()))){//去掉不上的5个商品【%名称核准% %设立登记%  %领取证照% %刻制印章%】
+									Map map_3 = new HashMap<String, Object>();
+									map_3.put("pid", x.getProduct_id());
+									map_3.put("pname", x.getProduct_name());
+									three.add(map_3);
+								}
+							}
+						}
+					}
+					map_2.put(catename, three);
+					two.add(map_2);
+					
+				
+			}
+			
+			map_1.put(""+id_, two);
+			one.add(map_1);
+		}
+		
+		
+		
+		
+		MemcachedUtil.set("one_", one_);
+		MemcachedUtil.set("one", one);
+		MemcachedUtil.set("imgMap", imgMap);
+	}
+
+	public static List<Bannervo> getBanners(){
+		String memkey = "baner_memkey_pclvzheng";
+		//Properties pro = (Properties) MemcachedUtil.get(memkey);
+		List<Bannervo> list = (List<Bannervo>) MemcachedUtil.get(memkey);
+		
+		if(list == null || list.size() == 0){
+			list = new ArrayList<Bannervo>();
+			String url = ArgoTool.getConfigFolder()+ArgoTool.getNamespace() + "/banner.properties";// + fileName;
+			InputStream in = null;
+			try {
+				in = new BufferedInputStream(new FileInputStream(url));
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} 
+			Properties pro = new Properties(); 
+			if(in != null){
+				try {
+					pro.load(in);
+				} catch (IOException e) {
+					e.printStackTrace();
+				} 
+			}
+			Set keyset = pro.keySet();
+			Iterator it = keyset.iterator();
+			while(it.hasNext()){
+				Bannervo vo = new Bannervo();
+				String key = (String) it.next();
+				if(null != key && !"".equals(key)){
+					String vstr = (String) pro.get(key);
+					String[] array = vstr.split(",");
+					vo.setConurl(array[1]);
+					vo.setImgurl(array[0]);
+					list.add(vo);
+				}
+			}
+			MemcachedUtil.set(memkey, list, new Date(60*1000));
+		}
+		
+		return list;
+	}
+	/**
+	 * 去掉不需要的商品
+	 * @param code_
+	 * @throws Exception
+	 */
+	public static String getWheresql() throws Exception {
+		String wheresql = " ";
+		Set<String> set = new HashSet<String>();
+		List<LvzProductEntity> ll = RSBLL.getstance().getLvzProductService().getProductEntityList(" product_name LIKE '%名称核准%' OR product_name LIKE '%设立登记%'  OR product_name LIKE '%领取证照%' OR product_name LIKE '%刻制印章%'", 1, 20, "");
+		for (LvzProductEntity e:ll) {
+			String pid = String.valueOf(e.getProduct_id());
+			set.add(pid);
+		}
+		List<String> ll2 = new ArrayList<String>(set);
+		for (String s:ll2) {
+			wheresql+= s+",";
+		}
+		
+		System.out.println(wheresql);
+		return wheresql;
+	}
+	
+	public static void main(String[] args) {
+		MemcachedUtil.delete("one");
+		MemcachedUtil.delete("one_");
+		MemcachedUtil.delete("imgMap");
+		
+		//getWheresql(code_)
+		
+	}
+}

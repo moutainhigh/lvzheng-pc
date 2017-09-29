@@ -1,0 +1,498 @@
+package com.jx.hunter.lvzhengpc.controllers;
+
+import java.util.Date;
+import java.util.List;
+
+import org.apache.commons.lang.StringUtils;
+
+import com.alibaba.fastjson.JSONObject;
+import com.jx.argo.ActionResult;
+import com.jx.argo.BeatContext;
+import com.jx.argo.annotations.Path;
+import com.jx.blackface.gaea.usercenter.contract.ILoginService;
+import com.jx.blackface.gaea.usercenter.entity.BFLoginEntity;
+import com.jx.hunter.lvzhengpc.common.CommonUtils;
+import com.jx.hunter.lvzhengpc.common.ValidateCode;
+import com.jx.hunter.lvzhengpc.frame.RSBLL;
+import com.jx.hunter.lvzhengpc.utils.ActionResultUtils;
+import com.jx.hunter.lvzhengpc.utils.CookieUtils;
+import com.jx.hunter.lvzhengpc.utils.MD5;
+import com.jx.hunter.lvzhengpc.utils.WAQUtils;
+import com.jx.service.messagecenter.entity.MobileSmsResultExt;
+
+public class UserCommonController extends BaseController {
+
+	@Path("/login.html")
+	public ActionResult tologIn(){
+		CommonUtils.geneCode(beat());
+		String redurl = beat().getRequest().getParameter("red_path");
+		
+		String reduls = beat().getRequest().getParameter("path");
+		if(null != redurl && !"".equals(redurl)){
+			beat().getModel().add("red_url", redurl);
+		}
+		if(null != reduls && !"".equals(reduls)){
+			beat().getModel().add("red_url", reduls);
+		}
+		return super.view("users/login");
+	}	
+	@Path("/loginaction")
+	public ActionResult logInAction(){
+		String logintype = beat().getRequest().getParameter("logintype");
+		JSONObject jr = new JSONObject();
+		String red_path = beat().getRequest().getParameter("red_path");
+		
+		String checkFlag = beat().getRequest().getParameter("checkMe");
+		long userid = 0;
+		if(logintype != null && "1".equals(logintype)){//普通登录
+			String phone = beat().getRequest().getParameter("phoneNum");
+			String password = beat().getRequest().getParameter("userpassd");
+			String condition = "password='"+password+"' and userphone='"+phone+"'";
+			List<BFLoginEntity> ulist = null;
+			try {
+				ulist = RSBLL.getstance().getLoginService().getLoginEntity(condition, 1, 1, "userid");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if(ulist == null || ulist.size() == 0){
+				jr.put("ret", "fail");
+				jr.put("msg", "用户名或者密码不正确!");
+				return ActionResultUtils.renderJson(jr.toString());
+			}else{
+				userid = ulist.get(0).getUserid();
+			}
+			
+		}else if(logintype != null && "2".equals(logintype)){//手机验证码登录
+			String tokenstr = beat().getRequest().getParameter("token");
+			String phonenumber = beat().getRequest().getParameter("phoneNum2");
+			String phonecode = beat().getRequest().getParameter("phoneM");
+			String valicode = beat().getRequest().getParameter("validatecode");
+			if(tokenstr == null || "".equals(tokenstr)){
+				jr.put("ret", "fail");
+				jr.put("msg", "生成的图形验证码又问题，请刷新页面重试！");
+				return ActionResultUtils.renderJson(jr.toString());
+			}
+			if(phonenumber == null || "".equals(phonenumber)){
+				jr.put("ret", "fail");
+				jr.put("msg", "电话号码不能为空！");
+				return ActionResultUtils.renderJson(jr.toString());
+			}
+			
+			if(valicode == null || "".equals(valicode)){
+				jr.put("ret", "fail");
+				jr.put("msg", "图形验证码错误！");
+				return ActionResultUtils.renderJson(jr.toString());
+			}else{
+				String sevali = (String) beat().getRequest().getSession().getAttribute("valicode"+tokenstr);
+				if(!StringUtils.equalsIgnoreCase(sevali,valicode)){
+					jr.put("ret", "fail");
+					jr.put("msg", "图形验证码不正确!");
+					
+					return ActionResultUtils.renderJson(jr.toString());
+				}
+				
+			}
+			
+			if(phonecode == null || "".equals(phonecode)){
+				jr.put("ret", "fail");
+				jr.put("msg", "手机验证码不能为空！");
+				return ActionResultUtils.renderJson(jr.toString());
+			}else{
+				try {
+					boolean f = RSBLL.getstance().getMoblieSmsService().checkVerifyCode(phonenumber, phonecode);
+					if(!f){
+						jr.put("ret", "fail");
+						jr.put("msg", "手机验证码错误！");
+						return ActionResultUtils.renderJson(jr.toString());
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+			String condition = " userphone='"+phonenumber+"'";
+			List<BFLoginEntity> ulist = null;
+			try {
+				ulist = RSBLL.getstance().getLoginService().getLoginEntity(condition, 1, 1, "userid");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if(null == ulist || ulist.size() == 0){
+				
+				String password = phonenumber.substring(phonenumber.length() - 6, phonenumber.length());
+				
+				BFLoginEntity bf = new BFLoginEntity();
+				bf.setUserphone(phonenumber);
+				bf.setAddtime(new Date().getTime());
+				bf.setChannel(4);
+				bf.setPassword(MD5.sign(password, "utf-8"));
+				bf.setUsername(phonenumber);
+				
+				
+				try {
+					userid = RSBLL.getstance().getLoginService().addLoginEntity(bf);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					jr.put("ret", "fail");
+					jr.put("msg", "您不是我们的注册用户，我们尝试新添加一个用户，但是发生了异常，请您稍后再试，或者访问我们的注册页面！");
+				}finally{
+					if(userid > 0){
+						jr.put("ret", "ok");
+						jr.put("msg", "您不是我们的注册用户，我们为您注册了一个新的用户，密码为您的手机的后6位!");
+					}else{
+						jr.put("ret", "fail");
+						jr.put("msg", "您不是我们的注册用户，我们尝试新添加一个用户，但是失败了！");
+					}
+				}
+				
+				return ActionResultUtils.renderJson(jr.toString());
+			}else{
+				userid = ulist.get(0).getUserid();
+			}
+		}
+		
+		int cookieTime = 60 * 60 * 24;
+		// 如果选中了记住我则cookie保存7天
+		if ("1".equals(checkFlag)) {
+			cookieTime = 60 * 60 * 24 * 7;
+		}
+		try {
+			CookieUtils.saveCookie(userid, response(), cookieTime);
+			jr.put("ret", "success");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			jr.put("ret", "fail");
+			jr.put("msg", "登录异常！");
+		}
+		
+		
+		return ActionResultUtils.renderJson(jr.toString());
+	}
+	@Path("/register.html")
+	public ActionResult toregUser(){
+		String redurl = beat().getRequest().getParameter("red_path");
+		CommonUtils.geneCode(beat());
+		if(null != redurl && !"".equals(redurl)){
+			beat().getModel().add("red_url", redurl);
+		}
+		
+		return super.view("users/reguser");
+	}
+	@Path("/loginout")
+	public ActionResult logOut(){
+		try {
+			//UtilTool.deleteCookie(beat.getRequest(), beat.getResponse());
+			CookieUtils.deleteCookie(beat().getRequest(), beat().getResponse());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return super.redirect("/");
+	}
+	@Path("/logout")
+	public ActionResult loginOut(){
+		JSONObject jo = new JSONObject();
+		try {
+			//UtilTool.deleteCookie(beat.getRequest(), beat.getResponse());
+			CookieUtils.deleteCookie(beat().getRequest(), beat().getResponse());
+			jo.put("ret", "ok");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			jo.put("ret", "fail");
+			jo.put("msg", "删除cookie异常");
+		}
+		return ActionResultUtils.renderJson(jo.toString());
+	}
+	@Path("/reguseraction")
+	public ActionResult regUserAction(){
+		ILoginService ls = RSBLL.getstance().getLoginService();
+		String tokenstr = beat().getRequest().getParameter("token");
+		String userphone = beat().getRequest().getParameter("userphone");
+		String validatecode = beat().getRequest().getParameter("validatecode");
+		String phonecode = beat().getRequest().getParameter("phonecode");
+		String password = beat().getRequest().getParameter("password");
+		
+		JSONObject jr = new JSONObject();
+		if(null == tokenstr || "".equals(tokenstr)){
+			jr.put("ret", "fail");
+			jr.put("msg", "图形验证码失败！请刷新后重试!");
+			
+			return ActionResultUtils.renderJson(jr.toString());
+		}
+		
+		if(validatecode == null || "".equals(validatecode)){
+			
+			jr.put("ret", "fail");
+			jr.put("msg", "图形验证码错误!");
+			
+			return ActionResultUtils.renderJson(jr.toString());
+		}else{
+			String sevali = (String) beat().getRequest().getSession().getAttribute("valicode"+tokenstr);
+			if(!StringUtils.equalsIgnoreCase(sevali,validatecode)){
+				jr.put("ret", "fail");
+				jr.put("msg", "图形验证码错误!");
+				
+				return ActionResultUtils.renderJson(jr.toString());
+			}
+			
+		}
+		if(userphone != null && !"".equals(userphone)){
+			String condition = "userphone='"+userphone+"'";
+			List<BFLoginEntity> list = null;
+			try {
+				list = ls.getLoginEntity(condition, 1, 1, "userid");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			if(null != list && list.size() > 0){
+				jr.put("ret", "fail");
+				jr.put("msg", "电话已经存在！");
+				return ActionResultUtils.renderJson(jr.toString());
+			}
+		}
+		
+		try {
+			if(phonecode == null || "".equals(phonecode)){
+				jr.put("ret", "fail");
+				jr.put("msg", "手机验证码错误");
+				return ActionResultUtils.renderJson(jr.toString());
+			}else if(!RSBLL.getstance().getMoblieSmsService().checkVerifyCode(userphone, phonecode)){
+				jr.put("ret", "fail");
+				jr.put("msg", "手机验证码错误");
+				return ActionResultUtils.renderJson(jr.toString());
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+		
+		
+		if(password == null || "".equals(password)){
+			jr.put("ret", "fail");
+			jr.put("msg", "密码不能为空");
+			return ActionResultUtils.renderJson(jr.toString());
+		}
+		
+		long userid = 0;
+		
+		BFLoginEntity bf = new BFLoginEntity();
+		bf.setUserphone(userphone);
+		bf.setUsername(userphone);
+		bf.setAddtime(new Date().getTime());
+		bf.setChannel(4);
+		bf.setPassword(password);
+		
+		try {
+			userid = ls.addLoginEntity(bf);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(userid > 0){
+			int cookieTime = 60 * 60 * 24;
+			// 如果选中了记住我则cookie保存7天
+			try {
+				CookieUtils.saveCookie(userid, response(), cookieTime);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			jr.put("ret", "ok");
+		}else{
+			jr.put("ret", "fail");
+			jr.put("msg", "添加用户失败!");
+		}
+		
+		return ActionResultUtils.renderJson(jr.toString());
+		
+	}
+	
+	public static void main(String[] args){
+		ILoginService iss = RSBLL.getstance().getLoginService();
+		String condition = "1=1";
+		
+		
+		int m = 0;
+		for(int i = 1;i<=20;i++){
+			++m;
+			List<BFLoginEntity> list = null;
+			try {
+				list = iss.getLoginEntity(condition, i, 1000, "userid");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if(list != null && list.size() > 0){
+				for(BFLoginEntity bf : list){
+					System.out.println("usrid is "+bf.getUserid()+" user phone is "+bf.getUserphone()+" and before md5 "+bf.getPassword());
+					if(null != bf.getPassword() && !"".equals(bf.getPassword()) && bf.getPassword().length() != 32){
+						String pp = bf.getPassword();
+						pp = MD5.sign(pp, "utf-8");
+						bf.setPassword(pp);
+						try {
+							iss.updateLoginEntity(bf);
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						System.out.println("usrid is "+bf.getUserid()+" user phone is "+bf.getUserphone()+" and after md5 "+bf.getPassword());
+					}
+				}
+				
+			}
+			System.out.println("mmm is "+m);
+		}
+		
+	}
+	/**
+	 * width 设置图片宽度
+	 * height 
+	 * @param tokenstr
+	 * @return
+	 */
+	@Path("/picvalidate/{tokenstr:\\S+}")
+	public ActionResult picvalidate(final String tokenstr){
+		
+		return new ActionResult(){
+
+			@Override
+			public void render(BeatContext beatContext) {
+				// TODO Auto-generated method stub
+
+				int w = 80;
+				String width = beat().getRequest().getParameter("width");
+				if(null != width && !"".equals(width) && Integer.parseInt(width) > 0){
+					w = Integer.parseInt(width);
+				}
+				
+				int h = 25;
+				String height = beat().getRequest().getParameter("height");
+				if(null != height && !"".equals(height) && Integer.parseInt(height) > 0){
+					h = Integer.parseInt(height);
+				}
+				
+				int c = 4;
+				String count = beat().getRequest().getParameter("count");
+				if(null != count && !"".equals(count) && Integer.parseInt(count) > 0){
+					c = Integer.parseInt(count);
+				}
+				int lc = 30;
+				String lineCount = beat().getRequest().getParameter("lineCount");
+				if(null != lineCount && !"".equals(lineCount) && Integer.parseInt(lineCount) > 0){
+					lc = Integer.parseInt(lineCount);
+				}
+				
+				ValidateCode vc = new ValidateCode(w,h,c,lc);
+				vc.createCode();
+				beat().getRequest().getSession().setAttribute("valicode"+tokenstr, vc.getCode());
+				try {
+					vc.write(beat().getResponse().getOutputStream());
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+			
+		};
+		
+	}
+	/***
+	 * 发送手机验证码
+	 * @return 1发送成功 2发送的语音验证码 -1发送失败 error 获取手机号失败
+	 */
+	@Path("/common/sendPhoneCode")
+	public ActionResult sendPhoneCode(){
+		String tokenstr = beat().getRequest().getParameter("tokenstr");
+		String valicdoe = beat().getRequest().getParameter("validatecode");
+		
+		String phoneNum = beat().getRequest().getParameter("phoneNum")==null?"":WAQUtils.HTMLEncode(beat().getRequest().getParameter("phoneNum"));
+		
+		if(StringUtils.isBlank(phoneNum)){
+			return ActionResultUtils.renderJson("{\"error\":}");
+		}
+		if(valicdoe == null || "".equals(valicdoe) || null == tokenstr || "".equals(tokenstr)){
+			return ActionResultUtils.renderJson("{\"flag\":\"8\"}");
+		}else if(!valicdoe.toUpperCase().equalsIgnoreCase((String) beat().getRequest().getSession().getAttribute("valicode"+tokenstr))){
+			String sttt = (String) beat().getRequest().getSession().getAttribute("valicode"+tokenstr);
+			
+			System.out.println(valicdoe.toUpperCase()+"---"+sttt);
+			return ActionResultUtils.renderJson("{\"flag\":\"9\"}");
+		}else{
+			try {
+				MobileSmsResultExt  result = RSBLL.getstance().getMoblieSmsService().sendVerifyCode(phoneNum);
+				System.out.println("********************"+result.getCode()+"==="+result.getMsg()+"==="+result.isResult());
+				if(result.isResult()){
+					if(result.getCode() == 2){
+						return ActionResultUtils.renderJson("{\"flag\":\"2\"}");
+					}
+					return ActionResultUtils.renderJson("{\"flag\":\"1\"}");
+		        }
+			} catch (Exception e) {
+				e.printStackTrace();
+				return ActionResultUtils.renderJson("{\"flag\":\"-1\"}");
+			}
+		}
+		
+		
+		
+		return ActionResultUtils.renderJson("{\"flag\":\"-1\"}");
+	}
+//	
+//	/***
+//	 * 校验手机发送的验证码是否正确
+//	 * @return true正确 false 错误 error 手机或验证码为空
+//	 */
+	@Path("/common/checkPhoneAndCode")
+	public ActionResult checkPhoneAndCode(){
+		String phoneNum = beat().getRequest().getParameter("phoneNum")==null?"":WAQUtils.HTMLEncode(beat().getRequest().getParameter("phoneNum"));
+		String code = beat().getRequest().getParameter("code")==null?"":WAQUtils.HTMLEncode(beat().getRequest().getParameter("code"));
+		
+		if(StringUtils.isBlank(phoneNum) || StringUtils.isBlank(code)){
+			return ActionResultUtils.renderJson("{\"error\":}");
+		}
+		try {
+			Boolean  result = RSBLL.getstance().getMoblieSmsService().checkVerifyCode(phoneNum, code);
+			if(result){
+				return ActionResultUtils.renderJson("{\"success\":\"true\"}");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("调用校验手机和验证码方法：checkVerifyCode失败手机号:" + phoneNum +"验证码:"+code);
+		}
+		return ActionResultUtils.renderJson("{\"success\":\"false\"}");
+	}
+	
+	
+	@Path("/alertLogin.html")
+	public ActionResult alertLogin(){
+		CommonUtils.geneCode(beat());
+		String redurl = beat().getRequest().getParameter("red_path");
+		
+		String reduls = beat().getRequest().getParameter("path");
+		if(null != redurl && !"".equals(redurl)){
+			beat().getModel().add("red_url", redurl);
+		}
+		if(null != reduls && !"".equals(reduls)){
+			beat().getModel().add("red_url", reduls);
+		}
+		return super.view("users/alertLogin");
+	}
+	
+	
+	@Path("/common/checkImgCode")
+	public ActionResult checkImgCode(){
+		JSONObject checkImgCode = CommonUtils.checkImgCode(beat());
+		return ActionResultUtils.renderJson(checkImgCode.toString());
+	}
+	
+	
+}

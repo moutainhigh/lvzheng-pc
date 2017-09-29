@@ -1,0 +1,146 @@
+<!-- logo区域 -->
+#parse("views/common/logo_normal.html")
+
+ <!-- 导航 -->
+#parse("views/common/navigation.html")
+<div class="sp-listbg">
+    <!-- 商品详情 -->
+    <div class="sp-detail">
+        <div class="crumbs">
+            <a class="crumb-link" href="/">首页</a>
+            <i class="crumb-line">></i>
+            <a class="crumb-link">$!{crumbsName}</a>
+        </div>
+        <!-- 广告位 -->
+        <div class="need-sp">
+            <div class="list">
+                <ul>
+                    <li>
+                        <a href="http://mycenter.lvzheng.com/mywf/page/reg">
+                        <img src="/images/product/list/p1.jpg">
+                        <p class="name"><span>自助流程</span> 自助办理，0元注册！</p>
+                        <p class="price"><span class="t1">￥</span>0<span class="t2">￥0</span></p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/commondetail/detail/38229817543169">
+                        <img src="/images/product/list/p2.jpg">
+                        <p class="name"><span>公司注册</span> 极速出证，含一证五章！</p>
+                        <p class="price"><span class="t1">￥</span>588<span class="t2">￥1500</span></p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/addresslist.html">
+                        <img src="/images/product/list/p3.jpg">
+                        <p class="name"><span>虚拟地址</span> 可靠地址，放心注册！</p>
+                        <p class="price"><span class="t1">￥</span>4000<span class="t2">￥19999</span></p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/commondetail/detail/38230084959489">
+                        <img src="/images/product/list/p4.jpg">
+                        <p class="name"><span>内资变更</span> 快速办理，全程透明！</p>
+                        <p class="price"><span class="t1">￥</span>588<span class="t2">￥4500</span></p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- 优惠套餐 -->
+        <!-- <div class="splist-box" >
+            <div class="list">
+                <ul class="list-ul">
+                    <li class="item">
+                        <p class="ico">工商<br>注册</p>
+                        <p class="name">工商注册</p>
+                        <p class="text">极速出证，含一证五章</p>
+                        <p class="price">￥200</p>
+                    </li>
+                    <li class="plus"></li>
+                    <li class="item">
+                        <p class="ico">代理<br>记账</p>
+                        <p class="name">代理记账</p>
+                        <p class="text">极速出证，含一证五章</p>
+                        <p class="price">￥200</p>
+                    </li>
+                    <li class="plus"></li>
+                    <li class="item">
+                        <p class="ico">税务<br>报到</p>
+                        <p class="name">税务报到</p>
+                        <p class="text">极速出证，含一证五章</p>
+                        <p class="price">￥200</p>
+                    </li>
+                </ul>
+                <div class="equ-box">
+                    <div class="equal"></div>
+                    <p class="t1"><label>套餐价：</label><span>￥4000</span></p>
+                    <p class="t2"><label>原  价：</label><span>￥4978</span></p>
+                    <p class="t3"><label>立  省：</label><span>￥100</span></p>
+                    <p class="t4"><a href="" class="btn">购买套装</a></p>
+                </div>
+            </div>        
+        </div> -->
+        
+        <div class="main-splist" id="content">
+
+            <!-- 商品列表浮动导航 -->
+            <div class="splist-nav" id="menu">
+                <div class="spnav">
+                    <ul>
+                    	#set($foo = 1)
+	                	#foreach($productCate in $!{productCateEntityList})
+	                    	<li><a href="#a$!{foo}" #if($!{foo} == 1)class="cur"#end>$!{productCate.cate_name}</a></li>
+	                		#set($foo = $foo + 1 )
+	                	#end
+                    </ul>
+                </div>
+            </div>
+			#set($foo2 = 1)
+			#foreach($productCate in $!{productCateEntityList})
+            	<p class="md-hover" id="a$!{foo2}"></p>
+	            <div class="list">
+	                <p class="title">$!{productCate.cate_name}</p>
+	                <ul>
+						#foreach($lvzproductList in $!{ProductUtils.getProductList($!{productCate.cate_code})})
+	                    <li>
+	                        <a href="/commondetail/detail/$!{lvzproductList.product_id}">
+	                        <p class="one-ico1"></p>
+	                        <p class="name">$!{lvzproductList.product_name}</p>
+	                        <p class="text">$!{ProductUtils.getProductInfoByProductId($!{lvzproductList.product_id}).tips}</p>
+	                        </a>
+	                    </li>
+						#end
+	                </ul>
+	            </div>
+				#set($foo2 = $foo2 + 1 )
+			#end
+        </div>
+    </div>        
+</div>
+<script type="text/javascript">
+$(function(){
+    // 中部menu
+    $(window).scroll(function(){
+        var top = $(document).scrollTop();          
+        var menu = $("#menu");                      
+        var items = $("#content").find(".md-hover"); 
+        var curId = "";                             
+        items.each(function(){
+            var m = $(this);                        
+            var itemsTop = m.offset().top;        
+            if(top > itemsTop-100){
+                curId = "#" + m.attr("id");
+            }else{
+                return false;
+            }
+        });
+
+        var curLink = menu.find(".cur");
+        if( curId && curLink.attr("href") != curId ){
+            curLink.removeClass("cur");
+            menu.find( "[href=" + curId + "]" ).addClass("cur");
+        }
+    });
+});
+</script>

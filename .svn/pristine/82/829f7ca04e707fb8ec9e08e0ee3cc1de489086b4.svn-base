@@ -1,0 +1,245 @@
+<link href="/css/cx-trade.css" type="text/css"  rel="stylesheet"/>
+<script type="text/javascript" src="/js/users/alertLogin.js"></script>
+<script type="text/javascript" src="/js/brand/brand.js"></script>
+<script type="text/javascript" src="/js/jquery.md5.js"></script>
+<script>
+$(function(){
+    // 左导航切换显示
+    $(".left-nav dd").hover(function(){
+        $(".nav-right",this).show();
+    });
+    $(".left-nav dd").mouseleave(function(){
+        $(".nav-right",this).hide();
+    });
+
+    // 行业领域
+    $(".sb-ul li").each(function(){
+        $(this).click(function(){
+            $(".sb-ul li").addClass("b-box").removeClass("cur");
+            $(this).addClass("cur").removeClass("b-box");
+        })
+    });
+
+     // 行业领域
+    $(".zt-ul li").each(function(){
+        $(this).click(function(){
+            $(".zt-ul li").addClass("b-box").removeClass("cur");
+            $(this).addClass("cur").removeClass("b-box");
+        })
+    });
+
+    // 更多
+    $('a.limore').bind('click', function () { 
+        var txt = $('a.limore').text(); 
+        if (txt == '更多') { 
+            $('#limorediv').show(); 
+            $('a.limore').text('收起').addClass('litop-arr').removeClass('libot-arr'); 
+        } else { 
+            $('#limorediv').hide(); 
+            $('a.limore').text('更多').removeClass('litop-arr').addClass('libot-arr'); 
+        } 
+    }) 
+
+    // 左侧图片浮动
+    $(window).scroll(function(){
+        var a=parseInt($(window).scrollTop());
+        if(a>220){
+            $(".adpic").addClass("picfixed")
+        }
+        if(a<220){
+            $(".adpic").removeClass("picfixed")
+        }
+    });
+        
+});
+</script>
+
+ <!-- logo区域 -->
+#parse("views/common/logo_normal.html")
+
+#parse("views/common/navigation.html")
+
+#parse("views/common/sendphonecode.html")
+<div id="continer">
+
+    <div class="cx-result">
+        <div class="crumbs">
+            <a class="crumb-link" href="/">首页 </a>
+            <i class="crumb-line"> > </i>
+            <a class="crumb-link" href="javascript:location.reload()">商标查询 </a>
+        </div>
+        <div class="cx-result-box ">
+            <div class="cx-result-center">
+                <div class="sea-box">
+                    <div class="search">
+                        <span class="sea-item">
+                            <input type="text" id="searchKeyWord" placeholder="请输入您要搜索的关键字，如商标名称“小微”或者申请人">
+                       		<input id="brandSearchCount" type="hidden" value="$!{brandSearchCount}"/>
+                        </span>
+                        <a href="javascript:void(0)" class="btn selectBtn">查一下</a>
+                    </div>
+                    <p class="ts-text">***精确查找 拒绝抢注***</p>
+                </div>
+                
+                <div class="result-box">
+                    <p class="name">小微为您找到“<span>$!{keyWord}</span>”相关结果$!{retCount}条</p>
+	                #if($!{brList})
+                    <div class="result-box-mian">
+                       <ul class="box-mian-ul">
+                       		#foreach($elem in $brList)
+                           <li>
+                                <a>
+                                     <span class="box-mian-spn1 not">
+
+                                         <h6 class="spn1-h6 white bj1">$!{velocityCount}</h6>
+                                     </span>
+                                     <span class="box-mian-spn2">
+                                         <p><em class="ash">商标名称：</em><i class="red">$!{elem.trade_name}</i></p>
+                                         <p><em class="ash">申请人：</em><i>$!{elem.trade_applyer}</i></p>
+                                         <p><em class="ash">类别：</em><i class="red">第$!{elem.trade_class}类 &nbsp; $!{elem.tradeClassName}</i></p>
+                                         <p><em class="ash">注册号：</em><i>$!{elem.trade_id}</i></p>
+                                     </span>
+                                </a>
+                             </li>
+                             #end
+                       </ul>
+                    </div>
+                    
+                    <div class="page-turn">
+                        <!-- <a href="javascript:void(0)">[首页]</a>
+                        <a href="javascript:void(0)">[上一页]</a>
+                        <a href="javascript:void(0)">1</a>
+                        <a href="javascript:void(0)">2</a>
+                        <a href="javascript:void(0)">3</a>
+                        <a href="javascript:void(0)" class="current">4</a>
+                        <a href="javascript:void(0)">5</a>
+                        <a href="javascript:void(0)">6</a>
+                        <a href="javascript:void(0)">[下一页]</a>
+                        <a href="javascript:void(0)">[末页]</a> -->
+                        <!-- 分页 -->
+						#parse("views/common/fenye.html")
+                    </div>
+                    #else
+	                <!-- 未查询到数据时 -->
+					<div class="show-none">
+						<p class="ts-text">暂时还没有相关数据哟！</p>
+					</div>	
+	                #end
+                </div>
+            </div>
+            <div class="cx-result-right">
+                <a class="adpic" href="/commondetail/detail/38230926529537.html">
+                    <img src="/images/product/ad_buy.jpg">
+                </a>
+            </div>
+		</div>
+     </div>
+</div>
+
+
+<div class="cd-popup cd-box1imgcode" role="alert"> 
+    <!--输入验证码 提示框 -->
+    <div class="cd-popup-container bl-box">
+        <div class="bl">
+            <div class="item">
+                <div class="w-text">
+                	<!-- <input type="hidden" id="token" value="$!{token}" /> -->
+                    <input type="text" id="valicodeinput" placeholder="请输入验证码">
+                    <div class="imgcode">
+                        <img id="valicodedateimg" src="" onclick="$(this).attr('src',encodeURI('/picvalidate/$!{token}?'+new Date()));" >
+                    </div>
+                    <a href="javascript:void(0);" onclick="$('.imgcode img').attr('src',encodeURI('/picvalidate/$!{token}?'+new Date()));" class="codebtn">点击刷新</a>
+                </div>
+            </div>
+            <div class="btn">
+                <a href="javascript:void(0);" class="imgcode searchBtn" >查询</a>
+            </div>
+        </div> 
+        <a href="javascript:void(0);" class="cd-popup-close img-replace brandSearch-close">关闭</a>
+    </div>
+</div>
+
+<!-- 登录弹层 -->
+<div class="cd-popup cd-box1AlertLogin" role="alert"> 
+    <div class="cd-popup-container" id="login-box">
+        <div class="cx-login login">
+            
+        <form action="/loginaction" method="post" id="pt_form">
+            <input name="redurl" id="red_path" value="http://www.lvzheng.com/order/index/38504449205249.html" type="hidden"/>
+            <input type="hidden" id="userpassd"  name="userpassd" value=""/>
+            <input type="hidden"  name="logintype" value="1"/>
+            <div class="login_box" id="pt_login" style="display:none;">
+                <div class="box_top">
+                    <p class="reg_name1">普通登录</p>
+                    <p class="reg_login2" id="phone_click">手机验证登录</p>
+                </div>
+                <div class="clear"></div>
+                <div class="t_box1">                                                  
+                    <input class="w_box1" type="text" placeholder="请输入手机号码" id="username"  name="phoneNum" value="">
+                    <span id="enter_right" name="enter_right_phone" style="display: none;"></span><!-- 正确图标 -->
+                    <span id="enter_error" name="enter_error_phone" style="display: none;"></span><!-- 错误图标 -->
+                    <div class="clear"></div>
+                </div>
+
+                <div class="t_box1">
+                    <input class="w_box1" type="password" placeholder="请输入密码" id="password" name="password">
+                    <span id="enter_right" name="enter_right_password" style="display: none;"></span><!-- 正确图标 -->
+                    <span id="enter_error" name="enter_error_password" style="display: none;"></span><!-- 错误图标 -->
+                    <div class="clear"></div>
+                </div>
+                <input type="hidden" id="ptError" value="">
+                <div class="t_box2">
+                    <input type="checkbox" name="checkMe" value="1"/> <span>记住我</span>
+                </div>
+                <div class="t_box1">
+                    <p class="reg_btn" id="pt_button">登 录</p>
+                </div>
+                <div class="t_box1">没有账号，立即 <a href="/register.html">注册</a></div>
+            </div>
+        </form>
+
+        <form action="/loginaction" method="post" id="phone_form">
+            <input name="redurl" id="red_path" value="http://www.lvzheng.com/order/index/38504449205249.html" type="hidden"/>
+            <input type="hidden" id="token" name="token" value="$!{token}"/>
+            <input type="hidden"  name="logintype" value="2"/>
+            <div class="login_box" id="phone_login" style="">
+                <div class="box_top">
+                    <p class="reg_name2">手机验证登录</p>
+                    <p class="reg_login1" id="pt_click">普通登录</p>
+                </div>
+                <div class="clear"></div>
+                <div class="t_box1">
+                    <input class="w_box1" type="text" placeholder="请输入手机号码" id="phoneNum" name="phoneNum2" value="">
+                    <span id="enter_right" name="enter_right_phone2" style="display: none;"></span><!-- 正确图标 -->
+                    <span id="enter_error" name="enter_error_phone2" style="display: none;"></span><!-- 错误图标 -->
+                    <div class="clear"></div>
+                </div>
+                <!-- 暂时不需要  -->
+                <div class="t_box1">
+                    <input class="w_box2" id="validatecode" name="validatecode" type="text" placeholder="输入验证码">
+                    <span class="t_box_btn"><img id="validateimg" onclick="$(this).attr('src','/picvalidate/$!{token}?'+new Date());" src="/picvalidate/$!{token}"></span>
+                    <div class="clear"></div>
+                </div> 
+                <div class="t_box1">
+                    <input class="w_box2" type="text" placeholder="手机验证码" id="phoneM" name="phoneM">
+                    <!-- <span class="t_box_btn" id="box_btn">获取验证码</span> -->
+                    <input class="t_box_btn" id="box_btn" type="button" value="获取验证码" style="height: 38px;">
+                    <span id="enter_right" name="enter_right_phoneM" style="display: none;"></span><!-- 正确图标 -->
+                    <span id="enter_error" name="enter_error_phoneM" style="display: none;"></span><!-- 错误图标 -->
+                    <input type="hidden" id="phoneErrorMsg" value="">
+                    <div class="clear"></div>
+                </div>
+                <div class="t_box2">
+                    <input type="checkbox" id="checkMe" name="checkMe" value="1"> <span>记住我</span>
+                </div>
+                <div class="t_box1">
+                    <p class="reg_btn" id="phone_button">登 录</p>
+                </div>
+                <div class="t_box1">没有账号，立即 <a href="/register.html">注册</a></div>
+            </div>
+        </form>
+
+        </div>
+        <a href="#" class="cd-popup-close img-replace alertLogin-close">关闭</a>   
+    </div>
+</div> 

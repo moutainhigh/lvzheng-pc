@@ -1,0 +1,17 @@
+#if($!{packageSellList})
+<label class="name">特惠套餐</label>
+<div class="tccon">
+	#foreach($packageSellE in $!{packageSellList})
+		<div class="list">
+		
+		  $!{packageSellE.package_name}   
+			=
+			$!{packageSellE.sell_overprice} 
+			<a href="/order/buyorderByPackage/$!{packageSellE.packagesell_id}">购买></a>
+			<p class="moretext">
+				$!{tipsMap.get("$!{packageSellE.packagesell_id}").tips}
+			</p>
+		</div>
+	#end
+</div>
+#end

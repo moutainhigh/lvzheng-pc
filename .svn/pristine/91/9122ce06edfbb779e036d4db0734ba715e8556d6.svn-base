@@ -1,0 +1,203 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>商标搜索</title>
+<meta name="description" content="注册公司找小微律政,小微律政拥有专业的律师和会计团队,小微律政专注为创业公司及中小微企业提供代办公司注册,商标注册,代理记账,社保公积金开户,公司变更,合同拟定,公司章程等一站式企业服务，小微律政服务流程每一步都无微不至。">
+<meta name="keywords" content="小微律政,代办注册公司,公司注册,商标注册费用和流程" />
+<link href="/css/index.css" type="text/css"  rel="stylesheet"/>
+<link href="/css/box.css" type="text/css"  rel="stylesheet"/>
+<link href="/css/cx-trade.css" type="text/css"  rel="stylesheet"/>
+<script type="text/javascript" src="/js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="/js/box.js"></script>
+<script type="text/javascript" src="/js/users/alertLogin.js"></script>
+<script type="text/javascript" src="/js/brand/brand.js"></script>
+<script type="text/javascript" src="/js/jquery.md5.js"></script>
+#parse("views/common/sendphonecode.html")
+
+</head>
+<body>
+<div class="cx-trade-box">
+    <div class="cx-trade-banner">
+        <div class="banner-box">
+            <div class="btag1"></div>
+            <div class="btag2">***精确查找 拒绝抢注***</div>
+            <div class="search">
+                <span class="sea-item">
+                    <input type="text" id="searchKeyWord" placeholder="请输入您要搜索的关键字，如商标名称“小微”或者申请人">
+                    <input id="brandSearchCount" type="hidden" value="$!{brandSearchCount}"/>
+                </span>
+                <a href="javascript:void(0)" class="btn selectBtn">查一下</a>
+            </div>
+        </div>
+    </div>  
+
+    <div class="cx-trade-main">
+        
+        <div class="cx-boxbg">
+            <div class="cxbox1">
+                <p class="boxname">我们提供的商标服务</p>
+                <div class="trade-fw">
+                    <ul>
+                        <li><a href="/commondetail/detail/38230926529537.html"><p class="t1">商标注册</p></a></li>
+                        <li><a href="/commondetail/detail/38231039879425.html"><p class="t2">计算机软件著作权登记</p></a></li>
+                        <li><a href="/commondetail/detail/38230940369921.html"><p class="t3">商标转让</p></a></li>
+                        <li><a href="/commondetail/detail/38230933328385.html"><p class="t4">商标变更</p></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="cx-boxbg1">
+            <div class="cxbox1">
+                <p class="boxname">商标注册的流程</p>
+                <div class="trade-flow">
+                    <div class="flow-box">
+                        <img src="/images/trade/flowbg.png">
+                    </div>
+                    <div class="xw-flow">
+                        <span class="xw">小微律政：只需要13个月左右</span>
+                        <span class="other"> 其他代理机构：<a>多达20个月左右</a></span>                    
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cx-boxbg">
+            <div class="cxbox2">
+                <p class="boxname">注册商标的好处</p>
+                <div class="trade-good">
+                    <div class="good-box">
+                        <img src="/images/trade/goodbg.png">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cx-boxbg2">
+            <div class="cxbox1">
+                <p class="boxname">商标注册需要的资料</p>
+                <div class="apply">
+                    <div class="app">
+                        <p class="name1">公司名义申请</p>
+                        <p class="img"><img src="/images/trade/apply1.png"></p>
+                    </div>
+                    <div class="app">
+                        <p class="name2">个人名义申请</p>
+                        <p class="img"><img src="/images/trade/apply2.png"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="cd-popup cd-box1imgcode" role="alert"> 
+    <!--输入验证码 提示框 -->
+    <div class="cd-popup-container bl-box">
+        <div class="bl">
+            <div class="item">
+                <div class="w-text">
+                	<input type="hidden" id="token" value="$!{token}" />
+                    <input type="text" id="valicodeinput" placeholder="请输入验证码">
+                    <div class="imgcode">
+                        <img id="valicodedateimg" src="" onclick="$(this).attr('src',encodeURI('/picvalidate/$!{token}?'+new Date()));" >
+                    </div>
+                    <a href="javascript:void(0);" onclick="$('.imgcode img').attr('src',encodeURI('/picvalidate/$!{token}?'+new Date()));" class="codebtn">点击刷新</a>
+                </div>
+            </div>
+            <div class="btn">
+                <a href="javascript:void(0);" class="imgcode searchBtn" >查询</a>
+            </div>
+        </div> 
+        <a href="javascript:void(0);" class="cd-popup-close img-replace brandSearch-close">关闭</a>
+    </div>
+</div>
+
+<!-- 登录弹层 -->
+<div class="cd-popup cd-box1AlertLogin" role="alert"> 
+    <div class="cd-popup-container" id="login-box">
+        <div class="cx-login login">
+            
+        <form action="/loginaction" method="post" id="pt_form">
+            <input name="redurl" id="red_path" value="http://www.lvzheng.com/order/index/38504449205249.html" type="hidden"/>
+            <input type="hidden" id="userpassd"  name="userpassd" value=""/>
+            <input type="hidden"  name="logintype" value="1"/>
+            <div class="login_box" id="pt_login" style="display:none;">
+                <div class="box_top">
+                    <p class="reg_name1">普通登录</p>
+                    <p class="reg_login2" id="phone_click">手机验证登录</p>
+                </div>
+                <div class="clear"></div>
+                <div class="t_box1">                                                  
+                    <input class="w_box1" type="text" placeholder="请输入手机号码" id="username"  name="phoneNum" value="">
+                    <span id="enter_right" name="enter_right_phone" style="display: none;"></span><!-- 正确图标 -->
+                    <span id="enter_error" name="enter_error_phone" style="display: none;"></span><!-- 错误图标 -->
+                    <div class="clear"></div>
+                </div>
+
+                <div class="t_box1">
+                    <input class="w_box1" type="password" placeholder="请输入密码" id="password" name="password">
+                    <span id="enter_right" name="enter_right_password" style="display: none;"></span><!-- 正确图标 -->
+                    <span id="enter_error" name="enter_error_password" style="display: none;"></span><!-- 错误图标 -->
+                    <div class="clear"></div>
+                </div>
+                <input type="hidden" id="ptError" value="">
+                <div class="t_box2">
+                    <input type="checkbox" name="checkMe" value="1"/> <span>记住我</span>
+                </div>
+                <div class="t_box1">
+                    <p class="reg_btn" id="pt_button">登 录</p>
+                </div>
+                <div class="t_box1">没有账号，立即 <a href="/register.html">注册</a></div>
+            </div>
+        </form>
+
+        <form action="/loginaction" method="post" id="phone_form">
+            <input name="redurl" id="red_path" value="http://www.lvzheng.com/order/index/38504449205249.html" type="hidden"/>
+            <input type="hidden" id="token" name="token" value="$!{token}"/>
+            <input type="hidden"  name="logintype" value="2"/>
+            <div class="login_box" id="phone_login" style="">
+                <div class="box_top">
+                    <p class="reg_name2">手机验证登录</p>
+                    <p class="reg_login1" id="pt_click">普通登录</p>
+                </div>
+                <div class="clear"></div>
+                <div class="t_box1">
+                    <input class="w_box1" type="text" placeholder="请输入手机号码" id="phoneNum" name="phoneNum2" value="">
+                    <span id="enter_right" name="enter_right_phone2" style="display: none;"></span><!-- 正确图标 -->
+                    <span id="enter_error" name="enter_error_phone2" style="display: none;"></span><!-- 错误图标 -->
+                    <div class="clear"></div>
+                </div>
+                <!-- 暂时不需要  -->
+                <div class="t_box1">
+                    <input class="w_box2" id="validatecode" name="validatecode" type="text" placeholder="输入验证码">
+                    <span class="t_box_btn"><img id="validateimg" onclick="$(this).attr('src','/picvalidate/$!{token}?'+new Date());" src="/picvalidate/$!{token}"></span>
+                    <div class="clear"></div>
+                </div> 
+                <div class="t_box1">
+                    <input class="w_box2" type="text" placeholder="手机验证码" id="phoneM" name="phoneM">
+                    <!-- <span class="t_box_btn" id="box_btn">获取验证码</span> -->
+                    <input class="t_box_btn" id="box_btn" type="button" value="获取验证码" style="height: 38px;">
+                    <span id="enter_right" name="enter_right_phoneM" style="display: none;"></span><!-- 正确图标 -->
+                    <span id="enter_error" name="enter_error_phoneM" style="display: none;"></span><!-- 错误图标 -->
+                    <input type="hidden" id="phoneErrorMsg" value="">
+                    <div class="clear"></div>
+                </div>
+                <div class="t_box2">
+                    <input type="checkbox" id="checkMe" name="checkMe" value="1"> <span>记住我</span>
+                </div>
+                <div class="t_box1">
+                    <p class="reg_btn" id="phone_button">登 录</p>
+                </div>
+                <div class="t_box1">没有账号，立即 <a href="/register.html">注册</a></div>
+            </div>
+        </form>
+
+        </div>
+        <a href="#" class="cd-popup-close img-replace alertLogin-close">关闭</a>   
+    </div>
+</div> 
+</body>
+
+</html>

@@ -1,0 +1,17 @@
+log4j.additivity.weizhanlog=false
+log4j.logger.weizhanlog=INFO,weizhanlog
+log4j.appender.weizhanlog=org.apache.log4j.DailyRollingFileAppender
+log4j.appender.weizhanlog.File=/opt/gaea/logs/webview/weizhan_m.weizhanlog.log
+log4j.appender.weizhanlog.Append=true
+log4j.appender.weizhanlog.Threshold=INFO
+log4j.appender.weizhanlog.layout=org.apache.log4j.PatternLayout
+log4j.appender.weizhanlog.layout.ConversionPattern=%m%n
+
+log4j.additivity.lvzhengpcindex=false
+log4j.logger.lvzhengpcindex=INFO,lvzhengpcindex
+log4j.appender.lvzhengpcindex=org.apache.log4j.DailyRollingFileAppender
+log4j.appender.lvzhengpcindex.File=/mnt/black_track/lvzheng-pc/lvzheng_pc.tracelog.log
+log4j.appender.lvzhengpcindex.Append=true
+log4j.appender.lvzhengpcindex.Threshold=INFO
+log4j.appender.lvzhengpcindex.layout=org.apache.log4j.PatternLayout
+log4j.appender.lvzhengpcindex.layout.ConversionPattern=%m%n

@@ -1,0 +1,151 @@
+@charset "utf-8";
+*{padding:0;margin:0;}
+body{padding:0;margin:0;font-size:12px;font-family:"微软雅黑";color: #333;background:#fff;}
+img{border:none;}
+a{text-decoration:none;cursor:pointer;color:#666;}
+a:hover,a:hover {text-decoration:none;color:#55acee;}
+input{color: #777;outline: none;}
+ul{padding:0;margin:0;list-style:none;}
+li,p{padding:0;margin:0;}
+.clear{clear:both;}
+::-webkit-input-placeholder { /* WebKit browsers */color: #ccc;}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */color: #ccc;}
+::-moz-placeholder { /* Mozilla Firefox 19+ */color: #ccc;}
+:-ms-input-placeholder { /* Internet Explorer 10+ */color: #ccc;}
+
+.land-box{width: 100%;min-height: 1500px; background: #f6f6f6 url('http://static.lvzheng.com/lvzhengpc/images/land/banner.jpg')  no-repeat center top;overflow: hidden;}
+/*.land-box .banner{width: 1100px;height: 500px;margin: 0 auto;position: relative;}
+.land-box .banner .btag{width: 460px;height: 300px;background: url('http://static.lvzheng.com/lvzhengpc/images/land/btag.png')  no-repeat center;position: absolute;top: 40px;right: 90px}
+.land-box .banner .btag_4222{width: 460px;height: 300px;background: url('http://static.lvzheng.com/lvzhengpc/images/land/btag_1.png')  no-repeat center;position: absolute;top: 40px;right: 90px}
+.land-box .banner .bbtn{width: 390px;height: 110px;background: url('http://static.lvzheng.com/lvzhengpc/images/land/bbtn.png')  no-repeat center;position: absolute;top: 350px;right: 90px}*/
+.land-box .banner{width: 1100px;height: 400px;margin: 0 auto;position: relative;}
+.land-box .banner .btag{width: 460px;height: 300px;background: url('http://static.lvzheng.com/lvzhengpc/images/land/btag.png')  no-repeat center;position: absolute;top: 0px;right: 90px}
+.land-box .banner .btag_4222{width: 460px;height: 300px;background: url('http://static.lvzheng.com/lvzhengpc/images/land/btag_1.png')  no-repeat center;position: absolute;top: 0px;right: 90px}
+.land-box .banner .bbtn{width: 390px;height: 110px;background: url('http://static.lvzheng.com/lvzhengpc/images/land/bbtn.png')  no-repeat center;position: absolute;top: 300px;right: 90px}
+.land-box .md-hover{height: 1px}
+
+.land-box .main-box{width: 1100px; min-height: 1000px; margin: 0 auto}
+.land-box .main-box .left-box{width: 788px;min-height: 1000px;margin-right: 12px;float: left;}
+.land-box .main-box .left-box .cp-box{width: 788px;min-height: 200px;}
+.land-box .main-box .left-box .cp-box .sbox{min-height: 180px;padding: 15px 20px 20px 90px;background: #fff;position: relative;margin-top: 15px}
+.land-box .main-box .left-box .cp-box .sbox p.num{font-size: 18px;width: 54px; height: 70px;line-height: 55px; font-size: 36px;color: #fff; text-align: center; background: url('http://static.lvzheng.com/lvzhengpc/images/land/numbg.png')  no-repeat center;position: absolute;top: -5px;left: 20px}
+.land-box .main-box .left-box .cp-box .sbox p.name{font-size: 18px;color: #ee1a1a;font-weight: bold;height: 30px;line-height: 30px}
+.land-box .main-box .left-box .cp-box .sbox p.text{font-size: 14px;color: #222;min-height: 20px;line-height: 20px;padding: 5px 0 20px}
+.land-box .main-box .left-box .cp-box .sbox p.list{width: 200px; height: 60px; text-align: center; font-size: 18px;color: #ee363a; padding: 20px 10px;line-height: 30px;border: 1px solid #ff2b2b;float: left;}
+.land-box .main-box .left-box .cp-box .sbox p.list span{display: inline-block;font-size: 16px}
+.land-box .main-box .left-box .cp-box .sbox .cp-pic{}
+
+.land-box .main-box .left-box .fw-box{width: 788px;min-height: 200px;}
+.land-box .main-box .left-box .fw-box .fbox{min-height: 180px;background: #fff;margin-top: 15px}
+.land-box .main-box .left-box .fw-box .fbox .titlebox{height: 36px;line-height: 36px;padding: 12px 0;border-bottom: 1px solid #e5e5e5}
+.land-box .main-box .left-box .fw-box .fbox .titlebox p.title{padding-left: 20px;border-left: 8px solid #ff433d;font-size: 24px;color: #000;font-weight: bold;}
+.land-box .main-box .left-box .fw-box .fbox .conbox{padding: 20px;text-align: center;overflow: hidden;}
+.land-box .main-box .left-box .fw-box .fbox .conbox p.name{font-size: 22px;color: #f1231c;height: 40px;line-height: 40px;font-weight: bold;background: url('http://static.lvzheng.com/lvzhengpc/images/land/star.png')  no-repeat center;}
+.land-box .main-box .left-box .fw-box .fbox .conbox p.info{font-size: 18px;color: #000;height: 30px;line-height: 30px}
+.land-box .main-box .left-box .fw-box .fbox .conbox p.text{font-size: 14px;color: #666;min-height: 20px;line-height: 20px;padding: 20px 0}
+.land-box .main-box .left-box .fw-box .fbox .conbox .fw-pic{padding: 20px 0}
+.land-box .main-box .left-box .fw-box .fbox .conbox p.remark{font-size: 14px;color: #ec373a;height: 20px;line-height: 20px;padding: 10px 0}
+
+.land-box .fw-time{width: 680px;height: 140px;margin: 20px auto 0;text-align: left;}
+.land-box .fw-time .fw{width: 100px;text-align: center;float: left;}
+.land-box .fw-time .fw .sname{width: 80px;height: 40px; padding: 20px 0; margin: 5px 10px; border-radius: 50%;font-size: 18px;line-height: 20px;color: #fff}
+.land-box .fw-time .fw .stime{font-size: 14px;color: #222;height: 30px;line-height: 30px}
+.land-box .fw-time .s1 .sname{background: #92d526;}
+.land-box .fw-time .s2 .sname{background: #f96e6e;}
+.land-box .fw-time .s3 .sname{background: #63c9f6;}
+.land-box .fw-time .s4 .sname{background: #ffac41;}
+.land-box .fw-time .s5 .sname{background: #6dacfd;}
+.land-box .fw-time .arr{width: 45px;height: 90px;background: url('http://static.lvzheng.com/lvzhengpc/images/land/arr_ico.png')  no-repeat center;float: left;}
+.land-box .fw-time .fw:hover .sname{width: 94px;height: 54px;padding: 20px 0;margin: 0px;line-height: 27px;font-size: 20px;cursor: pointer;}
+.land-box .fw-time .fw:hover .stime{font-size: 16px}
+
+.land-box .fw-flow{width: 680px;height: 200px;margin: 20px auto;text-align: left;}
+.land-box .fw-flow .fw{width: 130px;text-align: center;float: left;}
+.land-box .fw-flow .fw .fpic{width: 130px;height: 125px; cursor: pointer;  }
+.land-box .fw-flow .s1 .fpic{background: url('http://static.lvzheng.com/lvzhengpc/images/land/fw_s1.png')  no-repeat center;}
+.land-box .fw-flow .s2 .fpic{background: url('http://static.lvzheng.com/lvzhengpc/images/land/fw_s2.png')  no-repeat center;}
+.land-box .fw-flow .s3 .fpic{background: url('http://static.lvzheng.com/lvzhengpc/images/land/fw_s3.png')  no-repeat center;}
+.land-box .fw-flow .s4 .fpic{background: url('http://static.lvzheng.com/lvzhengpc/images/land/fw_s4.png')  no-repeat center;}
+
+.land-box .fw-flow .s1:hover .fpic{background: url('http://static.lvzheng.com/lvzhengpc/images/land/fw_m1.png')  no-repeat center;}
+.land-box .fw-flow .s2:hover .fpic{background: url('http://static.lvzheng.com/lvzhengpc/images/land/fw_m2.png')  no-repeat center;}
+.land-box .fw-flow .s3:hover .fpic{background: url('http://static.lvzheng.com/lvzhengpc/images/land/fw_m3.png')  no-repeat center;}
+.land-box .fw-flow .s4:hover .fpic{background: url('http://static.lvzheng.com/lvzhengpc/images/land/fw_m4.png')  no-repeat center;}
+
+.land-box .fw-flow .fw .fname{font-size: 16px; margin-top: 10px; color: #222;height: 25px;limne-height: 25px}
+.land-box .fw-flow .fw .zxbtn{width: 75px;height: 25px;text-align: center;line-height: 25px; display: block; margin: 2px auto; background: #ec373a;border-radius: 3px;font-size: 14px;color: #fff}
+.land-box .fw-flow .arr{width: 50px;height: 125px;background: url('http://static.lvzheng.com/lvzhengpc/images/land/fw_arr.png')  no-repeat center;float: left;}
+
+.land-box .main-box .left-box .fw-box .fbox .conbox .cl-list{width: 220px;height: 275px;border:1px solid #cddddf;background: #f3f6fb;margin: 50px 13px 20px;float: left;position: relative;}
+.land-box .main-box .left-box .fw-box .fbox .conbox .cl-list:hover{border: 1px solid #ff8e8b;background: #fef7f6;}
+.land-box .main-box .left-box .fw-box .fbox .conbox .cl-list p.tag-ico{position: absolute;top: -35px;left: 75px}
+.land-box .main-box .left-box .fw-box .fbox .conbox .cl-list p.cname{font-size: 18px;color: #000;height: 30px;line-height: 30px; width: 100%; font-weight: bold;position: absolute; top: 60px;text-align: center;}
+.land-box .main-box .left-box .fw-box .fbox .conbox .cl-list p.ctext{position: absolute;top: 110px;left: 15px}
+.land-box .main-box .left-box .fw-box .fbox .conbox .cl-list p.ctext span{font-size: 14px;color: #666;min-height: 20px;line-height: 20px;padding: 2px 2px 2px 15px;display: block;text-align: left;width: 170px;background: url('http://static.lvzheng.com/lvzhengpc/images/land/dot.png')  no-repeat left top;}
+.land-box .main-box .left-box .fw-box .fbox .conbox .cl-list p.cremark{font-size: 12px;color: #e91d1d;line-height: 20px;position: absolute;top: 225px; left: 10px; text-align: left;width: 190px;}
+
+.land-box .main-box .left-box .fw-box .fbox .add-box{min-height: 120px; padding: 20px 0 0 20px; position: relative;overflow: hidden;}
+.land-box .main-box .left-box .fw-box .fbox .add-box:hover{background: #fef7f6}
+.land-box .main-box .left-box .fw-box .fbox .add-box .ico{width: 120px;height: 100px;position: absolute;top: 20px;left: 20px}
+.land-box .main-box .left-box .fw-box .fbox .add-box .info-box{width: 610px; padding-right: 15px; padding-top: 10px; min-height: 110px; float: right; border-bottom: 1px solid #e5e5e5}
+.land-box .main-box .left-box .fw-box .fbox .add-box .info-box span.name{font-size: 18px;color: #000;height: 30px;line-height: 30px; font-weight: bold; display: block;text-align: left;}
+.land-box .main-box .left-box .fw-box .fbox .add-box .info-box span.text{font-size: 14px;color: #666;min-height: 20px;line-height: 20px; padding: 10px 0; display: block;text-align: left;}
+.land-box .main-box .left-box .fw-box .fbox .add-box .info-box span.text b{color: #000}
+.land-box .main-box .left-box .fw-box .fbox .add-box .info-box span.remark{font-size: 14px;color: #f32a2a}
+.land-box .main-box .left-box .fw-box .fbox .add-box .info-box a.abtn{font-size: 18px;color: #fff;background: #ec373a; margin: 20px 0; width: 170px;height: 45px;line-height: 45px;text-align: center;display: block;}
+
+.land-box .main-box .left-box .fw-box .fbox .conbox .bzbox{padding: 20px; margin-bottom: 50px; border:1px solid #f6a2a4;border-radius: 10px}
+.land-box .main-box .left-box .fw-box .fbox .conbox .bzbox .bname{font-size: 18px;color: #f12c26;height: 30px;line-height: 30px;text-align: left;}
+.land-box .main-box .left-box .fw-box .fbox .conbox .bzbox .btext{font-size: 14px;color: #000;min-height: 20px;line-height: 20px; padding: 5px 0; text-align: left;}
+.land-box .main-box .left-box .fw-box .fbox .conbox .bzbox .btext span{color: #f12c26}
+.land-box .main-box .left-box .fw-box .fbox .conbox .bzbox .bz-pic{padding: 30px 0}
+
+.land-box .main-box .right-box{width: 300px; margin-top: 15px; min-height: 1000px;float: left;}
+.land-box .right-box .zx-box{width: 300px;background: #fff;margin-bottom: 15px;}
+.land-box .right-box .zx-box .titlebox{height: 35px;line-height: 35px;border-bottom: 1px solid #e5e5e5}
+.land-box .right-box .zx-box .titlebox .title{font-size: 16px; display: inline-block; margin-left: 15px; color: #000;padding: 0 5px;border-bottom: 1px solid #ed3539}
+.land-box .right-box .zx-box .conbox{padding: 5px 15px;}
+.land-box .right-box .zx-box .conbox .text{font-size: 14px;color: #000;line-height: 20px;padding: 5px 0}
+.land-box .right-box .zx-box .conbox .w-text{padding: 8px 0}
+.land-box .right-box .zx-box .conbox .w-text input{width: 238px;padding: 0 10px;height: 35px;line-height: 35px;font-size: 14px;color: #000;border: 1px solid #dddddd;background: #f7f7f7;border-radius: 5px}
+.land-box .right-box .zx-box .conbox a.tbtn{display: block;width: 260px; text-align: center; height: 40px;line-height: 40px;font-size: 18px;color: #fff;background: #eb3639;margin: 5px 0 10px}
+.land-box .right-box .tel-box {height: 50px;line-height: 50px; text-align: center; background: #fff;margin-bottom: 15px;}
+.land-box .right-box .tel-box .tel{font-size: 18px; display: inline-block; color: #222;padding-left: 35px;background: url('http://static.lvzheng.com/lvzhengpc/images/land/tel_ico.png')  no-repeat center left;}
+.land-box .right-box .tel-box .tel span{color: #ed363a}
+.land-box .right-fixed{position: fixed;top: 0px}
+
+.land-box .conbox .hot-tab {width: 270px; height: 25px; border-bottom: 1px solid #fac1c1;margin-top: 10px}
+.land-box .conbox .hot-tab li a {display:block; height: 25px;line-height: 25px; width:75px;text-align:center;font-size:14px; color: #666; float: left; cursor:pointer;}
+.land-box .conbox .hot-tab li.current a {background:#ff7468;color:#fff;font-weight: 800;border-radius: 3px}
+
+.land-box .conbox .hot-con{padding: 5px 0;min-height: 200px;width: 270px; }
+.land-box .conbox .hot-con .sublist .list .hname{font-size: 14px;color: #000;min-height: 20px;line-height: 20px; margin: 8px 0; cursor: pointer; padding: 0 0 0 15px;background: url('http://static.lvzheng.com/lvzhengpc/images/land/dot.png')  no-repeat left top;}
+.land-box .conbox .hot-con .sublist .list:hover .hname{color: #ee3332}
+/*.land-box .conbox .hot-con .sublist .list:hover .ans{display: block;}*/
+.land-box .conbox .hot-con .sublist .list .ans{padding: 3px 8px; width: 250px; border: 1px solid #ecbc88; position: relative; border-radius: 4px;display: none;background: #fffdef;font-size: 14px;color: #666;}
+.land-box .conbox .hot-con .sublist .list .ts-arr{display: block; width: 15px;height: 7px;background: url('http://static.lvzheng.com/lvzhengpc/images/land/ts_arr.png')  no-repeat center;position: absolute;top: -7px;left: 30px}
+
+.land-box .bot-box{width: 100%;height: 40px; line-height: 40px; background: #182834;padding: 10px 0;display: none;}
+.land-box .bot-boxxf{position: fixed;bottom: 0px;display: block;z-index: 9999999;}
+.land-box .bot-box .tel-box{width: 800px;margin: 0 auto}
+.land-box .bot-box .tel-box .tel{font-size: 24px;color: #ec373a;padding-left: 30px;background: url('http://static.lvzheng.com/lvzhengpc/images/land/tel_ico.png')  no-repeat center left;float: left;}
+.land-box .bot-box .tel-box .item{float: left; width: 440px; margin-left: 30px}
+.land-box .bot-box .tel-box .item input.w-text{width: 270px;height: 40px; line-height: 40px; background: #fff;padding: 0 10px;border: none;float: left;font-size: 16px;color: #333}
+.land-box .bot-box .tel-box .item a.btn{width: 150px;text-align: center;height: 40px;line-height: 40px;font-size: 20px;color: #fff;background: #ec373a;display: block;float: left;}
+
+/*左侧描点 浮动导航*/
+.ldlist-nav{width: 60px;min-height: 55px; position: absolute; top: 20px; left: -100px; }
+.ldlist-nav .spnav{width: 60px;margin: 0 auto;}
+.ldlist-nav .spnav ul{}
+.ldlist-nav .spnav ul li a{width: 60px;height: 40px; text-align: center; margin: 10px; line-height: 20px;padding: 10px 0; font-size: 12px;color: #222; display: block;background: #fff;border-radius: 50%}
+.ldlist-nav .spnav ul li a:hover{cursor: pointer;color: #fff;background: #ed363a}
+.ldlist-nav .spnav ul li a.cur{background: #ed363a; color: #fff; width: 70px;height: 50px;  line-height: 25px;padding: 10px 0; margin: 5px;  font-size: 16px; display: block;border-radius: 50%}
+.ldlist-navxf { position: fixed; top: 20px; left: 50%; margin-left: -650px; z-index: 9000; display: block;}
+.main-ldlist{position: relative;}
+
+/*弹层*/
+#submit-box{margin-top: 10%;width: 420px;min-height: 100px;padding: 50px 0}
+#submit-box .submit{width: 260px;padding-left: 75px;margin: 0 auto;background: url('http://static.lvzheng.com/lvzhengpc/images/land/c_ico.png')  no-repeat center left;}
+
+#submit-box .submit p.name{font-size: 18px;height: 40px;line-height: 40px;color: #000}
+#submit-box .submit p.text{font-size: 14px;min-height: 20px;line-height: 20px;color: #666}

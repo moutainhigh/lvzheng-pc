@@ -1,0 +1,124 @@
+@charset "utf-8";
+*{padding:0;margin:0;}
+body{padding:0;margin:0;font-size:12px;font-family:"微软雅黑";color: #333;background:#fff;}
+img{border:none;}
+a{text-decoration:none;cursor:pointer;color:#666;}
+a:hover,a:hover {text-decoration:none;color:#55acee;}
+input{color: #777;}
+ul{padding:0;margin:0;list-style:none;}
+li,p{padding:0;margin:0;}
+.clear{clear:both;}
+::-webkit-input-placeholder { /* WebKit browsers */color: #ccc;}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */color: #ccc;}
+::-moz-placeholder { /* Mozilla Firefox 19+ */color: #ccc;}
+:-ms-input-placeholder { /* Internet Explorer 10+ */color: #ccc;}
+
+.hot-box{background: #fbf8a8;padding-bottom: 50px}
+.hot-banner{width: 100%; min-width:1200px; height: 500px;background: #17A7FE url('../images/hot/hot_banner.jpg')  no-repeat center;}
+.hot-main{width: 900px; padding: 50px; min-height: 600px;margin: 10px auto 0;background: #fff;border-radius: 5px;overflow: hidden;}
+
+.disc-box{position: relative;width: 470px; height: 650px; margin: 0 10px; float: left;}
+.disc {width:470px;height:470px;position:relative;}
+.disc .pointer {width:140px;height:180px;position:absolute;left:165px;top:130px;z-index:8;}
+.disc .rotate {width:470px;height:470px;position:absolute;left:0;top:0;}
+.base{position: absolute;top: 415px; left: 13px; width: 444px;height: 165px;background: url('../images/hot/base.png')  no-repeat center;}
+.base .base-text{font-size: 14px; overflow: hidden; min-height: 50px; width: 260px; color: #fff;margin: 65px 0 0 110px}
+.base .base-text p.text{min-height: 20px; line-height: 20px;}
+.base .base-text p.text label{width: 70px;height: 20px; line-height: 20px; display: block;float: left;}
+.base .base-text p.text span{width: 190px;min-height: 20px; line-height: 20px; display: block;float: left;}
+
+
+.info-box{width: 320px;min-height: 540px;float: left;margin-left: 90px}
+.info-box .chance{height: 50px; line-height: 50px; border: 1px solid #ddd;border-radius: 5px;background: #f7fcff;padding: 0 20px}
+.info-box .chance .text{font-size: 18px;color: #4f4f4f;padding-left: 40px;background: url('../images/hot/chance_ico.png')  no-repeat center left;}
+.info-box .chance .text span{display: inline-block;min-width: 20px; text-align: center;font-weight: bold; color: #ed2020}
+
+.prize{border-top: 3px solid #61b4e0;margin-top: 20px;min-height: 150px; padding: 10px 0; background: #e1f7fe}
+.prize .name{font-size: 28px;color: #61b4e0;height: 40px;line-height: 40px;text-align: center;}
+.prize .list{padding: 10px 20px;}
+.prize .list .listname{height: 30px;background: #cadee4;font-size: 14px;color: #000}
+.prize .list .listname span.t1{display: inline-block;text-align: center;width: 175px;height: 30px;line-height: 30px;}
+.prize .list .listname span.t2{display: inline-block;text-align: center;width: 100px;height: 30px;line-height: 30px;}
+
+.prize .list .listprize{height: 40px;font-size: 14px;color: #404040;}
+.prize .list .listprize span.t1{display: inline-block;text-align: center;width: 175px;height: 40px;line-height: 40px;color: #f45739;float: left;overflow:hidden;word-break:keep-all;white-space:nowrap;text-overflow:ellipsis;}
+.prize .list .listprize span.t2{display: inline-block;text-align: center;width: 100px;height: 40px;line-height: 40px;float: left;}
+
+
+.winner{border-top: 3px solid #fabb13;margin-top: 20px;min-height: 150px; padding: 10px 0; background: #fffee8}
+.winner .name{font-size: 28px;color: #fabb13;height: 40px;line-height: 40px;text-align: center;}
+.winner .list{padding: 10px 20px;}
+.winner .list .listname{height: 30px;background: #e5e4d0;font-size: 14px;color: #000}
+.winner .list .listname span.t1{display: inline-block;text-align: center;width: 125px;height: 30px;line-height: 30px;}
+.winner .list .listname span.t2{display: inline-block;text-align: center;width: 150px;height: 30px;line-height: 30px;}
+
+.winner .list .listwinner{height: 40px;font-size: 14px;color: #404040}
+.winner .list .listwinner span.t1{display: inline-block;text-align: center;width: 115px;height: 40px;line-height: 40px;float: left;}
+.winner .list .listwinner span.t2{display: inline-block;text-align: center;width: 160px;height: 40px;line-height: 40px;color: #f45739;float: left;overflow:hidden;word-break:keep-all;white-space:nowrap;text-overflow:ellipsis;}
+
+.maquee{height: 120px;overflow: hidden;}
+
+.nolist{padding: 20px 40px}
+.nolist .text{font-size: 16px;color: #999;line-height: 25px;width: 130px; height: 50px;padding: 10px 0; padding-left: 100px;background: url('../images/hot/noprize.png')  no-repeat center left;}
+
+.pro-box{width: 940px;margin: 0 auto;height: 60px;background: #dff2fe;padding: 20px 30px}
+.pro-box ul{overflow: hidden;}
+.pro-box ul li{float: left;margin-right: 13px; padding-left: 20px; height: 60px;line-height: 60px;width: 205px;background: #fff;border-radius: 5px}
+.pro-box ul li:last-child{margin-right: 0px}
+.pro-box ul li p.name{width: 105px;padding-left: 40px;background: url('../images/hot/pro_ico.png')  no-repeat center left;font-size: 22px;color: #26a5fa;float: left; }
+.pro-box ul li a.btn{display: inline-block;width: 50px;height: 50px; padding: 5px; line-height: 25px; border-radius: 5px; background: #ff9c00;font-size: 18px;color: #fff;text-align: center;float: left;}
+
+
+
+.img-replace {display: inline-block;overflow: hidden;text-indent: 100%;color: transparent;white-space: nowrap;}
+.cd-popup {position: fixed;left: 0;top: 0;height: 100%;width: 100%;background-color: rgba(51, 51, 51, 0.9);z-index: 99999;opacity: 0;visibility: hidden;-webkit-transition: opacity 0.3s 0s, visibility 0s 0.3s;-moz-transition: opacity 0.3s 0s, visibility 0s 0.3s;transition: opacity 0.3s 0s, visibility 0s 0.3s;}
+.cd-popup.is-visible {opacity: 1;visibility: visible;-webkit-transition: opacity 0.3s 0s, visibility 0s 0s;-moz-transition: opacity 0.3s 0s, visibility 0s 0s;transition: opacity 0.3s 0s, visibility 0s 0s;}
+.cd-popup-container {position: relative;width: 90%;max-width: 735px;margin: 10% auto 0;background: #FFF;border-radius: 8px;box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);-webkit-transform: translateY(-40px);-moz-transform: translateY(-40px);-ms-transform: translateY(-40px);-o-transform: translateY(-40px);transform: translateY(-40px);-webkit-backface-visibility: hidden;-webkit-transition-property: -webkit-transform;-moz-transition-property: -moz-transform;transition-property: transform;-webkit-transition-duration: 0.3s;-moz-transition-duration: 0.3s;transition-duration: 0.3s;}
+.is-visible .cd-popup-container {-webkit-transform: translateY(0);-moz-transform: translateY(0);-ms-transform: translateY(0);-o-transform: translateY(0);transform: translateY(0);}
+
+.cd-popup-container .cd-popup-close {position: absolute;top: 8px;right: 8px;width: 30px;height: 30px;}
+.cd-popup-container .cd-popup-close::before, .cd-popup-container .cd-popup-close::after {content: '';position: absolute;top: 12px;width: 14px;height: 3px;background-color: #8f9cb5;}
+.cd-popup-container .cd-popup-close::before {-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);-ms-transform: rotate(45deg);-o-transform: rotate(45deg);transform: rotate(45deg);left: 8px;}
+.cd-popup-container .cd-popup-close::after {-webkit-transform: rotate(-45deg);-moz-transform: rotate(-45deg);-ms-transform: rotate(-45deg);-o-transform: rotate(-45deg);transform: rotate(-45deg);right: 8px;}
+
+
+.hot-ceng{width: 420px;padding: 10px 0}
+.hot .item{padding: 20px 30px 10px 60px}
+.hot .item p.text{font-size: 18px;color: #333;line-height: 25px;width: 230px; min-height: 60px; padding: 15px 0 15px 100px;background: url(../images/hot/c_ico1.png) no-repeat left center;}
+.hot .item p.text span{color: #ff0000}
+.hot .btn{text-align: center;padding: 0 0 10px}
+.hot .btn a{display: inline-block;width: 103px;height: 40px;background: url('../images/hot/ok_ico.png')  no-repeat center}
+.hot .btn a:hover{display: inline-block;width: 103px;height: 40px;background: url('../images/hot/okh_ico.png')  no-repeat center}
+
+
+.hot .item1{padding: 5px 20px 10px }
+.hot .item1 p.text1{font-size: 30px;color: #000;line-height: 40px;width: 230px; margin-left:40px; padding: 5px 0 15px 110px;background: url(../images/hot/c_ico2.png) no-repeat left center;}
+.hot .item1 p.text1 span{color: #ff0000;font-size: 16px}
+.hot .item1 div.ts{padding: 10px;background: #fff8c6;font-size: 14px;color: #000000;min-height: 30px;overflow: hidden;}
+.hot .item1 div.ts p.dtext{overflow: hidden;padding: 2px 0}
+.hot .item1 div.ts label{display: inline-block;width: 75px;text-align: right;padding: 0 5px 0 30px;float: left;}
+.hot .item1 div.ts span{width: 200px;float: left;}
+.hot .item1 div.ts p.dtext a{color: #ff0000}
+.hot .item1 div.ts p.center{text-align: center;}
+.hot .btn{text-align: center;padding: 0 0 10px}
+.hot .btn a{display: inline-block;width: 103px; margin: 0 8px; font-size: 20px;color: #fff;line-height: 40px;text-align: center;font-weight: bold; height: 40px;background: url('../images/hot/ok_ico.png')  no-repeat center}
+.hot .btn a:hover{display: inline-block;width: 103px;height: 40px;background: url('../images/hot/okh_ico.png')  no-repeat center}
+
+.hot .btn button{display: inline-block;width: 103px; margin: 0 8px; border: none; cursor: pointer; font-size: 20px;color: #fff;line-height: 40px;text-align: center;font-weight: bold; height: 40px;background: url('../images/hot/ok_ico.png')  no-repeat center}
+.hot .btn button:hover{display: inline-block;width: 103px;height: 40px;background: url('../images/hot/okh_ico.png')  no-repeat center}
+
+
+.hot .item2{padding: 5px 0 10px}
+.hot .item2 p.text1{font-size: 30px;color: #000;line-height: 40px;width: 230px; margin-left:60px; padding: 5px 0 15px 110px;background: url(../images/hot/c_ico2.png) no-repeat left center;}
+.hot .item2 p.text1 span{color: #ff0000;font-size: 16px}
+.hot .w-box{padding: 0 0 0 80px}
+.hot .w-box .w-text-box{padding: 3px 0;overflow: hidden;height: 37px;position: relative;}
+.hot .w-box input.w-text{width: 250px;height: 35px;line-height: 35px;border: 1px solid #ddd;border-radius: 5px;padding: 0 10px;font-size: 14px;color: #333}
+.hot .w-box .w-text-box a.img-code{position: absolute;z-index: 99;left: 185px;top: 7px;width: 70px;height: 30px;border: none}
+.hot .w-box .w-text-box a.img-code img{width: 70px;height: 30px}
+.hot .w-box .w-text-box a.phone-code{position: absolute;z-index: 99;left: 185px;top: 7px;width: 70px;height: 30px; line-height: 30px; font-size: 14px;color: #26a5fa}
+
+
+.fn-tinput{width: 235px;height: 35px;line-height: 35px;border: 1px solid #ddd;border-radius: 5px;padding: 0 10px;font-size: 14px;color: #333}
+.fn-tinput:focus,textarea:focus{ border-color:#c00;}
+span.error{color:#C00; padding:0 6px;}

@@ -1,0 +1,57 @@
+package com.jx.hunter.lvzhengpc.controllers;
+
+import java.util.List;
+
+import com.jx.argo.ActionResult;
+import com.jx.argo.Model;
+import com.jx.argo.annotations.Path;
+import com.jx.blackface.gaea.sell.entity.LvzProductCateEntity;
+import com.jx.blackface.gaea.sell.entity.LvzProductEntity;
+import com.jx.hunter.lvzhengpc.common.LocationPage;
+import com.jx.hunter.lvzhengpc.frame.RSBLL;
+import com.jx.hunter.lvzhengpc.utils.ProductUtils;
+
+/***
+ * 导航的controller
+ * @author duxiaofei
+ * @date   2016年3月21日
+ */
+@Path("/navigation")
+public class NavigationController extends BaseController{
+	
+	@Path("/index/{cateid:\\d+}.html")
+	public ActionResult goTomyIndex(long cateid){
+		Model model = beat().getModel();
+		
+		int count = 0;
+		List<LvzProductCateEntity> productCateEntityList = null;
+		try {
+			count = RSBLL.getstance().getLvzProductCateService().getCountProductCate("cate_state='1' and parent_cateid='"+cateid+"'");
+			productCateEntityList = RSBLL.getstance().getLvzProductCateService().getProductCateEntityList("cate_state='1' and parent_cateid='"+cateid+"'", 1, count, "cate_id");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		try {
+			LvzProductCateEntity productCateEntity = RSBLL.getstance().getLvzProductCateService().getProductCateEntityById(cateid);
+			String crumbs = "公司注册"; //给予默认值
+			if(null != productCateEntity){
+				crumbs = productCateEntity.getCate_name();
+			}
+			model.add("crumbsName", crumbs);  //存放动态面包屑
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		List<LvzProductEntity> productEntityList = null;
+		if(null != productCateEntityList && !productCateEntityList.isEmpty()){
+			model().add("productCateEntityList", productCateEntityList); //product二级类集合
+			model().add("ProductUtils", ProductUtils.class);
+		}
+		//转到的页面路径
+		model.add("LocationPage", new LocationPage("productcate/productcatelist","index"));
+		
+		getFriendLinks(FRIEND_LIST);//友情链接
+		
+		return view("/index");
+	}
+}

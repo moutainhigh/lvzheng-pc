@@ -1,0 +1,353 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>贺中秋迎国庆，小微律政创业套餐直降610，机会难得，速来抢购！-国内领先的O2O自营法律服务提供商</title>
+<meta name="description" content="注册公司找小微律政,小微律政拥有专业的律师和会计团队,小微律政专注为创业公司及中小微企业提供代办公司注册,商标注册,代理记账,社保公积金开户,公司变更,合同拟定,公司章程等一站式企业服务，小微律政服务流程每一步都无微不至。">
+<meta name="keywords" content="小微律政,代办注册公司,公司注册,商标注册费用和流程" />
+
+<link href="/css/ldy/mid_land.css" type="text/css"  rel="stylesheet"/>
+<link type="text/css" rel="stylesheet" href="/css/star.css">
+<link href="/css/index.css" type="text/css"  rel="stylesheet"/>
+<link href="/css/box.css" type="text/css"  rel="stylesheet"/>
+
+<script type="text/javascript" src="/js/jquery-1.7.2.min.js"></script>
+<script src="/js/jquery.touchSlider.js"></script>
+<script src="/js/jquery.pslides.js"></script>
+<script type="text/javascript" src="/js/owl.carousel.min.js"></script>
+<script type="text/javascript" src="/js/box.js"></script> 
+<script src="/js/jquery.tabs.js"></script>
+
+
+
+<script type="text/javascript">
+$(document).ready(function($){
+    $(window).scroll(function(){
+        var b=parseInt($(window).scrollTop());
+        if(b<800){
+            $(".bot-box").removeClass("bot-boxxf")
+        }
+        if(b>800){
+            $(".bot-box").addClass("bot-boxxf")
+        }
+    });
+
+    // 底部礼包浮层
+    $(".mid-close").click(function(){      
+        $(".main-mid").animate({"left":-$(".main-mid").width()},300);
+        $('.mid-btn').animate({'left':'0px'},400);
+    });
+    $('.mid-btn').click(function(){ 
+        $('.main-mid').animate({'left':'0'},400);
+        $('.mid-btn').animate({'left':'-280px'},400);
+    })
+
+	getAllCountByEvaluationScope();
+    
+ 
+    
+  //新评价模块tab
+    $.fn.tab=function (){
+        this.each(function (){
+          var oParent=$(this);
+          var aBtn=oParent.find('.md-hr-tab-lists li a');
+          
+          var aCont=oParent.find('.tab-conts-h');
+         
+          aBtn.click(function (){
+            aBtn.removeClass('active');
+            aCont.removeClass('show');
+            
+            $(this).addClass('active');
+            var index=$(this).index(".md-hr-tab-lists li a");
+            aCont.eq(index).addClass('show');
+            var scope = $(this).parent().attr('data-value');
+            loadCusEvaluation(scope);
+          });
+          
+          /*初始化客户评价*/
+      	$('.md-hr-tab-lists li:first').find('a').click();
+        });
+      };
+      
+   // 新评价模块js
+      $('.tab').tab();
+  
+});
+
+function loadCusEvaluation(scope){
+	//异步加载客户问答
+    $.ajax({
+    	url:"/cusEvaluation/getPageListCusEvalByPrdtId",
+    	type:"post",
+    	dataType:"html",
+    	async:false,
+    	data:{"productId":"38229817543169","scope":scope},
+    	success:function(data){
+    		var aCont=$(document).find('.tab-conts-h');
+    		var index = $(document).find('.md-hr-tab-lists li a.active').index('.md-hr-tab-lists li a');
+    		aCont.eq(index).children().remove();
+    		aCont.eq(index).append(data);
+    		
+    		//显示分数
+    		$(".show-number li p").each(function(index, element) {
+    		  var num=$(this).attr("tip");
+    		  var www=num*2*9;
+    		  $(this).css("width",www);
+    		  $(this).parent(".star-Show").siblings("span").text(num);
+    		});
+    		
+    		//显示分数2
+    		$(".show-number2 li p").each(function(index, element) {
+    		  var num=$(this).attr("tip");
+    		  var www=num*2*6;
+    		  $(this).css("width",www);
+    		  $(this).parent(".star-Show2").siblings("span").text(num);
+    		});
+    	},
+    	error:function(){
+    		//alert("未响应");
+    	}
+    });
+}
+
+function getAllCountByEvaluationScope(){
+	var scope = "";
+	$('.md-hr-tab-lists').find('li').each(function(i){
+		scope += $(this).attr("data-value") + "|";
+	});
+	
+	$.ajax({
+		url:"/commondetail/getAllCountByEvaluationScope",
+		type:"post",
+		dataType:"json",
+		data:{"scope":scope,"productid":"38229817543169"},
+		success:function(data){
+			$('.md-hr-tab-lists').find('li').each(function(j){
+				var para = $(this).attr("data-count");
+				var num = data[para];
+				var html = $(this).find('a').html() + "("+num+")";
+				$(this).find('a').html(html);
+			});
+		},
+		error:function(){}
+	});
+}
+
+
+function openwindow(url,name,iWidth,iHeight)
+{
+var url; //转向网页的地址;
+var name; //网页名称，可为空;
+var iWidth; //弹出窗口的宽度;
+var iHeight; //弹出窗口的高度;
+//window.screen.height获得屏幕的高，window.screen.width获得屏幕的宽
+var iTop = (window.screen.height-30-iHeight)/2; //获得窗口的垂直位置;
+var iLeft = (window.screen.width-10-iWidth)/2; //获得窗口的水平位置;
+window.open(url,name,'height='+iHeight+',,innerHeight='+iHeight+',width='+iWidth+',innerWidth='+iWidth+',top='+iTop+',left='+iLeft+',toolbar=no,menubar=no,scrollbars=auto,resizeable=no,location=no,status=no');
+}
+</script>
+</head>
+<body id="other-nav">
+	#parse("views/common/header.html")
+    <!-- logo区域 -->
+	 #parse("views/common/logo_normal.html")
+	 <!-- 导航 -->
+  	#parse("views/common/navigation.html") 
+<div class="mid-box">
+    <div class="bannerbg">
+        <div class="banner">
+            <p class="btag"></p>
+            <p class="bcp"></p>
+            <a href="javascript:void(0);" onclick="openwindow('http://p.qiao.baidu.com/cps/chat?siteId=6550807&userId=10178186','在线咨询',600,600)" class="bzx"></a>
+            <a href="http://www.lvzheng.com/order/buyorderByPackage/41331626193921" class="bbuy"></a>
+            <p class="btext"></p>
+        </div>
+    </div>
+
+    <div class="main-box">
+        <div class="titlebox">
+            <p class="name">服务<span>价格</span></p>
+        </div>
+        <div class="price-tab">
+            <table>
+                <tr>
+                    <th>服务套餐</th>
+                    <th>注册+刻章</th>
+                    <th>注册地址</th>
+                    <th>代理记账</th>
+                    <th>活动套餐价格</th>
+                </tr>
+                <tr>
+                    <td class="thprice">同行甲</td>
+                    <td>998元</td>
+                    <td>4000元</td>
+                    <td>2400元</td>
+                    <td class="tag1">6998元</td>
+                </tr>
+                <tr>
+                    <td class="thprice">同行乙</td>
+                    <td>588元</td>
+                    <td>4000元</td>
+                    <td>2400元</td>
+                    <td class="tag2">6188元</td>
+                </tr>
+                <tr class="xwprice">
+                    <td>小微律政</td>
+                    <td>598元</td>
+                    <td>4000元</td>
+                    <td>2000元</td>
+                    <td class="tag3">5988元</td>
+                </tr>
+            </table>
+        </div>
+        
+        <div class="titlebox">
+            <p class="name">服务<span>流程</span></p>
+        </div>
+        <div class="serflow">
+            <a href="" class="zxbtn b1">立即咨询</a>
+            <a href="" class="zxbtn b3">立即咨询</a>
+        </div>
+        
+        <div class="titlebox">
+            <p class="name long">办完之后会拿到哪些<span>材料</span></p>
+        </div>
+        <div class="clbox">
+            <div class="nav">
+                <span class="nav1">营业执照（正副本）</span>
+                <span class="nav2">公司章程</span>
+                <span class="nav3">公司印章</span>
+                <span class="nav4">留鉴留存卡</span>
+            </div>
+        </div>
+        
+        <div class="eval-box">
+            <div class="titlebox">
+                <p class="name">用户<span>评价</span></p>
+            </div>
+            <div class="eval">
+
+				<div class="md-hr-tab tab" >
+                    <div class="md-hr-tab-list">
+                         <ul class="md-hr-tab-lists">
+                             <li data-value="all" data-count="pingfenCountall"><a href="javascript:void(0)" class="active">全部评价</a></li>
+                             <li data-value="5~" data-count="pingfenCount5~"><a href="javascript:void(0)">5分评价</a></li>
+                             <li data-value="4~5" data-count="pingfenCount4~5"><a href="javascript:void(0)">4-5分评价</a></li>
+                             <li data-value="3~4" data-count="pingfenCount3~4"><a href="javascript:void(0)"> 3-4分评价</a></li>
+                             <li data-value="1~3" data-count="pingfenCount1~3"><a href="javascript:void(0)">1-3分评价</a></li> 
+                         </ul>
+                    </div>
+            	
+            	
+            	 	<div class="md-tab-conts " >
+                          <div class="tab-conts-h show">
+                             <dl class="clrfix">
+                                 
+                             </dl>
+                             <dl class="clrfix">
+                                
+                             </dl>
+                           </div>
+                        </div>   
+
+                        <div class="md-tab-conts" >
+                          <div class="tab-conts-h">
+                             <dl class="clrfix">
+                                
+                             </dl>
+                             <dl class="clrfix">
+                                
+                             </dl>
+                           </div>
+                        </div> 
+
+                        <div class="md-tab-conts" >
+                          <div class="tab-conts-h">
+                             <dl class="clrfix">
+                                
+                                    
+                             </dl>
+                             <dl class="clrfix">
+                                 
+                             </dl>
+                           </div>
+                        </div>   
+
+                        <div class="md-tab-conts" >
+                          <div class="tab-conts-h">
+                             <dl class="clrfix">
+                               
+                             </dl>
+                             <dl class="clrfix">
+                                
+                             </dl>
+                           </div>
+                        </div> 
+
+                        <div class="md-tab-conts" >
+                          <div class="tab-conts-h">
+                             <dl class="clrfix">
+                                
+                             </dl>
+                             <dl class="clrfix">
+                                 
+                             </dl>
+                           </div>
+                        </div>    
+            	
+            	
+            	</div>
+            	
+            	
+        </div>
+
+    </div>
+    
+    <div class="bot-box">
+        <div class="cp-fix">
+            <div class="cp">朝阳注册＋地址＋刻章＋代理记账＝<span>￥5988</span></div>
+            <div class="btn">
+                <a href="javascript:void(0);" onclick="openwindow('http://p.qiao.baidu.com/cps/chat?siteId=6550807&userId=10178186','在线咨询',600,600)" class="zx">免费咨询</a>
+                <a href="http://www.lvzheng.com/order/buyorderByPackage/41331626193921" class="buy">立即购买</a>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 页面底部领取礼包浮层 -->
+    <!-- <div class="mid-btn">
+        <img src="/images/mid/mid-btn.png"/>
+    </div>
+    <div class="main-mid">
+        <div class="main-mid-box">
+            <div class="mid-con">
+                <a class="mid-pic" target="_blank" ></a>
+                <div class="mid-item">
+                    <p class="item"><input type="text" class="tel" placeholder="请输入手机号"></p>
+                    <p class="item"><input type="text" class="code" placeholder="请输入验证码"><a href="" class="getcode">获取验证码</a><a href="" class="getbtn">立即领取</a></p>
+                </div>
+                <p class="ewm"><img src="/images/mid/ewm.png"></p>
+                <a class="mid-close" ></a>
+            </div>
+        </div>
+    </div> -->
+
+
+    <!-- 提交电话 弹出框 -->
+    <div class="cd-popup cd-box1" role="alert"> 
+        <div class="cd-popup-container" id="submit-box">
+            <div class="submit">
+                <p class="name">您的电话已提交成功！</p>
+                <p class="text">稍后我们的服务人员将会给您致电解答您的疑问，感谢您的信任！</p>
+            </div> 
+            <a href="#" class="cd-popup-close img-replace">关闭</a>
+        </div>
+        
+    </div> 
+    <!-- 弹出框 -->
+
+</div>
+</body>
+
+</html>

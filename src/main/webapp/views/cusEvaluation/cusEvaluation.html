@@ -1,0 +1,221 @@
+#foreach( $elem in $cusEvalList)
+<dl class="clrfix">
+    <dt><img src="/images/product/tx.jpg"></dt>
+    <dd>
+        <span class="spn1"><b>$DataFormat.phoneFormatHide($!{elem.phone})</b><b>$DataFormat.dateFormat($!{elem.datetime})</b><em>(北京)$!{elem.product_name}</em></span>
+        <!-- <span class="spn2">
+           <h3 class="spn-xx1"></h3>
+           <h4>$!{elem.zhpf}</h4>
+        </span> -->
+        <div class="content">
+		    <ul class="show-number clearfix">
+				<li>
+					<div class="star-Show">
+						<p tip="$DataFormat.doubleFormatInt($!{elem.zhpf})"></p>
+					</div>
+					<span></span>
+				</li>
+		    </ul>
+		  </div>
+        <span class="spn3 clrfix">
+          <p>$!{elem.content}</p>
+        </span>
+       <div class="cont_pf">
+       	<div class="content2" style="float: left">
+	       	<span class="spn4">
+	            <h5>服务态度</h5>
+	             <ul class="show-number2 clearfix2">
+				<li>
+					<div class="star-Show2">
+						<p tip="$!{elem.fwtd}"></p>
+					</div>
+					<span></span>
+				</li>
+		    </ul>
+	        </span>
+		   
+		  </div> 
+		  
+		  <div class="content2" style="float: left">
+	       	<span class="spn4">
+	            <h5>专业程度</h5>
+	            <ul class="show-number2 clearfix2">
+				<li>
+					<div class="star-Show2">
+						<p tip="$!{elem.zycd}"></p>
+					</div>
+					<span></span>
+				</li>
+		    </ul>
+	        </span>
+		    
+		  </div> 
+		  
+		  <div class="content2" style="float: left">
+	       	<span class="spn4">
+	            <h5>响应速度</h5>
+	            <ul class="show-number2 clearfix2">
+				<li>
+					<div class="star-Show2">
+						<p tip="$!{elem.xysd}"></p>
+					</div>
+					<span></span>
+				</li>
+		    </ul>
+	        </span>
+		    
+		  </div> 
+		  
+		  <div class="content2" style="float: left">
+	       	<span class="spn4">
+	            <h5>办事效率</h5>
+	             <ul class="show-number2 clearfix2">
+				<li>
+					<div class="star-Show2">
+						<p tip="$!{elem.bsxl}"></p>
+					</div>
+					<span></span>
+				</li>
+		    </ul>
+	        </span>
+		   
+		  </div> 
+        </div>
+    </dd>
+</dl>
+#end
+    
+    
+     <!-- 分页 -->
+    #if($pageEntity.getPageCount() > 0)
+	<div class="page-turn" id="pageNo">
+	#set($pre = $!{pageEntity.getPageIndex()} - 1)
+	#set($next = $!{pageEntity.getPageIndex()} + 1)
+	#if($pageEntity.getPageIndex() == 1)
+		<a href="javascript:void(0);" >[首页]</a>
+		#else
+		<a class="fenye_pingjia" data-url="$!{pageEntity.getCurrenturl()}/1$!{pageEntity.getUrlSuffix()}$!{pageEntity.getParamValue()}">[首页]</a>
+		<a class="fenye_pingjia" data-url="$!{pageEntity.getCurrenturl()}/$pre$!{pageEntity.getUrlSuffix()}$!{pageEntity.getParamValue()}">[上一页]</a>
+		#end
+		#if($pageEntity.getPageCount() < 10)
+			#foreach($foo in [1..$!{pageEntity.getPageCount()}])
+				#if($foo == $!{pageEntity.getPageIndex()})
+				<a class="current">$!foo</a>
+				#else
+				<a class="fenye_pingjia" data-url="$!{pageEntity.getCurrenturl()}/$foo$!{pageEntity.getUrlSuffix()}$!{pageEntity.getParamValue()}">$foo</a>
+				#end
+			#end
+		#else
+			#if($pageEntity.getPageIndex() > 7)
+				<a class="fenye_pingjia" data-url="$!{pageEntity.getCurrenturl()}/1$!{pageEntity.getUrlSuffix()}$!{pageEntity.getParamValue()}">1</a>
+				<a class="fenye_pingjia" data-url="$!{pageEntity.getCurrenturl()}/2$!{pageEntity.getUrlSuffix()}$!{pageEntity.getParamValue()}">2</a>
+				<a class="fenye_pingjia" data-url="$!{pageEntity.getCurrenturl()}/3$!{pageEntity.getUrlSuffix()}$!{pageEntity.getParamValue()}">3</a>
+				<a href="javascript:;" class="nb">…</a>
+				#set($prindex = $pageEntity.getPageIndex() - 2)
+				#if($pageEntity.getPageCount() > $pageEntity.getPageIndex() + 2)
+					#set($endindex = $pageEntity.getPageIndex() +2)
+				#else
+					#set($endindex = $pageEntity.getPageCount())
+				#end
+				#foreach($p in [$prindex..$endindex])
+					#if($p == $!pageEntity.getPageIndex())
+					<a class="current fenye_pingjia" data-url="$!{pageEntity.getCurrenturl()}/$!p$!{pageEntity.getUrlSuffix()}$!{pageEntity.getParamValue()}">$!p</a>
+					#else
+					<a class="fenye_pingjia" data-url="$!{pageEntity.getCurrenturl()}/$!p$!{pageEntity.getUrlSuffix()}$!{pageEntity.getParamValue()}">$!p</a>
+					#end
+				#end		
+			#else
+				#foreach($foo in [1..7])
+				#if($foo == $!pageEntity.getPageIndex())
+				<a class="current">$!foo</a>
+				#else
+				<a class="fenye_pingjia" data-url="$!{pageEntity.getCurrenturl()}/$!foo$!{pageEntity.getUrlSuffix()}$!{pageEntity.getParamValue()}">$foo</a>
+				#end
+				#end
+				<a href="javascript:;" class="nb">…</a>
+				#set($p2index = $pageEntity.getPageCount() - 2)
+				#set($p1index = $pageEntity.getPageCount() - 1)
+				<a class="fenye_pingjia" data-url="$!{pageEntity.getCurrenturl()}/$!{p2index}$!{pageEntity.getUrlSuffix()}$!{pageEntity.getParamValue()}">$!{p2index}</a>
+				<a class="fenye_pingjia" data-url="$!{pageEntity.getCurrenturl()}/$!{p1index}$!{pageEntity.getUrlSuffix()}$!{pageEntity.getParamValue()}">$!{p1index}</a>
+				<a class="fenye_pingjia" data-url="$!{pageEntity.getCurrenturl()}/$pageEntity.getPageCount()$!{pageEntity.getUrlSuffix()}$!{pageEntity.getParamValue()}">$pageEntity.getPageCount()</a>
+				
+			#end
+			
+		#end
+		#if($pageEntity.getPageIndex() == $pageEntity.getPageCount())
+		<a href="javascript:void(0);" >[末页]</a>
+		#else
+		<a class="fenye_pingjia" data-url="$!{pageEntity.getCurrenturl()}/$next$!{pageEntity.getUrlSuffix()}$!{pageEntity.getParamValue()}" >[下一页]</a>
+		<a class="fenye_pingjia" data-url="$!{pageEntity.getCurrenturl()}/$pageEntity.getPageCount()$!{pageEntity.getUrlSuffix()}$!{pageEntity.getParamValue()}">[末页]</a>
+		#end
+	</div>
+	#end
+	
+<!-- 未查询到数据时 -->
+#if($cusEvalList.size() == 0)
+<div class="show-none">
+	<p class="ts-text">暂时还没有相关评价哟！</p>
+</div>	
+#end	
+<script type="text/javascript">
+/* var list = '$!{list}';
+if(list != "" && list != null){
+	var listJson = JSON.parse(list);
+	var DomHtml = "";
+	$.each(listJson,function(n,value){
+		
+		DomHtml +=  '<div class="q1">'+
+				        '<p class="que question">'+
+				            '<label></label>'+
+				            '<span>'+value.questioncontent+'</span>'+
+				        '</p>'+
+				        '<p class="ans answer">'+value.answercontent+'</p>'+
+			    	'</div>';
+	});
+	
+	$('.questionBox').append(DomHtml);
+} */
+	
+	
+$('.fenye_pingjia').unbind('click').on('click',function(){
+	var dataUrl = $(this).attr('data-url');
+	if(dataUrl == undefined || dataUrl == ""){
+		return;
+	}
+	
+	//异步加载客户问答
+	$.ajax({
+		url:dataUrl,
+		type:"post",
+		dataType:"html",
+		success:function(data){
+			var aCont=$(document).find('.tab-conts-h');
+    		var index = $(document).find('.md-hr-tab-lists li a.active').index('.md-hr-tab-lists li a');
+    		aCont.eq(index).children().remove();
+    		aCont.eq(index).append(data);
+    		
+    		//显示分数
+    		$(".show-number li p").each(function(index, element) {
+    		  var num=$(this).attr("tip");
+    		  var www=num*2*9;
+    		  $(this).css("width",www);
+    		  $(this).parent(".star-Show").siblings("span").text(num);
+    		});
+    		
+    		//显示分数2
+    		$(".show-number2 li p").each(function(index, element) {
+    		  var num=$(this).attr("tip");
+    		  var www=num*2*6;
+    		  $(this).css("width",www);
+    		  $(this).parent(".star-Show2").siblings("span").text(num);
+    		});
+		},
+		error:function(){
+			alert("未响应");
+		}
+	});
+})
+	
+	
+</script>
+

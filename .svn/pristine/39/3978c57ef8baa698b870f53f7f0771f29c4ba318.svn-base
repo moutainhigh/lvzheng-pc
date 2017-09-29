@@ -1,0 +1,111 @@
+<link src="http://static.lvzheng.com/lvzhengpc/css/index.css" type="text/css"  rel="stylesheet"/>
+<script type="text/javascript" src="http://static.lvzheng.com/lvzhengpc/js/jquery-1.7.2.min.js"></script>
+<script src="http://static.lvzheng.com/lvzhengpc/js/jquery.jquery.tabs.js"></script>
+<script type="text/javascript" src="http://static.lvzheng.com/lvzhengpc/js/return-top.js"></script>
+<script>
+$(function(){
+    // 左导航切换显示
+    $(".left-nav dd").hover(function(){
+        $(".nav-right",this).show();
+    });
+    $(".left-nav dd").mouseleave(function(){
+        $(".nav-right",this).hide();
+    });
+});
+</script>
+</head>
+
+<body class="no-js">
+<div id="continer">
+    <!-- 顶部信息条 -->
+   <!-- logo区域 -->
+    #parse("views/common/logo_normal.html")
+
+
+    <!-- 导航 -->
+     #parse("views/common/navigation.html")
+
+	<div class="xwabout">
+		<div class="bleft">
+			#parse("views/common/aboutmanu.html")
+		</div>
+	
+		<div class="bright">
+			<div class="deve-history">
+				<div class="his-left">
+					<ul>
+                        <li>
+                            <div class="box pos">
+                                <i class="arr-right"><s></s></i>
+                                <p class="title">2015年9月</p>
+                                <p class="text">客户资源管理服务系统(V3.0)上线</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="box pos">
+                                <i class="arr-right"><s></s></i>
+                                <p class="title">2015年5月</p>
+                                <p class="text">深圳分公司成立；同期完成售前咨询、售中服务、售后反馈业务线流程标准化</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="box pos">
+                                <i class="arr-right"><s></s></i>
+                                <p class="title">2015年3月</p>
+                                <p class="text">开展代理记账、商标注册、社保开户、公积金开户等业务</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="box pos">
+                                <i class="arr-right"><s></s></i>
+                                <p class="title">2014年12月</p>
+                                <p class="text">小微律政品牌成立<br>获得蓝驰创投和58到家联合天使轮千万投资</p>
+                            </div>
+                        </li>
+					</ul>
+				</div>
+
+				<div class="his-right">
+					<ul>
+                        <li>
+                            <div class="box pos">
+                                <i class="arr-left"><s></s></i>
+                                <p class="title">2015年12月</p>
+                                <p class="text">小微律政迎来周年庆～</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="box pos">
+                                <i class="arr-left"><s></s></i>
+                                <p class="title">2015年6月</p>
+                                <p class="text">推出“全民创业季活动”<br>同时产品（V2.0)版本上线</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="box pos">
+                                <i class="arr-left"><s></s></i>
+                                <p class="title">2015年4月</p>
+                                <p class="text">月销售额首破100万<br>北京市月代理注册公司总量排名第一</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="box pos">
+                                <i class="arr-left"><s></s></i>
+                                <p class="title">2015年1月</p>
+                                <p class="text">微信平台产品上线<br>同时推出公司注册一站式服务</p>
+                            </div>
+                        </li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+    <!-- 网站底部 -->
+
+
+</div>
+
+</body>
+
+</html>

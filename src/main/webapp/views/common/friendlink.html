@@ -1,0 +1,54 @@
+<!-- 友情连接 -->
+<div class="link-main">
+    <div class="link-box">
+        <div class="list">
+            <label>热门服务：</label>
+            <div class="con">
+                <ul>
+                    <li><a href="/reg_bj.html">北京公司注册</a></li>
+                    <li><a href="/change_bj.html">北京公司变更</a></li>
+                    <li><a href="/bookkeeping_bj.html">北京公司记账</a></li>
+                    <li><a href="/addresslist.html">北京注册地址</a></li>
+                </ul>
+            </div>
+        </div>
+        #if(${friendlinks})
+        <div class="list">
+            <label>友情链接：</label>
+            <div class="con">
+                <ul class="link">
+                    #set ($i=0)
+                  	#foreach($friendlink in $!{friendlinks})
+                  	
+						#if($i ==0  && $i%10==0)
+							<li>
+						#elseif ($i !=0  && $i%10==0)
+							</li><li>
+						#else
+						#end
+							<a href="http://$!{friendlink.lurl}"  target="_blank" >	$!{friendlink.keyword}     </a>
+					#set($i=$i+1)
+					#end
+					</li>
+                </ul>
+            </div>
+        </div>                                         
+		#end
+                                               
+    </div>
+</div>
+<script>
+        // 友情连接滚动
+        function autoScroll(obj){  
+            $(obj).find("ul.link").animate({  
+                marginTop : "-20px"  
+            },500,function(){  
+                $(this).css({marginTop : "0px"}).find("li:first").appendTo(this);  
+            })  
+        }  
+        $(function(){  
+            if ($(".con li").length > 1) {
+                setInterval('autoScroll(".con")',4000);
+            }
+        }); 
+        </script>

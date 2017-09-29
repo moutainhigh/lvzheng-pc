@@ -1,0 +1,282 @@
+  <!-- logo区域 -->
+    #parse("views/common/logo_normal.html")
+
+
+    <!-- 导航 -->
+     #parse("views/common/navigation.html")
+	<!-- 产品查询 -->
+    <div class="cp-search">
+        <div class="search-box sea-bg">
+            <div class="search">
+                <span class="sea-item">
+                    <a class="city" id="localCity" data-val="北京" >北京</a>
+                    <input class="zh-box" type="text" id="shopName" placeholder="请输入字号" value="$!{shopName}" data-validate="chinese:true;required:true;" data-info="enterprise:main" />
+                    <input class="w-input-310" type="hidden" id="industryCharacteristics" value="$!{industryCharacteristics}" data-select="none" placeholder="行业特点" data-validate="chinese:true;required:true;" data-info="enterprise:main">
+                    <div class="s-select w-220 center" name="s-select">
+                        <input class="n-val" id="n-val" type="text" placeholder="请选择行业特点" value="$!{industryCharacteristics}" readonly>
+                        <ul>
+							#foreach($bus in $mainBusinessList)
+							<li data-industry="$!{bus.getIndustryText()}" data-code="$!{bus.getCode()}" data-codeName="$!{bus.getCodeName()}" data-uniteCode="$!{bus.getUniteCode()}" data-value="$!{bus.getIndustryText()}" >$!{bus.getIndustryText()}（主营业务：$!{bus.getCodeName()}）</li>
+							#end
+                        </ul>
+                    </div>
+                    <input type="hidden" id="mainBusiness" value="$!{mainBusiness}" data-info="enterprise:main" />
+					<input type="hidden" id="mainBusinessCode" value="$!{mainBusinessCode}" data-info="enterprise:main" />
+					<input type="hidden" id="mainBusinessUniteCode" value="$!{mainBusinessUniteCode}" data-info="enterprise:main" />
+					<input type="hidden" id="operatingRange" value="$!{operatingRange}" data-info="enterprise:main" />
+					<input type="hidden" id="name" value="$!{name}" data-info="enterprise:main" />
+					
+					<input type="hidden" id="checkNameStatus" value="2" data-info="enterprise:main"  />
+					<input type="hidden" id="organizationType" value="有限公司" data-info="enterprise:main" />
+					<input type="hidden" id="regionLocationInName" value="1" data-info="enterprise:main" />
+                    
+                    <a class="type" >有限公司</a>
+                </span>
+                <a href="javascript:void(0);" class="btn pop_box1 checkName">立即查询</a>
+            </div>
+            
+            #if($foundCheckJson)
+            <div class="jg-box" id="foundCheckReasonDiv" >
+                <p class="jg-search">您输入的查询结果：</p>
+                <div class="hz-btn">
+					#if($!{foundCheckJson.get("errorNum")} == 0)
+                    
+                    <span>公司名还没被占？ 恭喜你，快点 >> </span>
+                    <a href="javascript:void(0);" onclick="checkNameCollection()" class="btn" >核准名称</a>
+					
+					#elseif($foundCheckJson.get("cc") && $foundCheckJson.get("jyz"))
+					
+					<p class="error">您的公司名称与以下公司相同，无法使用：</p>
+					
+					#foreach($cc in $!{foundCheckJson.get("cc")})
+					<p class="error-name">$!{cc.get("rule")} ：$!{cc.get("entName")}</p>
+					#end
+					
+					#foreach($jyz in $!{foundCheckJson.get("jyz")})
+					<p class="error-name">$!{jyz.get("rule")} ：$!{jyz.get("msg")}</p>
+					#end
+					
+                   	#end
+                </div>
+            </div>
+            #else
+            <div class="jg-box" id="foundCheckReasonDiv" style="display: none" >
+            	<p class="jg-search">您输入的查询结果：</p>
+                <div class="hz-btn"></div>
+            </div>
+            #end
+            
+            <div class="ex-box">
+                <div class="box1">
+                    <label>名称举例：</label>
+                    <div class="con">
+                        <span>北京</span>
+                        <span class="t1">小微律政</span>
+                        <span class="t2">咨询服务</span>
+                        <span>有限公司</span>
+                    </div>
+                </div>
+                <div class="box1">
+                    <label>小微建议：</label>
+                    <div class="con">
+                        <p class="text">1、字号：您与其他企业区别的标志。</p>
+                        <p class="text">2、字号最少2个汉字。</p>
+                        <p class="text">3、行业特点：您所要从事的主要经营项目。</p>
+                        <p class="text">4、行业特点可填可选，应与您的主营业务相符。</p>
+                        <p class="text">5、当字号相同时，但行业特点不同时，可以注册。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+	<!-- 加载弹出层 -->
+	<div class="cd-popup1 cd-boxloading" role="alert"> 
+	    <div class="cd-popup-container1 bgno">
+	        <p class="sf-loading">小微正在努力为您加载！</p>
+	    </div>
+	</div>
+	<!-- 查询 弹出框 -->
+<div class="cd-popup cd-box1imgcode" role="alert"> 
+    <!--输入验证码 提示框 -->
+    <div class="cd-popup-container bl-box">
+        <div class="bl">
+            <div class="item">
+                <div class="w-text">
+                	<input type="hidden" id="token" value="$!{token}" />
+                    <input type="text" id="valicodeinput" placeholder="请输入验证码">
+                    <div class="imgcode">
+                        <img id="validateimg" src="" onclick="$(this).attr('src',encodeURI('/picvalidate/$!{token}?'+new Date()));" >
+                    </div>
+                    <a href="javascript:void(0);" onclick="$('.imgcode img').attr('src',encodeURI('/picvalidate/$!{token}?'+new Date()));" class="codebtn">点击刷新</a>
+                </div>
+            </div>
+            <div class="btn">
+                <a href="javascript:void(0);" class="imgcode searchBtn" >查询</a>
+            </div>
+        </div> 
+        <a href="javascript:void(0);" class="cd-popup-close img-replace">关闭</a>
+    </div>
+</div>
+
+<script type="text/javascript" src="/js/mywf/gov.js"></script>
+<script type="text/javascript" src="/js/jx.validate.js"></script>
+<script type="text/javascript">
+$(function(){
+	fullName();
+	
+	$("#n-val").next("ul").find("li").click(function(){
+		selectMainBusiness($(this));
+	});
+
+	$("#shopName").change(function(){
+		fullName();
+		$("#foundCheckReasonDiv").hide();
+	});
+	$(".imgcode.searchBtn").click(function(){
+    	// 校验验证码
+		var valicod = $("#valicodeinput").val();
+		var token = $("#token").val();
+		var shopName = $("#shopName").val();
+		var organizationType = $("#organizationType").val();
+		var localCity = $("#localCity").attr("data-val");
+		var industryCharacteristics = $("#industryCharacteristics").val();
+		var mainBusinessCode = $("#mainBusinessCode").val();
+		var mainBusinessUniteCode = $("#mainBusinessUniteCode").val();
+		GOV.foundCheck(shopName, industryCharacteristics, mainBusinessCode, mainBusinessUniteCode, organizationType, localCity, valicod, token);
+		
+	});
+	$(".btn.checkName").click(function(){
+		// 点击核名查询
+		var validateArray = new Array();
+		validateArray.push($(".search"));
+		if(!JX.validateArray(validateArray)){
+			return;
+		}
+		//埋点请求
+		var shopName = $("#J_shopName").val();
+		var mainBusinessCode = $("#mainBusinessCode").val();
+    	lv_clickLog("moudle=名称查询按钮&logName=lvzhengpcindex&data_action=click&data_shopName="+shopName+"&data_mainBusCode="+mainBusinessCode);
+
+    	
+    	$("#validateimg").click();
+		$(".cd-box1imgcode").addClass("is-visible");
+		
+
+		
+	});
+	
+    // 左导航切换显示
+    $(".left-nav dd").hover(function(){
+        $(".nav-right",this).show();
+    });
+    $(".left-nav dd").mouseleave(function(){
+        $(".nav-right",this).hide();
+    });
+	    
+	// 行业特点下拉
+	$('[name="s-select"]').click(function(e) {
+		$('[name="s-select"]').find('ul').hide();
+		$(this).find('ul').show();
+		e.stopPropagation();
+	});
+	$('[name="s-select"] li').hover(function(e) {
+		$(this).toggleClass('on');
+		e.stopPropagation();
+	});
+	$('[name="s-select"] li').click(function(e) {
+		var val = $(this).attr("data-value");
+		if(val != $(this).parents('[name="s-select"]').find('input').val()){
+			$("#foundCheckReasonDiv").hide();
+			fullName();
+		}
+		$(this).parents('[name="s-select"]').find('input').val(val);
+		$('[name="s-select"] ul').hide();
+		e.stopPropagation();
+	});
+	$(document).click(function() {
+		$('[name="s-select"] ul').hide();
+	});
+	
+    $(".img-replace").click(function(){
+    	$("#valicodeinput").val("");
+    	$(".cd-box1imgcode").removeClass("is-visible");
+    });
+});
+
+function fullName(){
+	$("#name").val($("#localCity").attr("data-val") + $("#shopName").val() + $("#industryCharacteristics").val() + $("#organizationType").val() );
+}
+
+function checkNameCollection(){
+	fullName();
+	var mainData = {};
+	// 核名业务
+	var enterpriseData = {};
+	$("[data-info='enterprise:main']").each(function(index, element){
+		if($(element).parents("div:hidden").length <= 0){
+			enterpriseData[$(element).attr("id")] =  $(element).val();
+		}else{
+//			enterpriseData[$(element).attr("id")] = "";
+		}
+	});
+	mainData['selfCheckName'] = enterpriseData;
+	var valicod = $("#valicodeinput").val();
+	var token = $("#token").val();
+	
+	var param = "&valCode=" + valicod + "$tokenstr=" + token + "&data=" + JSON.stringify(mainData);
+	$.ajax({
+		url:"/gov/business/checkNameCollection",
+		type:'post',    
+	    data:param,
+	    dataType:'json',
+	    async:false,
+		complete:function(data){
+			window.location.href = data.responseText;
+			return true;
+		}
+	});
+	
+	//埋点请求
+	var shopName = $("#J_shopName").val();
+	var mainBusinessCode = $("#mainBusinessCode").val();
+	lv_clickLog("moudle=名称查询抢占按钮&logName=lvzhengpcindex&data_action=click&data_shopName="+shopName+"&data_mainBusCode="+mainBusinessCode);
+
+	
+}
+
+function selectMainBusiness(liObj) {
+	var name = $(liObj).attr("data-codeName");
+	var code = $(liObj).attr("data-code");
+	var uniteCode = $(liObj).attr("data-uniteCode");
+	var industry = $(liObj).attr("data-industry");
+	var scope = $(liObj).attr("data-scope");
+
+	if (name == undefined) {
+		name = "";
+	}
+	if (code == undefined) {
+		code = "";
+	}
+	if (uniteCode == undefined) {
+		uniteCode = "";
+	}
+	if (industry != undefined) {
+		$("#industryCharacteristics").val(industry);
+
+		$(liObj).parents('[name="n-select"]').find('input').val(industry);
+	}
+	$("#mainBusiness").val(name);
+	$("#mainBusinessCode").val(code);
+	$("#mainBusinessUniteCode").val(uniteCode);
+	if (scope == undefined || scope == "") {
+		scope = name;
+	}
+	$("#operatingRange").val(scope + "；");
+	
+	//埋点请求
+	var shopName = $("#shopName").val();
+	lv_clickLog("moudle=名称查询行业特点&logName=lvzhengpcindex&data_action=click&data_shopName="+shopName+"&data_mainBusCode="+code);
+
+}
+</script>

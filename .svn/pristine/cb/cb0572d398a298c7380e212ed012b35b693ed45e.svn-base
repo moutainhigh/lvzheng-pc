@@ -1,0 +1,26 @@
+#if($!{packageSellList})
+<label class="name">特惠套餐</label>
+<div class="tccon">
+	#foreach($packageSellE in $!{packageSellList})
+		<div class="list">
+		 #set($i = 1)
+		#foreach($sellMap in $!{sellProductMap.get("$!{packageSellE.packagesell_id}")})
+			
+			$!{sellMap.sell_product_name}
+			#if($i!=$!{sellProductMap.get("$!{packageSellE.packagesell_id}").size()})
+			+
+			#end
+			#set($i = $i + 1 )	
+		#end 
+			=
+			$!{packageSellE.sell_overprice} 
+			<a href="/order/buyorderByPackage/$!{packageSellE.packagesell_id}">购买></a>
+			<p class="moretext">套餐包含：
+				#foreach($info in $!{tipsMap.get("$!{packageSellE.packagesell_id}")})
+				$info.tips
+				#end
+			</p>
+		</div>
+	#end
+</div>
+#end

@@ -1,0 +1,504 @@
+<script>
+$(function(){
+	
+	//根据后台的参数选中相关内容
+	var cityid = "$!{cityid}";
+	var productid = "$!{productid}";
+	var areaid = "$!{areaid}";
+	if(productid){
+		$("#J_prod_ul").find("li").each(function(){
+			var pid = $(this).attr("oid");
+			if(productid == pid){
+				$(this).attr("class","checked");
+			}else{
+				$(this).attr("class","b-box hide");
+			}
+		})
+	}
+	
+	if(areaid){
+		$("#J_area_ul").find("li").each(function(){
+			var pid = $(this).attr("oid");
+			if(areaid == pid){
+				$(this).attr("class","checked");
+			}else{
+				$(this).attr("class","b-box hide");
+			}
+		})
+	}
+	
+	if(cityid){
+		$("#J_city_ul").find("li").each(function(){
+			var pid = $(this).attr("oid");
+			if(cityid == pid){
+				$(this).attr("class","checked");
+			}else{
+				$(this).attr("class","b-box hide");
+			}
+		})
+	}
+	
+
+    // 选择商品
+    $(".c-sp li").each(function(){
+        $(this).click(function(){
+            $(".c-sp li").addClass("b-box").removeClass("checked");
+            $(this).addClass("checked").removeClass("b-box");
+            
+            //获取id
+            var pid = $(this).attr("oid");
+            $("#J_pid").val(pid);
+            var cid = $("#J_cityid").val();
+            var aid = $("#J_areaid").val();
+            
+            var url = "/commondetail/detail/"+pid+".html";
+            window.location.href = url;
+            
+        })
+    });
+
+
+
+
+
+    // 选择区域
+    $(".c-area li").each(function(){
+        $(this).click(function(){
+            $(".c-area li").addClass("b-box").removeClass("checked");
+            $(this).addClass("checked").removeClass("b-box");
+            
+            //获取id
+            var aid = $(this).attr("oid");
+            var cid = $("#J_cityid").val();
+            var pid = $("#J_pid").val();
+            $("#J_areaid").val(aid);
+            $.ajax({
+
+                url:"/commondetail/detail/queryPrice",
+
+                type:"post",
+
+                data:{"pid":pid,"cityid":cid,"areaid":aid},
+
+                success:function(data){
+
+                	var sellprice = data.sellprice;
+                	var marketprice = data.marketprice;
+                	var sellid = data.sellid;
+                	//异步替换数值
+                	$("#J_hd_pri").text(sellprice);
+                	$("#J_top_pri").text(sellprice);
+                	
+                	$("#J_top_mark_pri").text(marketprice);
+                	$("#J_hd_mark_pri").text(marketprice);
+                	$("#J_buy_btn").attr("href","/order/index/"+sellid+".html");
+                	$("#J_buy_btn_2").attr("href","/order/index/"+sellid+".html");
+                }
+
+            });
+        })
+    });
+    // 选择城市
+    $(".c-city li").each(function(){
+        $(this).click(function(){
+            $(".c-city li").addClass("b-box").removeClass("checked");
+            $(this).addClass("checked").removeClass("b-box");
+            
+            //获取id
+            var cid = $(this).attr("oid");
+            $("#J_cid").val(cid);
+            var pid = $("#J_pid").val();
+            var aid = $("#J_areaid").val();
+            
+            $.ajax({
+
+                url:"/commondetail/detail/queryCity",
+
+                type:"post",
+
+                data:{"pid":pid,"cityid":cid,"areaid":aid},
+
+                success:function(data){
+
+                	var sellprice = data.sellprice;
+                	var marketprice = data.marketprice;
+                	var arealist = data.area;
+
+                	var sellid = data.sellid;
+               
+                	
+                	//清空区域列表
+                	$("#J_area_ul").empty();
+                	for(var i=0;i<arealist.length;i++){
+                		var li = "";
+                		
+                		if(i==0){
+                			
+                			 li = "<li class=\"checked\" oid=\""+arealist[i].areaid+"\">"+arealist[i].name+"</li>";
+                		}else{
+                			 li = "<li class=\"b-box hide\" oid=\""+arealist[i].areaid+"\">"+arealist[i].name+"</li>";
+                		}
+                		$("#J_area_ul").append(li);
+                		
+                		rebind();
+                	}
+                	//异步替换数值
+                	$("#J_hd_pri").text(sellprice);
+                	$("#J_top_pri").text(sellprice);
+                	
+                	$("#J_top_mark_pri").text(marketprice);
+                	$("#J_hd_mark_pri").text(marketprice);
+                	
+                	
+                	$("#J_buy_btn").attr("href","/order/index/"+sellid+".html");
+                	$("#J_buy_btn_2").attr("href","/order/index/"+sellid+".html");
+                }
+
+            });
+            
+        })
+    });
+
+
+    
+    // 无忧套餐切换
+    $(".tc-con").hide(); 
+    $(".tc-tabs p:first").addClass("active").show(); 
+    $(".tc-con:first").show(); 
+    $(".tc-tabs p").click(function() {
+        $(".tc-tabs p").removeClass("active"); 
+        $(this).addClass("active"); 
+        $(".tc-con").hide(); 
+        var activeTab = $(this).find("a").attr("href"); 
+        $(activeTab).fadeIn(); 
+        return false;
+    });
+
+    // 中部menu
+    $(window).scroll(function(){
+        var top = $(document).scrollTop();          
+        var menu = $("#menu");                      
+        var items = $("#content").find(".md-hover"); 
+        var curId = "";                             
+        items.each(function(){
+            var m = $(this);                        
+            var itemsTop = m.offset().top;        
+            if(top > itemsTop-100){
+                curId = "#" + m.attr("id");
+            }else{
+                return false;
+            }
+        });
+
+        var curLink = menu.find(".cur");
+        if( curId && curLink.attr("href") != curId ){
+            curLink.removeClass("cur");
+            menu.find( "[href=" + curId + "]" ).addClass("cur");
+        }
+    });
+
+});
+
+
+function rebind(){
+	 // 选择区域
+    $(".c-area li").each(function(){
+        $(this).click(function(){
+            $(".c-area li").addClass("b-box").removeClass("checked");
+            $(this).addClass("checked").removeClass("b-box");
+            
+            //获取id
+            var aid = $(this).attr("oid");
+            var cid = $("#J_cityid").val();
+            var pid = $("#J_pid").val();
+            $("#J_areaid").val(aid);
+            $.ajax({
+
+                url:"/commondetail/detail/queryPrice",
+
+                type:"post",
+
+                data:{"pid":pid,"cityid":cid,"areaid":aid},
+
+                success:function(data){
+
+                	var sellprice = data.sellprice;
+                	var marketprice = data.marketprice;
+                	var sellid = data.sellid;
+                	//异步替换数值
+                	$("#J_hd_pri").text(sellprice);
+                	$("#J_top_pri").text(sellprice);
+                	
+                	$("#J_top_mark_pri").text(marketprice);
+                	$("#J_hd_mark_pri").text(marketprice);
+                	$("#J_buy_btn").attr("href","/order/index/"+sellid+".html");
+                	$("#J_buy_btn_2").attr("href","/order/index/"+sellid+".html");
+                	
+                }
+
+            });
+        })
+    });
+}
+
+</script>
+
+<body>
+<div id="continer">
+
+    <!-- logo区域 -->
+    #parse("views/common/logo_normal.html")
+
+
+    <!-- 导航 -->
+     #parse("views/common/navigation.html")
+
+   
+    <!-- 商品详情 -->
+    <div class="sp-detail">
+        <div class="crumbs">
+            <a class="crumb-link" href="/">首页</a>
+            <i class="crumb-line">></i>
+            <a class="crumb-link" href="/navigation/index/$!{catModel.cate_id}.html">$!{catModel.cate_name}</a>
+            <i class="crumb-line">></i>
+            <a class="crumb-link" >$!{catModel2.cate_name}</a>
+            <i class="crumb-line">></i>
+            <a class="crumb-link" href="/commondetail/detail/$!{productid}.html">$!{pModel.product_name}</a>
+        </div>
+        <!-- 选择商品 -->
+        <div class="sp-type">
+        	#if($!{productid} == '38230926529537')
+        	<a href="http://www.lvzheng.com/brand/index" class="cp-banner"><img src="/images/product/sb_banner.jpg"></a>
+            #end
+            <input type="hidden" id="J_pid"     value="$!{productid}"/>
+            <input type="hidden" id="J_cityid"  value="$!{cityid}"/>
+            <input type="hidden" id="J_areaid"  value="$!{areaid}"/>
+            <p class="name">$!{pModel.product_name}</p>
+            <p class="time">$!{info.tips}</p>
+            <div class="con">
+                <div class="p-banner">
+                    <ul id="slides">
+                         #foreach($m in $!img)
+                       		 <li style="background:url('/file/download/$!{m}') no-repeat"><a href=""></a><p class="bt"></p></li>
+                         #end
+                    </ul>
+                </div>
+                <div class="p-info">
+                    <div class="price">
+                        <label>价格：</label>
+                        <span class="pri1">￥<a id="J_top_pri">$!{model.sell_overprice}</a></span>
+                        <span class="pri2" id="J_top_mark_pri">￥$!{model.sell_markprice}</span>
+                       #if($!{info.detail} !='')
+                        <p class="tag-box"><span  class="tag"><i class="angle1"><s></s></i>$!{info.detail}</span></p>
+                        #end 
+                    </div>
+                    <div class="sp">
+                        <label>商品名称：</label>
+                        <div class="cho c-sp">
+                            <ul id="J_prod_ul">
+                             <!--    <li class="b-box hide">有限公司注册</li>
+                                <li class="b-box hide">股份公司注册</li>
+                                <li class="b-box hide">分公司注册</li>
+                                <li class="b-box show">合伙公司注册</li>
+                                <li class="b-box hide">分公司注册</li>
+                                <li class="b-box hide">个人独资注册</li> -->
+                                 #foreach($m in $!list)
+                                 	
+                                 	#if ($velocityCount == 1 )
+                                 	<li class="checked" oid="$!{m.product_id}">$!{m.product_name}</li>
+                                 	#else
+                                 	
+                                 	<li class="b-box hide" oid="$!{m.product_id}">$!{m.product_name}</li>
+                                 	#end
+                                 #end
+                            </ul>
+                        </div>
+                    </div>
+                   <!--  <div class="sp pro-detail">
+                        <label>商品详细：</label>
+                        <div class="cho c-detail">
+                            <ul>
+                                <li class="b-box">10人以下</li>
+                                <li class="b-box">10到20人</li>
+                            </ul>
+                        </div>
+                    </div> -->
+                    <div class="sp">
+                        <label>选择城市：</label>
+                        <div class="cho c-city">
+                            <ul id="J_city_ul">
+                                 #foreach($m in $!city)
+                                 	#if ($velocityCount == 1 )
+                                 	<li class="checked" oid="$!{m.areaid}">$!{m.name}</li>
+                                 	#else
+                                 	<li class="b-box" oid="$!{m.areaid}">$!{m.name}</li>
+                                 	#end
+                                 #end
+                                 
+                                 
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="sp">
+                        <label>选择区域：</label>
+                        <div class="cho c-area">
+                            <ul id="J_area_ul">
+                                 #foreach($m in $!area)
+                                 	#if ($velocityCount == 1 )
+                                 	<li class="checked" oid="$!{m.areaid}">$!{m.name}</li>
+                                 	#else
+                                 	<li class="b-box" oid="$!{m.areaid}">$!{m.name}</li>
+                                 	#end
+                                 #end
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="btn-box">
+                        <a href="/order/index/$!{model.sell_id}.html" class="btn" id="J_buy_btn">立即购买</a>
+                        #if($!{catModel2.cate_name}=='办公用品')
+                        <span style="padding-left:30px">（请先登录会员）</span>
+                        #end
+<!--                         <a href="" class="share">分享</a>
+ -->                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div class="main-spcon">
+            <div class="con-left" id="content">
+                <div class="tit-nav">
+                    <ul>
+                        <a href="#a1"><li class="on">服务标准</li></a>
+                        <a href="#a2"><li>价格透明</li></a>
+                        <a href="#a3"><li>客户问答</li></a>
+                        <!--  <a href="#a4"><li>客户心声</li></a> -->
+                    </ul>
+                </div>
+                <p class="md-hover" id="a1"></p>
+                <div class="s-box">
+                    <div class="title">
+                        <p>服务标准</p>
+                    </div>
+                    <div class="tab1">
+                            $!{info.service_text}
+                    </div>
+                </div>
+                <p class="md-hover" id="a2"></p>
+                <div class="s-box">
+                    <div class="title">
+                        <p>收费透明</p>
+                    </div>
+                    <div class="tab2">
+                            $!{info.price_text}
+                    </div>
+                </div>
+                <p class="md-hover" id="a3"></p>
+                <div class="s-box">
+                    <div class="title">
+                        <p>客户问题</p>
+                    </div>
+                    <div class="que-box">
+	                    #foreach($m in $!faqlist)
+	                    
+	                        <div class="q1">
+	                            <p class="que">
+	                                <label></label>
+	                                <span>$!m.questions</span>
+	                            </p>
+	                            <p class="ans">$!m.answer</p>
+	                        </div>
+	                    #end
+                    </div>
+                </div>  
+                <p class="md-hover" id="a4"></p>
+                <!-- <div class="s-box">
+                    <div class="title">
+                        <p>用户评价</p>
+                    </div>
+                    <div class="user-box">
+                        <div class="tx"><img src="/images/product/tx.png"></div>
+                        <div class="box">
+                            <p class="info">
+                                <span>北京新西兰留学生旅游管理公司</span>
+                                <span>王先生</span>
+                                <span>2015-12-25  17:53</span>
+                            </p>
+                            <p class="text">公司印章主要包括公章、财务章、合同章、发票章、法人代表人名章；除法人章外，其它4个章章主要包括公章、财务章、合同章、发票章、法人代表人名章；除法、公安、开户银行备案或预留印鉴。</p>
+                        </div>
+                    </div>
+                    <div class="user-box">
+                        <div class="tx"><img src="/images/product/tx.png"></div>
+                        <div class="box">
+                            <p class="info">
+                                <span>北京新西兰留学生旅游管理公司</span>
+                                <span>王先生</span>
+                                <span>2015-12-25  17:53</span>
+                            </p>
+                            <p class="text">公司印章主要包括公章、财务章、合同章、发票章、法人代表人名章；除法人章外，其它4个章章主要包括公章、财务章、合同章、发票章、法人代表人名章；除法、公安、开户银行备案或预留印鉴。</p>
+                        </div>
+                    </div>
+                </div>    --> 
+
+            </div>
+
+            <div class="con-right">
+                <div class="box1">
+                    <div class="title">相关服务</div>
+                    <div class="con">
+                        <ul>
+                            #foreach($m in $!reflist)
+                            <li>
+                                <p class="t1">$!{m.name}</p>
+                                <p class="t2">$!{m.tip}</p>
+                                <p class="t3">
+                                    <span class="s1">小微价：</span>
+                                    <span class="s2">￥$!{m.price}</span>
+                                    <a href="$!{m.path}">去购买</a>
+                                </p>
+                            </li>
+                            #end
+                            <!-- <li>
+                                <p class="t1">公司注册</p>
+                                <p class="t2">为企业办理公司注册</p>
+                                <p class="t3">
+                                    <span class="s1">小微价：</span>
+                                    <span class="s2">￥598</span>
+                                    <a href="/commondetail/detail/38229817543169">去购买</a>
+                                </p>
+                            </li>
+                            <li>
+                                <p class="t1">虚拟地址</p>
+                                <p class="t2">可靠地址，放心注册</p>
+                                <p class="t3">
+                                    <span class="s1">小微价：</span>
+                                    <span class="s2">￥400</span>
+                                    <a href="/addresslist.html">去购买</a>
+                                </p>
+                            </li> -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>        
+
+    <!-- 中部menu -->
+    <div class="sp-nav-box" id="menu">
+        <div class="new-spnav">
+            <ul>
+                <li><a href="#a1" class="cur">服务标准</a></li>
+                <li><a href="#a2">价格透明</a></li>
+                <li><a href="#a3">客户问答</a></li>
+               <!-- <li><a href="#a4">客户心声</a></li> -->
+            </ul>
+            <div class="nav-r">
+                <span class="t2">￥</span><span class="t3" id="J_hd_pri">$!{model.sell_overprice}</span>
+                <span class="t1" id="J_hd_mark_pri">￥$!{model.sell_markprice}</span>
+                <a href="/order/index/$!{model.sell_id}.html" id="J_buy_btn_2">立即购买</a>
+            </div>
+        </div>
+    </div>
+
+   

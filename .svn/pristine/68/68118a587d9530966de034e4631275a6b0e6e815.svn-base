@@ -1,0 +1,141 @@
+<!-- 导航 -->
+<div class="nav-box">
+        <div class="box-con">
+            <!-- 全部分类 -->
+           <div class="n-left">全部分类
+               <div class="banner-nav">
+                   <div class="left-nav">
+                       <dl>
+                              #foreach($x in $!menulist)
+                                 	<dd>
+                               <a href="$!{x.path1}" class="nav-left hover">$!{x.menu_name1} #if($!{x.flag}==1)<span class="hot"></span>#end</a>
+                               <div class="nav-right">
+                                   <div class="main-box">
+                                       <div class="left">
+                                           #foreach($y in $!x.menu2VOlist)
+		                                           <div class="list">
+		                                               <div class="title"><p><a href="$!{y.path2}"> $y.menu_name2 #if($!{y.flag}==1)<span class="hot"></span>#end </a></p></div>
+		                                               <div class="text">
+		                                                   <ul>            
+		                                                       #foreach($z in $y.prolist)
+		                                                            #if($!z.flag==1)
+		                                                            	#if($!z.ptype==1)<!-- 红字 -->
+		                                                            	<li><a class="red" href="$!{z.path}">$!{z.spname}</a></li>
+		                                                            	#elseif($!z.ptype==2)<!-- 图片字 -->
+		                                                            	<li><a class="act" href="$!{z.path}">$!{z.spname}</a></li>
+		                                                            	#end
+		                                                            #else
+		                                                       		<li><a href="$!{z.path}">$!{z.spname}</a></li>
+		                                                       		#end
+		                                                       #end
+		                                                   </ul>
+		                                               </div>
+		                                           </div>
+                                             #end
+
+                                       </div>
+                                       <div class="right">
+                                           <div class="pic">
+                                           <!--动态配置图片  -->
+                                          <!--  #foreach($img in $!imgMap.entrySet()) 
+                                               #if($!img.key == $!x.cate_id)
+                                                  #foreach($p in $!img.value) 
+                                                  
+                                                    <img src="/file/download/$!{p}">
+                                                  #end
+                                               #end
+                                           #end -->
+                                              <!--静态图片  -->
+                                               <a href="/commondetail/detail/38229817543169.html"><img src="/images/index/pic/yy1.png"><span>高效注册 方便有效</span>  </a>
+                                               <a href="/addresslist.html"><img src="/images/index/pic/yy2.png">                        <span>可靠地址 安全放心</span></a>
+                                               <a href="/commondetail/detail/38230926529537.html"><img src="/images/index/pic/yy3.png">      <span>商标注册 放心可靠</span></a>
+                                               
+
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+                           </dd>
+
+                                 #end
+                           
+
+                           
+                           
+                       </dl>
+                   </div>
+               </div>
+           </div>
+           <ul class="nav-ul">
+               <!-- <li><a href="/"  #if($!{nav}=='home')class="current"#end>首页</a></li> -->
+               <li><a href="/commondetail/detail/38229817543169.html" #if($!{catModel.cate_name}=='工商注册')class="current"#end>公司注册</a></li>
+               <li><a href="/commondetail/detail/38253230296833.html" #if($!{catModel.cate_name}=='财税服务')class="current"#end>代理记账</a></li>
+               <li><a href="/commondetail/detail/38230926529537.html?cityid=999" #if($!{catModel.cate_name}=='知识产权')class="current"#end>商标注册</a></li>
+               <li><a href="/commondetail/detail/38230152382977.html" #if($!{catModel.cate_name}=='公司变更')class="current"#end>公司变更</a></li>
+               <li><a href="/addresslist.html" #if($!{nav}=='address')class="current"#end>虚拟地址</a></li>
+               <li><a href="/commondetail/detail/39186221829377.html?cityid=999" #if($!{catModel.cate_name}=='企业服务' && $!{catModel2.cate_name}!='办公用品')class="current"#end>法律服务</a></li>
+               <li><a href="/commondetail/detail/39454548424449.html?cityid=999" #if($!{catModel2.cate_name}=='办公用品')class="current"#end>网站建设</a></li>
+               <!-- <li class="hm-nav"><a href="/business/checkname/detail.html"   #if($!{nav}=='query')class="current"#end><img src="/images/product/hm_nav.gif"></a></li> -->
+               <li><a href="http://zhishi.lvzheng.com/" ><!-- <img src="/images/index/cy_nav.gif"> -->创业知识</a></li>
+                <!-- class="cy-nav" -->
+               
+           </ul>
+       </div>
+   </div>
+
+<script type="text/javascript">
+$("#flow-name").tabso({
+    cntSelect:"#flow-con",
+    tabEvent:"mouseover",
+    tabStyle:"normal"
+}); 
+
+//左导航hover
+$("dd a.hover").each(function(){
+    $(this).mousemove(function(){
+        $("dd a.hover").addClass("nav-left").removeClass("nav-on");
+        $(this).addClass("nav-on").removeClass("nav-left");
+    })
+    $(this).mouseout(function(){
+        $("dd a.hover").addClass("nav-left").removeClass("nav-on");
+    });
+});
+// 左导航切换显示
+$(".left-nav dd").hover(function(){
+    $(".nav-right",this).show();
+});
+$(".left-nav dd").mouseleave(function(){
+    $(".nav-right",this).hide();
+});
+
+//左菜单自适应
+if($(".left-nav dd").length<=6){
+    $(".left-nav dd").addClass("dd6")
+}else if($(".left-nav dd").length==7){
+    $(".left-nav dd").addClass("dd7")
+}else if($(".left-nav dd").length==8){
+    $(".left-nav dd").addClass("dd8")  
+};
+
+$('#cy-act').owlCarousel({
+    items: 4,
+    navigation: true,
+    navigationText: ["",""],
+    scrollPerPage: true
+});
+
+$('#ser-eval').owlCarousel({
+    items: 2,
+    navigation: true,
+    navigationText: ["",""],
+    scrollPerPage: true
+});
+
+$('#ent-info').owlCarousel({
+    items: 1,
+    navigation: true,
+    navigationText: ["",""],
+    scrollPerPage: true
+});
+
+</script>

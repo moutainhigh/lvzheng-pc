@@ -1,0 +1,111 @@
+package com.jx.hunter.lvzhengpc.common;
+
+import java.util.Date;
+import com.whalin.MemCached.MemCachedClient;
+import com.whalin.MemCached.SockIOPool;
+
+public class MemcachedUtil {
+	protected static MemCachedClient cachedClient = new MemCachedClient();
+	static {
+		 // server list and weights  
+		String[] servers = {"242.3000g.net:12000"};  
+        Integer[] weights = { 1};  
+        // grab an instance of our connection pool  
+        SockIOPool pool = SockIOPool.getInstance();  
+        // set the servers and the weights  
+        pool.setServers(servers);  
+        pool.setWeights(weights);  
+        pool.setHashingAlg(SockIOPool.CONSISTENT_HASH);  
+        // set some basic pool settings  
+        // 5 initial, 5 min, and 250 max conns  
+        // and set the max idle time for a conn  
+        // to 6 hours  
+        pool.setInitConn(5);  
+        pool.setMinConn(5);  
+        pool.setMaxConn(250);  
+        pool.setMaxIdle(1000 * 60 * 60 * 6);  
+  
+        // set the sleep for the maint thread  
+        // it will wake up every x seconds and  
+        // maintain the pool size  
+        pool.setMaintSleep(30);  
+  
+        // set some TCP settings  
+        // disable nagle  
+        // set the read timeout to 3 secs  
+        // and don't set a connect timeout  
+        pool.setNagle(false);  
+        pool.setSocketTO(3000);  
+        pool.setSocketConnectTO(0);  
+  
+        // initialize the connection pool  
+        pool.initialize();  
+	}
+	
+	/** 
+     * 向缓存添加新的键值对。如果键已经存在，则之前的值将被替换。 
+     *  
+     * @param key 
+     *            键 
+     * @param value 
+     *            值 
+     * @return 
+     */  
+    public static boolean set(String key, Object value) {
+        return cachedClient.set(key, value);
+    }  
+  
+    /** 
+     * 向缓存添加新的键值对。如果键已经存在，则之前的值将被替换。 
+     *  
+     * @param key 
+     *            键 
+     * @param value 
+     *            值 
+     * @param expire 
+     *            过期时间 New Date(1000*10)：十秒后过期 
+     * @return 
+     */  
+    public static boolean set(String key, Object value, Date expire) {  
+    	return cachedClient.set(key, value,expire);  
+    }
+    /** 
+     * get 命令用于检索与之前添加的键值对相关的值。 
+     *  
+     * @param key 
+     *            键 
+     * @return 
+     */  
+    public static Object get(String key) {
+    	return cachedClient.get(key);
+    }  
+  
+    /** 
+     * 删除 memcached 中的任何现有值。 
+     *  
+     * @param key 
+     *            键 
+     * @return 
+     */  
+    public static boolean delete(String key) {  
+        return cachedClient.delete(key);
+    }  
+  
+    /** 
+     * 清理缓存中的所有键/值对 
+     *  
+     * @return 
+     */  
+    public static boolean flashAll() { 
+        return cachedClient.flushAll();
+    }  
+  
+    public static void main(String[] args) {
+		Date date = new Date(10000);
+		boolean b = set("foo", "1111", date);
+		System.out.println(b);
+		String bar = String.valueOf(MemcachedUtil.get("foo"));
+		System.out.println(bar);
+	}
+
+} 

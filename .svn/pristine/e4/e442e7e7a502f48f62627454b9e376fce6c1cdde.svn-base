@@ -1,0 +1,87 @@
+$(document).ready(function(){
+	var GOV = {
+			foundCheck:function(shopName, industryCharacteristics, mainBusinessCode, mainBusinessUniteCode, organizationType, localCity, valicod, token){
+				var param = "&superNameId=''&valCode=" + valicod + "&tokenstr=" + token;
+				if(industryCharacteristics != undefined){
+					param += "&hangye=" + industryCharacteristics;
+				}
+				if(mainBusinessCode != undefined){
+					param += "&hydm=" + mainBusinessCode;
+				}
+				if(mainBusinessUniteCode != undefined){
+					param += "&hbdm=" + mainBusinessUniteCode;
+				}
+				if(shopName != undefined){
+					param += "&zihao=" + shopName;
+				}
+				if(organizationType != undefined){
+					param += "&organizationType=" + organizationType;
+				}
+				if(localCity != undefined){
+					param += "&localCity=" + localCity;
+				}
+				if(shopName != undefined && industryCharacteristics != undefined){
+					param += "&zihaohangye=" + shopName + industryCharacteristics;
+				}
+				var value = "";
+				$.ajax({
+					url:"/gov/business/postGovFoundcheck",
+					type:'post',    
+				    data:param,
+				    dataType : 'json',  
+				    async:true,
+				    beforeSend:function(){
+				    	$(".cd-box1imgcode").removeClass("is-visible");
+						$(".cd-popup1.cd-boxloading").addClass('is-visible');
+				    },
+					complete:function(data){
+						$(".cd-popup1.cd-boxloading").removeClass('is-visible');
+						console.log(data);
+						if(data != undefined && data != "" 
+							&& data.responseText != undefined 
+							&& data.responseText != "undefined" ){
+							var reason = $.parseJSON(data.responseText);
+							if(reason == undefined){
+								$("#validateimg").click();
+			            		alert("验证码验证失败。");
+			            		$("#valicodeinput").val("");
+			            		$(".cd-box1imgcode").addClass("is-visible");
+			            	}
+							
+			            	if(reason.ret != "fail" ){
+			            		$("#valicodeinput").val("");
+								$("#foundCheckOkDiv").hide();
+								var html = "";
+								if(reason != undefined && reason.errorNum == 0){
+									// 预核名通过
+									html += "<span>公司名还没被占？ 恭喜你，快点 >> </span><a href=\"javascript:void(0);\" onclick=\"checkNameCollection()\" class=\"btn\">核准名称</a>";
+								}else if(reason != undefined && reason.cc != undefined && reason.cc.length > 0){
+									// 不通过
+									html += "<p class=\"error\">您的公司名称与以下公司相同，无法使用：</p>";
+									for(var i=0; i<reason.cc.length;i++){
+										html += "<p class=\"error-name\">" + reason.cc[i].rule + "：" + reason.cc[i].entName + "</p>";
+									}
+								}else if(reason != undefined && reason.jyz != undefined && reason.jyz.length > 0){
+									// 不通过
+									html += "<p class=\"error\">您的公司名称与以下公司相同，无法使用：</p>";
+									for(var i=0; i<reason.jyz.length;i++){
+										html += "<p class=\"error-name\">" + reason.jyz[i].rule + "：" + reason.jyz[i].msg + "</p>";
+									}
+								}else{
+									alert("系统超时");
+								}
+								$("#foundCheckReasonDiv").show();
+								$("#foundCheckReasonDiv .hz-btn").html(html);
+			            	}else{
+			            		alert(reason.msg);
+			            		$("#valicodeinput").val("");
+			            		$("#validateimg").click();
+			            		$(".cd-box1imgcode").addClass("is-visible");
+			            	}
+						}
+					}
+				});
+			}
+	};
+	window.location.GOV =window.GOV = GOV;
+}());

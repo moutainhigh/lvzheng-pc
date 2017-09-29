@@ -1,0 +1,27 @@
+<!-- 动态添加商品包 -->
+<div class="tc-coupon-box">
+ <div class="tc-coupon">
+     <ul>
+    	 <li style="display: none;" class="mypackagesellid">$!{postPackageSellEntity.packagesell_id}</li>
+         <li>$!{postPackageSellEntity.package_name}</li>
+         <li></li>
+         <li></li>
+         <li></li>
+         <li></li>
+         <li>¥<span class="price">$!{postPackageSellEntity.sell_overprice}</span></li>
+         <li class="del"><a class="del" ></a></li>
+     </ul>
+ </div>
+ #foreach($packageMap in $!{postPackageMapList})
+ <div class="tc-list">
+     <ul>
+         <li>$!{packageMap.sell_product_name}</li>
+         <li>$!{packageMap.cityname}</li>
+         <li>$!{packageMap.aeasname}</li>
+         <li>$!{packageMap.sell_amount}</li>
+         <li></li>
+         <li>¥<span class="price">$!{packageMap.sell_overprice}</span></li>
+     </ul>
+ </div>
+ #end
+</div>

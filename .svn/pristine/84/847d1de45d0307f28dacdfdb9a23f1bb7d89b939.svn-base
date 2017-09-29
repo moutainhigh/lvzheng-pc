@@ -1,0 +1,708 @@
+ 
+ <!-- 顶部广告位 -->
+   <!--  <div id="ad-banner">
+        <div class="ad-area">
+            <a target="_blank" href="/ldy/shangbiao.html">
+            <div class="ad"></div>
+            </a>
+            <div id="ad-close">X</div>
+        </div>
+    </div> -->
+ <!-- 导航 -->
+<!-- logo区域 -->
+#parse("views/common/logo_normal.html")
+
+<div id="show-nav"> 
+#parse("views/common/navigation.html")
+</div>
+    
+<!--banner-->
+<div class="banner-box" id="show-nav">
+    <!-- <div class="flicking-con">
+        <div class="flicking-inner">
+        #foreach($foo in [1..$bannerlist.size()])
+       		<a href="javascript:">1</a>
+       		#end
+         </div>
+    </div> -->
+    <!-- <div class="main-image"> -->
+        <ul class="main-image">
+        #foreach($banner in $bannerlist)
+        <li><a href="$!{banner.conurl}" target="_blank"  style="background:url('$!{banner.imgurl}') center top no-repeat"></a></li>
+        #end
+        </ul>
+       <!--  <a href="javascript:;" id="btn-prev"></a>
+        <a href="javascript:;" id="btn-next"></a> -->
+    <!-- </div> -->
+    
+    
+    <!-- banner右侧 新增加运营模块 -->
+        <div class="banner-fc">
+            <div class="banner-right">
+                <div class="box">
+                    <p class="name">实时资讯</p>
+                    <p class="list">小微律政迎来第<span>$!{userCount}</span>新注册用户</p>
+                    <p class="list">第<span>$!{orderCount}</span>用户选择咨询我们的服务</p>
+                    <p class="list"><a target="_blank" href="http://www.lvzheng.com/ldy/shangbiao.html">担保注册商标，不通过全额退款</a></p>
+                    <p class="list"><a target="_blank" href="http://zhishi.lvzheng.com/zhuce/chuangye_65.html"><span>创业法律问题，一键免费约行家</span></a></p>
+                </div>
+                
+                <div class="box">
+                    <p class="name">核准名称<span class="bhot"></span></p>
+                    <div class="zh-box">
+                        <span class="city">北京</span>
+                        <input class="zh-box" type="text" id="J_shopName" placeholder="请输入字号">
+                        <input class="zh-box" type="hidden" id="J_industry" >
+                    	<input class="zh-box" type="hidden" id="J_mainBusCode" >
+                    </div>
+                    <div class="hy-sel" name="s-select">
+                        <input class="n-val" type="text" placeholder="请选择行业特点"  readonly>
+                        <ul>
+                            <!-- <li data-value="1">信息咨询(主营业务：其他专业咨询)</li>
+                            <li data-value="2">科技(主营业务：其他技术推广服务)</li>
+                            <li data-value="3">信息技术(主营业务：其他技术推广服务)</li>
+                            <li data-value="4">商贸(主营业务：其他综合零售)</li>
+                            <li data-value="5">国际贸易(主营业务：其他未列明零售业)</li> -->
+                             #foreach($m in $!mainBusinessList)
+                                  <li data-value="$!{m.code}"  class="J_bus_li" mainBusCode="$!{m.code}"  industry="$!{m.industryText}" >$!{m.industryText}(主营业务：$!{m.codeName})</li>
+                                 
+                           #end
+                        </ul>
+                    </div>
+                    <a id="J_query" target="_blank" class="s-btn">立即查询</a>
+                </div>   
+
+                <div class="box">
+                    <p class="name">商标查询</p>
+                    <div class="sb-box">
+                        查找你公司需要注册的商标类型
+                    </div>
+                    <a href="/brand/ldy/brandLdy" target="_blank" class="s-btn">立即查询</a>
+                </div> 
+            </div>
+        </div>
+        <!-- 运营模块结束 -->
+
+    </div>
+</div>
+
+
+
+    
+    <!-- 优惠券模块 -->
+    <div class="index-cou">
+        <div class="cou-box">
+            <p class="name">领优惠券</p>
+            <div class="type-box">
+                <p class="type">#if($!{packetVO.name}=="''")通用优惠券#else $!{packetVO.name}#end</p>
+                <p class="text">$!{packetVO.suitAreaName}</p>
+                <p class="text">$!{packetVO.suitProductName}</p>
+            </div>
+            <p class="num"><span>￥</span>$!{packetVO.quota}</p>
+            <input type="hidden" id="J_used" value="$!{packetVO.userFetch}"/>
+            <input type="hidden" id="J_packet_id" value="$!{packetVO.id}"/>
+            <a class="getbtn" id="J_get_now">立即领取</a>
+            <!-- <p class="ts-box">敬请期待我们最新的<br>超值优惠券~</p>-->  <!-- 没数据时样式 -->
+        </div>
+        <div class="cou-box">
+            <p class="name">优惠组合</p>
+            <div class="type-box">
+                <p class="type">公司注册套餐</p>
+                <p class="text">适用于朝阳区</p>
+                <p class="text">含公司注册、虚拟地址、代理记账</p>
+            </div>
+            <p class="num"><span>￥</span>6088</p>
+            <p class="yjnum">￥7000</p>
+            <a class="getbtn" onclick="location.href='http://www.lvzheng.com/commondetail/detail/38229817543169.html#packageList'">立即购买</a>
+        </div>
+        <div class="cou-box">
+            <p class="name">超值服务</p>
+            <div class="type-box">
+                <p class="type">注册公司虚拟地址</p>
+                <p class="text">历史最低价！</p>
+                <p class="text">放心可靠的地址，放心注册！</p>
+            </div>
+            <p class="num"><span>￥</span>4000</p>
+            <p class="yjnum">￥5000</p>
+            <a class="getbtn" onclick="location.href='http://www.lvzheng.com/addresslist.html'">立即购买</a>
+        </div>
+    </div>
+    <!-- 优惠券模块结束 -->
+
+
+ <!-- 搜索区域 -->
+    <!-- <div class="search-bg">
+        <div class="search-box">
+            <div class="search">
+                <span class="sea-item">
+                    <a class="city">北京</a>
+                    <input class="zh-box" type="text" id="J_shopName" placeholder="请输入字号">
+                    <input class="zh-box" type="hidden" id="J_industry" >
+                    <input class="zh-box" type="hidden" id="J_mainBusCode" >
+                    <div class="s-select w-220 center" name="s-select">
+                        <input class="n-val" id="n-val" type="text" placeholder="请选择行业特点" readonly>
+                        <ul>
+                           #foreach($m in $!mainBusinessList)
+                                  <li data-value="$!{m.code}"  class="J_bus_li" mainBusCode="$!{m.code}"  industry="$!{m.industryText}" >$!{m.industryText}(主营业务：$!{m.codeName})</li>
+                                 
+                           #end
+                        </ul>
+                    </div>
+                    <a class="type">有限公司</a>
+                </span>
+                <a  class="btn pop_box1" id="J_query">立即查询</a>
+            </div>
+        </div>
+    </div> -->
+    
+    
+    <!-- 免费工具 -->
+    <!-- <div class="free-tool">
+        <div class="tool-box">
+            <div class="title">
+                <p>免费实用工具</p>
+            </div>
+            <div class="list-box">
+                <a class="link" href="http://www.lvzheng.com/business/checkname/detail.html">
+                <div class="list">
+                    <div class="list-body1">
+                        <p class="name">核准公司名称</p>
+                        <p class="text">办理公司营业执照的第一步，让你自己轻松注册公司。</p>
+                    </div>
+                </div>
+                </a>
+                <a class="link" href="http://www.lvzheng.com/brand/index">
+                <div class="list">
+                    <div class="list-body2">
+                        <p class="name">商标购买推荐</p>
+                        <p class="text">查找你公司需要注册的商标类型，保护你的公司知识产权。</p>
+                    </div>
+                </div>
+                </a>
+            </div>
+        </div>
+    </div> -->
+
+<!-- 热门服务 -->
+#parse("views/common/hot.html")
+<!-- 创业活动 -->
+<!-- <div class="cy-act">
+    <div class="act-box">
+        <div class="title">
+            <p>创业活动</p>
+        </div>
+
+        <div id="cy-act" class="owl-carousel">
+            <div class="item">
+                <img src="/images/index/pic/a1.jpg">
+                <p class="text">【公开课】初创企业招人用人秘籍！！！</p>
+                <p class="bot">
+                    <span class="time">2016-02-14</span>
+                    <span class="btn"><a href="http://www.lvzheng.com/xiaoweishuo/ccqiyezr.html" target="_Blank">往期回顾</a></span>
+                </p>
+            </div>
+            <div class="item">
+                <img src="/images/index/pic/a2.jpg">
+                <p class="text">小微律政服务过的客户，都是这么霸气、悍然的拿融资的</p>
+                <p class="bot">
+                    <span class="time">2016-02-14</span>
+                    <span class="btn"><a href="http://www.lvzheng.com/xiaoweishuo/58daojia.html"  target="_Blank">往期回顾</a></span>
+                </p>
+            </div>
+            <div class="item">
+                <img src="/images/index/pic/a3.jpg">
+                <p class="text">重磅|小微律政CEO王芬为新华社撰文谈商事登记改革</p>
+                <p class="bot">
+                    <span class="time">2016-02-14</span>
+                    <span class="btn"><a href="http://www.lvzheng.com/xiaoweishuo/wangfen.html"  target="_Blank">往期回顾</a></span>
+                </p>
+            </div>
+            <div class="item">
+                <img src="/images/index/pic/a4.jpg">
+                <p class="text">小微律政“首届创业问诊律师座谈会”成功举办</p>
+                <p class="bot">
+                    <span class="time">2016-02-14</span>
+                    <span class="btn"><a href="http://www.lvzheng.com/xiaoweishuo/falv10.html"  target="_Blank">往期回顾</a></span>
+                </p>
+            </div>
+        </div>
+
+    </div>
+</div>  -->       
+
+
+<!-- 服务与评价 -->
+<div class="ser-eval">
+    <div class="ser-eval-box">
+        <div class="title">
+            <p>服务与评价</p>
+        </div>
+
+        <div id="ser-eval" class="owl-carousel">
+            <div class="item">
+                <img class="bann" src="/images/index/pic/s11.jpg">
+                <div class="ceo-box">
+                    <div class="ceo-tx"><img src="/images/index/pic/tx1.jpg"></div>
+                    <div class="info">
+                        <p class="name">58到家CEO陈小华</p>
+                        <p class="text">无论是面对个人还是面对公司，如果你的专业服务超过了用户的心理预期，你收获的将无比丰厚，而小微律政就做到了这一点。<!-- <a href="">更多</a> --></p>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <img class="bann" src="/images/index/pic/s22.jpg">
+                <div class="ceo-box">
+                    <div class="ceo-tx"><img src="/images/index/pic/tx2.jpg"></div>
+                    <div class="info">
+                        <p class="name">点到CEO何流</p>
+                        <p class="text">小微律政在财税、法务等方面给了我们很专业的帮助和支持，对于一家创业公司来说，等于有了更多的时间和精力专注于核心业务。<!-- <a href="">更多</a> --></p>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="item">
+                <img class="bann" src="/images/index/pic/s1.jpg">
+                <div class="ceo-box">
+                    <div class="ceo-tx"><img src="/images/index/pic/tx1.png"></div>
+                    <div class="info">
+                        <p class="name">张小磊   58陪练CEO</p>
+                        <p class="text">VIE架构的搭建，小微做的相当专业，这是传统的代理机构所不能具备的服务能力，无论服务标准上还小微做的相当专业，这是传统的代理机构...<a href="">更多</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <img class="bann" src="/images/index/pic/s2.jpg">
+                <div class="ceo-box">
+                    <div class="ceo-tx"><img src="/images/index/pic/tx1.png"></div>
+                    <div class="info">
+                        <p class="name">张小磊   58陪练CEO</p>
+                        <p class="text">VIE架构的搭建，小微做的相当专业，这是传统的代理机构所不能具备的服务能力，无论服务标准上还小微做的相当专业，这是传统的代理机构...<a href="">更多</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <img class="bann" src="/images/index/pic/s1.jpg">
+                <div class="ceo-box">
+                    <div class="ceo-tx"><img src="/images/index/pic/tx1.png"></div>
+                    <div class="info">
+                        <p class="name">张小磊   58陪练CEO</p>
+                        <p class="text">VIE架构的搭建，小微做的相当专业，这是传统的代理机构所不能具备的服务能力，无论服务标准上还小微做的相当专业，这是传统的代理机构...<a href="">更多</a></p>
+                    </div>
+                </div>
+            </div> -->
+            </div> 
+        </div>
+
+    </div>
+</div>        
+
+<!-- 服务与评价 -->
+<div class="par-main">
+    <div class="par-box">
+        <div class="title">
+            <p>我们的客户</p>
+        </div>
+        <ul class="par-ul">
+            <li class="p1"></li>
+            <li class="p2"></li>
+            <li class="p3"></li>
+            <li class="p4"></li>
+            <li class="p5"></li>
+            <li class="p6"></li>
+            <li class="p7"></li>
+            <li class="p8"></li>
+            <li class="p9"></li>
+            <li class="p10"></li>
+            <li class="p11"></li>
+            <li class="p12"></li>
+          <!--  <li class="p13"></li>
+            <li class="p14"></li>
+            <li class="p15"></li>
+            <li class="p16"></li>
+            <li class="p17"></li>
+            <li class="p18"></li> --> 
+        </ul>
+    </div>
+</div>        
+
+<!-- 企业资讯 -->
+<div class="ent-info">
+    <div class="ent-box">
+        <div class="title">
+            <p>企业资讯</p>
+        </div>
+
+        <div id="ent-info" class="owl-carousel">
+            <div class="item">
+                <div class="info-list">
+                    <ul>
+                        <li><a target="_blank" href="http://www.lvzheng.com/xiaoweishuo/gszclc/">公司注册流程是什么        </a></li>
+                        <li><a target="_blank" href="http://www.lvzheng.com/xiaoweishuo/zcgsfy/">北京注册公司需要多少钱      </a></li>
+                        <li><a target="_blank" href="http://www.lvzheng.com/xiaoweishuo/gszcdz/">北京无地址怎么注册公司      </a></li>
+                        <li><a target="_blank" href="http://www.lvzheng.com/xiaoweishuo/bjsbdl/"> 北京商标注册流程   </a></li>
+                        <li><a target="_blank" href="http://www.lvzheng.com/xiaoweishuo/bjdljz/"> 北京有哪些代理记账公司   </a></li>
+                        <li><a target="_blank" href="http://www.lvzheng.com/xiaoweishuo/yyzzbg/"> 营业执照怎么，变更流程是什么  </a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="item">
+                <div class="info-list">
+                    <ul>
+                        <li><a target="_blank" href="http://zhishi.lvzheng.com">商标注册多少钱       </a></li>
+                        <li><a target="_blank" href="http://zhishi.lvzheng.com/zhuce/">北京公司注册     </a></li>
+                        <li><a target="_blank" href="http://zhishi.lvzheng.com/biangeng/guquan"> 北京股权转让  </a></li>
+                        <li><a target="_blank" href="http://zhishi.lvzheng.com/jizhang/"> 北京代理记账公司   </a></li>
+                        <li><a target="_blank" href="http://zhishi.lvzheng.com/shangbiao/">  商标代理公司   </a></li>
+                        <li><a target="_blank" href="http://zhishi.lvzheng.com/banquan/">    版权登记代理费用  </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>        
+
+
+<!-- 查询 弹出框 -->
+<div class="cd-popup cd-box1imgcode" role="alert"> 
+    <!--输入验证码 提示框 -->
+    <div class="cd-popup-container bl-box">
+        <div class="bl">
+            <div class="item">
+                <div class="w-text">
+                	<input type="hidden" id="token" value="$!{token}" />
+                    <input type="text" id="valicodeinput" placeholder="请输入验证码">
+                    <div class="imgcode">
+                        <img id="validateimg" src="" onclick="$(this).attr('src',encodeURI('/picvalidate/$!{token}?'+new Date()));" >
+                    </div>
+                    <a href="javascript:void(0);" onclick="$('.imgcode img').attr('src',encodeURI('/picvalidate/$!{token}?'+new Date()));" class="codebtn">点击刷新</a>
+                </div>
+            </div>
+            <div class="btn">
+                <a href="javascript:void(0);" class="imgcode searchBtn" >查询</a>
+            </div>
+        </div> 
+        <a href="javascript:void(0);" class="cd-popup-close img-replace">关闭</a>
+    </div>
+</div>
+
+<div class="cd-popup cd-box111" id = "J_alert" role="alert"> 
+    <!-- 提示框 -->
+    <div class="cd-popup-container bl-box">
+        <div class="bl">
+            <div class="item">
+                <p id="J_con_box">您输入的内容不完整，无法查询！</p>
+            </div>
+            <div class="btn">
+                <a id="J_ok_btn">确定</a>
+            </div>
+        </div> 
+        <a href="" class="cd-popup-close img-replace">关闭</a>
+    </div>
+</div> 
+<!-- 弹出框 -->
+
+
+ <!-- 优惠券 弹出框 -->
+    <div  id="J_gift_pop_up" class="cd-popup  cd-box1" role="alert"> 
+        <div class="cd-popup-container" id="coushow">
+            <div class="cou-box">
+                <a class="pop_box2" id="J_gift_pop">
+                <img src="/images/drawgift/coupon/cou.gif">
+                </a>
+            </div> 
+            <a href="#" class="cd-popup-close img-replace closebtn">关闭</a>   
+        </div>
+    </div> 
+    <!-- 弹出框 -->  
+    
+    <!-- 老用户提示 弹出框 -->
+    <div id="J_old_pop" class="cd-popup   cd-box3"  role="alert"> 
+        <div class="cd-popup-container" id="old-user">
+            <div class="old-ts" >亲，老用户是不能参加这次活动的哦~</div>
+        </div>
+    </div> 
+    <!-- 弹出框 -->  
+
+ 	<!-- 老用户提示 弹出框 -->
+    <div id="J_succ_pop" class="cd-popup  cd-box3" role="alert"> 
+        <div class="cd-popup-container" id="old-user">
+            <div class="old-ts" >领取成功~</div>
+        </div>
+    </div> 
+    <!-- 弹出框 -->  
+    
+    <!-- 新老用户提示层 -->
+    <div class="cd-popup cd-box2" role="alert"> 
+        <div class="cd-popup-container" id="couts-box">
+        
+            
+        </div>
+    </div> 
+    
+    
+       <!-- 页面底部领取礼包浮层 -->
+   <!--  <div class="hb-btn">
+        <img src="/images/index/hb/hb-btn.png"/>
+    </div>
+    <div class="main-hb">
+        <div class="main-hb-box">
+            <div class="hb-con">
+                <a class="hb-pic" target="_blank" href="/gift/pcgift"  ></a>
+                <a class="hb-close" ></a>
+            </div>
+        </div>
+    </div> -->
+    
+     <!-- 页面底部领取礼包浮层 -->
+    <!-- <div class="hb-btn">
+        <img src="/images/index/hb/hb-btn.png"/>
+    </div>
+    <div class="main-hb">
+        <div class="main-hb-box">
+            <div class="hb-con">
+                <a class="hb-pic" target="_blank" ></a>
+                <div class="hb-item">
+                    <p class="item"><input type="text"  name="userphone" id="userphone" class="tel" placeholder="请输入手机号"></p>
+                    <p class="item"><input type="text" name="usercode" id="usercode" class="code" placeholder="请输入验证码">
+                     <input type="hidden" id="token" name="token" value="$!{token}"/>
+                    <a onclick="MysendCode()" id="J_send_code"  class="getcode">获取验证码</a></p>
+                    <a id="J_get_btn" class="getbtn">立即领取</a>
+                </div>
+                <a class="hb-close" ></a>
+            </div>
+        </div>
+    </div> -->
+    
+    
+
+<script>
+
+$(function(){
+	// 广告关闭
+	$("#ad-close").click(function(){
+	    $("#ad-banner").fadeOut(500);
+	});
+    $("#flow-name").tabso({
+        cntSelect:"#flow-con",
+        tabEvent:"mouseover",
+        tabStyle:"normal"
+    }); 
+
+    // 左导航切换显示
+    $(".left-nav dd").hover(function(){
+        $(".nav-right",this).show();
+    });
+    $(".left-nav dd").mouseleave(function(){
+        $(".nav-right",this).hide();
+    });
+
+    $('#cy-act').owlCarousel({
+        items: 4,
+        navigation: true,
+        navigationText: ["",""],
+        scrollPerPage: true
+    });
+
+    $('#ser-eval').owlCarousel({
+        items: 2,
+        navigation: true,
+        navigationText: ["",""],
+        scrollPerPage: true
+    });
+
+    $('#ent-info').owlCarousel({
+        items: 1,
+        navigation: true,
+        navigationText: ["",""],
+        scrollPerPage: true
+    });
+    
+    
+ // 行业特点下拉
+    $('[name="s-select"]').click(function(e){
+    $('[name="s-select"]').find('ul').hide();
+    $(this).find('ul').show();
+    e.stopPropagation();
+    });
+    $('[name="s-select"] li').hover(function(e){
+        $(this).toggleClass('on');
+        e.stopPropagation();
+    });
+    $('[name="s-select"] li').click(function(e){
+        var val = $(this).attr("industry");
+        var dataVal = $(this).attr("data-value");
+        $(this).parents('[name="s-select"]').find('input').val(val);
+        $('[name="s-select"] ul').hide();
+        e.stopPropagation();
+    });
+    $(document).click(function(){
+        $('[name="s-select"] ul').hide();
+    });
+    
+    
+    //下拉框设值
+    $(".J_bus_li").each(function(){
+    	$(this).click(function(){
+    		var mainBusCode = $(this).attr("mainBusCode");
+    		var industry =  $(this).attr("industry");
+    		$("#J_mainBusCode").val(mainBusCode);
+    		$("#J_industry").val(industry);
+			
+    		//埋点请求
+    		var shopName = $("#J_shopName").val();
+        	lv_clickLog("moudle=热门行业特点&logName=lvzhengpcindex&data_action=click&data_shopName="+shopName+"&data_mainBusCode="+mainBusCode);
+
+    	});
+    });
+    
+    $(".img-replace").click(function(){
+    	$("#valicodeinput").val("");
+    	$(".cd-box1imgcode").removeClass("is-visible");
+    });
+
+    $(".imgcode.searchBtn").click(function(){
+    	// 校验验证码
+    	var mainBusCode = $("#J_mainBusCode").val();
+		var industry = $("#J_industry").val();
+		var shopName = $("#J_shopName").val().replace(/\s+/g, ""); 
+		var valicod = $("#valicodeinput").val();
+		var token = $("#token").val();
+		var param = "&valCode=" + valicod + "&tokenstr=" + token;
+		$.ajax({
+            type: "POST", // 用POST方式传输  
+            dataType: "json", // 数据格式:JSON  
+            url: "/business/checkImgCode", // 目标地址  
+            data: param,
+            success:function(data){
+            	if(data == undefined){
+            		$("#validateimg").click();
+            		alert("验证码验证失败。");
+            	}
+            	if(data.ret == "ok" ){
+            	    var url = "/business/checkname/detail.html?shopName=" + shopName + "&industry=" + industry + "&mainBusCode=" + mainBusCode + "&valCode=" + valicod + "&tokenstr=" + token;
+            		url = encodeURI(url);
+            	    window.location.href = url;
+
+            	    //埋点请求
+                	lv_clickLog("moudle=首页验证码查询&logName=lvzhengpcindex&data_action=click&data_shopName="+shopName+"&data_mainBusCode="+mainBusCode);
+            	    return true;
+            	}else{
+            		$("#validateimg").click();
+            		alert(data.msg);
+            	}
+            }
+        }); 
+	    
+		return true;
+    });
+    
+    //查询
+    $("#J_query").click(function(){
+    	var mainBusCode = $("#J_mainBusCode").val();
+		var industry = $("#J_industry").val();
+		var shopName = $("#J_shopName").val().replace(/\s+/g, ""); 
+		if(mainBusCode && shopName){
+			if(!isChineseChar(shopName)){
+				$("#J_alert").addClass("is-visible");
+				$("#J_con_box").text('请填写中文字号');
+				return;
+			}else{
+		    	$("#validateimg").click();
+				$(".cd-box1imgcode").addClass("is-visible");
+			}
+		}else{
+			$("#J_alert").addClass("is-visible");
+			$("#J_con_box").text('您输入的内容不完整，无法查询！');
+		}
+		
+		//埋点请求
+    	lv_clickLog("moudle=首页查询按钮&logName=lvzhengpcindex&data_action=click&data_shopName="+shopName+"&data_mainBusCode="+mainBusCode);
+
+    });
+    
+    
+    //判断是不是中文
+    function isChineseChar(str){   
+    	   var reg = /[\u4E00-\u9FA5\uF900-\uFA2D]/;
+    	   return reg.test(str);
+    }
+    
+    $("#J_ok_btn").click(function(){
+    	$("#J_alert").removeClass("is-visible");
+    })
+    
+    
+    $('#J_get_now').click(function(){
+    	var flag = $("#J_used").val();
+    	var packetid  =$("#J_packet_id").val();
+    	if(flag==1){
+    		swal(
+    				  '已经领取过啦~~',
+    				  '',
+    				  'info'
+    		)
+    		
+    		return false;
+    	}else{
+    		$.ajax({
+
+	             url:"/dash/getPacket",
+
+	             type:"post",
+	             
+	             dataType:"json",
+
+	             data:{"packetId":packetid},
+
+	             success:function(data){
+	            	 if(data.msg=='2login'){
+	            		 window.location.href="http://www.lvzheng.com/login.html?test=1";
+	            	 }else{
+	            		 
+			            	 swal(
+			            		  data.msg,
+			       				  '',
+			       				  'info'
+			       			)
+	            	 }
+
+
+	             }
+
+	         });
+    	}
+    	
+    })
+    
+    
+    $("#other-nav").attr("id","home-nav");
+    
+    
+    
+    
+    // 底部礼包浮层
+   /*  $(".hb-close").click(function(){      
+        $(".main-hb").animate({"left":-$(".main-hb").width()},300);
+        $('.hb-btn').animate({'left':'0px'},400);
+    });
+    $('.hb-btn').click(function(){ 
+        $('.main-hb').animate({'left':'0'},400);
+        $('.hb-btn').animate({'left':'-200px'},400);
+    })
+
+    
+    //判断是不是要隐藏
+    popgift(); */
+    
+    
+    //banner改版js
+    $(".banner-box").yx_rotaion({auto:true});
+   
+});
+
+
+</script>
+
+<!-- 引入新用户活动的抽取出的js -->
+<!-- <script src="/js/gift/gift.js"></script> -->
+<!-- <script type="text/javascript" src="/js/gift/mgift.js"></script> -->
+

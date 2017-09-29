@@ -1,0 +1,21 @@
+ #if($pagecount > 1)
+ <div class="page-turn">
+ #if($pagenumber > 1)
+ #set($pageprev = $pagenumber - 1 )
+ <a href="$!{url}$!{pagenourl}1">[首页]</a>
+ <a href="$!{url}$!{pagenourl}$!{pageprev}">[上一页]</a>
+ #end
+     #foreach($foo in [1..$!{pagecount}])
+     #if($foo == $pagenumber)
+     	 <a class="current">$!foo</a>
+     #else
+      	<a href="$!{url}$!{pagenourl}$!{foo}" >$!foo</a>
+     #end
+     #end               
+#if($pagenumber < $pagecount)
+#set($pagenext = $pagenumber + 1)
+<a href="$!{url}$!{pagenourl}$!{pagenext}">[下一页]</a>
+<a href="$!{url}$!{pagenourl}$!{pagecount}">[末页]</a>
+#end                 
+</div>
+#end

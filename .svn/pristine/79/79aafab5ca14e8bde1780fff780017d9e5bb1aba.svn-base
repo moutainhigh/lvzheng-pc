@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0036)http://www.lvzheng.com/register.html -->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>注册-小微律政</title>
+<meta name="description" content="注册公司找小微律政,小微律政拥有专业的律师和会计团队,小微律政专注为创业公司及中小微企业提供代办公司注册,商标注册,代理记账,社保公积金开户,公司变更,合同拟定,公司章程等一站式企业服务，小微律政服务流程每一步都无微不至。">
+<meta name="keywords" content="小微律政公司介绍,小微律政怎么样">
+<link href="/css/users/style.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="/js/jquery-1.7.2.min.js"></script>
+<script src="/js/users/register.js"></script>
+<script src="/js/jquery.md5.js"></script>
+<script src="/js/jx.validate.js"></script>
+#parse("views/common/sendphonecode.html")
+</head>
+
+<body class="no-js">
+<input type="hidden" name="red_url" id="red_url" value="$!{red_url}"/>
+<div class="login">
+	<div class="login_top">
+		<div class="logo"><a href="/"><img src="/images/users/logo.png" height="53"></a></div>
+		<div class="register">注册</div>
+		<div class="tel"><p>400-085-3639</p></div>
+	</div>
+	<div class="clear"></div>
+	<div class="login_conbox" style="padding-bottom: 67px;">
+		<div class="login_con">
+		    <form action="/reguseraction" method="post" id="register_form">
+		    <input type="hidden" id="password" name="password" />
+		    <input type="hidden" id="token" name="token" value="$!{token}">
+		    			<div class="login_box">
+				<div class="box_top">
+					<p class="reg_name">账号注册</p>
+											<p class="reg_login">已有账号，立即<a href="/login.html">登录</a></p>
+					
+				</div>
+				<div class="clear"></div>
+				<div class="t_box1"><span style="color:red;"></span></div>
+				<div class="t_box1">
+					<input class="w_box1" type="text" placeholder="请输入手机号码" id="phoneNum" name="userphone"/>
+					<span id="enter_right" name="enter_right_phone" style="display: none;"></span><!-- 正确图标 -->
+					<span id="enter_error" name="enter_error_phone" style="display: none;"></span><!-- 错误图标 -->
+					<div class="clear"></div>
+				</div>
+				<!-- 暂时不需要	-->
+				<div class="t_box1">
+					<input class="w_box2" id="validatecode" type="text" name="validatecode" placeholder="输入验证码" />
+					<span class="t_box_btn"><img onclick="$(this).attr('src','/picvalidate/$!{token}?'+new Date());" src="/picvalidate/$!{token}" onclick=""></span>
+					<div class="clear"></div>
+				</div> 
+				<div class="t_box1">
+					<input class="w_box2" type="text" placeholder="手机验证码" id="phoneM" name="phonecode" />
+					<!-- <span class="t_box_btn" id="box_btn">获取验证码</span> -->
+					<input class="t_box_btn" id="box_btn" type="button" value="获取验证码" style="height: 38px;"/>
+					<span id="enter_right" name="enter_right_phoneM" style="display: none;"></span><!-- 正确图标 -->
+					<span id="enter_error" name="enter_error_phoneM" style="display: none;"></span><!-- 错误图标 -->
+					<input type="hidden" id="phoneErrorMsg" value="">
+					<div class="clear"></div>
+				</div>
+				<div class="t_box1">
+					<input class="w_box1" type="password" max="6" placeholder="请设置您的密码" id="pass" name="showpassword" />
+					<span id="enter_right" name="enter_right_pass" style="display: none;"></span><!-- 正确图标 -->
+					<span id="enter_error" name="enter_error_pass" style="display: none;"></span><!-- 错误图标 -->
+					<div class="clear"></div>
+				</div>
+				<div class="t_box1">
+					<!-- class="w_box1 w_error" -->
+					<input class="w_box1" type="password" size="6" placeholder="请再次确认您的密码" id="re_password" name="re_password" />
+					<span id="enter_error" name="enter_error_repass" style="display: none;"></span><!-- 错误图标 -->
+					<span id="enter_right" name="enter_right_repass" style="display: none;"></span> <!--正确图标 -->
+					<div class="clear"></div>
+				</div>
+				
+			
+				<div class="t_box1">
+					<p class="reg_btn" id="register">注 册</p>
+				</div>
+			</div>
+			</form>
+		</div>
+	</div>	
+	<div class="login_bott">
+		<p>版权所有 ©lvzheng.com  2014-2015     京ICP备15002212号-1(网站备案编号)  </p>
+	</div>
+</div>
+</body></html>

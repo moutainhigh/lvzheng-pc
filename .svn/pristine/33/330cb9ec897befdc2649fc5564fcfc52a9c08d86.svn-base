@@ -1,0 +1,143 @@
+@charset "utf-8";
+*{padding:0;margin:0;}
+body{padding:0;margin:0;font-size:12px;font-family:"微软雅黑";color: #333;background:#fff;}
+img{border:none;}
+a{text-decoration:none;cursor:pointer;color:#666;}
+a:hover,a:hover {text-decoration:none;color:#55acee;}
+input{color: #777;outline: none;}
+ul{padding:0;margin:0;list-style:none;}
+li,p{padding:0;margin:0;}
+.clear{clear:both;}
+::-webkit-input-placeholder { /* WebKit browsers */color: #ccc;}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */color: #ccc;}
+::-moz-placeholder { /* Mozilla Firefox 19+ */color: #ccc;}
+:-ms-input-placeholder { /* Internet Explorer 10+ */color: #ccc;}
+
+.kz-box{width: 100%;min-height: 1500px; padding-bottom: 70px; overflow: hidden;}
+.kz-box .bannerbg{width: 100%;height: 450px; background: url('/images/kz/banner.jpg')  no-repeat center;}
+.kz-box .banner{width: 1000px;height: 450px;margin: 0 auto;position: relative;}
+.kz-box .banner .btext{width: 840px;height: 350px;background: url('/images/kz/btext.png')  no-repeat center;position: absolute;top: 20px;left: 80px}
+.kz-box .banner .tel-box{width: 400px;height: 43px;background: url('/images/kz/btel.png')  no-repeat center;position: absolute;top: 380px;left: 300px}
+
+.kz-box .main-box{width: 100%; min-height: 1000px; margin: 20px auto 0;overflow: hidden;}
+.kz-box .main-box .fw-box{width: 1000px;margin: 0 auto;min-height: 300px;padding: 20px 0;}
+.kz-box .main-box .fw-box p.name{height: 50px;line-height: 45px;padding-left: 70px;background: url('/images/kz/namebg.png')  no-repeat center;font-size: 36px;color: #2b4358}
+.kz-box .main-box .fw-box p.name span{display: inline-block;width: 180px;text-align: center;}
+.kz-box .main-box .fw-box .adv-box{height: 1000px;height: 270px; padding:20px 0;  background: url('/images/kz/fw_adv.jpg')  no-repeat center;}
+.kz-box .main-box .fw-box p.text{font-size: 16px;color: #000;height: 30px;line-height: 30px;padding: 20px 0;text-align: center;}
+.kz-box .main-box .fw-box .adv-con{height: 1000px;height: 350px; padding:20px 0;  background: url('/images/kz/fw_con.jpg')  no-repeat center;position: relative;}
+.kz-box .main-box .fw-box .adv-con p.price{font-size: 30px; color: #fff; height: 40px;line-height: 40px;position: absolute;right: 100px;top: 150px;}
+.kz-box .main-box .fw-box .adv-con a.buybtn{display: block;width: 170px;text-align: center;height: 50px;line-height: 50px;font-size: 20px;color: #fff; background: #f12525;border-radius: 3px; position: absolute;right: 120px;top: 220px}
+
+.kz-box .main-box .ch-box{width: 100%;height: 1000px;padding: 35px 0;background: url('/images/kz/chbg.jpg')  no-repeat center;}
+.kz-box .main-box .ch-box .change{width: 1000px;height: 1000px;margin: 0 auto}
+.kz-box .main-box .ch-box .title{height: 40px;line-height: 40px;text-align: center;padding-bottom: 30px;font-size: 30px; margin-bottom: 30px; color: #2b4358;background: url('/images/kz/barr.png')  no-repeat center bottom;}
+.kz-box .main-box .ch-box .cbox1{width: 1000px;height: 220px;margin-bottom: 10px; background: #fff url('/images/kz/ch1.png')  no-repeat center; border-radius: 8px;position: relative;}
+.kz-box .main-box .ch-box .cbox1 .step1{width: 220px;height: 100px;position: absolute;top: 120px;left: 290px;}
+.kz-box .main-box .ch-box .cbox1 .step1 .num{width: 26px;height: 26px; text-align: center;line-height: 24px; background: #c4671a; border-radius: 50%; font-size: 14px;color: #fff;position: absolute;top: 13px;left: 2px;}
+.kz-box .main-box .ch-box .cbox1 .step1 .name{font-size: 16px;color: #c4671a;height: 20px;line-height: 20px;position: absolute;top: 42px;left: 40px;}
+.kz-box .main-box .ch-box .cbox1 .step1:hover .num{width: 30px; height: 30px;line-height: 29px; font-size: 16px; position: absolute; top: 10px;left: 0px}
+.kz-box .main-box .ch-box .cbox1 .step1:hover .name{font-size: 18px;}
+.kz-box .main-box .ch-box .cbox1 .step2{width: 220px;height: 100px;position: absolute;top: 20px;left: 490px;}
+.kz-box .main-box .ch-box .cbox1 .step2 .num{width: 26px;height: 26px; text-align: center;line-height: 24px; background: #c4671a; border-radius: 50%; font-size: 14px;color: #fff;position: absolute;top: 45px;left: 3px;}
+.kz-box .main-box .ch-box .cbox1 .step2 .name{font-size: 16px;color: #c4671a;height: 20px;line-height: 20px;position: absolute;top: 8px;left: 40px;}
+.kz-box .main-box .ch-box .cbox1 .step2:hover .num{width: 30px; height: 30px;line-height: 29px; font-size: 16px; position: absolute; top: 43px;left: 1px}
+.kz-box .main-box .ch-box .cbox1 .step2:hover .name{font-size: 18px;}
+.kz-box .main-box .ch-box .cbox1 .step3{width: 220px;height: 100px;position: absolute;top: 120px;left: 685px;}
+.kz-box .main-box .ch-box .cbox1 .step3 .num{width: 26px;height: 26px; text-align: center;line-height: 24px; background: #c4671a; border-radius: 50%; font-size: 14px;color: #fff;position: absolute;top: 13px;left: 2px;}
+.kz-box .main-box .ch-box .cbox1 .step3 .name{font-size: 16px;color: #c4671a;height: 20px;line-height: 20px;position: absolute;top: 42px;left: 40px;}
+.kz-box .main-box .ch-box .cbox1 .step3:hover .num{width: 30px; height: 30px;line-height: 29px; font-size: 16px; position: absolute; top: 10px;left: 0px}
+.kz-box .main-box .ch-box .cbox1 .step3:hover .name{font-size: 18px;}
+
+.kz-box .main-box .ch-box .cbox2{width: 1000px;height: 220px;margin-bottom: 10px; background: #fff url('/images/kz/ch2.png')  no-repeat center; border-radius: 8px;position: relative;}
+.kz-box .main-box .ch-box .cbox2 .step1{width: 220px;height: 100px;position: absolute;top: 120px;left: 290px;}
+.kz-box .main-box .ch-box .cbox2 .step1 .num{width: 26px;height: 26px; text-align: center;line-height: 24px; background: #748076; border-radius: 50%; font-size: 14px;color: #fff;position: absolute;top: 13px;left: 2px;}
+.kz-box .main-box .ch-box .cbox2 .step1 .name{font-size: 16px;color: #748076;height: 20px;line-height: 20px;position: absolute;top: 42px;left: 40px;}
+.kz-box .main-box .ch-box .cbox2 .step1:hover .num{width: 30px; height: 30px;line-height: 29px; font-size: 16px; position: absolute; top: 10px;left: 0px}
+.kz-box .main-box .ch-box .cbox2 .step1:hover .name{font-size: 18px;}
+.kz-box .main-box .ch-box .cbox2 .step2{width: 220px;height: 100px;position: absolute;top: 20px;left: 448px;}
+.kz-box .main-box .ch-box .cbox2 .step2 .num{width: 26px;height: 26px; text-align: center;line-height: 24px; background: #748076; border-radius: 50%; font-size: 14px;color: #fff;position: absolute;top: 45px;left: 3px;}
+.kz-box .main-box .ch-box .cbox2 .step2 .name{font-size: 16px;color: #748076;height: 20px;line-height: 20px;position: absolute;top: 8px;left: 40px;}
+.kz-box .main-box .ch-box .cbox2 .step2:hover .num{width: 30px; height: 30px;line-height: 29px; font-size: 16px; position: absolute; top: 43px;left: 1px}
+.kz-box .main-box .ch-box .cbox2 .step2:hover .name{font-size: 18px;}
+.kz-box .main-box .ch-box .cbox2 .step3{width: 220px;height: 100px;position: absolute;top: 120px;left: 605px;}
+.kz-box .main-box .ch-box .cbox2 .step3 .num{width: 26px;height: 26px; text-align: center;line-height: 24px; background: #748076; border-radius: 50%; font-size: 14px;color: #fff;position: absolute;top: 13px;left: 2px;}
+.kz-box .main-box .ch-box .cbox2 .step3 .name{font-size: 16px;color: #748076;height: 20px;line-height: 20px;position: absolute;top: 42px;left: 40px;}
+.kz-box .main-box .ch-box .cbox2 .step3:hover .num{width: 30px; height: 30px;line-height: 29px; font-size: 16px; position: absolute; top: 10px;left: 0px}
+.kz-box .main-box .ch-box .cbox2 .step3:hover .name{font-size: 18px;}
+.kz-box .main-box .ch-box .cbox2 .step4{width: 220px;height: 100px;position: absolute;top: 20px;left: 750px;}
+.kz-box .main-box .ch-box .cbox2 .step4 .num{width: 26px;height: 26px; text-align: center;line-height: 24px; background: #748076; border-radius: 50%; font-size: 14px;color: #fff;position: absolute;top: 45px;left: 3px;}
+.kz-box .main-box .ch-box .cbox2 .step4 .name{font-size: 16px;color: #748076;height: 20px;line-height: 20px;position: absolute;top: 20px;left: 40px;}
+.kz-box .main-box .ch-box .cbox2 .step4:hover .num{width: 30px; height: 30px;line-height: 29px; font-size: 16px; position: absolute; top: 43px;left: 1px}
+.kz-box .main-box .ch-box .cbox2 .step4:hover .name{font-size: 18px;}
+
+.kz-box .main-box .ch-box .cbox3{width: 1000px;height: 220px;margin-bottom: 10px; background: #fff url('/images/kz/ch3.png')  no-repeat center; border-radius: 8px;position: relative;}
+.kz-box .main-box .ch-box .cbox3 .step1{width: 220px;height: 100px;position: absolute;top: 120px;left: 290px;}
+.kz-box .main-box .ch-box .cbox3 .step1 .num{width: 26px;height: 26px; text-align: center;line-height: 24px; background: #95b432; border-radius: 50%; font-size: 14px;color: #fff;position: absolute;top: 13px;left: 2px;}
+.kz-box .main-box .ch-box .cbox3 .step1 .name{font-size: 16px;color: #95b432;height: 20px;line-height: 20px;position: absolute;top: 42px;left: 40px;}
+.kz-box .main-box .ch-box .cbox3 .step1:hover .num{width: 30px; height: 30px;line-height: 29px; font-size: 16px; position: absolute; top: 10px;left: 0px}
+.kz-box .main-box .ch-box .cbox3 .step1:hover .name{font-size: 18px;}
+.kz-box .main-box .ch-box .cbox3 .step2{width: 220px;height: 100px;position: absolute;top: 20px;left: 490px;}
+.kz-box .main-box .ch-box .cbox3 .step2 .num{width: 26px;height: 26px; text-align: center;line-height: 24px; background: #95b432; border-radius: 50%; font-size: 14px;color: #fff;position: absolute;top: 45px;left: 3px;}
+.kz-box .main-box .ch-box .cbox3 .step2 .name{font-size: 16px;color: #95b432;height: 20px;line-height: 20px;position: absolute;top: 8px;left: 40px;}
+.kz-box .main-box .ch-box .cbox3 .step2:hover .num{width: 30px; height: 30px;line-height: 29px; font-size: 16px; position: absolute; top: 43px;left: 1px}
+.kz-box .main-box .ch-box .cbox3 .step2:hover .name{font-size: 18px;}
+.kz-box .main-box .ch-box .cbox3 .step3{width: 220px;height: 100px;position: absolute;top: 120px;left: 685px;}
+.kz-box .main-box .ch-box .cbox3 .step3 .num{width: 26px;height: 26px; text-align: center;line-height: 24px; background: #95b432; border-radius: 50%; font-size: 14px;color: #fff;position: absolute;top: 13px;left: 2px;}
+.kz-box .main-box .ch-box .cbox3 .step3 .name{font-size: 16px;color: #95b432;height: 20px;line-height: 20px;position: absolute;top: 42px;left: 40px;}
+.kz-box .main-box .ch-box .cbox3 .step3:hover .num{width: 30px; height: 30px;line-height: 29px; font-size: 16px; position: absolute; top: 10px;left: 0px}
+.kz-box .main-box .ch-box .cbox3 .step3:hover .name{font-size: 18px;}
+
+.kz-box .main-box .ch-box .cbox4{width: 1000px;min-height: 180px;margin-bottom: 10px; background: #fff url('/images/kz/ch4.png')  no-repeat center left; border-radius: 8px;position: relative;}
+.kz-box .main-box .ch-box .cbox4 .text-box{ min-height:140px; padding: 20px 20px 20px 260px;}
+.kz-box .main-box .ch-box .cbox4 .text-box p.name{font-size: 20px;color: #000;height: 40px;line-height: 40px}
+.kz-box .main-box .ch-box .cbox4 .text-box p.text{font-size: 14px;color: #000;min-height: 40px;line-height: 25px}
+.kz-box .main-box .ch-box .cbox4 .text-box p.remark{font-size: 14px;color: #f22525;min-height: 25px;line-height: 25px}
+
+.kz-box .main-box .wkz-box{width: 1000px;margin: 0 auto;margin-top: 70px;}
+.kz-box .main-box .wkz-box .buy-box{width: 1000px; height: 150px; margin: 0 auto;padding-top: 350px;background: url('/images/kz/kzbg.jpg')  no-repeat center top;}
+.kz-box .main-box .wkz-box .buy-box a.kzbtn{display: block;width: 210px;text-align: center;height: 60px;line-height: 60px;font-size: 24px;color: #fff; background: #f12525;border-radius: 3px; margin: 0 auto}
+.kz-box .main-box .wkz-box .buy-box p.tel{width: 310px; text-align: center; height: 40px;line-height: 40px;font-size: 26px;color: #ee3d3d;border-bottom: 1px dashed #ee3d3d;margin: 20px auto}
+
+.kz-box .main-box .fw-box .needcl{width: 900px;margin: 20px auto;min-height:300px;overflow: hidden; }
+.kz-box .main-box .fw-box .needcl ul{overflow: hidden;}
+.kz-box .main-box .fw-box .needcl ul li{width: 380px;padding-left: 30px; min-height: 100px; margin: 20px 20px 40px 20px;float: left;background: url('/images/kz/listline.png')  no-repeat left top;}
+.kz-box .main-box .fw-box .needcl ul li div.name{font-size: 22px; color: #000; height: 30px;line-height: 30px;padding-bottom: 10px;}
+.kz-box .main-box .fw-box .needcl ul li div.text{min-height: 20px;line-height: 20px;font-size: 14px;color: #4e5d73;padding: 3px 0}
+.kz-box .main-box .fw-box .needcl ul li div.text label{display: inline-block; width: 20px; height: 20px;line-height: 20px; float: left;}
+.kz-box .main-box .fw-box .needcl ul li div.text p{width: 330px; min-height: 20px;line-height: 20px; float: left;padding-right: 20px}
+
+.kz-box .main-box .fw-box .wyz-box{width: 1000px;height: 330px;padding: 30px 0}
+.kz-box .main-box .fw-box .wyz-box ul{overflow: hidden;}
+.kz-box .main-box .fw-box .wyz-box ul li{width: 300px;height: 30px; padding: 275px 10px 15px 10px;margin-right: 20px;float: left;position: relative;}
+.kz-box .main-box .fw-box .wyz-box ul li:last-child{margin-right: 0px}
+.kz-box .main-box .fw-box .wyz-box ul li.list1{background: #f4f4f4 url('/images/kz/yz1.jpg')  no-repeat center top 10px;}
+.kz-box .main-box .fw-box .wyz-box ul li.list1:hover{background: #587186 url('/images/kz/yz1.jpg')  no-repeat center top 10px;}
+.kz-box .main-box .fw-box .wyz-box ul li.list2{background: #f4f4f4 url('/images/kz/yz2.jpg')  no-repeat center top 10px;}
+.kz-box .main-box .fw-box .wyz-box ul li.list2:hover{background: #587186 url('/images/kz/yz2.jpg')  no-repeat center top 10px;}
+.kz-box .main-box .fw-box .wyz-box ul li.list3{background: #f4f4f4 url('/images/kz/yz3.jpg')  no-repeat center top 10px;}
+.kz-box .main-box .fw-box .wyz-box ul li.list3:hover{background: #587186 url('/images/kz/yz3.jpg')  no-repeat center top 10px;}
+.kz-box .main-box .fw-box .wyz-box ul li .yzname{width: 300px;height: 50px;line-height: 50px;font-size: 24px;color: #000;text-align: center;border-bottom: 1px solid #dbdbdb;position: absolute;top: 210px}
+.kz-box .main-box .fw-box .wyz-box ul li:hover .yzname{color: #fff}
+.kz-box .main-box .fw-box .wyz-box ul li .price{width: 190px;font-size: 18px; height: 30px;line-height: 30px; color: #000;float: left;}
+.kz-box .main-box .fw-box .wyz-box ul li:hover .price{color: #fff}
+.kz-box .main-box .fw-box .wyz-box ul li .price span{color: #ef2121}
+.kz-box .main-box .fw-box .wyz-box ul li:hover .price span{color: #fff}
+.kz-box .main-box .fw-box .wyz-box ul li a.zxbtn{width: 100px;height: 28px;line-height: 28px;border: 1px solid #cccccc; background: #fff; font-size: 14px;color: #000;text-align: center;border-radius: 8px;display: block;float: left;}
+.kz-box .main-box .fw-box .wyz-box ul li:hover a.zxbtn{background: #ff2525;color: #fff}
+
+.bot-box{width: 100%;height: 40px; line-height: 40px; background: #182834;padding: 10px 0;display: none;}
+.bot-boxxf{position: fixed;bottom: 0px;display: block;}
+.bot-box .tel-box{width: 800px;margin: 0 auto}
+.bot-box .tel-box .tel{font-size: 24px;color: #ec373a;padding-left: 30px;background: url('/images/kz/tel_ico.png')  no-repeat center left;float: left;}
+.bot-box .tel-box .item{float: left; width: 440px; margin-left: 30px}
+.bot-box .tel-box .item input.w-text{width: 270px;height: 40px; line-height: 40px; background: #fff;padding: 0 10px;border: none;float: left;font-size: 16px;color: #333}
+.bot-box .tel-box .item a.btn{width: 150px;text-align: center;height: 40px;line-height: 40px;font-size: 20px;color: #fff;background: #ec373a;display: block;float: left;}
+
+
+/*弹层*/
+#submit-box{margin-top: 10%;width: 420px;min-height: 100px;padding: 50px 0}
+#submit-box .submit{width: 260px;padding-left: 75px;margin: 0 auto;background: url('/images/kz/c_ico.png')  no-repeat center left;}
+#submit-box .submit p.name{font-size: 18px;height: 40px;line-height: 40px;color: #000}
+#submit-box .submit p.text{font-size: 14px;min-height: 20px;line-height: 20px;color: #666}
+
